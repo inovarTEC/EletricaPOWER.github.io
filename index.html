@@ -107,6 +107,70 @@
         </style>
 <style>
 .ico{display:inline-block;width:1em;height:1em;vertical-align:-0.125em;fill:currentColor;}
+
+        /* ── Notification panel ── */
+        #notif-panel {
+            position: fixed;
+            top: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 24px);
+            max-width: 420px;
+            background: #0d1117;
+            border: 1px solid rgba(255,255,255,.1);
+            border-radius: 16px;
+            box-shadow: 0 16px 48px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.04);
+            z-index: 500;
+            overflow: hidden;
+            display: none;
+            animation: notif-in .18s cubic-bezier(.34,1.56,.64,1);
+        }
+        @keyframes notif-in {
+            from { opacity:0; transform:translateX(-50%) translateY(-8px) scale(.97); }
+            to   { opacity:1; transform:translateX(-50%) translateY(0)     scale(1);   }
+        }
+        #notif-panel .np-header {
+            padding: 12px 14px 8px;
+            display: flex; align-items: center; justify-content: space-between;
+            border-bottom: 1px solid rgba(255,255,255,.06);
+        }
+        #notif-panel .np-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px; font-weight: 800;
+            letter-spacing: .5px; text-transform: uppercase;
+            color: #f1f5f9;
+        }
+        #notif-panel .np-clear {
+            font-size: 10px; font-weight: 700; color: #475569;
+            background: none; border: none; cursor: pointer; padding: 2px 6px;
+            border-radius: 6px;
+        }
+        #notif-panel .np-clear:hover { color: #94a3b8; }
+        #notif-panel .np-empty {
+            padding: 20px 14px;
+            text-align: center;
+            font-size: 11px; color: #334155;
+        }
+        #notif-panel .np-list { max-height: 320px; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+        #notif-panel .ni {
+            display: flex; align-items: flex-start; gap: 10px;
+            padding: 11px 14px;
+            border-bottom: 1px solid rgba(255,255,255,.04);
+            cursor: pointer;
+            transition: background .15s;
+        }
+        #notif-panel .ni:last-child { border-bottom: none; }
+        #notif-panel .ni:hover { background: rgba(255,255,255,.03); }
+        #notif-panel .ni-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+        #notif-panel .ni-body { flex: 1; }
+        #notif-panel .ni-title { font-size: 12px; font-weight: 700; color: #e2e8f0; margin-bottom: 2px; }
+        #notif-panel .ni-sub   { font-size: 10px; color: #64748b; line-height: 1.4; }
+        #notif-panel .ni-del {
+            background: none; border: none; color: #334155;
+            cursor: pointer; font-size: 14px; padding: 2px 4px;
+            border-radius: 4px; flex-shrink: 0;
+        }
+        #notif-panel .ni-del:hover { color: #ef4444; }
 </style>
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
 <symbol id="i-bolt" viewBox="0 0 448 512"><path d="M349.4 44.6c5.9-13.7 1.5-29.7-10.6-38.5s-28.6-8-39.9 1.8l-256 224c-10 8.8-13.6 22.9-8.9 35.3S50.7 288 64 288l111.5 0L98.6 467.4c-5.9 13.7-1.5 29.7 10.6 38.5s28.6 8 39.9-1.8l256-224c10-8.8 13.6-22.9 8.9-35.3s-16.6-20.7-30-20.7l-111.5 0L349.4 44.6z"/></symbol>
@@ -183,94 +247,167 @@
     </div>
 
     <div class="app-wrapper min-h-[100dvh] flex flex-col items-center justify-start sm:justify-center p-0 sm:p-4 no-print">
-        <div class="w-full max-w-md bg-white sm:rounded-3xl overflow-hidden border-0 sm:border border-slate-200 shadow-none sm:shadow-2xl relative z-10 flex flex-col min-h-[100dvh] sm:min-h-0">
+        <div class="w-full max-w-md sm:rounded-3xl overflow-hidden border-0 sm:border border-slate-200 shadow-none sm:shadow-2xl relative z-10 flex flex-col min-h-[100dvh] sm:min-h-0" style="background:#07090f;">
 
-            <header class="text-white pt-safe relative overflow-hidden flex justify-between items-end shadow-lg z-20" style="background:linear-gradient(135deg,#1e3a5f,#0f172a);padding:20px 20px 0 20px;min-height:90px;">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-blue-600 rounded-full opacity-20 blur-3xl transform translate-x-10 -translate-y-10 pointer-events-none"></div>
-                <div class="z-10 flex items-center gap-3 pb-10">
-                    <div id="headerLogoArea" class="hidden bg-white overflow-hidden flex items-center justify-center border border-slate-700 shadow-lg" style="width:40px;height:40px;border-radius:8px;flex-shrink:0;">
-                        <img id="headerLogoImg" src="" alt="Logo" class="w-full h-full object-contain">
-                    </div>
-                    <div>
-                        <div class="flex items-center gap-1 opacity-80">
-                            <span class="text-[10px] font-bold" style="color:#93c5fd;" id="headerSaudacao">Olá, você ⚡</span>
-                        </div>
-                        <h1 class="text-xl font-black text-white leading-none mt-0.5">
-                            Eletricista Power
-                        </h1>
-                        <p class="font-semibold" style="white-space:nowrap;font-size:9.7px;letter-spacing:0.01em;line-height:1;margin-top:-1px;">
-                            <span style="color:#f97316;">Crie Orçamentos</span><span style="color:#fff;"> Profissionais,</span><span style="color:#93c5fd;"> conquiste clientes 🏆</span>
-                        </p>
-                    </div>
+            <header id="app-header" style="background:rgba(9,12,19,.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.07);padding:0 18px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;flex-shrink:0;">
+                <div style="display:flex;align-items:center;gap:9px;">
+                    <div style="width:30px;height:30px;background:linear-gradient(145deg,#fbbf24,#d97706);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;box-shadow:0 2px 12px rgba(245,158,11,.35);flex-shrink:0;">⚡</div>
+                    <div style="font-family:'Inter',sans-serif;font-size:16px;font-weight:900;background:linear-gradient(90deg,#f1f5f9,#94a3b8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-.3px;">EL. POWER</div>
                 </div>
-                <div class="z-10 relative" style="width:72px;height:90px;overflow:hidden;flex-shrink:0;margin-bottom:-8px;">
-                    <svg width="72" height="115" viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg" style="position:absolute;bottom:-35px;left:0;">
-                      <style>@keyframes brun-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}@keyframes brun-blink{0%,88%,100%{transform:scaleY(1)}94%{transform:scaleY(0.08)}}@keyframes brun-spark{0%,100%{opacity:1}50%{opacity:0.2}}.bf{animation:brun-float 3.5s ease-in-out infinite}.bb{animation:brun-blink 5s ease-in-out infinite}.bs{animation:brun-spark 0.9s ease-in-out infinite}</style>
-                      <g class="bf">
-                      <rect x="33" y="162" width="21" height="22" rx="5" fill="#292524"/>
-                      <rect x="66" y="162" width="21" height="22" rx="5" fill="#292524"/>
-                      <rect x="30" y="174" width="27" height="9" rx="4" fill="#1c1917"/>
-                      <rect x="63" y="174" width="27" height="9" rx="4" fill="#1c1917"/>
-                      <rect x="35" y="130" width="22" height="36" rx="7" fill="#7c2d12"/>
-                      <rect x="63" y="130" width="22" height="36" rx="7" fill="#7c2d12"/>
-                      <rect x="30" y="124" width="60" height="8" rx="3" fill="#1c1917"/>
-                      <rect x="53" y="123" width="14" height="10" rx="2" fill="#44403c"/>
-                      <rect x="28" y="72" width="64" height="56" rx="11" fill="#ea580c"/>
-                      <path d="M46 72 L60 84 L74 72" stroke="#c2410c" stroke-width="2" fill="none"/>
-                      <rect x="28" y="104" width="64" height="5" rx="2" fill="#fbbf24" opacity="0.95"/>
-                      <rect x="8" y="74" width="22" height="13" rx="7" fill="#ea580c" transform="rotate(-10 19 80)"/>
-                      <ellipse cx="6" cy="100" rx="9" ry="8" fill="#fcd34d"/>
-                      <g class="bs"><line x1="0" y1="94" x2="-4" y2="88" stroke="#fef08a" stroke-width="1.5" stroke-linecap="round"/><line x1="4" y1="92" x2="2" y2="86" stroke="#fef08a" stroke-width="1.5" stroke-linecap="round"/><circle cx="-1" cy="88" r="2.5" fill="#fef08a" opacity="0.8"/></g>
-                      <rect x="90" y="74" width="22" height="13" rx="7" fill="#ea580c" transform="rotate(10 101 80)"/>
-                      <ellipse cx="114" cy="100" rx="9" ry="8" fill="#fbbf24"/>
-                      <rect x="116" y="82" width="5" height="26" rx="2" fill="#94a3b8"/>
-                      <path d="M113 82 Q120 78 124 83 Q121 88 113 88 Z" fill="#64748b"/>
-                      <path d="M113 102 Q120 98 124 103 Q121 108 113 108 Z" fill="#64748b"/>
-                      <rect x="53" y="56" width="14" height="18" rx="5" fill="#c87533"/>
-                      <ellipse cx="60" cy="38" rx="28" ry="28" fill="#c87533"/>
-                      <path d="M36 46 Q36 62 60 66 Q84 62 84 46" fill="#c87533"/>
-                      <ellipse cx="38" cy="50" rx="6" ry="5" fill="#a05c20" opacity="0.4"/>
-                      <ellipse cx="82" cy="50" rx="6" ry="5" fill="#a05c20" opacity="0.4"/>
-                      <path d="M32 32 Q30 8 60 4 Q90 8 88 32 Q84 18 60 16 Q36 18 32 32 Z" fill="#5c3317"/>
-                      <path d="M32 32 Q26 40 28 48 Q30 34 36 34 Z" fill="#5c3317"/>
-                      <path d="M88 32 Q94 40 92 48 Q90 34 84 34 Z" fill="#5c3317"/>
-                      <path d="M38 18 Q46 12 54 18 Q46 14 38 18 Z" fill="#4a2610"/>
-                      <path d="M56 12 Q64 8 72 12 Q64 10 56 12 Z" fill="#4a2610"/>
-                      <path d="M72 14 Q80 10 86 16 Q80 12 72 14 Z" fill="#4a2610"/>
-                      <path d="M32 38 Q28 42 29 48 Q30 54 34 54 Q32 50 33 44 Z" fill="#b06828"/>
-                      <path d="M88 38 Q92 42 91 48 Q90 54 86 54 Q88 50 87 44 Z" fill="#b06828"/>
-                      <path d="M40 26 Q48 22 56 25" stroke="#3d1f0a" stroke-width="3" fill="none" stroke-linecap="round"/>
-                      <path d="M64 25 Q72 22 80 26" stroke="#3d1f0a" stroke-width="3" fill="none" stroke-linecap="round"/>
-                      <ellipse cx="48" cy="37" rx="7" ry="7.5" fill="white"/>
-                      <ellipse cx="72" cy="37" rx="7" ry="7.5" fill="white"/>
-                      <circle cx="48" cy="38" r="5" fill="#6b3a10"/>
-                      <circle cx="72" cy="38" r="5" fill="#6b3a10"/>
-                      <circle cx="48" cy="38" r="3" fill="#1a0a00"/>
-                      <circle cx="72" cy="38" r="3" fill="#1a0a00"/>
-                      <circle cx="50" cy="36" r="1.5" fill="white"/>
-                      <circle cx="74" cy="36" r="1.5" fill="white"/>
-                      <g class="bb"><path d="M41 34 Q48 30 55 34" stroke="#3d1f0a" stroke-width="1.5" fill="none"/><path d="M65 34 Q72 30 79 34" stroke="#3d1f0a" stroke-width="1.5" fill="none"/></g>
-                      <path d="M56 46 Q60 52 64 46" stroke="#a05c20" stroke-width="2" fill="none" stroke-linecap="round"/>
-                      <circle cx="54" cy="50" r="3" fill="#b06828" opacity="0.5"/>
-                      <circle cx="66" cy="50" r="3" fill="#b06828" opacity="0.5"/>
-                      <path d="M49 58 Q60 66 71 58" stroke="#7a3a08" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                      <path d="M53 59 Q60 65 67 59 Q67 62 60 63 Q53 62 53 59 Z" fill="white" opacity="0.85"/>
-                      <ellipse cx="60" cy="22" rx="30" ry="18" fill="#c2410c"/>
-                      <path d="M30 26 Q60 14 90 26 Q90 30 60 28 Q30 30 30 26 Z" fill="#ea580c"/>
-                      <rect x="24" y="26" width="18" height="7" rx="3" fill="#ea580c"/>
-                      <path class="bs" d="M58 16 L55 22 L59 20 L56 26 L64 19 L59 21 Z" fill="#fef08a" opacity="0.95"/>
-                      </g>
-                    </svg>
+                <div style="display:flex;gap:7px;align-items:center;">
+                    <div id="headerLogoArea" class="hidden" style="width:30px;height:30px;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,.1);flex-shrink:0;"><img id="headerLogoImg" src="" alt="" style="width:100%;height:100%;object-fit:contain;"></div>
+                    <div onclick="toggleNotif()" style="width:32px;height:32px;background:#0f1220;border:1px solid rgba(255,255,255,.07);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;position:relative;">
+                        🔔<div id="notif-dot" style="position:absolute;top:6px;right:6px;width:6px;height:6px;border-radius:50%;background:#f59e0b;border:1.5px solid #090c13;box-shadow:0 0 6px rgba(245,158,11,.6);display:none;"></div>
+                    </div>
+                    <div style="width:32px;height:32px;background:#0f1220;border:1px solid rgba(255,255,255,.07);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;">👷</div>
                 </div>
             </header>
+            <!-- ── Notification Panel ── -->
+            <div id="notif-panel">
+                <div class="np-header">
+                    <div class="np-title">🔔 Notificações</div>
+                    <button class="np-clear" onclick="limparNotificacoes()">Limpar tudo</button>
+                </div>
+                <div id="notif-list" class="np-list"></div>
+            </div>
 
-            <a href="https://beacons.ai/josetecinstalation/eletronicos" target="_blank" class="block w-full text-white font-bold text-xs py-2.5 flex items-center justify-center gap-2 transition-all group relative overflow-hidden z-20" style="background:linear-gradient(to right,#3b82f6,#2563eb);">
-                <div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <svg class="ico text-yellow-300 text-sm group-hover:animate-bounce" aria-hidden="true"><use href="#i-gift"></use></svg>
-                <span class="tracking-wide">OFERTAS DA SEMANA</span>
-                <svg class="ico text-[10px] opacity-60 ml-1" aria-hidden="true"><use href="#i-arrow-up-right-from-square"></use></svg>
-            </a>
 
+
+            
+            
+            <div id="tela-home" style="background:#07090f;overflow-y:auto;flex:1;padding:16px 16px 96px;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain;">
+
+                <!-- greeting -->
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
+                    <div>
+                        <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#475569;margin-bottom:3px;" id="homeGreetSub">Bem-vindo</div>
+                        <div style="font-family:'Inter',sans-serif;font-size:19px;font-weight:900;line-height:1.2;color:#f1f5f9;">Olá, <span id="homeNome" style="color:#f59e0b;">Eletricista</span> ⚡</div>
+                    </div>
+                    <div style="background:#0f1220;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:7px 12px;text-align:right;box-shadow:0 2px 8px rgba(0,0,0,.3);">
+                        <div id="home-proj-num" style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:600;color:#f59e0b;line-height:1;">—</div>
+                        <div style="font-size:8px;color:#475569;letter-spacing:.5px;margin-top:1px;">projetos</div>
+                    </div>
+                </div>
+
+                <!-- SEC: Ferramenta Principal -->
+                <div style="font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#334155;margin-bottom:10px;display:flex;align-items:center;gap:8px;">Ferramenta Principal <span style="flex:1;height:1px;background:linear-gradient(90deg,rgba(255,255,255,.07),transparent);display:block;"></span></div>
+
+                <!-- HERO CARD — DEMANDA -->
+                <div onclick="abrirDemanda()" style="border-radius:20px;margin-bottom:18px;position:relative;overflow:hidden;cursor:pointer;background:linear-gradient(145deg,#1a1200 0%,#0f1a2e 60%,#080e1c 100%);border:1px solid rgba(245,158,11,.2);box-shadow:0 20px 60px rgba(0,0,0,.5),0 8px 20px rgba(245,158,11,.08),inset 0 1px 0 rgba(245,158,11,.15),inset 0 -1px 0 rgba(0,0,0,.4);transform:perspective(800px) rotateX(1.5deg);transition:transform .2s,box-shadow .2s;" onmousedown="this.style.transform='perspective(800px) rotateX(0deg) scale(.98)'" onmouseup="this.style.transform='perspective(800px) rotateX(1.5deg)'" ontouchstart="this.style.transform='perspective(800px) rotateX(0deg) scale(.97)'" ontouchend="this.style.transform='perspective(800px) rotateX(1.5deg)'">
+                    <div style="position:absolute;top:-60px;right:-40px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(245,158,11,.2),transparent 65%);pointer-events:none;"></div>
+                    <div style="position:absolute;bottom:-40px;left:-20px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(6,182,212,.1),transparent 65%);pointer-events:none;"></div>
+                    <!-- top -->
+                    <div style="padding:16px 16px 12px;display:flex;align-items:flex-start;justify-content:space-between;">
+                        <div style="display:flex;gap:10px;align-items:center;">
+                            <div style="width:38px;height:38px;background:linear-gradient(145deg,rgba(245,158,11,.2),rgba(245,158,11,.08));border:1px solid rgba(245,158,11,.25);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 4px 12px rgba(245,158,11,.15),inset 0 1px 0 rgba(255,255,255,.1);">⚡</div>
+                            <div>
+                                <div style="font-family:'Inter',sans-serif;font-size:15px;font-weight:900;color:#fff;letter-spacing:-.2px;">Demanda Elétrica</div>
+                                <div style="font-size:9px;color:#64748b;margin-top:2px;">Bitola · Disjuntor · Circuitos · Fases</div>
+                            </div>
+                        </div>
+                        <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;font-weight:600;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);color:#f59e0b;padding:3px 8px;border-radius:10px;white-space:nowrap;box-shadow:0 2px 6px rgba(245,158,11,.1);">NBR 5410</div>
+                    </div>
+                    <!-- mini result -->
+                    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.05);margin:0 14px;border-radius:12px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.05);">
+                        <div style="background:#0a1220;padding:8px 6px;text-align:center;"><div style="font-size:7px;color:#334155;letter-spacing:.8px;text-transform:uppercase;margin-bottom:4px;">Demanda</div><div id="home-res-demanda" style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:#f59e0b;">— <span style="font-size:7px;color:#1e293b;">VA</span></div></div>
+                        <div style="background:#0a1220;padding:8px 6px;text-align:center;"><div style="font-size:7px;color:#334155;letter-spacing:.8px;text-transform:uppercase;margin-bottom:4px;">Corrente</div><div id="home-res-corrente" style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:#fb923c;">— <span style="font-size:7px;color:#1e293b;">A</span></div></div>
+                        <div style="background:#0a1220;padding:8px 6px;text-align:center;"><div style="font-size:7px;color:#334155;letter-spacing:.8px;text-transform:uppercase;margin-bottom:4px;">Disjuntor</div><div id="home-res-disjuntor" style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:#60a5fa;">— <span style="font-size:7px;color:#1e293b;">A</span></div></div>
+                        <div style="background:#0a1220;padding:8px 6px;text-align:center;"><div style="font-size:7px;color:#334155;letter-spacing:.8px;text-transform:uppercase;margin-bottom:4px;">Bitola</div><div id="home-res-fio" style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:#34d399;">— <span style="font-size:7px;color:#1e293b;">mm²</span></div></div>
+                    </div>
+                    <!-- footer -->
+                    <div style="padding:10px 14px 14px;display:flex;align-items:center;justify-content:space-between;">
+                        <div style="display:flex;gap:4px;align-items:center;">
+                            <div id="hfc-mono" style="font-size:9px;font-weight:700;padding:4px 9px;border-radius:8px;border:1px solid rgba(245,158,11,.3);background:rgba(245,158,11,.12);color:#fbbf24;cursor:pointer;" onclick="event.stopPropagation();setBadgeSistema('mono')">Mono</div>
+                            <div id="hfc-bi" style="font-size:9px;font-weight:700;padding:4px 9px;border-radius:8px;border:1px solid rgba(255,255,255,.07);color:#334155;background:rgba(255,255,255,.03);cursor:pointer;" onclick="event.stopPropagation();setBadgeSistema('bi')">Bi</div>
+                            <div id="hfc-tri" style="font-size:9px;font-weight:700;padding:4px 9px;border-radius:8px;border:1px solid rgba(255,255,255,.07);color:#334155;background:rgba(255,255,255,.03);cursor:pointer;" onclick="event.stopPropagation();setBadgeSistema('tri')">Tri</div>
+                            <div id="hfc-v" style="font-size:9px;font-weight:700;color:#334155;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:4px 8px;margin-left:2px;">220V</div>
+                        </div>
+                        <button onclick="event.stopPropagation();abrirDemanda()" style="background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;border:none;border-radius:10px;font-family:'Inter',sans-serif;font-size:11px;font-weight:900;letter-spacing:.5px;padding:8px 14px;cursor:pointer;box-shadow:0 4px 14px rgba(245,158,11,.35),inset 0 1px 0 rgba(255,255,255,.2);">⚡ Calcular</button>
+                    </div>
+                </div>
+
+                <!-- SEC: Ferramentas -->
+                <div style="font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#334155;margin-bottom:10px;display:flex;align-items:center;gap:8px;">Ferramentas <span style="flex:1;height:1px;background:linear-gradient(90deg,rgba(255,255,255,.07),transparent);display:block;"></span></div>
+                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px;">
+
+                    <!-- QUEDA -->
+                    <div onclick="abrirQueda()" style="border-radius:16px;padding:14px 12px;cursor:pointer;position:relative;overflow:hidden;background:linear-gradient(145deg,#071824 0%,#060f1a 100%);border:1px solid rgba(6,182,212,.25);box-shadow:0 8px 24px rgba(6,182,212,.12),0 4px 12px rgba(0,0,0,.4),inset 0 1px 0 rgba(6,182,212,.15);transform:perspective(600px) rotateX(4deg);transition:transform .18s;" ontouchstart="this.style.transform='perspective(600px) rotateX(1deg) scale(.95)'" ontouchend="this.style.transform='perspective(600px) rotateX(4deg)'">
+                        <div style="position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(180deg,rgba(255,255,255,.07),transparent);border-radius:16px 16px 0 0;pointer-events:none;"></div>
+                        <div style="position:absolute;bottom:0;left:0;right:0;height:2px;border-radius:0 0 16px 16px;background:rgba(6,182,212,.2);"></div>
+                        <div style="width:36px;height:36px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:19px;margin-bottom:9px;background:linear-gradient(145deg,rgba(6,182,212,.2),rgba(6,182,212,.08));border:1px solid rgba(6,182,212,.2);box-shadow:0 4px 12px rgba(6,182,212,.15),inset 0 1px 0 rgba(255,255,255,.1);">📉</div>
+                        <div style="font-size:12px;font-weight:700;margin-bottom:3px;color:#22d3ee;position:relative;z-index:2;">Queda</div>
+                        <div style="font-size:8px;color:#164e63;line-height:1.4;position:relative;z-index:2;">Verificar tensão</div>
+                    </div>
+
+                    <!-- ORÇAMENTO -->
+                    <div onclick="abrirOrcamento()" style="border-radius:16px;padding:14px 12px;cursor:pointer;position:relative;overflow:hidden;background:linear-gradient(145deg,#041a0f 0%,#050f0a 100%);border:1px solid rgba(16,185,129,.25);box-shadow:0 8px 24px rgba(16,185,129,.12),0 4px 12px rgba(0,0,0,.4),inset 0 1px 0 rgba(16,185,129,.15);transform:perspective(600px) rotateX(4deg);transition:transform .18s;" ontouchstart="this.style.transform='perspective(600px) rotateX(1deg) scale(.95)'" ontouchend="this.style.transform='perspective(600px) rotateX(4deg)'">
+                        <div style="position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(180deg,rgba(255,255,255,.07),transparent);border-radius:16px 16px 0 0;pointer-events:none;"></div>
+                        <div style="position:absolute;bottom:0;left:0;right:0;height:2px;border-radius:0 0 16px 16px;background:rgba(16,185,129,.2);"></div>
+                        <div style="width:36px;height:36px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:19px;margin-bottom:9px;background:linear-gradient(145deg,rgba(16,185,129,.2),rgba(16,185,129,.08));border:1px solid rgba(16,185,129,.2);box-shadow:0 4px 12px rgba(16,185,129,.15),inset 0 1px 0 rgba(255,255,255,.1);">🧾</div>
+                        <div style="font-size:12px;font-weight:700;margin-bottom:3px;color:#34d399;position:relative;z-index:2;">Orçamento</div>
+                        <div style="font-size:8px;color:#064e3b;line-height:1.4;position:relative;z-index:2;">Mat. e MO</div>
+                    </div>
+
+                    <!-- CHECKLIST -->
+                    <div onclick="abrirChecklistHome()" style="border-radius:16px;padding:14px 12px;cursor:pointer;position:relative;overflow:hidden;background:linear-gradient(145deg,#1a0a02 0%,#100804 100%);border:1px solid rgba(249,115,22,.25);box-shadow:0 8px 24px rgba(249,115,22,.12),0 4px 12px rgba(0,0,0,.4),inset 0 1px 0 rgba(249,115,22,.15);transform:perspective(600px) rotateX(4deg);transition:transform .18s;" ontouchstart="this.style.transform='perspective(600px) rotateX(1deg) scale(.95)'" ontouchend="this.style.transform='perspective(600px) rotateX(4deg)'">
+                        <div style="position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(180deg,rgba(255,255,255,.07),transparent);border-radius:16px 16px 0 0;pointer-events:none;"></div>
+                        <div style="position:absolute;bottom:0;left:0;right:0;height:2px;border-radius:0 0 16px 16px;background:rgba(249,115,22,.2);"></div>
+                        <div style="width:36px;height:36px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:19px;margin-bottom:9px;background:linear-gradient(145deg,rgba(249,115,22,.2),rgba(249,115,22,.08));border:1px solid rgba(249,115,22,.2);box-shadow:0 4px 12px rgba(249,115,22,.15),inset 0 1px 0 rgba(255,255,255,.1);">📋</div>
+                        <div style="font-size:12px;font-weight:700;margin-bottom:3px;color:#fb923c;position:relative;z-index:2;">Checklist</div>
+                        <div style="font-size:8px;color:#431407;line-height:1.4;position:relative;z-index:2;">Inspeção</div>
+                    </div>
+
+                </div>
+
+                <!-- SEC: Gestão -->
+                <div style="font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#334155;margin-bottom:10px;display:flex;align-items:center;gap:8px;">Gestão <span style="flex:1;height:1px;background:linear-gradient(90deg,rgba(255,255,255,.07),transparent);display:block;"></span></div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px;">
+
+                    <!-- AGENDA -->
+                    <div onclick="toggleAgenda()" style="border-radius:18px;padding:15px 14px;cursor:pointer;position:relative;overflow:hidden;background:linear-gradient(145deg,#050e1e 0%,#040b18 100%);border:1px solid rgba(59,130,246,.25);box-shadow:0 10px 28px rgba(59,130,246,.12),0 4px 14px rgba(0,0,0,.5),inset 0 1px 0 rgba(59,130,246,.15);transform:perspective(500px) rotateX(3deg);transition:transform .18s;" ontouchstart="this.style.transform='perspective(500px) rotateX(0deg) scale(.96)'" ontouchend="this.style.transform='perspective(500px) rotateX(3deg)'">
+                        <div style="position:absolute;top:0;left:0;right:0;height:45%;background:linear-gradient(180deg,rgba(255,255,255,.07),transparent);border-radius:18px 18px 0 0;pointer-events:none;"></div>
+                        <div style="position:absolute;bottom:0;left:0;right:0;height:2px;border-radius:0 0 18px 18px;background:rgba(59,130,246,.2);"></div>
+                        <div style="width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:10px;background:linear-gradient(145deg,rgba(59,130,246,.2),rgba(59,130,246,.08));border:1px solid rgba(59,130,246,.2);box-shadow:0 4px 14px rgba(59,130,246,.15),inset 0 1px 0 rgba(255,255,255,.1);position:relative;z-index:2;">📅</div>
+                        <div style="font-size:13px;font-weight:700;margin-bottom:2px;color:#60a5fa;position:relative;z-index:2;">Agenda</div>
+                        <div style="font-size:9px;color:#1e3a5f;line-height:1.3;margin-bottom:6px;position:relative;z-index:2;">Próximos serviços</div>
+                        <div id="home-agenda-badge" style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;display:inline-flex;align-items:center;gap:4px;border-radius:8px;padding:3px 8px;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);color:#60a5fa;position:relative;z-index:2;"><div style="width:5px;height:5px;border-radius:50%;background:#60a5fa;box-shadow:0 0 5px #3b82f6;"></div>agenda</div>
+                    </div>
+
+                    <!-- CLIENTES -->
+                    <div onclick="abrirClientes()" style="border-radius:18px;padding:15px 14px;cursor:pointer;position:relative;overflow:hidden;background:linear-gradient(145deg,#0e0820 0%,#080515 100%);border:1px solid rgba(139,92,246,.25);box-shadow:0 10px 28px rgba(139,92,246,.12),0 4px 14px rgba(0,0,0,.5),inset 0 1px 0 rgba(139,92,246,.15);transform:perspective(500px) rotateX(3deg);transition:transform .18s;" ontouchstart="this.style.transform='perspective(500px) rotateX(0deg) scale(.96)'" ontouchend="this.style.transform='perspective(500px) rotateX(3deg)'">
+                        <div style="position:absolute;top:0;left:0;right:0;height:45%;background:linear-gradient(180deg,rgba(255,255,255,.07),transparent);border-radius:18px 18px 0 0;pointer-events:none;"></div>
+                        <div style="position:absolute;bottom:0;left:0;right:0;height:2px;border-radius:0 0 18px 18px;background:rgba(139,92,246,.2);"></div>
+                        <div style="width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:10px;background:linear-gradient(145deg,rgba(139,92,246,.2),rgba(139,92,246,.08));border:1px solid rgba(139,92,246,.2);box-shadow:0 4px 14px rgba(139,92,246,.15),inset 0 1px 0 rgba(255,255,255,.1);position:relative;z-index:2;">👥</div>
+                        <div style="font-size:13px;font-weight:700;margin-bottom:2px;color:#a78bfa;position:relative;z-index:2;">Clientes</div>
+                        <div style="font-size:9px;color:#2e1065;line-height:1.3;margin-bottom:6px;position:relative;z-index:2;">Cadastro e projetos</div>
+                        <div id="home-clientes-badge" style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;display:inline-flex;align-items:center;gap:4px;border-radius:8px;padding:3px 8px;background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.2);color:#a78bfa;position:relative;z-index:2;"><div style="width:5px;height:5px;border-radius:50%;background:#8b5cf6;box-shadow:0 0 5px #7c3aed;"></div>clientes</div>
+                    </div>
+
+                    <!-- RELATÓRIO -->
+                    <div onclick="abrirRelatorio()" style="border-radius:18px;padding:15px 14px;cursor:pointer;position:relative;overflow:hidden;background:linear-gradient(145deg,#1a0518 0%,#100310 100%);border:1px solid rgba(236,72,153,.25);box-shadow:0 10px 28px rgba(236,72,153,.12),0 4px 14px rgba(0,0,0,.5),inset 0 1px 0 rgba(236,72,153,.15);transform:perspective(500px) rotateX(3deg);transition:transform .18s;" ontouchstart="this.style.transform='perspective(500px) rotateX(0deg) scale(.96)'" ontouchend="this.style.transform='perspective(500px) rotateX(3deg)'">
+                        <div style="position:absolute;top:0;left:0;right:0;height:45%;background:linear-gradient(180deg,rgba(255,255,255,.07),transparent);border-radius:18px 18px 0 0;pointer-events:none;"></div>
+                        <div style="position:absolute;bottom:0;left:0;right:0;height:2px;border-radius:0 0 18px 18px;background:rgba(236,72,153,.2);"></div>
+                        <div style="width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:10px;background:linear-gradient(145deg,rgba(236,72,153,.2),rgba(236,72,153,.08));border:1px solid rgba(236,72,153,.2);box-shadow:0 4px 14px rgba(236,72,153,.15),inset 0 1px 0 rgba(255,255,255,.1);position:relative;z-index:2;">📊</div>
+                        <div style="font-size:13px;font-weight:700;margin-bottom:2px;color:#f472b6;position:relative;z-index:2;">Relatório</div>
+                        <div style="font-size:9px;color:#500724;line-height:1.3;margin-bottom:6px;position:relative;z-index:2;">Faturamento mensal</div>
+                        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;display:inline-flex;align-items:center;gap:4px;border-radius:8px;padding:3px 8px;background:rgba(236,72,153,.1);border:1px solid rgba(236,72,153,.2);color:#f472b6;position:relative;z-index:2;"><div style="width:5px;height:5px;border-radius:50%;background:#ec4899;box-shadow:0 0 5px #db2777;"></div>financeiro</div>
+                    </div>
+
+                    <!-- HISTÓRICO -->
+                    <div onclick="toggleHistory()" style="border-radius:18px;padding:15px 14px;cursor:pointer;position:relative;overflow:hidden;background:linear-gradient(145deg,#0c0820 0%,#070518 100%);border:1px solid rgba(167,139,250,.25);box-shadow:0 10px 28px rgba(167,139,250,.12),0 4px 14px rgba(0,0,0,.5),inset 0 1px 0 rgba(167,139,250,.15);transform:perspective(500px) rotateX(3deg);transition:transform .18s;" ontouchstart="this.style.transform='perspective(500px) rotateX(0deg) scale(.96)'" ontouchend="this.style.transform='perspective(500px) rotateX(3deg)'">
+                        <div style="position:absolute;top:0;left:0;right:0;height:45%;background:linear-gradient(180deg,rgba(255,255,255,.07),transparent);border-radius:18px 18px 0 0;pointer-events:none;"></div>
+                        <div style="position:absolute;bottom:0;left:0;right:0;height:2px;border-radius:0 0 18px 18px;background:rgba(167,139,250,.2);"></div>
+                        <div style="width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:10px;background:linear-gradient(145deg,rgba(167,139,250,.2),rgba(167,139,250,.08));border:1px solid rgba(167,139,250,.2);box-shadow:0 4px 14px rgba(167,139,250,.15),inset 0 1px 0 rgba(255,255,255,.1);position:relative;z-index:2;">🕘</div>
+                        <div style="font-size:13px;font-weight:700;margin-bottom:2px;color:#c4b5fd;position:relative;z-index:2;">Histórico</div>
+                        <div style="font-size:9px;color:#2e1065;line-height:1.3;margin-bottom:6px;position:relative;z-index:2;">Cálculos salvos</div>
+                        <div id="home-hist-badge" style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;display:inline-flex;align-items:center;gap:4px;border-radius:8px;padding:3px 8px;background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.2);color:#c4b5fd;position:relative;z-index:2;"><div style="width:5px;height:5px;border-radius:50%;background:#a78bfa;box-shadow:0 0 5px #8b5cf6;"></div>salvos</div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div id="tela-orcamento" style="display:none;flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain;">
             <div class="relative -mt-6 rounded-t-[1.5rem] flex-grow shadow-[0_-10px_20px_-5px_rgba(0,0,0,0.1)] z-30 overflow-y-auto" style="background:#f0f7ff;padding-bottom:140px;">
                 <div class="p-5 pt-6">
 
@@ -486,43 +623,57 @@
         </div>
     </div>
 
-    <nav id="bottom-nav" class="no-print" style="position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:28rem;background:#fff;border-top:1px solid #e2e8f0;display:none;z-index:40;padding-bottom:env(safe-area-inset-bottom);">
-
-        <button onclick="window.scrollTo(0,0)" id="bnav-inicio" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 4px 8px;border:none;background:transparent;cursor:pointer;">
-            <div style="width:34px;height:34px;background:#eff6ff;border-radius:12px;display:flex;align-items:center;justify-content:center;transition:all .2s;">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H5a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
             </div>
-            <span style="font-size:8px;font-weight:800;color:#2563eb;text-transform:uppercase;letter-spacing:0.4px;">Início</span>
-        </button>
 
-        <button onclick="toggleAgenda()" id="bnav-agenda" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 4px 8px;border:none;background:transparent;cursor:pointer;">
-            <div style="width:34px;height:34px;border-radius:12px;display:flex;align-items:center;justify-content:center;transition:all .2s;">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg>
-            </div>
-            <span style="font-size:8px;font-weight:800;color:#94a3b8;text-transform:uppercase;letter-spacing:0.4px;">Agenda</span>
-        </button>
+    <nav id="bottom-nav" class="no-print" style="position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:28rem;background:rgba(9,12,19,.97);backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,.07);display:none;z-index:400;padding-bottom:env(safe-area-inset-bottom);">
+        <div style="display:flex;align-items:center;justify-content:space-around;padding:6px 8px 10px;">
 
-        <button onclick="toggleFerramentas()" id="bnav-ferramentas" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 4px 8px;border:none;background:transparent;cursor:pointer;">
-            <div style="width:34px;height:34px;border-radius:12px;display:flex;align-items:center;justify-content:center;transition:all .2s;">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
-            </div>
-            <span style="font-size:8px;font-weight:800;color:#94a3b8;text-transform:uppercase;letter-spacing:0.4px;">Ferramentas</span>
-        </button>
+            <button onclick="irParaHome()" id="bnav-inicio"
+                style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;flex:1;border:none;background:transparent;cursor:pointer;padding:4px 2px;min-width:0;-webkit-tap-highlight-color:transparent;">
+                <div id="bnav-pill-inicio"
+                    style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;width:52px;padding:6px 4px 5px;border-radius:14px;background:rgba(245,158,11,.14);border:1px solid rgba(245,158,11,.28);transition:background .2s,border-color .2s;">
+                    <span style="font-size:19px;line-height:1;display:block;">🏠</span>
+                    <span style="font-size:8px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:#f59e0b;white-space:nowrap;">Home</span>
+                </div>
+            </button>
 
-        <button onclick="toggleHistory()" id="bnav-historico" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 4px 8px;border:none;background:transparent;cursor:pointer;">
-            <div style="width:34px;height:34px;border-radius:12px;display:flex;align-items:center;justify-content:center;transition:all .2s;">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-            </div>
-            <span style="font-size:8px;font-weight:800;color:#94a3b8;text-transform:uppercase;letter-spacing:0.4px;">Histórico</span>
-        </button>
+            <button onclick="abrirDemanda()" id="bnav-ferramentas"
+                style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;flex:1;border:none;background:transparent;cursor:pointer;padding:4px 2px;min-width:0;-webkit-tap-highlight-color:transparent;">
+                <div id="bnav-pill-ferramentas"
+                    style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;width:52px;padding:6px 4px 5px;border-radius:14px;background:transparent;border:1px solid transparent;transition:background .2s,border-color .2s;">
+                    <span style="font-size:19px;line-height:1;display:block;">⚡</span>
+                    <span style="font-size:8px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#3a4a60;white-space:nowrap;">Calc.</span>
+                </div>
+            </button>
 
-        <button onclick="toggleSettings();setTimeout(()=>trocarAbaConfig('perfil'),50);" id="bnav-ajustes" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 4px 8px;border:none;background:transparent;cursor:pointer;">
-            <div style="width:34px;height:34px;border-radius:12px;display:flex;align-items:center;justify-content:center;transition:all .2s;">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
-            </div>
-            <span style="font-size:8px;font-weight:800;color:#94a3b8;text-transform:uppercase;letter-spacing:0.4px;">Ajustes</span>
-        </button>
+            <button onclick="toggleAgenda()" id="bnav-agenda"
+                style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;flex:1;border:none;background:transparent;cursor:pointer;padding:4px 2px;min-width:0;-webkit-tap-highlight-color:transparent;">
+                <div id="bnav-pill-agenda"
+                    style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;width:52px;padding:6px 4px 5px;border-radius:14px;background:transparent;border:1px solid transparent;transition:background .2s,border-color .2s;">
+                    <span style="font-size:19px;line-height:1;display:block;">📅</span>
+                    <span style="font-size:8px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#3a4a60;white-space:nowrap;">Agenda</span>
+                </div>
+            </button>
 
+            <button onclick="toggleHistory()" id="bnav-historico"
+                style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;flex:1;border:none;background:transparent;cursor:pointer;padding:4px 2px;min-width:0;-webkit-tap-highlight-color:transparent;">
+                <div id="bnav-pill-historico"
+                    style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;width:52px;padding:6px 4px 5px;border-radius:14px;background:transparent;border:1px solid transparent;transition:background .2s,border-color .2s;">
+                    <span style="font-size:19px;line-height:1;display:block;">🕘</span>
+                    <span style="font-size:8px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#3a4a60;white-space:nowrap;">Hist.</span>
+                </div>
+            </button>
+
+            <button onclick="toggleSettings();setTimeout(()=>trocarAbaConfig('perfil'),50);" id="bnav-ajustes"
+                style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;flex:1;border:none;background:transparent;cursor:pointer;padding:4px 2px;min-width:0;-webkit-tap-highlight-color:transparent;">
+                <div id="bnav-pill-ajustes"
+                    style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;width:52px;padding:6px 4px 5px;border-radius:14px;background:transparent;border:1px solid transparent;transition:background .2s,border-color .2s;">
+                    <span style="font-size:19px;line-height:1;display:block;">⚙️</span>
+                    <span style="font-size:8px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#3a4a60;white-space:nowrap;">Config</span>
+                </div>
+            </button>
+
+        </div>
     </nav>
 
     <div class="fab-calcular no-print" id="fab-calcular" style="display:none;">
@@ -553,7 +704,7 @@
                 <button onclick="trocarAbaAgenda('relatorio')" id="atab-relatorio" class="agenda-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-slate-400 border-b-2 border-transparent">Relatório</button>
             </div>
 
-            <div class="p-5 space-y-4 overflow-y-auto flex-grow pb-safe modal-scroll">
+            <div class="p-5 space-y-4 overflow-y-auto flex-grow pb-safe modal-scroll" style="-webkit-overflow-scrolling:touch;overscroll-behavior:contain;">
 
                 <div id="agenda-visitas">
                     <div class="flex justify-between items-center mb-3">
@@ -688,7 +839,7 @@
                 <button onclick="trocarAbaFerr('check')"   id="tab-check"   class="ferr-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-slate-400 border-b-2 border-transparent">Check</button>
             </div>
 
-            <div class="p-5 space-y-4 overflow-y-auto flex-grow pb-safe modal-scroll">
+            <div class="p-5 space-y-4 overflow-y-auto flex-grow pb-safe modal-scroll" style="-webkit-overflow-scrolling:touch;overscroll-behavior:contain;">
 
                 <div id="ferr-nbr" class="space-y-4">
 
@@ -926,6 +1077,8 @@
                                 <button onclick="setBadgeMetodo('D')"  id="badge-met-D"  style="flex:1;padding:5px;border-radius:6px;font-size:11px;font-weight:900;cursor:pointer;border:1.5px solid #334155;background:transparent;color:#475569;">D</button>
                             </div>
 
+                            <p id="res-metodo-desc" style="font-size:9px;color:#94a3b8;font-style:italic;margin:0;padding:0 2px;"></p>
+
                             <div style="height:1px;background:rgba(255,255,255,.06);"></div>
 
                             <div style="display:flex;gap:4px;align-items:center;flex-wrap:wrap;">
@@ -1034,6 +1187,58 @@
                             <button onclick="importarParaQueda()" style="font-size:10px;font-weight:900;padding:6px 10px;border-radius:8px;border:none;background:#2563eb;color:white;cursor:pointer;white-space:nowrap;">
                                 Calcular queda →
                             </button>
+                        </div>
+
+                        <!-- Painel verificação rápida NBR 5410 (acord-*) -->
+                        <div style="background:#0a1628;border:1px solid #1e3a5f;border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:8px;">
+                            <p style="font-size:9px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.08em;margin:0;">Verificação rápida — NBR 5410</p>
+                            <div style="display:flex;gap:4px;align-items:center;">
+                                <span style="font-size:9px;color:#64748b;white-space:nowrap;">Material</span>
+                                <button onclick="setAcordMat('cu')" id="ab-cu" style="flex:1;padding:5px;border-radius:6px;font-size:11px;font-weight:900;cursor:pointer;border:1.5px solid #f97316;background:#431407;color:#fb923c;">Cu</button>
+                                <button onclick="setAcordMat('al')" id="ab-al" style="flex:1;padding:5px;border-radius:6px;font-size:11px;font-weight:900;cursor:pointer;border:1.5px solid #334155;background:transparent;color:#475569;">Al</button>
+                                <span style="font-size:9px;color:#64748b;white-space:nowrap;margin-left:4px;">Bitola</span>
+                                <select id="acord-sel-bit" onchange="calcAcordQueda()" style="flex:2;padding:5px;border-radius:6px;font-size:10px;font-weight:900;border:1px solid #1e3a5f;background:#0d1b2a;color:#93c5fd;outline:none;">
+                                    <option value="1.5">1,5mm²</option>
+                                    <option value="2.5">2,5mm²</option>
+                                    <option value="4">4mm²</option>
+                                    <option value="6">6mm²</option>
+                                    <option value="10">10mm²</option>
+                                    <option value="16">16mm²</option>
+                                    <option value="25">25mm²</option>
+                                    <option value="35">35mm²</option>
+                                    <option value="50">50mm²</option>
+                                </select>
+                            </div>
+                            <div style="display:flex;gap:4px;align-items:center;">
+                                <span style="font-size:9px;color:#64748b;white-space:nowrap;">Dist (m)</span>
+                                <input type="number" id="acord-dist" value="" min="1" placeholder="Ex: 15" oninput="calcAcordQueda()"
+                                    style="width:64px;padding:5px;border-radius:6px;font-size:11px;font-weight:700;border:1px solid #1e3a5f;background:#0d1b2a;color:white;outline:none;text-align:center;">
+                                <select id="acord-tipo" onchange="calcAcordQueda()" style="flex:1;padding:5px;border-radius:6px;font-size:9px;font-weight:700;border:1px solid #1e3a5f;background:#0d1b2a;color:#93c5fd;outline:none;">
+                                    <option value="4">Terminal 4%</option>
+                                    <option value="7">Alimentador 7%</option>
+                                </select>
+                            </div>
+                            <div style="background:#0d1b2a;border-radius:8px;padding:8px;display:flex;justify-content:space-between;align-items:center;gap:6px;">
+                                <div style="display:flex;gap:10px;">
+                                    <div style="text-align:center;">
+                                        <p style="font-size:8px;color:#64748b;margin:0;">Iz</p>
+                                        <p id="acord-liz" style="font-size:13px;font-weight:900;color:#86efac;margin:0;">—</p>
+                                    </div>
+                                    <div style="text-align:center;">
+                                        <p style="font-size:8px;color:#64748b;margin:0;">Ib</p>
+                                        <p id="acord-lib" style="font-size:13px;font-weight:900;color:#fdba74;margin:0;">—</p>
+                                    </div>
+                                    <div style="text-align:center;">
+                                        <p style="font-size:8px;color:#64748b;margin:0;">Iz≥Ib</p>
+                                        <p id="acord-okiz" style="font-size:13px;font-weight:900;color:#86efac;margin:0;">—</p>
+                                    </div>
+                                    <div style="text-align:center;">
+                                        <p style="font-size:8px;color:#64748b;margin:0;">Queda</p>
+                                        <p id="acord-pct" style="font-size:13px;font-weight:900;color:#86efac;margin:0;">—</p>
+                                    </div>
+                                </div>
+                                <div id="acord-status" style="font-size:10px;font-weight:900;padding:5px 8px;border-radius:6px;background:#1e3a5f;color:#93c5fd;white-space:nowrap;">—</div>
+                            </div>
                         </div>
 
                         <div style="height:1px;background:rgba(255,255,255,.06);"></div>
@@ -1740,7 +1945,7 @@
                 </div>
                 <button onclick="toggleHistory()" class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20"><svg class="ico" aria-hidden="true"><use href="#i-xmark"></use></svg></button>
             </div>
-            <div id="historyList" class="flex-grow p-4 space-y-3 bg-slate-50 overflow-y-auto modal-scroll"></div>
+            <div id="historyList" class="flex-grow p-4 space-y-3 bg-slate-50 overflow-y-auto modal-scroll" style="-webkit-overflow-scrolling:touch;overscroll-behavior:contain;"></div>
             <div class="p-4 border-t border-slate-200 bg-white pb-safe">
                 <button onclick="limparHistorico()" class="w-full py-3 text-red-500 font-bold text-xs border border-red-100 rounded-xl hover:bg-red-50">LIMPAR TUDO</button>
             </div>
@@ -1878,8 +2083,8 @@
             _hashMaster   = await _sha256('POWER@2025');
             _hashDefaultU = await _sha256('admin');
             _hashDefaultP = await _sha256('eletricista123');
-            const oldU = localStorage.getItem('ep_user');
-            const oldP = localStorage.getItem('ep_pass');
+            let oldU, oldP;
+            try { oldU = localStorage.getItem('ep_user'); oldP = localStorage.getItem('ep_pass'); } catch(e) { oldU = null; oldP = null; }
             if (oldU && oldU.length < 60) {
                 try { localStorage.setItem('ep_user', await _sha256(atob(oldU))); } catch(e) {}
             }
@@ -1892,10 +2097,12 @@
         });
 
         async function _getHashesCredenciais() {
-            return {
-                u: localStorage.getItem('ep_user') || _hashDefaultU,
-                p: localStorage.getItem('ep_pass') || _hashDefaultP,
-            };
+            try {
+                return {
+                    u: localStorage.getItem('ep_user') || _hashDefaultU,
+                    p: localStorage.getItem('ep_pass') || _hashDefaultP,
+                };
+            } catch(e) { return { u: _hashDefaultU, p: _hashDefaultP }; }
         }
 
         function bloqueado(funcao) {
@@ -1958,6 +2165,12 @@
                 _modoTeste = isTeste_;
                 document.getElementById('login-screen').style.display = 'none';
                 const bnav = document.getElementById('bottom-nav');
+
+                const telaHome = document.getElementById('tela-home');
+                if (telaHome) telaHome.style.display = 'block';
+                const telaOrc = document.getElementById('tela-orcamento');
+                if (telaOrc) telaOrc.style.display = 'none';
+                setTimeout(() => { _atualizarHomeBadges(); _destacarNavBtnDark('bnav-inicio'); _atualizarDot(); }, 200);
                 if (bnav) bnav.style.display = 'flex';
                 _atualizarFAB();
                 sessionStorage.setItem('ep_auth', '1');
@@ -1990,6 +2203,13 @@
         }
 
         document.addEventListener('click', function(e) {
+            const panel = document.getElementById('notif-panel');
+            if (panel && panel.style.display === 'block') {
+                const bell = e.target.closest('[onclick="toggleNotif()"]');
+                if (!bell && !panel.contains(e.target)) {
+                    panel.style.display = 'none';
+                }
+            }
             if (sessionStorage.getItem('ep_auth') !== '1') {
                 const tela = document.getElementById('login-screen');
                 if (tela && !tela.contains(e.target)) {
@@ -2059,12 +2279,15 @@
 
         function loadState() {
             state.veiculo = state.veiculo || 'hatch';
-            const legado = localStorage.getItem('refrigBlindadoV5');
-            if (legado && !localStorage.getItem('eletristapower_v1')) {
-                localStorage.setItem('eletristapower_v1', legado);
-                localStorage.removeItem('refrigBlindadoV5');
-            }
-            const saved = localStorage.getItem('eletristapower_v1');
+            let legado = null, saved = null;
+            try {
+                legado = localStorage.getItem('refrigBlindadoV5');
+                if (legado && !localStorage.getItem('eletristapower_v1')) {
+                    localStorage.setItem('eletristapower_v1', legado);
+                    localStorage.removeItem('refrigBlindadoV5');
+                }
+                saved = localStorage.getItem('eletristapower_v1');
+            } catch(e) { console.warn('localStorage indisponível', e); }
             if (saved) {
                 try {
                     state = { ...state, ...JSON.parse(saved) };
@@ -2957,10 +3180,14 @@
         }
 
         function toggleHistory() {
+            const _th = document.getElementById('tela-home');
+            if (_th && _th.style.display !== 'none') _th.style.display = 'none';
+            else if (_th) { _th.style.display = 'block'; _destacarNavBtnDark('bnav-inicio'); }
             const m = document.getElementById('historyModal');
             _destacarNavBtn(m.classList.contains('hidden') ? 'bnav-historico' : 'bnav-inicio');
             const c = document.getElementById('historyContent');
             if (m.classList.contains('hidden')) {
+                _fecharTodosModais('historyModal');
                 lockScroll();
                 renderHistoricoUI();
                 m.classList.remove('hidden');
@@ -3096,7 +3323,6 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-
         function limparHistorico() {
             if (bloqueado('limpar')) return;
             if (confirm('Apagar todo o histórico?')) {
@@ -3114,25 +3340,7 @@
         }
 
         function _destacarNavBtn(id) {
-            const config = {
-                'bnav-inicio':      { bg:'#eff6ff', cor:'#2563eb' },
-                'bnav-agenda':      { bg:'#f0fdf4', cor:'#16a34a' },
-                'bnav-ferramentas': { bg:'#fff7ed', cor:'#ea580c' },
-                'bnav-historico':   { bg:'#faf5ff', cor:'#7c3aed' },
-                'bnav-ajustes':     { bg:'#f1f5f9', cor:'#475569' },
-            };
-            Object.keys(config).forEach(btnId => {
-                const btn = document.getElementById(btnId);
-                if (!btn) return;
-                const ico  = btn.querySelector('div');
-                const lbl  = btn.querySelector('span');
-                const svg  = btn.querySelector('svg');
-                const ativo = btnId === id;
-                const { bg, cor } = config[btnId];
-                if (ico) ico.style.background = ativo ? bg : 'transparent';
-                if (lbl) lbl.style.color = ativo ? cor : '#94a3b8';
-                if (svg) svg.setAttribute('stroke', ativo ? cor : '#94a3b8');
-            });
+            if (typeof _destacarNavBtnDark === 'function') _destacarNavBtnDark(id);
         }
 
         function _camposPreenchidos() {
@@ -3182,10 +3390,14 @@
         }
 
         function toggleSettings() {
+            const _th = document.getElementById('tela-home');
+            if (_th && _th.style.display !== 'none') _th.style.display = 'none';
+            else if (_th) { _th.style.display = 'block'; _destacarNavBtnDark('bnav-inicio'); }
             const m = document.getElementById('settingsModal');
             _destacarNavBtn(m.classList.contains('hidden') ? 'bnav-ajustes' : 'bnav-inicio');
             const c = document.getElementById('modalContent');
             if (m.classList.contains('hidden')) {
+                _fecharTodosModais('settingsModal');
                 lockScroll();
                 m.classList.remove('hidden');
                 requestAnimationFrame(() => requestAnimationFrame(() => c.classList.remove('translate-y-full')));
@@ -3357,8 +3569,10 @@
                     _toastSimples('❌ A senha deve ter pelo menos 4 caracteres.');
                     return;
                 }
-                if (novoUser) localStorage.setItem('ep_user', await _sha256(novoUser));
-                if (novaSenha) localStorage.setItem('ep_pass', await _sha256(novaSenha));
+                try {
+                    if (novoUser) localStorage.setItem('ep_user', await _sha256(novoUser));
+                    if (novaSenha) localStorage.setItem('ep_pass', await _sha256(novaSenha));
+                } catch(e) { _toastSimples('⚠️ Não foi possível salvar as credenciais.'); }
                 _toastSimples('✅ Usuário/senha atualizados com sucesso!');
                 document.getElementById('configUsuario').value = '';
                 document.getElementById('configSenha').value = '';
@@ -3636,11 +3850,15 @@
             renderChecklist();
         }
 
-        function toggleFerramentas() {
+function toggleFerramentas() {
+            const _th = document.getElementById('tela-home');
+            if (_th && _th.style.display !== 'none') _th.style.display = 'none';
+            else if (_th) { _th.style.display = 'block'; _destacarNavBtnDark('bnav-inicio'); }
             const m = document.getElementById('ferramentasModal');
             _destacarNavBtn(m.classList.contains('hidden') ? 'bnav-ferramentas' : 'bnav-inicio');
             const c = document.getElementById('ferramentasContent');
             if (m.classList.contains('hidden')) {
+                _fecharTodosModais('ferramentasModal');
                 lockScroll();
                 m.classList.remove('hidden');
                 requestAnimationFrame(() => requestAnimationFrame(() => c.classList.remove('translate-y-full')));
@@ -5287,10 +5505,14 @@
         if (!state.clientes) state.clientes = [];
 
         function toggleAgenda() {
+            const _th = document.getElementById('tela-home');
+            if (_th && _th.style.display !== 'none') _th.style.display = 'none';
+            else if (_th) { _th.style.display = 'block'; _destacarNavBtnDark('bnav-inicio'); }
             const m = document.getElementById('agendaModal');
             _destacarNavBtn(m.classList.contains('hidden') ? 'bnav-agenda' : 'bnav-inicio');
             const c = document.getElementById('agendaContent');
             if (m.classList.contains('hidden')) {
+                _fecharTodosModais('agendaModal');
                 lockScroll();
                 m.classList.remove('hidden');
                 requestAnimationFrame(() => requestAnimationFrame(() => c.classList.remove('translate-y-full')));
@@ -5596,10 +5818,287 @@
                 relLista.appendChild(div);
             });
         }
-    </script>
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js');
-  }
-</script></body>
+    
+        function _fecharTodosModais(exceto) {
+            const modais = [
+                { id:'ferramentasModal', content:'ferramentasContent', anim:'translate-y-full' },
+                { id:'agendaModal',      content:'agendaContent',      anim:'translate-y-full' },
+                { id:'historyModal',     content:'historyContent',     anim:'translate-x-full' },
+                { id:'settingsModal',    content:'modalContent',       anim:'translate-y-full' },
+            ];
+            modais.forEach(({ id, content: cid, anim }) => {
+                if (id === exceto) return;
+                const m = document.getElementById(id);
+                const c = document.getElementById(cid);
+                if (m && !m.classList.contains('hidden')) {
+                    if (c) c.classList.add(anim);
+                    setTimeout(() => { if (m) m.classList.add('hidden'); }, 300);
+                }
+            });
+        }
+
+        function irParaHome() {
+            document.getElementById('tela-home').style.display = 'block';
+            document.getElementById('tela-orcamento').style.display = 'none';
+            ['agendaModal','ferramentasModal','historyModal','settingsModal'].forEach(id => {
+                const m = document.getElementById(id);
+                if (m && !m.classList.contains('hidden')) m.classList.add('hidden');
+            });
+            unlockScroll();
+            _destacarNavBtnDark('bnav-inicio');
+            _atualizarHomeBadges();
+        }
+
+        function abrirDemanda() {
+            ['agendaModal','historyModal','settingsModal'].forEach(id => {
+                const m = document.getElementById(id);
+                if (m && !m.classList.contains('hidden')) m.classList.add('hidden');
+            });
+            unlockScroll();
+            document.getElementById('tela-home').style.display = 'none';
+            document.getElementById('tela-orcamento').style.display = 'none';
+            setTimeout(() => { toggleFerramentas(); trocarAbaFerr('carga'); }, 50);
+            _destacarNavBtnDark('bnav-ferramentas');
+        }
+
+        function abrirQueda() {
+            document.getElementById('tela-home').style.display = 'none';
+            setTimeout(() => { toggleFerramentas(); trocarAbaFerr('queda'); }, 50);
+            _destacarNavBtnDark('bnav-ferramentas');
+        }
+
+        function abrirOrcamento() {
+            document.getElementById('tela-home').style.display = 'none';
+            document.getElementById('tela-orcamento').style.display = 'block';
+            _destacarNavBtnDark('bnav-inicio');
+        }
+
+        function abrirChecklistHome() {
+            document.getElementById('tela-home').style.display = 'none';
+            setTimeout(() => { toggleFerramentas(); trocarAbaFerr('check'); }, 50);
+            _destacarNavBtnDark('bnav-ferramentas');
+        }
+
+        function abrirClientes() {
+            if (bloqueado('clientes')) return;
+            toggleAgenda();
+            setTimeout(() => trocarAbaAgenda('clientes'), 80);
+            _destacarNavBtnDark('bnav-agenda');
+        }
+
+        function abrirRelatorio() {
+            if (bloqueado('relatorio')) return;
+            toggleAgenda();
+            setTimeout(() => trocarAbaAgenda('relatorio'), 80);
+            _destacarNavBtnDark('bnav-agenda');
+        }
+
+        function toggleNotif() {
+            const panel = document.getElementById('notif-panel');
+            if (!panel) return;
+            const isOpen = panel.style.display === 'block';
+            if (isOpen) {
+                panel.style.display = 'none';
+            } else {
+                _renderNotifPanel();
+                panel.style.display = 'block';
+            }
+        }
+
+        function _gerarNotificacoes() {
+            const alertas = [];
+            const hoje = new Date();
+            hoje.setHours(0, 0, 0, 0);
+            const hojeStr = hoje.toISOString().slice(0, 10);
+            const amanhaStr = new Date(hoje.getTime() + 86400000).toISOString().slice(0, 10);
+
+            // ── Visitas de hoje ───────────────────────────────────────────
+            const visitasHoje = (state.visitas || []).filter(v =>
+                v.data && v.data.slice(0, 10) === hojeStr && v.status !== 'concluida'
+            );
+            if (visitasHoje.length > 0) {
+                visitasHoje.forEach(v => {
+                    alertas.push({
+                        id: 'visita-hoje-' + v.id,
+                        tipo: 'hoje',
+                        icon: '📅',
+                        titulo: 'Visita hoje' + (v.hora ? ' às ' + v.hora : ''),
+                        sub: v.cliente + (v.endereco ? ' • ' + v.endereco : ''),
+                        acao: () => { toggleAgenda(); setTimeout(() => trocarAbaAgenda('visitas'), 80); }
+                    });
+                });
+            }
+
+            // ── Visitas atrasadas (passaram da data, ainda pendentes) ─────
+            const visitasAtrasadas = (state.visitas || []).filter(v => {
+                if (!v.data || v.status === 'concluida') return false;
+                const d = new Date(v.data);
+                d.setHours(0, 0, 0, 0);
+                return d < hoje;
+            });
+            if (visitasAtrasadas.length > 0) {
+                const nomes = visitasAtrasadas.slice(0, 2).map(v => v.cliente).join(', ');
+                const extra = visitasAtrasadas.length > 2 ? ' e mais ' + (visitasAtrasadas.length - 2) : '';
+                alertas.push({
+                    id: 'visitas-atrasadas',
+                    tipo: 'alerta',
+                    icon: '⚠️',
+                    titulo: visitasAtrasadas.length + ' visita' + (visitasAtrasadas.length > 1 ? 's atrasadas' : ' atrasada'),
+                    sub: nomes + extra,
+                    acao: () => { toggleAgenda(); setTimeout(() => trocarAbaAgenda('visitas'), 80); }
+                });
+            }
+
+            // ── Garantias vencendo (≤ 7 dias) ────────────────────────────
+            (state.historico || []).forEach(h => {
+                if (!h.data || !h.garantia) return;
+                const partes = h.data.split('/');
+                if (partes.length < 3) return;
+                const dataServ = new Date(+partes[2], +partes[1] - 1, +partes[0]);
+                const dias = parseInt((h.garantia || '90').replace(/\D/g, ''), 10) || 90;
+                const venc = new Date(dataServ);
+                venc.setDate(venc.getDate() + dias);
+                const restantes = Math.ceil((venc - hoje) / 86400000);
+                if (restantes >= 0 && restantes <= 7) {
+                    alertas.push({
+                        id: 'garantia-' + (h.id || h.data),
+                        tipo: restantes <= 2 ? 'critico' : 'aviso',
+                        icon: restantes === 0 ? '🔴' : restantes <= 2 ? '🟠' : '🟡',
+                        titulo: 'Garantia vence em ' + restantes + ' dia' + (restantes !== 1 ? 's' : ''),
+                        sub: (h.cliente || 'Cliente') + ' • ' + h.data,
+                        acao: () => toggleHistory()
+                    });
+                } else if (restantes < 0 && restantes >= -30) {
+                    alertas.push({
+                        id: 'garantia-venc-' + (h.id || h.data),
+                        tipo: 'vencida',
+                        icon: '🔴',
+                        titulo: 'Garantia vencida há ' + Math.abs(restantes) + ' dia' + (Math.abs(restantes) !== 1 ? 's' : ''),
+                        sub: (h.cliente || 'Cliente') + ' • ' + h.data,
+                        acao: () => toggleHistory()
+                    });
+                }
+            });
+
+            return alertas;
+        }
+
+        function _renderNotifPanel() {
+            const list = document.getElementById('notif-list');
+            if (!list) return;
+            const alertas = _gerarNotificacoes();
+            const lidas = JSON.parse(sessionStorage.getItem('notif-lidas') || '[]');
+            const visiveis = alertas.filter(a => !lidas.includes(a.id));
+
+            if (visiveis.length === 0) {
+                list.innerHTML = '<div class="np-empty">✅ Nenhuma notificação pendente</div>';
+            } else {
+                list.innerHTML = visiveis.map(a => `
+                    <div class="ni" onclick="_notifAcao('${a.id}')">
+                        <div class="ni-icon">${a.icon}</div>
+                        <div class="ni-body">
+                            <div class="ni-title">${a.titulo}</div>
+                            <div class="ni-sub">${a.sub}</div>
+                        </div>
+                        <button class="ni-del" onclick="event.stopPropagation();_descartarNotif('${a.id}')" title="Descartar">✕</button>
+                    </div>
+                `).join('');
+            }
+            _atualizarDot();
+        }
+
+        function _notifAcao(id) {
+            const alertas = _gerarNotificacoes();
+            const alerta = alertas.find(a => a.id === id);
+            _descartarNotif(id);
+            document.getElementById('notif-panel').style.display = 'none';
+            if (alerta && alerta.acao) alerta.acao();
+        }
+
+        function _descartarNotif(id) {
+            const lidas = JSON.parse(sessionStorage.getItem('notif-lidas') || '[]');
+            if (!lidas.includes(id)) lidas.push(id);
+            sessionStorage.setItem('notif-lidas', JSON.stringify(lidas));
+            _renderNotifPanel();
+        }
+
+        function limparNotificacoes() {
+            const alertas = _gerarNotificacoes();
+            const lidas = JSON.parse(sessionStorage.getItem('notif-lidas') || '[]');
+            alertas.forEach(a => { if (!lidas.includes(a.id)) lidas.push(a.id); });
+            sessionStorage.setItem('notif-lidas', JSON.stringify(lidas));
+            _renderNotifPanel();
+            document.getElementById('notif-panel').style.display = 'none';
+        }
+
+        function _atualizarDot() {
+            const dot = document.getElementById('notif-dot');
+            if (!dot) return;
+            const alertas = _gerarNotificacoes();
+            const lidas = JSON.parse(sessionStorage.getItem('notif-lidas') || '[]');
+            const pendentes = alertas.filter(a => !lidas.includes(a.id)).length;
+            dot.style.display = pendentes > 0 ? 'block' : 'none';
+        }
+
+        function _destacarNavBtnDark(id) {
+            const cfg = {
+                'bnav-inicio':      { cor:'#f59e0b', bg:'rgba(245,158,11,.14)', borda:'rgba(245,158,11,.28)' },
+                'bnav-ferramentas': { cor:'#f59e0b', bg:'rgba(245,158,11,.14)', borda:'rgba(245,158,11,.28)' },
+                'bnav-agenda':      { cor:'#60a5fa', bg:'rgba(96,165,250,.14)',  borda:'rgba(96,165,250,.28)'  },
+                'bnav-historico':   { cor:'#c4b5fd', bg:'rgba(196,181,253,.14)', borda:'rgba(196,181,253,.28)' },
+                'bnav-ajustes':     { cor:'#94a3b8', bg:'rgba(148,163,184,.14)', borda:'rgba(148,163,184,.28)' },
+            };
+            Object.keys(cfg).forEach(btnId => {
+                const pill = document.getElementById('bnav-pill-' + btnId.replace('bnav-',''));
+                if (!pill) return;
+                const ativo = btnId === id;
+                const c = cfg[btnId];
+                pill.style.background = ativo ? c.bg : 'transparent';
+                pill.style.borderColor = ativo ? c.borda : 'transparent';
+                const spans = pill.querySelectorAll('span');
+                spans.forEach(s => {
+                    s.style.color = ativo ? c.cor : '#3a4a60';
+                });
+            });
+        }
+
+        function _atualizarHomeBadges() {
+            const hist = (state.historico || []).length;
+            const clientes = (state.clientes || []).length;
+            const hoje = new Date().toISOString().slice(0,10);
+            const visitsHoje = (state.visitas || []).filter(v => v.data && v.data.slice(0,10) === hoje).length;
+            const hb = document.getElementById('home-hist-badge');
+            if (hb) hb.innerHTML = '<div style="width:5px;height:5px;border-radius:50%;background:#a78bfa;box-shadow:0 0 5px #8b5cf6;"></div>' + (hist || 0) + ' salvos';
+            const hpn = document.getElementById('home-proj-num');
+            if (hpn) hpn.textContent = hist || '—';
+            const cab = document.getElementById('home-agenda-badge');
+            if (cab) {
+                const txt = visitsHoje > 0 ? visitsHoje + ' hoje' : 'agenda';
+                cab.innerHTML = '<div style="width:5px;height:5px;border-radius:50%;background:#60a5fa;box-shadow:0 0 5px #3b82f6;"></div>' + txt;
+            }
+            const ccb = document.getElementById('home-clientes-badge');
+            if (ccb) {
+                const txt = clientes > 0 ? clientes + ' ativos' : 'clientes';
+                ccb.innerHTML = '<div style="width:5px;height:5px;border-radius:50%;background:#8b5cf6;box-shadow:0 0 5px #7c3aed;"></div>' + txt;
+            }
+            const rd = document.getElementById('res-demanda');
+            const rc = document.getElementById('res-corrente');
+            const rj = document.getElementById('res-disjuntor');
+            const rf = document.getElementById('res-fio');
+            const hrd = document.getElementById('home-res-demanda');
+            const hrc = document.getElementById('home-res-corrente');
+            const hrj = document.getElementById('home-res-disjuntor');
+            const hrf = document.getElementById('home-res-fio');
+            if (hrd && rd && rd.textContent !== '— VA') hrd.innerHTML = rd.textContent + ' <span style="font-size:7px;color:#1e293b;">VA</span>';
+            if (hrc && rc && rc.textContent !== '— A') hrc.innerHTML = rc.textContent + ' <span style="font-size:7px;color:#1e293b;">A</span>';
+            if (hrj && rj && rj.textContent !== '— A') hrj.innerHTML = rj.textContent + ' <span style="font-size:7px;color:#1e293b;">A</span>';
+            if (hrf && rf && rf.textContent !== '— mm²') hrf.innerHTML = rf.textContent.replace(' mm²','') + ' <span style="font-size:7px;color:#1e293b;">mm²</span>';
+            const nome = state.prestadorPadrao || state.nomeEletricista || '';
+            const hn = document.getElementById('homeNome');
+            if (hn && nome) hn.textContent = nome;
+            _atualizarDot();
+        }
+
+        </script>
+</body>
 </html>
