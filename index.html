@@ -249,17 +249,20 @@
     <div class="app-wrapper min-h-[100dvh] flex flex-col items-center justify-start sm:justify-center p-0 sm:p-4 no-print">
         <div class="w-full max-w-md sm:rounded-3xl overflow-hidden border-0 sm:border border-slate-200 shadow-none sm:shadow-2xl relative z-10 flex flex-col min-h-[100dvh] sm:min-h-0" style="background:#07090f;">
 
-            <header id="app-header" style="background:rgba(9,12,19,.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.07);padding:0 18px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;flex-shrink:0;">
-                <div style="display:flex;align-items:center;gap:9px;">
-                    <div style="width:30px;height:30px;background:linear-gradient(145deg,#fbbf24,#d97706);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;box-shadow:0 2px 12px rgba(245,158,11,.35);flex-shrink:0;">⚡</div>
-                    <div style="font-family:'Inter',sans-serif;font-size:16px;font-weight:900;background:linear-gradient(90deg,#f1f5f9,#94a3b8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-.3px;">EL. POWER</div>
+            <header id="app-header" style="background:rgba(15,18,32,.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(245,158,11,.18);padding:0 18px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;flex-shrink:0;box-shadow:0 1px 0 rgba(245,158,11,.08);">
+                <div style="display:flex;align-items:center;gap:10px;">
+                    <div style="width:36px;height:36px;background:rgba(245,158,11,.13);border:1.5px solid rgba(245,158,11,.4);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">⚡</div>
+                    <div style="display:flex;flex-direction:column;line-height:1.1;">
+                        <div style="font-family:'Inter',sans-serif;font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#e2e8f0;">ELETRICISTA <span style="color:#f59e0b;">POWER</span></div>
+                        <div style="font-family:'Inter',sans-serif;font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#475569;">PRO</div>
+                    </div>
                 </div>
                 <div style="display:flex;gap:7px;align-items:center;">
                     <div id="headerLogoArea" class="hidden" style="width:30px;height:30px;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,.1);flex-shrink:0;"><img id="headerLogoImg" src="" alt="" style="width:100%;height:100%;object-fit:contain;"></div>
-                    <div onclick="toggleNotif()" style="width:32px;height:32px;background:#0f1220;border:1px solid rgba(255,255,255,.07);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;position:relative;">
-                        🔔<div id="notif-dot" style="position:absolute;top:6px;right:6px;width:6px;height:6px;border-radius:50%;background:#f59e0b;border:1.5px solid #090c13;box-shadow:0 0 6px rgba(245,158,11,.6);display:none;"></div>
+                    <div onclick="toggleNotif()" style="width:34px;height:34px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;position:relative;">
+                        🔔<div id="notif-dot" style="position:absolute;top:6px;right:6px;width:6px;height:6px;border-radius:50%;background:#f59e0b;border:1.5px solid #0f1220;box-shadow:0 0 6px rgba(245,158,11,.6);display:none;"></div>
                     </div>
-                    <div style="width:32px;height:32px;background:#0f1220;border:1px solid rgba(255,255,255,.07);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;">👷</div>
+                    <div style="width:34px;height:34px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;">👷</div>
                 </div>
             </header>
             <!-- ── Notification Panel ── -->
