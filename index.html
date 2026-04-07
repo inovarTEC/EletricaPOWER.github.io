@@ -203,6 +203,25 @@
         #form-visita input,#form-visita select,#form-visita textarea,
         #form-cliente input,#form-cliente select,#form-cliente textarea{background:#0a1628!important;color:#e2e8f0!important;border-color:rgba(255,255,255,.1)!important}
         #form-visita label,#form-cliente label{color:#94a3b8!important}
+        
+        /* ── Top-sheet modals ── */
+        .modal-top-sheet {
+            position: absolute !important;
+            top: 0 !important;
+            left: 50% !important;
+            width: 100% !important;
+            max-width: 32rem !important;
+            height: 92vh !important;
+            border-radius: 0 0 1.5rem 1.5rem !important;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 8px 40px rgba(0,0,0,.5) !important;
+            transform: translateX(-50%) translateY(-100%) !important;
+            transition: transform .3s cubic-bezier(.4,0,.2,1) !important;
+        }
+        .modal-top-sheet.modal-visible {
+            transform: translateX(-50%) translateY(0) !important;
+        }
         </style>
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
 <symbol id="i-bolt" viewBox="0 0 448 512"><path d="M349.4 44.6c5.9-13.7 1.5-29.7-10.6-38.5s-28.6-8-39.9 1.8l-256 224c-10 8.8-13.6 22.9-8.9 35.3S50.7 288 64 288l111.5 0L98.6 467.4c-5.9 13.7-1.5 29.7 10.6 38.5s28.6 8 39.9-1.8l256-224c10-8.8 13.6-22.9 8.9-35.3s-16.6-20.7-30-20.7l-111.5 0L349.4 44.6z"/></symbol>
@@ -325,31 +344,31 @@
                 <div style="font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#334155;margin-bottom:10px;display:flex;align-items:center;gap:8px;">Ferramenta Principal <span style="flex:1;height:1px;background:linear-gradient(90deg,rgba(255,255,255,.07),transparent);display:block;"></span></div>
 
                 <!-- HERO CARD — DEMANDA -->
-                <div onclick="abrirDemanda()" style="border-radius:20px;margin-bottom:18px;position:relative;overflow:hidden;cursor:pointer;background:linear-gradient(145deg,#1a1200 0%,#0f1a2e 60%,#080e1c 100%);border:1px solid rgba(245,158,11,.2);box-shadow:0 20px 60px rgba(0,0,0,.5),0 8px 20px rgba(245,158,11,.08),inset 0 1px 0 rgba(245,158,11,.15),inset 0 -1px 0 rgba(0,0,0,.4);transform:perspective(800px) rotateX(1.5deg);transition:transform .2s,box-shadow .2s;" onmousedown="this.style.transform='perspective(800px) rotateX(0deg) scale(.98)'" onmouseup="this.style.transform='perspective(800px) rotateX(1.5deg)'" ontouchstart="this.style.transform='perspective(800px) rotateX(0deg) scale(.97)'" ontouchend="this.style.transform='perspective(800px) rotateX(1.5deg)'">
+                <div onclick="abrirDemanda()" style="border-radius:18px;margin-bottom:14px;position:relative;overflow:hidden;cursor:pointer;background:linear-gradient(145deg,#1a1200 0%,#0f1a2e 60%,#080e1c 100%);border:1px solid rgba(245,158,11,.2);box-shadow:0 20px 60px rgba(0,0,0,.5),0 8px 20px rgba(245,158,11,.08),inset 0 1px 0 rgba(245,158,11,.15),inset 0 -1px 0 rgba(0,0,0,.4);transform:perspective(800px) rotateX(1.5deg);transition:transform .2s,box-shadow .2s;" onmousedown="this.style.transform='perspective(800px) rotateX(0deg) scale(.98)'" onmouseup="this.style.transform='perspective(800px) rotateX(1.5deg)'" ontouchstart="this.style.transform='perspective(800px) rotateX(0deg) scale(.97)'" ontouchend="this.style.transform='perspective(800px) rotateX(1.5deg)'">
                     <div style="position:absolute;top:-60px;right:-40px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(245,158,11,.2),transparent 65%);pointer-events:none;"></div>
                     <div style="position:absolute;bottom:-40px;left:-20px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(6,182,212,.1),transparent 65%);pointer-events:none;"></div>
                     <!-- top -->
-                    <div style="padding:16px 16px 12px;display:flex;align-items:flex-start;justify-content:space-between;">
+                    <div style="padding:12px 14px 10px;display:flex;align-items:flex-start;justify-content:space-between;">
                         <div style="display:flex;gap:10px;align-items:center;">
-                            <div style="width:38px;height:38px;background:linear-gradient(145deg,rgba(245,158,11,.2),rgba(245,158,11,.08));border:1px solid rgba(245,158,11,.25);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 4px 12px rgba(245,158,11,.15),inset 0 1px 0 rgba(255,255,255,.1);">⚡</div>
+                            <div style="width:32px;height:32px;background:linear-gradient(145deg,rgba(245,158,11,.2),rgba(245,158,11,.08));border:1px solid rgba(245,158,11,.25);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;box-shadow:0 4px 12px rgba(245,158,11,.15),inset 0 1px 0 rgba(255,255,255,.1);">⚡</div>
                             <div>
-                                <div style="font-family:'Inter',sans-serif;font-size:15px;font-weight:900;color:#fff;letter-spacing:-.2px;">Demanda Elétrica</div>
+                                <div style="font-family:'Inter',sans-serif;font-size:14px;font-weight:900;color:#fff;letter-spacing:-.2px;">Demanda Elétrica</div>
                                 <div style="font-size:9px;color:#64748b;margin-top:2px;">Bitola · Disjuntor · Circuitos · Fases</div>
                             </div>
                         </div>
                         <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;font-weight:600;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);color:#f59e0b;padding:3px 8px;border-radius:10px;white-space:nowrap;box-shadow:0 2px 6px rgba(245,158,11,.1);">NBR 5410</div>
                     </div>
                     <!-- mini result -->
-                    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.05);margin:0 14px;border-radius:12px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.05);">
+                    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.05);margin:0 12px 0;border-radius:10px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.05);">
                         <div style="background:#0a1220;padding:8px 6px;text-align:center;"><div style="font-size:7px;color:#334155;letter-spacing:.8px;text-transform:uppercase;margin-bottom:4px;">Demanda</div><div id="home-res-demanda" style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:#f59e0b;">— <span style="font-size:7px;color:#1e293b;">VA</span></div></div>
                         <div style="background:#0a1220;padding:8px 6px;text-align:center;"><div style="font-size:7px;color:#334155;letter-spacing:.8px;text-transform:uppercase;margin-bottom:4px;">Corrente</div><div id="home-res-corrente" style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:#fb923c;">— <span style="font-size:7px;color:#1e293b;">A</span></div></div>
                         <div style="background:#0a1220;padding:8px 6px;text-align:center;"><div style="font-size:7px;color:#334155;letter-spacing:.8px;text-transform:uppercase;margin-bottom:4px;">Disjuntor</div><div id="home-res-disjuntor" style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:#60a5fa;">— <span style="font-size:7px;color:#1e293b;">A</span></div></div>
                         <div style="background:#0a1220;padding:8px 6px;text-align:center;"><div style="font-size:7px;color:#334155;letter-spacing:.8px;text-transform:uppercase;margin-bottom:4px;">Bitola</div><div id="home-res-fio" style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:#34d399;">— <span style="font-size:7px;color:#1e293b;">mm²</span></div></div>
                     </div>
                     <!-- footer -->
-                    <div style="padding:10px 14px 14px;display:flex;align-items:center;justify-content:space-between;">
+                    <div style="padding:8px 12px 10px;display:flex;align-items:center;justify-content:space-between;">
                         <div style="display:flex;gap:4px;align-items:center;">
-                            <div id="hfc-mono" style="font-size:9px;font-weight:700;padding:4px 9px;border-radius:8px;border:1px solid rgba(245,158,11,.3);background:rgba(245,158,11,.12);color:#fbbf24;cursor:pointer;" onclick="event.stopPropagation();setBadgeSistema('mono')">Mono</div>
+                            <div id="hfc-mono" style="font-size:8px;font-weight:700;padding:3px 7px;border-radius:6px;border:1px solid rgba(245,158,11,.3);background:rgba(245,158,11,.12);color:#fbbf24;cursor:pointer;" onclick="event.stopPropagation();setBadgeSistema('mono')">Mono</div>
                             <div id="hfc-bi" style="font-size:9px;font-weight:700;padding:4px 9px;border-radius:8px;border:1px solid rgba(255,255,255,.07);color:#334155;background:rgba(255,255,255,.03);cursor:pointer;" onclick="event.stopPropagation();setBadgeSistema('bi')">Bi</div>
                             <div id="hfc-tri" style="font-size:9px;font-weight:700;padding:4px 9px;border-radius:8px;border:1px solid rgba(255,255,255,.07);color:#334155;background:rgba(255,255,255,.03);cursor:pointer;" onclick="event.stopPropagation();setBadgeSistema('tri')">Tri</div>
                             <div id="hfc-v" style="font-size:9px;font-weight:700;color:#334155;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:4px 8px;margin-left:2px;">220V</div>
@@ -363,79 +382,66 @@
                 <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px;">
 
                     <!-- QUEDA -->
-                    <div onclick="abrirQueda()" style="border-radius:16px;padding:14px 12px;cursor:pointer;position:relative;overflow:hidden;background:linear-gradient(145deg,#071824 0%,#060f1a 100%);border:1px solid rgba(6,182,212,.25);box-shadow:0 8px 24px rgba(6,182,212,.12),0 4px 12px rgba(0,0,0,.4),inset 0 1px 0 rgba(6,182,212,.15);transform:perspective(600px) rotateX(4deg);transition:transform .18s;" ontouchstart="this.style.transform='perspective(600px) rotateX(1deg) scale(.95)'" ontouchend="this.style.transform='perspective(600px) rotateX(4deg)'">
+                    <div onclick="abrirQueda()" style="border-radius:14px;padding:10px 10px;cursor:pointer;position:relative;overflow:hidden;background:linear-gradient(145deg,#071824 0%,#060f1a 100%);border:1px solid rgba(6,182,212,.25);box-shadow:0 8px 24px rgba(6,182,212,.12),0 4px 12px rgba(0,0,0,.4),inset 0 1px 0 rgba(6,182,212,.15);transform:perspective(600px) rotateX(4deg);transition:transform .18s;" ontouchstart="this.style.transform='perspective(600px) rotateX(1deg) scale(.95)'" ontouchend="this.style.transform='perspective(600px) rotateX(4deg)'">
                         <div style="position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(180deg,rgba(255,255,255,.07),transparent);border-radius:16px 16px 0 0;pointer-events:none;"></div>
                         <div style="position:absolute;bottom:0;left:0;right:0;height:2px;border-radius:0 0 16px 16px;background:rgba(6,182,212,.2);"></div>
-                        <div style="width:36px;height:36px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:19px;margin-bottom:9px;background:linear-gradient(145deg,rgba(6,182,212,.2),rgba(6,182,212,.08));border:1px solid rgba(6,182,212,.2);box-shadow:0 4px 12px rgba(6,182,212,.15),inset 0 1px 0 rgba(255,255,255,.1);">📉</div>
-                        <div style="font-size:12px;font-weight:700;margin-bottom:3px;color:#22d3ee;position:relative;z-index:2;">Queda</div>
-                        <div style="font-size:8px;color:#164e63;line-height:1.4;position:relative;z-index:2;">Verificar tensão</div>
+                        <div style="width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;margin-bottom:7px;background:linear-gradient(145deg,rgba(6,182,212,.2),rgba(6,182,212,.08));border:1px solid rgba(6,182,212,.2);box-shadow:0 4px 12px rgba(6,182,212,.15),inset 0 1px 0 rgba(255,255,255,.1);">📉</div>
+                        <div style="font-size:11px;font-weight:700;margin-bottom:2px;color:#22d3ee;position:relative;z-index:2;">Queda</div>
+                        <div style="font-size:8px;opacity:.55;color:#164e63;line-height:1.4;position:relative;z-index:2;">Verificar tensão</div>
                     </div>
 
                     <!-- ORÇAMENTO -->
-                    <div onclick="abrirOrcamento()" style="border-radius:16px;padding:14px 12px;cursor:pointer;position:relative;overflow:hidden;background:linear-gradient(145deg,#041a0f 0%,#050f0a 100%);border:1px solid rgba(16,185,129,.25);box-shadow:0 8px 24px rgba(16,185,129,.12),0 4px 12px rgba(0,0,0,.4),inset 0 1px 0 rgba(16,185,129,.15);transform:perspective(600px) rotateX(4deg);transition:transform .18s;" ontouchstart="this.style.transform='perspective(600px) rotateX(1deg) scale(.95)'" ontouchend="this.style.transform='perspective(600px) rotateX(4deg)'">
+                    <div onclick="abrirOrcamento()" style="border-radius:14px;padding:10px 10px;cursor:pointer;position:relative;overflow:hidden;background:linear-gradient(145deg,#041a0f 0%,#050f0a 100%);border:1px solid rgba(16,185,129,.25);box-shadow:0 8px 24px rgba(16,185,129,.12),0 4px 12px rgba(0,0,0,.4),inset 0 1px 0 rgba(16,185,129,.15);transform:perspective(600px) rotateX(4deg);transition:transform .18s;" ontouchstart="this.style.transform='perspective(600px) rotateX(1deg) scale(.95)'" ontouchend="this.style.transform='perspective(600px) rotateX(4deg)'">
                         <div style="position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(180deg,rgba(255,255,255,.07),transparent);border-radius:16px 16px 0 0;pointer-events:none;"></div>
                         <div style="position:absolute;bottom:0;left:0;right:0;height:2px;border-radius:0 0 16px 16px;background:rgba(16,185,129,.2);"></div>
-                        <div style="width:36px;height:36px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:19px;margin-bottom:9px;background:linear-gradient(145deg,rgba(16,185,129,.2),rgba(16,185,129,.08));border:1px solid rgba(16,185,129,.2);box-shadow:0 4px 12px rgba(16,185,129,.15),inset 0 1px 0 rgba(255,255,255,.1);">🧾</div>
-                        <div style="font-size:12px;font-weight:700;margin-bottom:3px;color:#34d399;position:relative;z-index:2;">Orçamento</div>
-                        <div style="font-size:8px;color:#064e3b;line-height:1.4;position:relative;z-index:2;">Mat. e MO</div>
+                        <div style="width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;margin-bottom:7px;background:linear-gradient(145deg,rgba(16,185,129,.2),rgba(16,185,129,.08));border:1px solid rgba(16,185,129,.2);box-shadow:0 4px 12px rgba(16,185,129,.15),inset 0 1px 0 rgba(255,255,255,.1);">🧾</div>
+                        <div style="font-size:11px;font-weight:700;margin-bottom:2px;color:#34d399;position:relative;z-index:2;">Orçamento</div>
+                        <div style="font-size:8px;opacity:.55;color:#064e3b;line-height:1.4;position:relative;z-index:2;">Mat. e MO</div>
                     </div>
 
                     <!-- CHECKLIST -->
-                    <div onclick="abrirChecklistHome()" style="border-radius:16px;padding:14px 12px;cursor:pointer;position:relative;overflow:hidden;background:linear-gradient(145deg,#1a0a02 0%,#100804 100%);border:1px solid rgba(249,115,22,.25);box-shadow:0 8px 24px rgba(249,115,22,.12),0 4px 12px rgba(0,0,0,.4),inset 0 1px 0 rgba(249,115,22,.15);transform:perspective(600px) rotateX(4deg);transition:transform .18s;" ontouchstart="this.style.transform='perspective(600px) rotateX(1deg) scale(.95)'" ontouchend="this.style.transform='perspective(600px) rotateX(4deg)'">
+                    <div onclick="abrirChecklistHome()" style="border-radius:14px;padding:10px 10px;cursor:pointer;position:relative;overflow:hidden;background:linear-gradient(145deg,#1a0a02 0%,#100804 100%);border:1px solid rgba(249,115,22,.25);box-shadow:0 8px 24px rgba(249,115,22,.12),0 4px 12px rgba(0,0,0,.4),inset 0 1px 0 rgba(249,115,22,.15);transform:perspective(600px) rotateX(4deg);transition:transform .18s;" ontouchstart="this.style.transform='perspective(600px) rotateX(1deg) scale(.95)'" ontouchend="this.style.transform='perspective(600px) rotateX(4deg)'">
                         <div style="position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(180deg,rgba(255,255,255,.07),transparent);border-radius:16px 16px 0 0;pointer-events:none;"></div>
                         <div style="position:absolute;bottom:0;left:0;right:0;height:2px;border-radius:0 0 16px 16px;background:rgba(249,115,22,.2);"></div>
-                        <div style="width:36px;height:36px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:19px;margin-bottom:9px;background:linear-gradient(145deg,rgba(249,115,22,.2),rgba(249,115,22,.08));border:1px solid rgba(249,115,22,.2);box-shadow:0 4px 12px rgba(249,115,22,.15),inset 0 1px 0 rgba(255,255,255,.1);">📋</div>
-                        <div style="font-size:12px;font-weight:700;margin-bottom:3px;color:#fb923c;position:relative;z-index:2;">Checklist</div>
-                        <div style="font-size:8px;color:#431407;line-height:1.4;position:relative;z-index:2;">Inspeção</div>
+                        <div style="width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;margin-bottom:7px;background:linear-gradient(145deg,rgba(249,115,22,.2),rgba(249,115,22,.08));border:1px solid rgba(249,115,22,.2);box-shadow:0 4px 12px rgba(249,115,22,.15),inset 0 1px 0 rgba(255,255,255,.1);">📋</div>
+                        <div style="font-size:11px;font-weight:700;margin-bottom:2px;color:#fb923c;position:relative;z-index:2;">Checklist</div>
+                        <div style="font-size:8px;opacity:.55;color:#431407;line-height:1.4;position:relative;z-index:2;">Inspeção</div>
                     </div>
 
                 </div>
 
                 <!-- SEC: Gestão -->
                 <div style="font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#334155;margin-bottom:10px;display:flex;align-items:center;gap:8px;">Gestão <span style="flex:1;height:1px;background:linear-gradient(90deg,rgba(255,255,255,.07),transparent);display:block;"></span></div>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px;">
 
-                    <!-- AGENDA -->
-                    <div onclick="toggleAgenda()" style="border-radius:18px;padding:15px 14px;cursor:pointer;position:relative;overflow:hidden;background:linear-gradient(145deg,#050e1e 0%,#040b18 100%);border:1px solid rgba(59,130,246,.25);box-shadow:0 10px 28px rgba(59,130,246,.12),0 4px 14px rgba(0,0,0,.5),inset 0 1px 0 rgba(59,130,246,.15);transform:perspective(500px) rotateX(3deg);transition:transform .18s;" ontouchstart="this.style.transform='perspective(500px) rotateX(0deg) scale(.96)'" ontouchend="this.style.transform='perspective(500px) rotateX(3deg)'">
-                        <div style="position:absolute;top:0;left:0;right:0;height:45%;background:linear-gradient(180deg,rgba(255,255,255,.07),transparent);border-radius:18px 18px 0 0;pointer-events:none;"></div>
-                        <div style="position:absolute;bottom:0;left:0;right:0;height:2px;border-radius:0 0 18px 18px;background:rgba(59,130,246,.2);"></div>
-                        <div style="width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:10px;background:linear-gradient(145deg,rgba(59,130,246,.2),rgba(59,130,246,.08));border:1px solid rgba(59,130,246,.2);box-shadow:0 4px 14px rgba(59,130,246,.15),inset 0 1px 0 rgba(255,255,255,.1);position:relative;z-index:2;">📅</div>
-                        <div style="font-size:13px;font-weight:700;margin-bottom:2px;color:#60a5fa;position:relative;z-index:2;">Agenda</div>
-                        <div style="font-size:9px;color:#1e3a5f;line-height:1.3;margin-bottom:6px;position:relative;z-index:2;">Próximos serviços</div>
-                        <div id="home-agenda-badge" style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;display:inline-flex;align-items:center;gap:4px;border-radius:8px;padding:3px 8px;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);color:#60a5fa;position:relative;z-index:2;"><div style="width:5px;height:5px;border-radius:50%;background:#60a5fa;box-shadow:0 0 5px #3b82f6;"></div>agenda</div>
-                    </div>
+                <!-- STRIP GESTÃO -->
+                <div style="display:flex;justify-content:space-around;align-items:flex-start;background:linear-gradient(145deg,#0a0f1e,#080c18);border:1px solid rgba(255,255,255,.07);border-radius:20px;padding:16px 8px 12px;margin-bottom:18px;gap:4px;">
 
-                    <!-- CLIENTES -->
-                    <div onclick="abrirClientes()" style="border-radius:18px;padding:15px 14px;cursor:pointer;position:relative;overflow:hidden;background:linear-gradient(145deg,#0e0820 0%,#080515 100%);border:1px solid rgba(139,92,246,.25);box-shadow:0 10px 28px rgba(139,92,246,.12),0 4px 14px rgba(0,0,0,.5),inset 0 1px 0 rgba(139,92,246,.15);transform:perspective(500px) rotateX(3deg);transition:transform .18s;" ontouchstart="this.style.transform='perspective(500px) rotateX(0deg) scale(.96)'" ontouchend="this.style.transform='perspective(500px) rotateX(3deg)'">
-                        <div style="position:absolute;top:0;left:0;right:0;height:45%;background:linear-gradient(180deg,rgba(255,255,255,.07),transparent);border-radius:18px 18px 0 0;pointer-events:none;"></div>
-                        <div style="position:absolute;bottom:0;left:0;right:0;height:2px;border-radius:0 0 18px 18px;background:rgba(139,92,246,.2);"></div>
-                        <div style="width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:10px;background:linear-gradient(145deg,rgba(139,92,246,.2),rgba(139,92,246,.08));border:1px solid rgba(139,92,246,.2);box-shadow:0 4px 14px rgba(139,92,246,.15),inset 0 1px 0 rgba(255,255,255,.1);position:relative;z-index:2;">👥</div>
-                        <div style="font-size:13px;font-weight:700;margin-bottom:2px;color:#a78bfa;position:relative;z-index:2;">Clientes</div>
-                        <div style="font-size:9px;color:#2e1065;line-height:1.3;margin-bottom:6px;position:relative;z-index:2;">Cadastro e projetos</div>
-                        <div id="home-clientes-badge" style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;display:inline-flex;align-items:center;gap:4px;border-radius:8px;padding:3px 8px;background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.2);color:#a78bfa;position:relative;z-index:2;"><div style="width:5px;height:5px;border-radius:50%;background:#8b5cf6;box-shadow:0 0 5px #7c3aed;"></div>clientes</div>
-                    </div>
-
-                    <!-- RELATÓRIO -->
-                    <div onclick="abrirRelatorio()" style="border-radius:18px;padding:15px 14px;cursor:pointer;position:relative;overflow:hidden;background:linear-gradient(145deg,#1a0518 0%,#100310 100%);border:1px solid rgba(236,72,153,.25);box-shadow:0 10px 28px rgba(236,72,153,.12),0 4px 14px rgba(0,0,0,.5),inset 0 1px 0 rgba(236,72,153,.15);transform:perspective(500px) rotateX(3deg);transition:transform .18s;" ontouchstart="this.style.transform='perspective(500px) rotateX(0deg) scale(.96)'" ontouchend="this.style.transform='perspective(500px) rotateX(3deg)'">
-                        <div style="position:absolute;top:0;left:0;right:0;height:45%;background:linear-gradient(180deg,rgba(255,255,255,.07),transparent);border-radius:18px 18px 0 0;pointer-events:none;"></div>
-                        <div style="position:absolute;bottom:0;left:0;right:0;height:2px;border-radius:0 0 18px 18px;background:rgba(236,72,153,.2);"></div>
-                        <div style="width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:10px;background:linear-gradient(145deg,rgba(236,72,153,.2),rgba(236,72,153,.08));border:1px solid rgba(236,72,153,.2);box-shadow:0 4px 14px rgba(236,72,153,.15),inset 0 1px 0 rgba(255,255,255,.1);position:relative;z-index:2;">📊</div>
-                        <div style="font-size:13px;font-weight:700;margin-bottom:2px;color:#f472b6;position:relative;z-index:2;">Relatório</div>
-                        <div style="font-size:9px;color:#500724;line-height:1.3;margin-bottom:6px;position:relative;z-index:2;">Faturamento mensal</div>
-                        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;display:inline-flex;align-items:center;gap:4px;border-radius:8px;padding:3px 8px;background:rgba(236,72,153,.1);border:1px solid rgba(236,72,153,.2);color:#f472b6;position:relative;z-index:2;"><div style="width:5px;height:5px;border-radius:50%;background:#ec4899;box-shadow:0 0 5px #db2777;"></div>financeiro</div>
-                    </div>
-
-                    <!-- HISTÓRICO -->
-                    <div onclick="toggleHistory()" style="border-radius:18px;padding:15px 14px;cursor:pointer;position:relative;overflow:hidden;background:linear-gradient(145deg,#0c0820 0%,#070518 100%);border:1px solid rgba(167,139,250,.25);box-shadow:0 10px 28px rgba(167,139,250,.12),0 4px 14px rgba(0,0,0,.5),inset 0 1px 0 rgba(167,139,250,.15);transform:perspective(500px) rotateX(3deg);transition:transform .18s;" ontouchstart="this.style.transform='perspective(500px) rotateX(0deg) scale(.96)'" ontouchend="this.style.transform='perspective(500px) rotateX(3deg)'">
-                        <div style="position:absolute;top:0;left:0;right:0;height:45%;background:linear-gradient(180deg,rgba(255,255,255,.07),transparent);border-radius:18px 18px 0 0;pointer-events:none;"></div>
-                        <div style="position:absolute;bottom:0;left:0;right:0;height:2px;border-radius:0 0 18px 18px;background:rgba(167,139,250,.2);"></div>
-                        <div style="width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:10px;background:linear-gradient(145deg,rgba(167,139,250,.2),rgba(167,139,250,.08));border:1px solid rgba(167,139,250,.2);box-shadow:0 4px 14px rgba(167,139,250,.15),inset 0 1px 0 rgba(255,255,255,.1);position:relative;z-index:2;">🕘</div>
-                        <div style="font-size:13px;font-weight:700;margin-bottom:2px;color:#c4b5fd;position:relative;z-index:2;">Histórico</div>
-                        <div style="font-size:9px;color:#2e1065;line-height:1.3;margin-bottom:6px;position:relative;z-index:2;">Cálculos salvos</div>
-                        <div id="home-hist-badge" style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;display:inline-flex;align-items:center;gap:4px;border-radius:8px;padding:3px 8px;background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.2);color:#c4b5fd;position:relative;z-index:2;"><div style="width:5px;height:5px;border-radius:50%;background:#a78bfa;box-shadow:0 0 5px #8b5cf6;"></div>salvos</div>
-                    </div>
-
+                    <div onclick="toggleAgenda()" style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;flex:1;-webkit-tap-highlight-color:transparent;" ontouchstart="this.querySelector('.ico-btn').style.transform='scale(.88)';this.querySelector('.ico-btn').style.opacity='.7'" ontouchend="this.querySelector('.ico-btn').style.transform='';this.querySelector('.ico-btn').style.opacity=''">
+                        <div class="ico-btn" style="width:56px;height:56px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:26px;border:1px solid rgba(255,255,255,.08);box-shadow:0 4px 14px rgba(0,0,0,.4);transition:transform .15s,opacity .15s;background:linear-gradient(145deg,rgba(59,130,246,.25),rgba(29,78,216,.15));box-shadow:0 4px 14px rgba(59,130,246,.25);">📅</div>
+                        <div style="font-size:10px;font-weight:700;letter-spacing:.3px;color:#60a5fa;">Agenda</div>
+                        <div style="font-size:8px;font-weight:500;letter-spacing:.2px;margin-top:-3px;opacity:.55;color:#60a5fa;">visitas</div>
+                        <!-- hidden badge holders for JS -->
+                    <span id="home-agenda-badge"  style="display:none;"></span>
+                    <span id="home-clientes-badge" style="display:none;"></span>
+                    <span id="home-hist-badge"    style="display:none;"></span>
                 </div>
+                    <div onclick="abrirClientes()" style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;flex:1;-webkit-tap-highlight-color:transparent;" ontouchstart="this.querySelector('.ico-btn').style.transform='scale(.88)';this.querySelector('.ico-btn').style.opacity='.7'" ontouchend="this.querySelector('.ico-btn').style.transform='';this.querySelector('.ico-btn').style.opacity=''">
+                        <div class="ico-btn" style="width:56px;height:56px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:26px;border:1px solid rgba(255,255,255,.08);box-shadow:0 4px 14px rgba(0,0,0,.4);transition:transform .15s,opacity .15s;background:linear-gradient(145deg,rgba(139,92,246,.25),rgba(109,40,217,.15));box-shadow:0 4px 14px rgba(139,92,246,.25);">👥</div>
+                        <div style="font-size:10px;font-weight:700;letter-spacing:.3px;color:#a78bfa;">Clientes</div>
+                        <div style="font-size:8px;font-weight:500;letter-spacing:.2px;margin-top:-3px;opacity:.55;color:#a78bfa;">cadastros</div>
+                    </div>
+                    <div onclick="abrirRelatorio()" style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;flex:1;-webkit-tap-highlight-color:transparent;" ontouchstart="this.querySelector('.ico-btn').style.transform='scale(.88)';this.querySelector('.ico-btn').style.opacity='.7'" ontouchend="this.querySelector('.ico-btn').style.transform='';this.querySelector('.ico-btn').style.opacity=''">
+                        <div class="ico-btn" style="width:56px;height:56px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:26px;border:1px solid rgba(255,255,255,.08);box-shadow:0 4px 14px rgba(0,0,0,.4);transition:transform .15s,opacity .15s;background:linear-gradient(145deg,rgba(236,72,153,.25),rgba(190,24,93,.15));box-shadow:0 4px 14px rgba(236,72,153,.25);">📊</div>
+                        <div style="font-size:10px;font-weight:700;letter-spacing:.3px;color:#f472b6;">Relatório</div>
+                        <div style="font-size:8px;font-weight:500;letter-spacing:.2px;margin-top:-3px;opacity:.55;color:#f472b6;">mensal</div>
+                    </div>
+                    <div onclick="toggleHistory()" style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;flex:1;-webkit-tap-highlight-color:transparent;" ontouchstart="this.querySelector('.ico-btn').style.transform='scale(.88)';this.querySelector('.ico-btn').style.opacity='.7'" ontouchend="this.querySelector('.ico-btn').style.transform='';this.querySelector('.ico-btn').style.opacity=''">
+                        <div class="ico-btn" style="width:56px;height:56px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:26px;border:1px solid rgba(255,255,255,.08);box-shadow:0 4px 14px rgba(0,0,0,.4);transition:transform .15s,opacity .15s;background:linear-gradient(145deg,rgba(167,139,250,.25),rgba(109,40,217,.15));box-shadow:0 4px 14px rgba(167,139,250,.25);">🕘</div>
+                        <div style="font-size:10px;font-weight:700;letter-spacing:.3px;color:#c4b5fd;">Histórico</div>
+                        <div style="font-size:8px;font-weight:500;letter-spacing:.2px;margin-top:-3px;opacity:.55;color:#c4b5fd;">salvos</div>
+                    </div>
+                </div>
+                            </div>
             </div>
 
 
@@ -658,55 +664,53 @@
             </div>
 
     <nav id="bottom-nav" class="no-print" style="position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:28rem;background:rgba(9,12,19,.97);backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,.07);display:none;z-index:400;padding-bottom:env(safe-area-inset-bottom);">
-        <div style="display:flex;align-items:center;justify-content:space-around;padding:6px 8px 10px;">
-
+        <div style="display:flex;align-items:center;justify-content:space-around;padding:4px 4px 8px;">
             <button onclick="irParaHome()" id="bnav-inicio"
-                style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;flex:1;border:none;background:transparent;cursor:pointer;padding:4px 2px;min-width:0;-webkit-tap-highlight-color:transparent;">
+                style="border:none;background:transparent;cursor:pointer;-webkit-tap-highlight-color:transparent;display:flex;flex-direction:column;align-items:center;gap:0;flex:1;padding:6px 2px 4px;min-width:0;">
                 <div id="bnav-pill-inicio"
-                    style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;width:52px;padding:6px 4px 5px;border-radius:14px;background:rgba(245,158,11,.14);border:1px solid rgba(245,158,11,.28);transition:background .2s,border-color .2s;">
-                    <span style="font-size:19px;line-height:1;display:block;">🏠</span>
-                    <span style="font-size:8px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:#f59e0b;white-space:nowrap;">Home</span>
+                    style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:56px;padding:7px 4px 5px;border-radius:14px;transition:background .2s,border-color .2s;border:1px solid transparent;background:rgba(245,158,11,.18);border-color:rgba(245,158,11,.3);color:#f59e0b;">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    <span style="font-size:8px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:#f59e0b;white-space:nowrap;">Home</span>
                 </div>
             </button>
 
             <button onclick="abrirDemanda()" id="bnav-ferramentas"
-                style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;flex:1;border:none;background:transparent;cursor:pointer;padding:4px 2px;min-width:0;-webkit-tap-highlight-color:transparent;">
+                style="border:none;background:transparent;cursor:pointer;-webkit-tap-highlight-color:transparent;display:flex;flex-direction:column;align-items:center;gap:0;flex:1;padding:6px 2px 4px;min-width:0;">
                 <div id="bnav-pill-ferramentas"
-                    style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;width:52px;padding:6px 4px 5px;border-radius:14px;background:transparent;border:1px solid transparent;transition:background .2s,border-color .2s;">
-                    <span style="font-size:19px;line-height:1;display:block;">⚡</span>
-                    <span style="font-size:8px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#3a4a60;white-space:nowrap;">Calc.</span>
+                    style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:56px;padding:7px 4px 5px;border-radius:14px;transition:background .2s,border-color .2s;border:1px solid transparent;background:transparent;border-color:transparent;color:#3a4a60;">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    <span style="font-size:8px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#3a4a60;white-space:nowrap;">Calc.</span>
                 </div>
             </button>
 
             <button onclick="toggleAgenda()" id="bnav-agenda"
-                style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;flex:1;border:none;background:transparent;cursor:pointer;padding:4px 2px;min-width:0;-webkit-tap-highlight-color:transparent;">
+                style="border:none;background:transparent;cursor:pointer;-webkit-tap-highlight-color:transparent;display:flex;flex-direction:column;align-items:center;gap:0;flex:1;padding:6px 2px 4px;min-width:0;">
                 <div id="bnav-pill-agenda"
-                    style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;width:52px;padding:6px 4px 5px;border-radius:14px;background:transparent;border:1px solid transparent;transition:background .2s,border-color .2s;">
-                    <span style="font-size:19px;line-height:1;display:block;">📅</span>
-                    <span style="font-size:8px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#3a4a60;white-space:nowrap;">Agenda</span>
+                    style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:56px;padding:7px 4px 5px;border-radius:14px;transition:background .2s,border-color .2s;border:1px solid transparent;background:transparent;border-color:transparent;color:#3a4a60;">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    <span style="font-size:8px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#3a4a60;white-space:nowrap;">Agenda</span>
                 </div>
             </button>
 
             <button onclick="toggleHistory()" id="bnav-historico"
-                style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;flex:1;border:none;background:transparent;cursor:pointer;padding:4px 2px;min-width:0;-webkit-tap-highlight-color:transparent;">
+                style="border:none;background:transparent;cursor:pointer;-webkit-tap-highlight-color:transparent;display:flex;flex-direction:column;align-items:center;gap:0;flex:1;padding:6px 2px 4px;min-width:0;">
                 <div id="bnav-pill-historico"
-                    style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;width:52px;padding:6px 4px 5px;border-radius:14px;background:transparent;border:1px solid transparent;transition:background .2s,border-color .2s;">
-                    <span style="font-size:19px;line-height:1;display:block;">🕘</span>
-                    <span style="font-size:8px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#3a4a60;white-space:nowrap;">Hist.</span>
+                    style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:56px;padding:7px 4px 5px;border-radius:14px;transition:background .2s,border-color .2s;border:1px solid transparent;background:transparent;border-color:transparent;color:#3a4a60;">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <span style="font-size:8px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#3a4a60;white-space:nowrap;">Hist.</span>
                 </div>
             </button>
 
             <button onclick="toggleSettings();setTimeout(()=>trocarAbaConfig('perfil'),50);" id="bnav-ajustes"
-                style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;flex:1;border:none;background:transparent;cursor:pointer;padding:4px 2px;min-width:0;-webkit-tap-highlight-color:transparent;">
+                style="border:none;background:transparent;cursor:pointer;-webkit-tap-highlight-color:transparent;display:flex;flex-direction:column;align-items:center;gap:0;flex:1;padding:6px 2px 4px;min-width:0;">
                 <div id="bnav-pill-ajustes"
-                    style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;width:52px;padding:6px 4px 5px;border-radius:14px;background:transparent;border:1px solid transparent;transition:background .2s,border-color .2s;">
-                    <span style="font-size:19px;line-height:1;display:block;">⚙️</span>
-                    <span style="font-size:8px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#3a4a60;white-space:nowrap;">Config</span>
+                    style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:56px;padding:7px 4px 5px;border-radius:14px;transition:background .2s,border-color .2s;border:1px solid transparent;background:transparent;border-color:transparent;color:#3a4a60;">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+                    <span style="font-size:8px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#3a4a60;white-space:nowrap;">Config</span>
                 </div>
             </button>
-
         </div>
-    </nav>
+    </div>
 
     <div class="fab-calcular no-print" id="fab-calcular" style="display:none;">
         <button onclick="calcularPrecos()" id="btn-calcular-agora" class="w-full text-white font-black py-4 rounded-2xl shadow-lg active:scale-[0.98] transition-transform text-sm flex items-center justify-center gap-3" style="background:#f97316;box-shadow:0 4px 20px rgba(249,115,22,0.5);">
@@ -718,9 +722,9 @@
 
     <div id="agendaModal" class="fixed inset-0 z-50 hidden">
         <div class="modal-overlay absolute inset-0 w-full h-full" onclick="toggleAgenda()"></div>
-        <div class="absolute inset-x-0 bottom-0 sm:inset-auto sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 w-full max-w-lg rounded-t-3xl sm:rounded-3xl h-[92vh] sm:max-h-[90vh] flex flex-col transform transition-transform duration-300 shadow-2xl translate-y-full" id="agendaContent" style="background:#0d1117;">
+        <div class="modal-top-sheet" id="agendaContent" style="background:#0d1117;">
 
-            <div <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:#0d1117;border-bottom:1px solid rgba(255,255,255,.06);position:sticky;top:0;z-index:10;flex-shrink:0;">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:#0d1117;border-bottom:1px solid rgba(255,255,255,.06);position:sticky;top:0;z-index:10;flex-shrink:0;">
                 <div style="display:flex;align-items:center;gap:12px;">
                     <div style="width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 14px rgba(0,0,0,.35);background:linear-gradient(135deg,#0ea5e9,#0369a1);">
                         <svg class="ico" style="color:white;width:18px;height:18px;" aria-hidden="true"><use href="#i-clock"></use></svg>
@@ -735,7 +739,7 @@
                 </button>
             </div>
 
-            <div <div style="display:flex;background:#0d1117;border-bottom:1px solid rgba(255,255,255,.06);flex-shrink:0;">
+            <div style="display:flex;background:#0d1117;border-bottom:1px solid rgba(255,255,255,.06);flex-shrink:0;">
                 <button onclick="trocarAbaAgenda('visitas')"   id="atab-visitas"   class="agenda-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-blue-600 border-b-2 border-blue-600" style="background:transparent;">Agenda</button>
                 <button onclick="trocarAbaAgenda('clientes')"  id="atab-clientes"  class="agenda-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-slate-400 border-b-2 border-transparent" style="background:transparent;">Clientes</button>
                 <button onclick="trocarAbaAgenda('garantias')" id="atab-garantias" class="agenda-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-slate-400 border-b-2 border-transparent" style="background:transparent;">Garantias</button>
@@ -859,7 +863,7 @@
 
     <div id="ferramentasModal" class="fixed inset-0 z-50 hidden">
         <div class="modal-overlay absolute inset-0 w-full h-full" onclick="toggleFerramentas()"></div>
-        <div class="absolute inset-x-0 bottom-0 sm:inset-auto sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 w-full max-w-lg rounded-t-3xl sm:rounded-3xl h-[92vh] sm:max-h-[90vh] flex flex-col transform transition-transform duration-300 shadow-2xl translate-y-full" id="ferramentasContent" style="background:#0d1117;">
+        <div class="modal-top-sheet" id="ferramentasContent" style="background:#0d1117;">
 
             <div <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:#0d1117;border-bottom:1px solid rgba(255,255,255,.06);position:sticky;top:0;z-index:10;flex-shrink:0;">
                 <div style="display:flex;align-items:center;gap:12px;">
@@ -1767,7 +1771,7 @@
     </div>
     <div id="settingsModal" class="fixed inset-0 z-50 hidden">
         <div class="modal-overlay absolute inset-0 w-full h-full" onclick="toggleSettings()"></div>
-        <div class="absolute inset-x-0 bottom-0 sm:inset-auto sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 w-full max-w-lg rounded-t-3xl sm:rounded-3xl h-[92vh] sm:max-h-[90vh] flex flex-col transform transition-transform duration-300 shadow-2xl translate-y-full" id="modalContent" style="background:#0d1117;">
+        <div class="modal-top-sheet" id="modalContent" style="background:#0d1117;">
 
             <div <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:#0d1117;border-bottom:1px solid rgba(255,255,255,.06);position:sticky;top:0;z-index:10;flex-shrink:0;">
                 <div style="display:flex;align-items:center;gap:12px;">
@@ -1991,7 +1995,7 @@
 
     <div id="historyModal" class="fixed inset-0 z-50 hidden">
         <div class="modal-overlay absolute inset-0 w-full h-full" onclick="toggleHistory()"></div>
-        <div class="absolute inset-y-0 right-0 w-full max-w-sm p-0 h-full flex flex-col transform transition-transform duration-300 translate-x-full shadow-2xl" id="historyContent" style="background:#0d1117;">
+        <div class="modal-top-sheet" id="historyContent" style="background:#0d1117;">
             <div <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:#0d1117;border-bottom:1px solid rgba(255,255,255,.06);position:sticky;top:0;z-index:10;flex-shrink:0;">
                 <div style="display:flex;align-items:center;gap:12px;">
                     <div style="width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 14px rgba(0,0,0,.35);background:linear-gradient(135deg,#c084fc,#7c3aed);">
@@ -3242,20 +3246,28 @@
 
         function toggleHistory() {
             const _th = document.getElementById('tela-home');
-            if (_th && _th.style.display !== 'none') _th.style.display = 'none';
-            else if (_th) { _th.style.display = 'block'; _destacarNavBtnDark('bnav-inicio'); }
             const m = document.getElementById('historyModal');
-            _destacarNavBtn(m.classList.contains('hidden') ? 'bnav-historico' : 'bnav-inicio');
             const c = document.getElementById('historyContent');
             if (m.classList.contains('hidden')) {
+                if (_th && _th.style.display !== 'none') _th.style.display = 'none';
+                _destacarNavBtn('bnav-historico');
                 _fecharTodosModais('historyModal');
                 lockScroll();
                 renderHistoricoUI();
                 m.classList.remove('hidden');
-                requestAnimationFrame(() => requestAnimationFrame(() => c.classList.remove('translate-x-full')));
+                requestAnimationFrame(() => requestAnimationFrame(() => c.classList.add('modal-visible')));
             } else {
-                c.classList.add('translate-x-full');
-                setTimeout(() => { m.classList.add('hidden'); unlockScroll(); }, 300);
+                _destacarNavBtn('bnav-inicio');
+                c.classList.remove('modal-visible');
+                setTimeout(() => {
+                    m.classList.add('hidden'); unlockScroll();
+            const _torc = document.getElementById('tela-orcamento');
+                if (_th && (!_torc || _torc.style.display === 'none')) {
+                    _th.style.display = 'block';
+                    _destacarNavBtnDark('bnav-inicio');
+                    _atualizarHomeBadges();
+                }
+                }, 300);
             }
         }
 
@@ -3452,22 +3464,30 @@
 
         function toggleSettings() {
             const _th = document.getElementById('tela-home');
-            if (_th && _th.style.display !== 'none') _th.style.display = 'none';
-            else if (_th) { _th.style.display = 'block'; _destacarNavBtnDark('bnav-inicio'); }
             const m = document.getElementById('settingsModal');
-            _destacarNavBtn(m.classList.contains('hidden') ? 'bnav-ajustes' : 'bnav-inicio');
             const c = document.getElementById('modalContent');
             if (m.classList.contains('hidden')) {
+                if (_th && _th.style.display !== 'none') _th.style.display = 'none';
+                _destacarNavBtn('bnav-ajustes');
                 _fecharTodosModais('settingsModal');
                 lockScroll();
                 m.classList.remove('hidden');
-                requestAnimationFrame(() => requestAnimationFrame(() => c.classList.remove('translate-y-full')));
+                requestAnimationFrame(() => requestAnimationFrame(() => c.classList.add('modal-visible')));
                 renderListaServicosBase();
                 renderListaMateriaisBase();
                 _syncLogoCfgUI();
             } else {
-                c.classList.add('translate-y-full');
-                setTimeout(() => { m.classList.add('hidden'); unlockScroll(); }, 300);
+                _destacarNavBtn('bnav-inicio');
+                c.classList.remove('modal-visible');
+                setTimeout(() => {
+                    m.classList.add('hidden'); unlockScroll();
+            const _torc = document.getElementById('tela-orcamento');
+                if (_th && (!_torc || _torc.style.display === 'none')) {
+                    _th.style.display = 'block';
+                    _destacarNavBtnDark('bnav-inicio');
+                    _atualizarHomeBadges();
+                }
+                }, 300);
             }
         }
 
@@ -3913,21 +3933,29 @@
 
 function toggleFerramentas() {
             const _th = document.getElementById('tela-home');
-            if (_th && _th.style.display !== 'none') _th.style.display = 'none';
-            else if (_th) { _th.style.display = 'block'; _destacarNavBtnDark('bnav-inicio'); }
             const m = document.getElementById('ferramentasModal');
-            _destacarNavBtn(m.classList.contains('hidden') ? 'bnav-ferramentas' : 'bnav-inicio');
             const c = document.getElementById('ferramentasContent');
             if (m.classList.contains('hidden')) {
+                if (_th && _th.style.display !== 'none') _th.style.display = 'none';
+                _destacarNavBtn('bnav-ferramentas');
                 _fecharTodosModais('ferramentasModal');
                 lockScroll();
                 m.classList.remove('hidden');
-                requestAnimationFrame(() => requestAnimationFrame(() => c.classList.remove('translate-y-full')));
+                requestAnimationFrame(() => requestAnimationFrame(() => c.classList.add('modal-visible')));
                 renderModelosCheck();
                 renderTabelaNBR();
             } else {
-                c.classList.add('translate-y-full');
-                setTimeout(() => { m.classList.add('hidden'); unlockScroll(); }, 300);
+                _destacarNavBtn('bnav-inicio');
+                c.classList.remove('modal-visible');
+                setTimeout(() => {
+                    m.classList.add('hidden'); unlockScroll();
+            const _torc = document.getElementById('tela-orcamento');
+                if (_th && (!_torc || _torc.style.display === 'none')) {
+                    _th.style.display = 'block';
+                    _destacarNavBtnDark('bnav-inicio');
+                    _atualizarHomeBadges();
+                }
+                }, 300);
                 ['cbtn-mono','cbtn-bi','cbtn-tri','btn127','btn220','btn380'].forEach(id => {
                     const btn = document.getElementById(id);
                     if (btn) btn.disabled = false;
@@ -5567,16 +5595,15 @@ function toggleFerramentas() {
 
         function toggleAgenda() {
             const _th = document.getElementById('tela-home');
-            if (_th && _th.style.display !== 'none') _th.style.display = 'none';
-            else if (_th) { _th.style.display = 'block'; _destacarNavBtnDark('bnav-inicio'); }
             const m = document.getElementById('agendaModal');
-            _destacarNavBtn(m.classList.contains('hidden') ? 'bnav-agenda' : 'bnav-inicio');
             const c = document.getElementById('agendaContent');
             if (m.classList.contains('hidden')) {
+                if (_th && _th.style.display !== 'none') _th.style.display = 'none';
+                _destacarNavBtn('bnav-agenda');
                 _fecharTodosModais('agendaModal');
                 lockScroll();
                 m.classList.remove('hidden');
-                requestAnimationFrame(() => requestAnimationFrame(() => c.classList.remove('translate-y-full')));
+                requestAnimationFrame(() => requestAnimationFrame(() => c.classList.add('modal-visible')));
                 const hoje = new Date();
                 document.getElementById('rel-mes').value = hoje.getMonth();
                 document.getElementById('rel-ano').value = hoje.getFullYear();
@@ -5584,8 +5611,17 @@ function toggleFerramentas() {
                 renderClientes();
                 renderGarantias();
             } else {
-                c.classList.add('translate-y-full');
-                setTimeout(() => { m.classList.add('hidden'); unlockScroll(); }, 300);
+                _destacarNavBtn('bnav-inicio');
+                c.classList.remove('modal-visible');
+                setTimeout(() => {
+                    m.classList.add('hidden'); unlockScroll();
+            const _torc = document.getElementById('tela-orcamento');
+                if (_th && (!_torc || _torc.style.display === 'none')) {
+                    _th.style.display = 'block';
+                    _destacarNavBtnDark('bnav-inicio');
+                    _atualizarHomeBadges();
+                }
+                }, 300);
             }
         }
 
@@ -5882,17 +5918,17 @@ function toggleFerramentas() {
     
         function _fecharTodosModais(exceto) {
             const modais = [
-                { id:'ferramentasModal', content:'ferramentasContent', anim:'translate-y-full' },
-                { id:'agendaModal',      content:'agendaContent',      anim:'translate-y-full' },
-                { id:'historyModal',     content:'historyContent',     anim:'translate-x-full' },
-                { id:'settingsModal',    content:'modalContent',       anim:'translate-y-full' },
+                { id:'ferramentasModal', content:'ferramentasContent' },
+                { id:'agendaModal',      content:'agendaContent'      },
+                { id:'historyModal',     content:'historyContent'     },
+                { id:'settingsModal',    content:'modalContent'       },
             ];
-            modais.forEach(({ id, content: cid, anim }) => {
+            modais.forEach(({ id, content: cid }) => {
                 if (id === exceto) return;
                 const m = document.getElementById(id);
                 const c = document.getElementById(cid);
                 if (m && !m.classList.contains('hidden')) {
-                    if (c) c.classList.add(anim);
+                    if (c) c.classList.remove('modal-visible');
                     setTimeout(() => { if (m) m.classList.add('hidden'); }, 300);
                 }
             });
@@ -6116,6 +6152,7 @@ function toggleFerramentas() {
                 const c = cfg[btnId];
                 pill.style.background = ativo ? c.bg : 'transparent';
                 pill.style.borderColor = ativo ? c.borda : 'transparent';
+                pill.style.color = ativo ? c.cor : '#3a4a60';
                 const spans = pill.querySelectorAll('span');
                 spans.forEach(s => {
                     s.style.color = ativo ? c.cor : '#3a4a60';
