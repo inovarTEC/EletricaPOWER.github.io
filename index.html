@@ -157,7 +157,7 @@
       <div class="hdr-home">
         <div class="hdr-logo">
           <div class="hdr-bolt">⚡</div>
-          <span class="hdr-name">EL. POWER</span>
+          <span class="hdr-name">EL. POWER <span style="font-size:13px;font-weight:900;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;padding:3px 8px;border-radius:7px;letter-spacing:2px;vertical-align:middle;box-shadow:0 2px 8px rgba(245,158,11,.5);">PRO</span></span>
         </div>
         <div class="hdr-right">
           <div class="hbtn" onclick="toggleNotifHome()">🔔<div class="ndot" id="home-ndot" style="display:none;"></div></div>
@@ -375,19 +375,19 @@
         .hover\:bg-slate-200:hover{background:rgba(255,255,255,.12)!important;}
 
         /* ══ TELA HOME ════════════════════════════════════════ */
-        #tela-home{display:none;position:fixed;inset:0;z-index:200;background:#07090f;flex-direction:column;overflow:hidden;}
+        #tela-home{display:none;position:fixed;inset:0;z-index:200;background:#07090f;flex-direction:column;overflow:hidden;padding-top:env(safe-area-inset-top,12px);} #tela-home ::-webkit-scrollbar{display:none;}
 
         /* header home */
         .hdr-home{background:rgba(11,14,24,.97);border-bottom:1px solid rgba(255,255,255,.07);padding:20px 14px 14px;display:flex;align-items:center;justify-content:space-between;}
         .hdr-logo{display:flex;align-items:center;gap:8px;}
         .hdr-bolt{width:28px;height:28px;background:linear-gradient(145deg,#fbbf24,#d97706);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;box-shadow:0 4px 12px rgba(245,158,11,.4);}
-        .hdr-name{font-family:'Syne',sans-serif;font-size:16px;font-weight:800;background:linear-gradient(90deg,#f1f5f9,#94a3b8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+        .hdr-name{font-family:'Syne',sans-serif;font-size:20px;font-weight:900;background:linear-gradient(90deg,#f1f5f9,#94a3b8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
         .hdr-right{display:flex;gap:6px;}
         .hbtn{width:30px;height:30px;background:#0b0e18;border:1px solid rgba(255,255,255,.07);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;position:relative;cursor:pointer;}
         .ndot{position:absolute;top:5px;right:5px;width:5px;height:5px;border-radius:50%;background:#f59e0b;border:1.5px solid #07090f;box-shadow:0 0 5px rgba(245,158,11,.6);}
 
         /* body home */
-        .home-body{padding:14px;overflow-y:hidden;flex:1;display:flex;flex-direction:column;gap:0;}
+        .home-body{padding:10px 14px;overflow:hidden;flex:1;display:flex;flex-direction:column;gap:0;}
         .home-body::-webkit-scrollbar{display:none;}
 
         /* greeting */
@@ -464,7 +464,7 @@
         /* GESTÃO */
         .gestao-strip{display:flex;background:linear-gradient(145deg,#0a0f1e,#080c18);border:1px solid rgba(255,255,255,.06);border-radius:15px;padding:14px 8px 12px;}
         .gi{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;flex:1;cursor:pointer;text-align:center;}
-        .gi-ico{width:126px;height:126px;border-radius:26px;display:flex;align-items:center;justify-content:center;font-size:63px;transition:transform .15s;}
+        .gi-ico{width:64px;height:64px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:32px;transition:transform .15s;}
         .gi:active .gi-ico{transform:scale(.86);}
         .gi-lbl{font-size:10px;font-weight:700;text-align:center;}
         .gi-sub{font-size:8px;font-weight:600;text-align:center;margin-top:2px;}
@@ -6098,6 +6098,7 @@
         }
 
         function _atualizarHomeUI() {
+            _atualizarDot();
             var nome = state.prestadorPadrao || state.nomeEletricista || '';
             var hn = document.getElementById('homeNome');
             if (hn && nome) hn.textContent = nome;
@@ -6179,6 +6180,35 @@
             if (btn) btn.className = 'f-btn on';
         }
         // ───────────────────────────────────────────────────────
+
+        
+        function _atualizarDot() {
+            var hoje = new Date().toISOString().slice(0,10);
+            var alertas = 0;
+
+            // Visitas atrasadas
+            (state.visitas || []).forEach(function(v) {
+                if (v.data && v.data < hoje && !v.feita) alertas++;
+            });
+
+            // Visitas de hoje
+            (state.visitas || []).forEach(function(v) {
+                if (v.data && v.data.slice(0,10) === hoje) alertas++;
+            });
+
+            // Garantias vencendo em 30 dias
+            var em30 = new Date();
+            em30.setDate(em30.getDate() + 30);
+            var em30str = em30.toISOString().slice(0,10);
+            (state.clientes || []).forEach(function(c) {
+                if (c.garantiaAte && c.garantiaAte <= em30str && c.garantiaAte >= hoje) alertas++;
+            });
+
+            var dot = document.getElementById('home-ndot');
+            if (dot) {
+                dot.style.display = alertas > 0 ? 'block' : 'none';
+            }
+        }
 
         </script>
 </body>
