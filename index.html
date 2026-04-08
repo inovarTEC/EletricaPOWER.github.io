@@ -468,6 +468,27 @@
         .ni-bar{width:14px;height:2px;border-radius:1px;background:transparent;margin-top:2px;}
         .ni.on .ni-bar{background:#f59e0b;box-shadow:0 0 5px rgba(245,158,11,.5);}
 
+        
+        /* ── Modal Design A ─────────────────────────────────── */
+        .modal-hdr{display:flex;align-items:center;justify-content:space-between;padding:15px 16px 13px;border-bottom:1px solid rgba(255,255,255,.07);position:sticky;top:0;background:#0d1117;z-index:10;flex-shrink:0;}
+        .modal-hdr-left{display:flex;align-items:center;gap:11px;}
+        .modal-ico{width:36px;height:36px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
+        .modal-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:800;color:#f1f5f9;}
+        .modal-sub{font-size:8px;color:#475569;letter-spacing:.5px;text-transform:uppercase;margin-top:1px;}
+        .modal-close{width:30px;height:30px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#64748b;font-size:14px;flex-shrink:0;padding:0;font-family:sans-serif;}
+        .modal-close:hover{background:rgba(255,255,255,.1);}
+        /* tab bar */
+        .modal-tabs{display:flex;gap:5px;padding:8px 12px;background:#0d1117;border-bottom:1px solid rgba(255,255,255,.06);flex-shrink:0;overflow-x:auto;}
+        .modal-tabs::-webkit-scrollbar{display:none;}
+        .mtab{flex:1;padding:7px 6px;border-radius:9px;font-size:8px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;text-align:center;cursor:pointer;border:1px solid transparent;transition:all .2s;white-space:nowrap;color:#334155;}
+        .mtab.on{background:rgba(245,158,11,.14);border-color:rgba(245,158,11,.28);color:#f59e0b;}
+        /* settings tabs vertical icon */
+        .cfg-tabs{display:flex;background:#0d1117;border-bottom:1px solid rgba(255,255,255,.06);flex-shrink:0;overflow-x:auto;}
+        .cfg-tabs::-webkit-scrollbar{display:none;}
+        .ctab{flex:1;min-width:56px;padding:9px 4px 7px;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:7px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;color:#334155;border-bottom:2px solid transparent;transition:.2s;}
+        .ctab.on{color:#f59e0b;border-bottom-color:#f59e0b;}
+        .ctab svg{width:16px;height:16px;}
+
         </style>
                       <g class="bf">
                       <rect x="33" y="162" width="21" height="22" rx="5" fill="#292524"/>
@@ -629,7 +650,7 @@
 
                     <div id="results-section" class="hidden space-y-5 animate-slide-up pb-10">
 
-                        <div class="bg-[#0f172a] p-6 rounded-3xl shadow-xl text-white text-center relative overflow-hidden ring-4 ring-slate-100">
+                        <div class=" p-6 rounded-3xl shadow-xl text-white text-center relative overflow-hidden ring-4 ring-slate-100">
                             <div class="absolute top-0 right-0 w-32 h-32 bg-blue-500 rounded-full opacity-20 blur-2xl"></div>
                             <div class="relative z-10">
                                 <p class="text-[10px] font-bold text-blue-300 uppercase mb-2 tracking-widest">Valor Sugerido</p>
@@ -746,20 +767,21 @@
 
         <div style="position:fixed;bottom:0;left:0;right:0;width:100%;height:92vh;background:#0d1117;border-radius:20px 20px 0 0;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .3s ease;box-shadow:0 -8px 40px rgba(0,0,0,.6);z-index:301;" id="agendaContent">
 
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:20px 20px 16px;border-bottom:1px solid rgba(255,255,255,.07);position:sticky;top:0;background:#0d1117;z-index:10;">
-                <h2 class="text-lg font-black text-slate-800 uppercase flex items-center gap-2">
-                    <svg class="ico text-blue-600" aria-hidden="true"><use href="#i-clock"></use></svg> Agenda & Clientes
-                </h2>
-                <button onclick="toggleAgenda()" class="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center hover:bg-slate-200">
-                    <svg class="ico" aria-hidden="true"><use href="#i-xmark"></use></svg>
-                </button>
+            <div class="modal-hdr">
+                <div class="modal-hdr-left">
+                    <div class="modal-ico" style="background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.25);">📅</div>
+                    <div>
+                        <div class="modal-title">Agenda & Clientes</div>
+                        <div class="modal-sub">Visitas · Garantias · Relatório</div>
+                    </div>
+                </div>
+                <button onclick="toggleAgenda()" class="modal-close">✕</button>
             </div>
-
-            <div style="display:flex;border-bottom:1px solid rgba(255,255,255,.07);background:#0a0f1a;position:sticky;top:73px;z-index:10;">
-                <button onclick="trocarAbaAgenda('visitas')"   id="atab-visitas"   class="agenda-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-blue-600 border-b-2 border-blue-600">Agenda</button>
-                <button onclick="trocarAbaAgenda('clientes')"  id="atab-clientes"  class="agenda-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-slate-400 border-b-2 border-transparent">Clientes</button>
-                <button onclick="trocarAbaAgenda('garantias')" id="atab-garantias" class="agenda-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-slate-400 border-b-2 border-transparent">Garantias</button>
-                <button onclick="trocarAbaAgenda('relatorio')" id="atab-relatorio" class="agenda-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-slate-400 border-b-2 border-transparent">Relatório</button>
+            <div class="modal-tabs">
+                <button onclick="trocarAbaAgenda('visitas')"   id="atab-visitas"   class="mtab on">Agenda</button>
+                <button onclick="trocarAbaAgenda('clientes')"  id="atab-clientes"  class="mtab">Clientes</button>
+                <button onclick="trocarAbaAgenda('garantias')" id="atab-garantias" class="mtab">Garantias</button>
+                <button onclick="trocarAbaAgenda('relatorio')" id="atab-relatorio" class="mtab">Relatório</button>
             </div>
 
             <div class="p-5 space-y-4 overflow-y-auto flex-grow pb-safe modal-scroll" style="background:#0d1117;">
@@ -848,7 +870,7 @@
                     </div>
 
                     <div id="resultado-relatorio" class="hidden space-y-3">
-                        <div class="bg-[#0f172a] text-white p-5 rounded-2xl">
+                        <div class=" text-white p-5 rounded-2xl">
                             <p class="text-[10px] font-bold text-blue-300 uppercase tracking-widest mb-3" id="rel-titulo">Relatório</p>
                             <div class="grid grid-cols-2 gap-3">
                                 <div class="bg-white/10 p-3 rounded-xl">
@@ -882,19 +904,19 @@
         <div style="position:fixed;bottom:0;left:0;right:0;width:100%;height:92vh;background:#0d1117;border-radius:20px 20px 0 0;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .3s ease;box-shadow:0 -8px 40px rgba(0,0,0,.6);z-index:301;" id="agendaContent">
 
             <div style="display:flex;justify-content:space-between;align-items:center;padding:20px 20px 16px;border-bottom:1px solid rgba(255,255,255,.07);position:sticky;top:0;background:#0d1117;z-index:10;">
-                <h2 class="text-lg font-black text-slate-800 uppercase flex items-center gap-2">
+                <h2 class="modal-title">
                     <svg class="ico text-blue-600" aria-hidden="true"><use href="#i-clock"></use></svg> Agenda & Clientes
                 </h2>
-                <button onclick="toggleAgenda()" class="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center hover:bg-slate-200">
+                <button onclick="toggleAgenda()" class="modal-close">
                     <svg class="ico" aria-hidden="true"><use href="#i-xmark"></use></svg>
                 </button>
             </div>
 
             <div style="display:flex;border-bottom:1px solid rgba(255,255,255,.07);background:#0a0f1a;position:sticky;top:73px;z-index:10;">
-                <button onclick="trocarAbaAgenda('visitas')"   id="atab-visitas"   class="agenda-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-blue-600 border-b-2 border-blue-600">Agenda</button>
-                <button onclick="trocarAbaAgenda('clientes')"  id="atab-clientes"  class="agenda-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-slate-400 border-b-2 border-transparent">Clientes</button>
-                <button onclick="trocarAbaAgenda('garantias')" id="atab-garantias" class="agenda-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-slate-400 border-b-2 border-transparent">Garantias</button>
-                <button onclick="trocarAbaAgenda('relatorio')" id="atab-relatorio" class="agenda-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-slate-400 border-b-2 border-transparent">Relatório</button>
+                <button onclick="trocarAbaAgenda('visitas')" id="atab-visitas" class="mtab on">Agenda</button>
+                <button onclick="trocarAbaAgenda('clientes')" id="atab-clientes" class="mtab">Clientes</button>
+                <button onclick="trocarAbaAgenda('garantias')" id="atab-garantias" class="mtab">Garantias</button>
+                <button onclick="trocarAbaAgenda('relatorio')" id="atab-relatorio" class="mtab">Relatório</button>
             </div>
 
             <div class="p-5 space-y-4 overflow-y-auto flex-grow pb-safe modal-scroll" style="background:#0d1117;">
@@ -983,7 +1005,7 @@
                     </div>
 
                     <div id="resultado-relatorio" class="hidden space-y-3">
-                        <div class="bg-[#0f172a] text-white p-5 rounded-2xl">
+                        <div class=" text-white p-5 rounded-2xl">
                             <p class="text-[10px] font-bold text-blue-300 uppercase tracking-widest mb-3" id="rel-titulo">Relatório</p>
                             <div class="grid grid-cols-2 gap-3">
                                 <div class="bg-white/10 p-3 rounded-xl">
@@ -1016,20 +1038,21 @@
         <div class="modal-overlay" style="position:absolute;inset:0;background:rgba(0,0,0,.7);" onclick="toggleFerramentas()"></div>
         <div style="position:fixed;bottom:0;left:0;right:0;width:100%;height:92vh;background:#0d1117;border-radius:20px 20px 0 0;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .3s ease;box-shadow:0 -8px 40px rgba(0,0,0,.6);z-index:301;" id="ferramentasContent">
 
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:20px 20px 16px;border-bottom:1px solid rgba(255,255,255,.07);position:sticky;top:0;background:#0d1117;z-index:10;">
-                <h2 class="text-lg font-black text-slate-800 uppercase flex items-center gap-2">
-                    <svg class="ico text-blue-600" aria-hidden="true"><use href="#i-screwdriver-wrench"></use></svg> Ferramentas
-                </h2>
-                <button onclick="toggleFerramentas()" class="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center hover:bg-slate-200">
-                    <svg class="ico" aria-hidden="true"><use href="#i-xmark"></use></svg>
-                </button>
+            <div class="modal-hdr">
+                <div class="modal-hdr-left">
+                    <div class="modal-ico" style="background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.25);">🔧</div>
+                    <div>
+                        <div class="modal-title">Ferramentas</div>
+                        <div class="modal-sub">NBR 5410 · Cálculos</div>
+                    </div>
+                </div>
+                <button onclick="toggleFerramentas()" class="modal-close">✕</button>
             </div>
-
-            <div style="display:flex;border-bottom:1px solid rgba(255,255,255,.07);background:#0a0f1a;position:sticky;top:73px;z-index:10;">
-                <button onclick="trocarAbaFerr('nbr')"     id="tab-nbr"     class="ferr-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-blue-600 border-b-2 border-blue-600">NBR 5410</button>
-                <button onclick="trocarAbaFerr('carga')"   id="tab-carga"   class="ferr-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-slate-400 border-b-2 border-transparent">Demanda</button>
-                <button onclick="trocarAbaFerr('queda')"   id="tab-queda"   class="ferr-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-slate-400 border-b-2 border-transparent">Queda V</button>
-                <button onclick="trocarAbaFerr('check')"   id="tab-check"   class="ferr-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-slate-400 border-b-2 border-transparent">Check</button>
+            <div class="modal-tabs">
+                <button onclick="trocarAbaFerr('nbr')"     id="tab-nbr"     class="mtab on">NBR 5410</button>
+                <button onclick="trocarAbaFerr('carga')"   id="tab-carga"   class="mtab">Demanda</button>
+                <button onclick="trocarAbaFerr('queda')"   id="tab-queda"   class="mtab">Queda V</button>
+                <button onclick="trocarAbaFerr('check')"   id="tab-check"   class="mtab">Check</button>
             </div>
 
             <div class="p-5 space-y-4 overflow-y-auto flex-grow pb-safe modal-scroll" style="background:#0d1117;">
@@ -1228,7 +1251,7 @@
                         <svg class="ico" aria-hidden="true"><use href="#i-calculator"></use></svg> CALCULAR DEMANDA ELÉTRICA
                     </button>
 
-                    <div id="resultado-carga" class="hidden bg-[#0f172a] text-white p-4 rounded-2xl space-y-4">
+                    <div id="resultado-carga" class="hidden  text-white p-4 rounded-2xl space-y-4">
 
                         <p class="text-[10px] font-bold text-blue-300 uppercase tracking-widest">⚡ Resultado — Demanda Elétrica NBR 5410</p>
 
@@ -1496,7 +1519,7 @@
                             </select>
                         </div>
 
-                        <div id="info-bitola-card" class="bg-[#0f172a] text-white p-3 rounded-xl">
+                        <div id="info-bitola-card" class=" text-white p-3 rounded-xl">
                             <p class="text-[10px] text-blue-300 uppercase font-bold mb-2">📊 Capacidade da bitola selecionada</p>
                             <div class="grid grid-cols-3 gap-2">
                                 <div class="bg-white/10 p-2 rounded-lg text-center">
@@ -1607,7 +1630,7 @@
 
                     <div id="check-editor" class="hidden space-y-3">
                         <div class="flex items-center gap-2">
-                            <button onclick="voltarModelos()" class="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center hover:bg-slate-200 flex-shrink-0">
+                            <button onclick="voltarModelos()" class="modal-close flex-shrink-0">
                                 <svg class="ico text-slate-600" aria-hidden="true"><use href="#i-rotate-left"></use></svg>
                             </button>
                             <input type="text" id="check-modelo-nome" placeholder="Nome do modelo (ex: Bomba com bóias)" class="input-field flex-grow p-2 rounded-xl border border-slate-200 text-sm font-bold text-slate-700 focus:outline-none">
@@ -1617,12 +1640,12 @@
                             <input type="text" id="novoCheckItem" placeholder="Adicionar item..." class="input-field flex-grow p-3 rounded-xl border border-slate-200 text-xs focus:outline-none">
                             <button onclick="addCheckItem()" class="bg-blue-600 text-white p-3 rounded-xl flex-shrink-0"><svg class="ico" aria-hidden="true"><use href="#i-plus"></use></svg></button>
                         </div>
-                        <button onclick="salvarModelo()" class="w-full bg-[#0f172a] text-white font-bold py-3 rounded-xl text-xs">SALVAR MODELO</button>
+                        <button onclick="salvarModelo()" class="w-full  text-white font-bold py-3 rounded-xl text-xs">SALVAR MODELO</button>
                     </div>
 
                     <div id="check-uso" class="hidden space-y-3">
                         <div class="flex items-center gap-2 mb-1">
-                            <button onclick="voltarModelos()" class="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center hover:bg-slate-200 flex-shrink-0">
+                            <button onclick="voltarModelos()" class="modal-close flex-shrink-0">
                                 <svg class="ico text-slate-600" aria-hidden="true"><use href="#i-rotate-left"></use></svg>
                             </button>
                             <h3 id="check-uso-titulo" class="text-sm font-black text-slate-800"></h3>
@@ -1864,25 +1887,30 @@
         <div class="modal-overlay" style="position:absolute;inset:0;background:rgba(0,0,0,.7);" onclick="toggleSettings()"></div>
         <div style="position:fixed;bottom:0;left:0;right:0;width:100%;height:92vh;background:#0d1117;border-radius:20px 20px 0 0;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .3s ease;box-shadow:0 -8px 40px rgba(0,0,0,.6);z-index:301;" id="modalContent">
 
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid rgba(255,255,255,.07);background:#0d1117;z-index:10;flex-shrink:0;">
-                <h2 class="text-lg font-black text-slate-800 uppercase flex items-center gap-2"><svg class="ico text-blue-600" aria-hidden="true"><use href="#i-sliders"></use></svg> Ajustes</h2>
-                <button onclick="toggleSettings()" class="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center hover:bg-slate-200"><svg class="ico" aria-hidden="true"><use href="#i-xmark"></use></svg></button>
+            <div class="modal-hdr">
+                <div class="modal-hdr-left">
+                    <div class="modal-ico" style="background:rgba(148,163,184,.12);border:1px solid rgba(148,163,184,.2);">⚙️</div>
+                    <div>
+                        <div class="modal-title">Ajustes</div>
+                        <div class="modal-sub">Configurações do app</div>
+                    </div>
+                </div>
+                <button onclick="toggleSettings()" class="modal-close">✕</button>
             </div>
-
-            <div style="display:flex;background:#0a0f1a;border-bottom:1px solid rgba(255,255,255,.07);flex-shrink:0;overflow-x:auto;">
-                <button onclick="trocarAbaConfig('perfil')" id="cfg-tab-perfil" class="cfg-tab flex-1 min-w-[64px] py-3 flex flex-col items-center gap-0.5 text-[9px] font-bold uppercase tracking-wide border-b-2 border-blue-600 text-blue-600 bg-white transition-all">
+            <div class="cfg-tabs">
+                <button onclick="trocarAbaConfig('perfil')" id="cfg-tab-perfil" class="ctab  on">
                     <svg class="ico text-sm" aria-hidden="true"><use href="#i-user-tag"></use></svg> Perfil
                 </button>
-                <button onclick="trocarAbaConfig('pagamento')" id="cfg-tab-pagamento" class="cfg-tab flex-1 min-w-[64px] py-3 flex flex-col items-center gap-0.5 text-[9px] font-bold uppercase tracking-wide border-b-2 border-transparent text-slate-400 transition-all">
+                <button onclick="trocarAbaConfig('pagamento')" id="cfg-tab-pagamento" class="ctab">
                     <svg class="ico text-sm" aria-hidden="true"><use href="#i-percent"></use></svg> Pagamento
                 </button>
-                <button onclick="trocarAbaConfig('catalogo')" id="cfg-tab-catalogo" class="cfg-tab flex-1 min-w-[64px] py-3 flex flex-col items-center gap-0.5 text-[9px] font-bold uppercase tracking-wide border-b-2 border-transparent text-slate-400 transition-all">
+                <button onclick="trocarAbaConfig('catalogo')" id="cfg-tab-catalogo" class="ctab">
                     <svg class="ico text-sm" aria-hidden="true"><use href="#i-box-open"></use></svg> Catálogo
                 </button>
-                <button onclick="trocarAbaConfig('acesso')" id="cfg-tab-acesso" class="cfg-tab flex-1 min-w-[64px] py-3 flex flex-col items-center gap-0.5 text-[9px] font-bold uppercase tracking-wide border-b-2 border-transparent text-slate-400 transition-all">
+                <button onclick="trocarAbaConfig('acesso')" id="cfg-tab-acesso" class="ctab">
                     <svg class="ico text-sm" aria-hidden="true"><use href="#i-lock"></use></svg> Acesso
                 </button>
-                <button onclick="trocarAbaConfig('backup')" id="cfg-tab-backup" class="cfg-tab flex-1 min-w-[64px] py-3 flex flex-col items-center gap-0.5 text-[9px] font-bold uppercase tracking-wide border-b-2 border-transparent text-slate-400 transition-all">
+                <button onclick="trocarAbaConfig('backup')" id="cfg-tab-backup" class="ctab">
                     <svg class="ico text-sm" aria-hidden="true"><use href="#i-cloud-arrow-up"></use></svg> Backup
                 </button>
             </div>
@@ -1936,7 +1964,7 @@
                         </div>
                         <p class="text-[10px] text-slate-400">Nome e dados que aparecem nos orçamentos e PDF.</p>
                     </div>
-                    <button onclick="salvarConfiguracoes()" class="w-full bg-[#0f172a] text-white font-bold py-3.5 rounded-2xl hover:bg-black transition-all">SALVAR</button>
+                    <button onclick="salvarConfiguracoes()" class="w-full  text-white font-bold py-3.5 rounded-2xl hover:bg-black transition-all">SALVAR</button>
                 </div>
 
                 <div id="cfg-aba-pagamento" class="hidden p-5 space-y-4">
@@ -1972,7 +2000,7 @@
                             <input type="text" id="configCartoes" placeholder="Visa, Mastercard, Elo..." class="input-field w-full p-2 rounded-lg border border-slate-200 text-xs font-bold text-slate-700 outline-none">
                         </div>
                     </div>
-                    <button onclick="salvarConfiguracoes()" class="w-full bg-[#0f172a] text-white font-bold py-3.5 rounded-2xl hover:bg-black transition-all">SALVAR</button>
+                    <button onclick="salvarConfiguracoes()" class="w-full  text-white font-bold py-3.5 rounded-2xl hover:bg-black transition-all">SALVAR</button>
                 </div>
 
                 <div id="cfg-aba-catalogo" class="hidden p-5 space-y-3">
@@ -2036,7 +2064,7 @@
                         </div>
                         <p class="text-[10px] text-slate-400">Deixe em branco para manter o usuário/senha atual.</p>
                     </div>
-                    <button onclick="salvarConfiguracoes()" class="w-full bg-[#0f172a] text-white font-bold py-3.5 rounded-2xl hover:bg-black transition-all">SALVAR</button>
+                    <button onclick="salvarConfiguracoes()" class="w-full  text-white font-bold py-3.5 rounded-2xl hover:bg-black transition-all">SALVAR</button>
                 </div>
 
                 <div id="cfg-aba-backup" class="hidden p-5 space-y-4">
@@ -2077,12 +2105,16 @@
     <div id="historyModal" class="fixed inset-0 hidden" style="z-index:300;">
         <div class="modal-overlay" style="position:absolute;inset:0;background:rgba(0,0,0,.7);" onclick="toggleHistory()"></div>
         <div style="position:fixed;top:0;right:0;width:100%;max-width:22rem;height:100vh;background:#0d1117;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .3s ease;box-shadow:-8px 0 40px rgba(0,0,0,.6);z-index:301;" id="historyContent">
-            <div class="bg-[#0f172a] text-white p-6 pb-6 flex justify-between items-center sticky top-0 z-10">
-                <div>
-                    <h2 class="text-lg font-black uppercase"><svg class="ico mr-2" aria-hidden="true"><use href="#i-clock-rotate-left"></use></svg> Histórico</h2>
-                    <p class="text-[10px] text-slate-400">Últimos orçamentos salvos</p>
+
+            <div class="modal-hdr">
+                <div class="modal-hdr-left">
+                    <div class="modal-ico" style="background:rgba(167,139,250,.15);border:1px solid rgba(167,139,250,.25);">🕘</div>
+                    <div>
+                        <div class="modal-title">Histórico</div>
+                        <div class="modal-sub">Orçamentos salvos</div>
+                    </div>
                 </div>
-                <button onclick="toggleHistory()" class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20"><svg class="ico" aria-hidden="true"><use href="#i-xmark"></use></svg></button>
+                <button onclick="toggleHistory()" class="modal-close">✕</button>
             </div>
             <div id="historyList" class="flex-grow p-4 space-y-3 overflow-y-auto modal-scroll" style="background:#0d1117;"></div>
             <div style="padding:16px;border-top:1px solid rgba(255,255,255,.07);background:#0d1117;" class="pb-safe">
@@ -3503,11 +3535,9 @@
                 var _ca = document.getElementById('cfg-aba-' + a); if(_ca) _ca.classList.toggle('hidden', a !== aba);
                 const tab = document.getElementById('cfg-tab-' + a);
                 if (a === aba) {
-                    tab.classList.add('border-blue-600','text-blue-600','bg-white');
-                    tab.classList.remove('border-transparent','text-slate-400');
+                    tab.classList.add('on');
                 } else {
-                    tab.classList.remove('border-blue-600','text-blue-600','bg-white');
-                    tab.classList.add('border-transparent','text-slate-400');
+                    tab.classList.remove('on');
                 }
             });
         }
@@ -3825,7 +3855,7 @@
                 btnUsar.onclick = () => abrirUsoChecklist(i);
 
                 const btnEdit = document.createElement('button');
-                btnEdit.className = 'bg-slate-100 text-slate-600 text-xs font-bold px-2 py-1.5 rounded-lg hover:bg-slate-200';
+                btnEdit.className = 'bg-slate-100 text-slate-600 text-xs font-bold px-2 py-1.5 rounded-lg hover:bg-opacity-10';
                 btnEdit.innerHTML = '<svg class="ico" aria-hidden="true"><use href="#i-pen-to-square"></use></svg>';
                 btnEdit.onclick = () => editarModelo(i);
 
@@ -4032,13 +4062,11 @@
             ['nbr','carga','queda','check'].forEach(a => {
                 var _fe = document.getElementById('ferr-' + a); if(_fe) _fe.classList.add('hidden');
                 const tab = document.getElementById('tab-' + a);
-                tab.classList.remove('text-blue-600','border-blue-600');
-                tab.classList.add('text-slate-400','border-transparent');
+                tab.classList.remove('on');
             });
             var _fa=document.getElementById('ferr-'+aba); if(_fa) _fa.classList.remove('hidden');
             const tabAtiva = document.getElementById('tab-' + aba);
-            tabAtiva.classList.add('text-blue-600','border-blue-600');
-            tabAtiva.classList.remove('text-slate-400','border-transparent');
+            tabAtiva.classList.add('on');
             if (aba === 'queda') {
                 setTimeout(atualizarInfoBitola, 50);
                 if (_modoTeste) {
@@ -5678,13 +5706,11 @@
             ['visitas','clientes','garantias','relatorio'].forEach(a => {
                 var _el = document.getElementById('agenda-' + a); if(_el) _el.classList.add('hidden');
                 const tab = document.getElementById('atab-' + a); if(!tab) return;
-                tab.classList.remove('text-blue-600','border-blue-600');
-                tab.classList.add('text-slate-400','border-transparent');
+                tab.classList.remove('on');
             });
             var _aa=document.getElementById('agenda-'+aba); if(_aa) _aa.classList.remove('hidden');
             const t = document.getElementById('atab-' + aba);
-            t.classList.add('text-blue-600','border-blue-600');
-            t.classList.remove('text-slate-400','border-transparent');
+            t.classList.add('on');
             if (aba === 'garantias') renderGarantias();
             if (aba === 'relatorio') {
                 const hoje = new Date();
