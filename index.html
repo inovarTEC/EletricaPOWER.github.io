@@ -107,122 +107,7 @@
         </style>
 <style>
 .ico{display:inline-block;width:1em;height:1em;vertical-align:-0.125em;fill:currentColor;}
-
-        /* ── Notification panel ── */
-        #notif-panel {
-            position: fixed;
-            top: 60px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: calc(100% - 24px);
-            max-width: 420px;
-            background: #0d1117;
-            border: 1px solid rgba(255,255,255,.1);
-            border-radius: 16px;
-            box-shadow: 0 16px 48px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.04);
-            z-index: 500;
-            overflow: hidden;
-            display: none;
-            animation: notif-in .18s cubic-bezier(.34,1.56,.64,1);
-        }
-        @keyframes notif-in {
-            from { opacity:0; transform:translateX(-50%) translateY(-8px) scale(.97); }
-            to   { opacity:1; transform:translateX(-50%) translateY(0)     scale(1);   }
-        }
-        #notif-panel .np-header {
-            padding: 12px 14px 8px;
-            display: flex; align-items: center; justify-content: space-between;
-            border-bottom: 1px solid rgba(255,255,255,.06);
-        }
-        #notif-panel .np-title {
-            font-family: 'Inter', sans-serif;
-            font-size: 12px; font-weight: 800;
-            letter-spacing: .5px; text-transform: uppercase;
-            color: #f1f5f9;
-        }
-        #notif-panel .np-clear {
-            font-size: 10px; font-weight: 700; color: #475569;
-            background: none; border: none; cursor: pointer; padding: 2px 6px;
-            border-radius: 6px;
-        }
-        #notif-panel .np-clear:hover { color: #94a3b8; }
-        #notif-panel .np-empty {
-            padding: 20px 14px;
-            text-align: center;
-            font-size: 11px; color: #334155;
-        }
-        #notif-panel .np-list { max-height: 320px; overflow-y: auto; -webkit-overflow-scrolling: touch; }
-        #notif-panel .ni {
-            display: flex; align-items: flex-start; gap: 10px;
-            padding: 11px 14px;
-            border-bottom: 1px solid rgba(255,255,255,.04);
-            cursor: pointer;
-            transition: background .15s;
-        }
-        #notif-panel .ni:last-child { border-bottom: none; }
-        #notif-panel .ni:hover { background: rgba(255,255,255,.03); }
-        #notif-panel .ni-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
-        #notif-panel .ni-body { flex: 1; }
-        #notif-panel .ni-title { font-size: 12px; font-weight: 700; color: #e2e8f0; margin-bottom: 2px; }
-        #notif-panel .ni-sub   { font-size: 10px; color: #64748b; line-height: 1.4; }
-        #notif-panel .ni-del {
-            background: none; border: none; color: #334155;
-            cursor: pointer; font-size: 14px; padding: 2px 4px;
-            border-radius: 4px; flex-shrink: 0;
-        }
-        #notif-panel .ni-del:hover { color: #ef4444; }
-
-        /* ── Dark modal theme ─────────────────────── */
-        .ferr-tab.text-blue-600,.agenda-tab.text-blue-600{color:#38bdf8!important}
-        .ferr-tab.border-blue-600,.agenda-tab.border-blue-600{border-color:#38bdf8!important}
-        .ferr-tab.text-slate-400,.agenda-tab.text-slate-400{color:#3d4f63!important}
-        .cfg-tab.text-blue-600{color:#38bdf8!important}
-        .cfg-tab.border-blue-600{border-color:#38bdf8!important}
-        .cfg-tab.text-slate-400{color:#3d4f63!important}
-        .cfg-tab.bg-white{background:rgba(255,255,255,.08)!important}
-        /* Settings inner cards */
-        #settingsModal .bg-slate-50{background:#0d1b2a!important;border-color:rgba(255,255,255,.08)!important}
-        #settingsModal .bg-slate-100{background:#0a1628!important}
-        #settingsModal input.input-field,#settingsModal select.input-field,
-        #settingsModal textarea.input-field{background:#0a1628!important;color:#e2e8f0!important;border-color:rgba(255,255,255,.1)!important}
-        #settingsModal .text-slate-700,#settingsModal .text-slate-600{color:#94a3b8!important}
-        #settingsModal .border-slate-200{border-color:rgba(255,255,255,.08)!important}
-        #settingsModal h3.text-xs.font-bold.text-slate-500{color:#64748b!important}
-        #sub-tab-servicos.bg-white{background:rgba(255,255,255,.1)!important;color:#e2e8f0!important}
-        /* History items */
-        #historyList .bg-white{background:#0d1b2a!important;border-color:rgba(255,255,255,.08)!important}
-        #historyList .text-slate-800{color:#e2e8f0!important}
-        #historyList .text-slate-400{color:#475569!important}
-        /* Agenda content */
-        #agenda-visitas .bg-white,#agenda-clientes .bg-white{background:#0d1b2a!important;border-color:rgba(255,255,255,.08)!important}
-        #agenda-visitas .text-slate-800,#agenda-clientes .text-slate-800{color:#e2e8f0!important}
-        #agenda-visitas .text-slate-500,#agenda-clientes .text-slate-500{color:#64748b!important}
-        #agenda-garantias .bg-green-50{background:rgba(21,128,61,.15)!important;border-color:rgba(21,128,61,.25)!important}
-        #agenda-garantias .bg-orange-50{background:rgba(154,52,18,.15)!important;border-color:rgba(154,52,18,.25)!important}
-        #agenda-garantias .bg-red-50{background:rgba(153,27,27,.2)!important;border-color:rgba(153,27,27,.3)!important}
-        #form-visita input,#form-visita select,#form-visita textarea,
-        #form-cliente input,#form-cliente select,#form-cliente textarea{background:#0a1628!important;color:#e2e8f0!important;border-color:rgba(255,255,255,.1)!important}
-        #form-visita label,#form-cliente label{color:#94a3b8!important}
-        
-        /* ── Top-sheet modals ── */
-        .modal-top-sheet {
-            position: absolute !important;
-            top: 0 !important;
-            left: 50% !important;
-            width: 100% !important;
-            max-width: 32rem !important;
-            height: 92vh !important;
-            border-radius: 0 0 1.5rem 1.5rem !important;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 8px 40px rgba(0,0,0,.5) !important;
-            transform: translateX(-50%) translateY(-100%) !important;
-            transition: transform .3s cubic-bezier(.4,0,.2,1) !important;
-        }
-        .modal-top-sheet.modal-visible {
-            transform: translateX(-50%) translateY(0) !important;
-        }
-        </style>
+</style>
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
 <symbol id="i-bolt" viewBox="0 0 448 512"><path d="M349.4 44.6c5.9-13.7 1.5-29.7-10.6-38.5s-28.6-8-39.9 1.8l-256 224c-10 8.8-13.6 22.9-8.9 35.3S50.7 288 64 288l111.5 0L98.6 467.4c-5.9 13.7-1.5 29.7 10.6 38.5s28.6 8 39.9-1.8l256-224c10-8.8 13.6-22.9 8.9-35.3s-16.6-20.7-30-20.7l-111.5 0L349.4 44.6z"/></symbol>
 <symbol id="i-arrow-right" viewBox="0 0 448 512"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></symbol>
@@ -264,6 +149,144 @@
 </head>
 <body class="text-slate-800 pb-safe">
 
+
+    <!-- ══ TELA HOME ══ -->
+    <div id="tela-home">
+
+      <!-- header -->
+      <div class="hdr-home">
+        <div class="hdr-logo">
+          <div class="hdr-bolt">⚡</div>
+          <span class="hdr-name">EL. POWER</span>
+        </div>
+        <div class="hdr-right">
+          <div class="hbtn" onclick="toggleNotifHome()">🔔<div class="ndot" id="home-ndot" style="display:none;"></div></div>
+          <div class="hbtn" onclick="irParaPerfil()">👷</div>
+        </div>
+      </div>
+
+      <div class="home-body">
+
+        <!-- greeting -->
+        <div class="greet">
+          <div class="g-name">Olá, <span id="homeNome">Eletricista</span> ⚡</div>
+          <div class="g-pill">
+            <div class="gp-n" id="home-proj-num">—</div>
+            <div class="gp-l">projetos</div>
+          </div>
+        </div>
+
+        <!-- HERO — seletor de demanda -->
+        <div class="sec">Ferramenta Principal</div>
+        <div class="hero">
+          <div class="hero-head">
+            <div class="hh-l">
+              <div class="h-ico">⚡</div>
+              <div>
+                <div class="h-name">Cálculo de Demanda</div>
+                <div class="h-sub">Selecione o tipo de instalação</div>
+              </div>
+            </div>
+            <div class="h-nbr">NBR 5410</div>
+          </div>
+          <div class="type-grid">
+            <div class="htc htc-res sel" onclick="selecionarTipoDemanda(this,'1.0')" data-fd="1.0">
+              <div class="htc-ck">✓</div>
+              <span class="htc-ico">🏠</span>
+              <div class="htc-name">Residencial</div>
+              <div class="htc-fd">fd 1,00</div>
+            </div>
+            <div class="htc htc-pred" onclick="selecionarTipoDemanda(this,'0.8')" data-fd="0.8">
+              <div class="htc-ck">✓</div>
+              <span class="htc-ico">🏢</span>
+              <div class="htc-name">Predial</div>
+              <div class="htc-fd">fd 0,60</div>
+            </div>
+            <div class="htc htc-ind" onclick="selecionarTipoDemanda(this,'0.6')" data-fd="0.6">
+              <div class="htc-ck">✓</div>
+              <span class="htc-ico">🏭</span>
+              <div class="htc-name">Industrial</div>
+              <div class="htc-fd">fd 0,60</div>
+            </div>
+            <div class="htc htc-com" onclick="selecionarTipoDemanda(this,'0.7')" data-fd="0.7">
+              <div class="htc-ck">✓</div>
+              <span class="htc-ico">🏪</span>
+              <div class="htc-name">Comercial</div>
+              <div class="htc-fd">fd 0,70</div>
+            </div>
+            <div class="htc htc-6ap" onclick="selecionarTipoDemanda(this,'0.5')" data-fd="0.5">
+              <div class="htc-ck">✓</div>
+              <span class="htc-ico">🏗️</span>
+              <div class="htc-name">+6 Apart.</div>
+              <div class="htc-fd">fd 0,50</div>
+            </div>
+            <div class="htc htc-out" onclick="selecionarTipoDemanda(this,'1.0')" data-fd="1.0">
+              <div class="htc-ck">✓</div>
+              <span class="htc-ico">⚡</span>
+              <div class="htc-name">Outros</div>
+              <div class="htc-fd">manual</div>
+            </div>
+          </div>
+          <div class="hero-cta">
+            <button class="cta-btn" onclick="comecarCalculo()">⚡ COMEÇAR CÁLCULO</button>
+          </div>
+        </div>
+
+        <!-- FERRAMENTAS -->
+        <div class="sec">Ferramentas</div>
+        <div class="g3">
+          <div class="tc3 tc-q" onclick="abrirQuedaHome()">
+            <div class="t3-ico">📉</div>
+            <div class="t3-name">Queda V</div>
+            <div class="t3-sub">Verificar limite do cabo</div>
+          </div>
+          <div class="tc3 tc-o" onclick="abrirOrcamentoHome()">
+            <div class="t3-ico">🧾</div>
+            <div class="t3-name">Orçamento</div>
+            <div class="t3-sub">Faça rápido</div>
+          </div>
+          <div class="tc3 tc-c" onclick="abrirCheckHome()">
+            <div class="t3-ico">📋</div>
+            <div class="t3-name">Checklist</div>
+            <div class="t3-sub">Últimas listas</div>
+          </div>
+        </div>
+
+        <!-- GESTÃO -->
+        <div class="sec">Gestão</div>
+        <div class="gestao-strip">
+          <div class="gi" onclick="toggleAgenda()">
+            <div class="gi-ico" style="background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.2);">📅</div>
+            <div class="gi-lbl" style="color:#60a5fa;">Agenda</div>
+          </div>
+          <div class="gi" onclick="abrirClientesHome()">
+            <div class="gi-ico" style="background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.2);">👥</div>
+            <div class="gi-lbl" style="color:#a78bfa;">Clientes</div>
+          </div>
+          <div class="gi" onclick="abrirRelatorioHome()">
+            <div class="gi-ico" style="background:rgba(236,72,153,.15);border:1px solid rgba(236,72,153,.2);">📊</div>
+            <div class="gi-lbl" style="color:#f472b6;">Relatório</div>
+          </div>
+          <div class="gi" onclick="toggleHistory()">
+            <div class="gi-ico" style="background:rgba(167,139,250,.15);border:1px solid rgba(167,139,250,.2);">🕘</div>
+            <div class="gi-lbl" style="color:#c4b5fd;">Histórico</div>
+          </div>
+        </div>
+
+      </div><!-- /home-body -->
+
+      <!-- bottom nav home -->
+      <div class="bnav-home">
+        <div class="ni on" onclick="irParaHome()"><div class="ni-i">🏠</div>Home<div class="ni-bar"></div></div>
+        <div class="ni" onclick="comecarCalculo()"><div class="ni-i">⚡</div>Calcular<div class="ni-bar"></div></div>
+        <div class="ni" onclick="toggleAgenda()"><div class="ni-i">📅</div>Agenda<div class="ni-bar"></div></div>
+        <div class="ni" onclick="toggleHistory()"><div class="ni-i">🕘</div>Hist.<div class="ni-bar"></div></div>
+        <div class="ni" onclick="toggleSettings()"><div class="ni-i">⚙️</div>Config<div class="ni-bar"></div></div>
+      </div>
+
+    </div>
+    <!-- /TELA HOME -->
+
     <div id="login-screen" style="display:flex;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;padding:16px;background:#0f172a;">
         <div style="width:100%;max-width:360px;background:white;border-radius:24px;overflow:hidden;box-shadow:0 25px 50px rgba(0,0,0,0.5);">
 
@@ -298,155 +321,214 @@
     </div>
 
     <div class="app-wrapper min-h-[100dvh] flex flex-col items-center justify-start sm:justify-center p-0 sm:p-4 no-print">
-        <div class="w-full max-w-md sm:rounded-3xl overflow-hidden border-0 sm:border border-slate-200 shadow-none sm:shadow-2xl relative z-10 flex flex-col min-h-[100dvh] sm:min-h-0" style="background:#07090f;">
+        <div class="w-full max-w-md bg-white sm:rounded-3xl overflow-hidden border-0 sm:border border-slate-200 shadow-none sm:shadow-2xl relative z-10 flex flex-col min-h-[100dvh] sm:min-h-0">
 
-            <header id="app-header" style="background:rgba(9,12,19,.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.07);padding:0 18px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;flex-shrink:0;">
-                <div style="display:flex;align-items:center;gap:9px;">
-                    <div style="width:30px;height:30px;background:linear-gradient(145deg,#fbbf24,#d97706);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;box-shadow:0 2px 12px rgba(245,158,11,.35);flex-shrink:0;">⚡</div>
-                    <div style="font-family:'Inter',sans-serif;font-size:16px;font-weight:900;background:linear-gradient(90deg,#f1f5f9,#94a3b8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-.3px;">EL. POWER</div>
-                </div>
-                <div style="display:flex;gap:7px;align-items:center;">
-                    <div id="headerLogoArea" class="hidden" style="width:30px;height:30px;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,.1);flex-shrink:0;"><img id="headerLogoImg" src="" alt="" style="width:100%;height:100%;object-fit:contain;"></div>
-                    <div onclick="toggleNotif()" style="width:32px;height:32px;background:#0f1220;border:1px solid rgba(255,255,255,.07);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;position:relative;">
-                        🔔<div id="notif-dot" style="position:absolute;top:6px;right:6px;width:6px;height:6px;border-radius:50%;background:#f59e0b;border:1.5px solid #090c13;box-shadow:0 0 6px rgba(245,158,11,.6);display:none;"></div>
+            <header id="app-header" style="display:none;" class="text-white pt-safe relative overflow-hidden flex justify-between items-end shadow-lg z-20" style="background:linear-gradient(135deg,#1e3a5f,#0f172a);padding:20px 20px 0 20px;min-height:90px;">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-blue-600 rounded-full opacity-20 blur-3xl transform translate-x-10 -translate-y-10 pointer-events-none"></div>
+                <div class="z-10 flex items-center gap-3 pb-10">
+                    <div id="headerLogoArea" class="hidden bg-white overflow-hidden flex items-center justify-center border border-slate-700 shadow-lg" style="width:40px;height:40px;border-radius:8px;flex-shrink:0;">
+                        <img id="headerLogoImg" src="" alt="Logo" class="w-full h-full object-contain">
                     </div>
-                    <div style="width:32px;height:32px;background:#0f1220;border:1px solid rgba(255,255,255,.07);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;">👷</div>
+                    <div>
+                        <div class="flex items-center gap-1 opacity-80">
+                            <span class="text-[10px] font-bold" style="color:#93c5fd;" id="headerSaudacao">Olá, você ⚡</span>
+                        </div>
+                        <h1 class="text-xl font-black text-white leading-none mt-0.5">
+                            Eletricista Power
+                        </h1>
+                        <p class="font-semibold" style="white-space:nowrap;font-size:9.7px;letter-spacing:0.01em;line-height:1;margin-top:-1px;">
+                            <span style="color:#f97316;">Crie Orçamentos</span><span style="color:#fff;"> Profissionais,</span><span style="color:#93c5fd;"> conquiste clientes 🏆</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="z-10 relative" style="width:72px;height:90px;overflow:hidden;flex-shrink:0;margin-bottom:-8px;">
+                    <svg width="72" height="115" viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg" style="position:absolute;bottom:-35px;left:0;">
+                      <style>@keyframes brun-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}@keyframes brun-blink{0%,88%,100%{transform:scaleY(1)}94%{transform:scaleY(0.08)}}@keyframes brun-spark{0%,100%{opacity:1}50%{opacity:0.2}}.bf{animation:brun-float 3.5s ease-in-out infinite}.bb{animation:brun-blink 5s ease-in-out infinite}.bs{animation:brun-spark 0.9s ease-in-out infinite}
+        /* ══ DARK THEME ══════════════════════════════════════ */
+        :root{--bg:#07090f;--s1:#0b0e18;--s2:#0f1220;--border:rgba(255,255,255,.07);}
+        body{background:#060810!important;color:#f1f5f9;}
+        .w-full.max-w-md{background:#07090f!important;}
+        .bg-white{background:#0d1117!important;}
+        .bg-slate-50{background:#0a0f1a!important;}
+        .bg-slate-100{background:#0d1520!important;}
+        .border-slate-200{border-color:rgba(255,255,255,.07)!important;}
+        .text-slate-800{color:#e2e8f0!important;}
+        .text-slate-700{color:#cbd5e1!important;}
+        .text-slate-600{color:#94a3b8!important;}
+        .text-slate-500{color:#64748b!important;}
+        .text-slate-400{color:#475569!important;}
+        .input-field{background:#0d1b2a!important;color:#e2e8f0!important;border-color:rgba(255,255,255,.1)!important;}
+        .input-field::placeholder{color:#475569!important;}
+        .service-row{background:#0d1b2a!important;}
+        .material-row{background:#0d1b2a!important;}
+        #bottom-nav{background:rgba(9,12,19,.97)!important;border-top-color:rgba(255,255,255,.07)!important;backdrop-filter:blur(20px);}
+        header{background:linear-gradient(135deg,#060c18,#090e1c)!important;}
+        .bg-slate-100.rounded-full{background:rgba(255,255,255,.08)!important;}
+        .hover\:bg-slate-200:hover{background:rgba(255,255,255,.12)!important;}
+
+        /* ══ TELA HOME ════════════════════════════════════════ */
+        #tela-home{display:none;flex:1;overflow:hidden;background:#07090f;flex-direction:column;}
+
+        /* header home */
+        .hdr-home{background:rgba(11,14,24,.97);border-bottom:1px solid rgba(255,255,255,.07);padding:12px 14px;display:flex;align-items:center;justify-content:space-between;}
+        .hdr-logo{display:flex;align-items:center;gap:8px;}
+        .hdr-bolt{width:28px;height:28px;background:linear-gradient(145deg,#fbbf24,#d97706);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;box-shadow:0 4px 12px rgba(245,158,11,.4);}
+        .hdr-name{font-family:'Syne',sans-serif;font-size:16px;font-weight:800;background:linear-gradient(90deg,#f1f5f9,#94a3b8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+        .hdr-right{display:flex;gap:6px;}
+        .hbtn{width:30px;height:30px;background:#0b0e18;border:1px solid rgba(255,255,255,.07);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;position:relative;cursor:pointer;}
+        .ndot{position:absolute;top:5px;right:5px;width:5px;height:5px;border-radius:50%;background:#f59e0b;border:1.5px solid #07090f;box-shadow:0 0 5px rgba(245,158,11,.6);}
+
+        /* body home */
+        .home-body{padding:14px;overflow-y:auto;flex:1;}
+        .home-body::-webkit-scrollbar{display:none;}
+
+        /* greeting */
+        .greet{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+        .g-name{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;line-height:1.2;color:#f1f5f9;}
+        .g-name span{color:#f59e0b;}
+        .g-pill{background:#0b0e18;border:1px solid rgba(255,255,255,.07);border-radius:11px;padding:5px 10px;text-align:right;}
+        .gp-n{font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600;color:#f59e0b;}
+        .gp-l{font-size:7px;color:#475569;letter-spacing:.5px;}
+
+        /* section label */
+        .sec{font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#334155;margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+        .sec::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(255,255,255,.07),transparent);}
+
+        /* HERO */
+        .hero{border-radius:15px;overflow:hidden;margin-bottom:14px;background:linear-gradient(145deg,#0d1117,#0a1020 60%,#060c18);border:1px solid rgba(245,158,11,.18);box-shadow:0 12px 30px rgba(0,0,0,.5),inset 0 1px 0 rgba(245,158,11,.08);}
+        .hero-head{padding:10px 12px 8px;display:flex;align-items:center;justify-content:space-between;}
+        .hh-l{display:flex;align-items:center;gap:8px;}
+        .h-ico{width:28px;height:28px;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.25);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;}
+        .h-name{font-family:'Syne',sans-serif;font-size:12px;font-weight:800;color:#fff;}
+        .h-sub{font-size:7px;color:#475569;margin-top:1px;}
+        .h-nbr{font-size:7px;font-weight:700;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);color:#f59e0b;padding:2px 6px;border-radius:6px;}
+
+        .type-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;padding:0 10px;margin-bottom:8px;}
+        .htc{border-radius:10px;padding:8px 4px 7px;cursor:pointer;text-align:center;position:relative;overflow:hidden;border:1px solid;transition:transform .15s,box-shadow .15s;}
+        .htc:active{transform:scale(.93);}
+        .htc::before{content:'';position:absolute;top:0;left:0;right:0;height:40%;background:linear-gradient(180deg,rgba(255,255,255,.05),transparent);}
+        .htc-ico{font-size:18px;margin-bottom:3px;display:block;}
+        .htc-name{font-family:'Syne',sans-serif;font-size:9px;font-weight:800;}
+        .htc-fd{font-size:6px;font-weight:700;margin-top:2px;padding:1px 4px;border-radius:4px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);color:#334155;display:inline-block;}
+        .htc-ck{position:absolute;top:4px;right:5px;width:12px;height:12px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:7px;opacity:0;}
+        .htc.sel .htc-ck{opacity:1;}
+        .htc.sel{box-shadow:0 0 10px var(--htc-glow,rgba(255,255,255,.1));}
+
+        .htc-res{background:linear-gradient(145deg,#081508,#050f05);border-color:rgba(34,197,94,.22);color:#4ade80;--htc-glow:rgba(34,197,94,.15);}
+        .htc-res .htc-ck{background:#22c55e;color:#000;}
+        .htc-pred{background:linear-gradient(145deg,#071824,#040f18);border-color:rgba(56,189,248,.22);color:#38bdf8;}
+        .htc-pred .htc-ck{background:#0ea5e9;color:#000;}
+        .htc-ind{background:linear-gradient(145deg,#1a0808,#100404);border-color:rgba(239,68,68,.22);color:#f87171;}
+        .htc-ind .htc-ck{background:#ef4444;color:#fff;}
+        .htc-com{background:linear-gradient(145deg,#180d00,#0f0800);border-color:rgba(251,146,60,.22);color:#fb923c;}
+        .htc-com .htc-ck{background:#f97316;color:#000;}
+        .htc-6ap{background:linear-gradient(145deg,#0e0818,#080510);border-color:rgba(167,139,250,.22);color:#c4b5fd;}
+        .htc-6ap .htc-ck{background:#a855f7;color:#fff;}
+        .htc-out{background:linear-gradient(145deg,#0f0f14,#080810);border-color:rgba(148,163,184,.15);color:#94a3b8;}
+        .htc-out .htc-ck{background:#64748b;color:#fff;}
+
+        .hero-cta{padding:0 10px 10px;}
+        .cta-btn{width:100%;padding:10px;border:none;border-radius:10px;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-family:'Syne',sans-serif;font-size:12px;font-weight:800;letter-spacing:.4px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 4px 14px rgba(245,158,11,.3);}
+
+        /* TOOL CARDS */
+        .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:14px;}
+        .tc3{border-radius:13px;padding:11px 9px;cursor:pointer;position:relative;overflow:hidden;transform:perspective(600px) rotateX(3deg);transition:transform .18s;}
+        .tc3:active{transform:perspective(600px) rotateX(0) scale(.95);}
+        .tc3::before{content:'';position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(180deg,rgba(255,255,255,.07),transparent);border-radius:13px 13px 0 0;}
+        .tc3::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;border-radius:0 0 13px 13px;}
+        .t3-ico{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;margin-bottom:7px;position:relative;z-index:1;}
+        .t3-name{font-size:11px;font-weight:700;position:relative;z-index:1;}
+        .t3-sub{font-size:7px;margin-top:2px;position:relative;z-index:1;}
+
+        .tc-q{background:linear-gradient(145deg,#071824,#060f1a);border:1px solid rgba(6,182,212,.22);box-shadow:0 6px 18px rgba(6,182,212,.1);}
+        .tc-q::after{background:rgba(6,182,212,.2);}
+        .tc-q .t3-ico{background:rgba(6,182,212,.15);border:1px solid rgba(6,182,212,.2);}
+        .tc-q .t3-name{color:#22d3ee;}.tc-q .t3-sub{color:#164e63;}
+        .tc-o{background:linear-gradient(145deg,#041a0f,#050f0a);border:1px solid rgba(16,185,129,.22);box-shadow:0 6px 18px rgba(16,185,129,.1);}
+        .tc-o::after{background:rgba(16,185,129,.2);}
+        .tc-o .t3-ico{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.2);}
+        .tc-o .t3-name{color:#34d399;}.tc-o .t3-sub{color:#064e3b;}
+        .tc-c{background:linear-gradient(145deg,#1a0a02,#100804);border:1px solid rgba(249,115,22,.22);box-shadow:0 6px 18px rgba(249,115,22,.1);}
+        .tc-c::after{background:rgba(249,115,22,.2);}
+        .tc-c .t3-ico{background:rgba(249,115,22,.15);border:1px solid rgba(249,115,22,.2);}
+        .tc-c .t3-name{color:#fb923c;}.tc-c .t3-sub{color:#431407;}
+
+        /* GESTÃO */
+        .gestao-strip{display:flex;background:linear-gradient(145deg,#0a0f1e,#080c18);border:1px solid rgba(255,255,255,.06);border-radius:15px;padding:12px 6px 9px;}
+        .gi{display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;cursor:pointer;}
+        .gi-ico{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;transition:transform .15s;}
+        .gi:active .gi-ico{transform:scale(.86);}
+        .gi-lbl{font-size:8px;font-weight:700;}
+
+        /* BOTTOM NAV HOME */
+        .bnav-home{background:rgba(11,14,24,.98);border-top:1px solid rgba(255,255,255,.07);display:grid;grid-template-columns:repeat(5,1fr);padding:7px 0 13px;}
+        .ni{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:7px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#1e2a3a;cursor:pointer;padding:2px 0;}
+        .ni.on{color:#f59e0b;}
+        .ni-i{font-size:18px;line-height:1;}
+        .ni-bar{width:14px;height:2px;border-radius:1px;background:transparent;margin-top:2px;}
+        .ni.on .ni-bar{background:#f59e0b;box-shadow:0 0 5px rgba(245,158,11,.5);}
+
+        </style>
+                      <g class="bf">
+                      <rect x="33" y="162" width="21" height="22" rx="5" fill="#292524"/>
+                      <rect x="66" y="162" width="21" height="22" rx="5" fill="#292524"/>
+                      <rect x="30" y="174" width="27" height="9" rx="4" fill="#1c1917"/>
+                      <rect x="63" y="174" width="27" height="9" rx="4" fill="#1c1917"/>
+                      <rect x="35" y="130" width="22" height="36" rx="7" fill="#7c2d12"/>
+                      <rect x="63" y="130" width="22" height="36" rx="7" fill="#7c2d12"/>
+                      <rect x="30" y="124" width="60" height="8" rx="3" fill="#1c1917"/>
+                      <rect x="53" y="123" width="14" height="10" rx="2" fill="#44403c"/>
+                      <rect x="28" y="72" width="64" height="56" rx="11" fill="#ea580c"/>
+                      <path d="M46 72 L60 84 L74 72" stroke="#c2410c" stroke-width="2" fill="none"/>
+                      <rect x="28" y="104" width="64" height="5" rx="2" fill="#fbbf24" opacity="0.95"/>
+                      <rect x="8" y="74" width="22" height="13" rx="7" fill="#ea580c" transform="rotate(-10 19 80)"/>
+                      <ellipse cx="6" cy="100" rx="9" ry="8" fill="#fcd34d"/>
+                      <g class="bs"><line x1="0" y1="94" x2="-4" y2="88" stroke="#fef08a" stroke-width="1.5" stroke-linecap="round"/><line x1="4" y1="92" x2="2" y2="86" stroke="#fef08a" stroke-width="1.5" stroke-linecap="round"/><circle cx="-1" cy="88" r="2.5" fill="#fef08a" opacity="0.8"/></g>
+                      <rect x="90" y="74" width="22" height="13" rx="7" fill="#ea580c" transform="rotate(10 101 80)"/>
+                      <ellipse cx="114" cy="100" rx="9" ry="8" fill="#fbbf24"/>
+                      <rect x="116" y="82" width="5" height="26" rx="2" fill="#94a3b8"/>
+                      <path d="M113 82 Q120 78 124 83 Q121 88 113 88 Z" fill="#64748b"/>
+                      <path d="M113 102 Q120 98 124 103 Q121 108 113 108 Z" fill="#64748b"/>
+                      <rect x="53" y="56" width="14" height="18" rx="5" fill="#c87533"/>
+                      <ellipse cx="60" cy="38" rx="28" ry="28" fill="#c87533"/>
+                      <path d="M36 46 Q36 62 60 66 Q84 62 84 46" fill="#c87533"/>
+                      <ellipse cx="38" cy="50" rx="6" ry="5" fill="#a05c20" opacity="0.4"/>
+                      <ellipse cx="82" cy="50" rx="6" ry="5" fill="#a05c20" opacity="0.4"/>
+                      <path d="M32 32 Q30 8 60 4 Q90 8 88 32 Q84 18 60 16 Q36 18 32 32 Z" fill="#5c3317"/>
+                      <path d="M32 32 Q26 40 28 48 Q30 34 36 34 Z" fill="#5c3317"/>
+                      <path d="M88 32 Q94 40 92 48 Q90 34 84 34 Z" fill="#5c3317"/>
+                      <path d="M38 18 Q46 12 54 18 Q46 14 38 18 Z" fill="#4a2610"/>
+                      <path d="M56 12 Q64 8 72 12 Q64 10 56 12 Z" fill="#4a2610"/>
+                      <path d="M72 14 Q80 10 86 16 Q80 12 72 14 Z" fill="#4a2610"/>
+                      <path d="M32 38 Q28 42 29 48 Q30 54 34 54 Q32 50 33 44 Z" fill="#b06828"/>
+                      <path d="M88 38 Q92 42 91 48 Q90 54 86 54 Q88 50 87 44 Z" fill="#b06828"/>
+                      <path d="M40 26 Q48 22 56 25" stroke="#3d1f0a" stroke-width="3" fill="none" stroke-linecap="round"/>
+                      <path d="M64 25 Q72 22 80 26" stroke="#3d1f0a" stroke-width="3" fill="none" stroke-linecap="round"/>
+                      <ellipse cx="48" cy="37" rx="7" ry="7.5" fill="white"/>
+                      <ellipse cx="72" cy="37" rx="7" ry="7.5" fill="white"/>
+                      <circle cx="48" cy="38" r="5" fill="#6b3a10"/>
+                      <circle cx="72" cy="38" r="5" fill="#6b3a10"/>
+                      <circle cx="48" cy="38" r="3" fill="#1a0a00"/>
+                      <circle cx="72" cy="38" r="3" fill="#1a0a00"/>
+                      <circle cx="50" cy="36" r="1.5" fill="white"/>
+                      <circle cx="74" cy="36" r="1.5" fill="white"/>
+                      <g class="bb"><path d="M41 34 Q48 30 55 34" stroke="#3d1f0a" stroke-width="1.5" fill="none"/><path d="M65 34 Q72 30 79 34" stroke="#3d1f0a" stroke-width="1.5" fill="none"/></g>
+                      <path d="M56 46 Q60 52 64 46" stroke="#a05c20" stroke-width="2" fill="none" stroke-linecap="round"/>
+                      <circle cx="54" cy="50" r="3" fill="#b06828" opacity="0.5"/>
+                      <circle cx="66" cy="50" r="3" fill="#b06828" opacity="0.5"/>
+                      <path d="M49 58 Q60 66 71 58" stroke="#7a3a08" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                      <path d="M53 59 Q60 65 67 59 Q67 62 60 63 Q53 62 53 59 Z" fill="white" opacity="0.85"/>
+                      <ellipse cx="60" cy="22" rx="30" ry="18" fill="#c2410c"/>
+                      <path d="M30 26 Q60 14 90 26 Q90 30 60 28 Q30 30 30 26 Z" fill="#ea580c"/>
+                      <rect x="24" y="26" width="18" height="7" rx="3" fill="#ea580c"/>
+                      <path class="bs" d="M58 16 L55 22 L59 20 L56 26 L64 19 L59 21 Z" fill="#fef08a" opacity="0.95"/>
+                      </g>
+                    </svg>
                 </div>
             </header>
-            <!-- ── Notification Panel ── -->
-            <div id="notif-panel">
-                <div class="np-header">
-                    <div class="np-title">🔔 Notificações</div>
-                    <button class="np-clear" onclick="limparNotificacoes()">Limpar tudo</button>
-                </div>
-                <div id="notif-list" class="np-list"></div>
-            </div>
 
 
-
-            
-            
-            <div id="tela-home" style="background:#07090f;overflow-y:auto;flex:1;padding:16px 16px 96px;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain;">
-
-                <!-- greeting -->
-                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
-                    <div>
-                        <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#475569;margin-bottom:3px;" id="homeGreetSub">Bem-vindo</div>
-                        <div style="font-family:'Inter',sans-serif;font-size:19px;font-weight:900;line-height:1.2;color:#f1f5f9;">Olá, <span id="homeNome" style="color:#f59e0b;">Eletricista</span> ⚡</div>
-                    </div>
-                    <div style="background:#0f1220;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:7px 12px;text-align:right;box-shadow:0 2px 8px rgba(0,0,0,.3);">
-                        <div id="home-proj-num" style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:600;color:#f59e0b;line-height:1;">—</div>
-                        <div style="font-size:8px;color:#475569;letter-spacing:.5px;margin-top:1px;">projetos</div>
-                    </div>
-                </div>
-
-                <!-- SEC: Ferramenta Principal -->
-                <div style="font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#334155;margin-bottom:10px;display:flex;align-items:center;gap:8px;">Ferramenta Principal <span style="flex:1;height:1px;background:linear-gradient(90deg,rgba(255,255,255,.07),transparent);display:block;"></span></div>
-
-                <!-- HERO CARD — DEMANDA -->
-                <div onclick="abrirDemanda()" style="border-radius:18px;margin-bottom:14px;position:relative;overflow:hidden;cursor:pointer;background:linear-gradient(145deg,#1a1200 0%,#0f1a2e 60%,#080e1c 100%);border:1px solid rgba(245,158,11,.2);box-shadow:0 20px 60px rgba(0,0,0,.5),0 8px 20px rgba(245,158,11,.08),inset 0 1px 0 rgba(245,158,11,.15),inset 0 -1px 0 rgba(0,0,0,.4);transform:perspective(800px) rotateX(1.5deg);transition:transform .2s,box-shadow .2s;" onmousedown="this.style.transform='perspective(800px) rotateX(0deg) scale(.98)'" onmouseup="this.style.transform='perspective(800px) rotateX(1.5deg)'" ontouchstart="this.style.transform='perspective(800px) rotateX(0deg) scale(.97)'" ontouchend="this.style.transform='perspective(800px) rotateX(1.5deg)'">
-                    <div style="position:absolute;top:-60px;right:-40px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(245,158,11,.2),transparent 65%);pointer-events:none;"></div>
-                    <div style="position:absolute;bottom:-40px;left:-20px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(6,182,212,.1),transparent 65%);pointer-events:none;"></div>
-                    <!-- top -->
-                    <div style="padding:12px 14px 10px;display:flex;align-items:flex-start;justify-content:space-between;">
-                        <div style="display:flex;gap:10px;align-items:center;">
-                            <div style="width:32px;height:32px;background:linear-gradient(145deg,rgba(245,158,11,.2),rgba(245,158,11,.08));border:1px solid rgba(245,158,11,.25);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;box-shadow:0 4px 12px rgba(245,158,11,.15),inset 0 1px 0 rgba(255,255,255,.1);">⚡</div>
-                            <div>
-                                <div style="font-family:'Inter',sans-serif;font-size:14px;font-weight:900;color:#fff;letter-spacing:-.2px;">Demanda Elétrica</div>
-                                <div style="font-size:9px;color:#64748b;margin-top:2px;">Bitola · Disjuntor · Circuitos · Fases</div>
-                            </div>
-                        </div>
-                        <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;font-weight:600;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);color:#f59e0b;padding:3px 8px;border-radius:10px;white-space:nowrap;box-shadow:0 2px 6px rgba(245,158,11,.1);">NBR 5410</div>
-                    </div>
-                    <!-- mini result -->
-                    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.05);margin:0 12px 0;border-radius:10px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.05);">
-                        <div style="background:#0a1220;padding:8px 6px;text-align:center;"><div style="font-size:7px;color:#334155;letter-spacing:.8px;text-transform:uppercase;margin-bottom:4px;">Demanda</div><div id="home-res-demanda" style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:#f59e0b;">— <span style="font-size:7px;color:#1e293b;">VA</span></div></div>
-                        <div style="background:#0a1220;padding:8px 6px;text-align:center;"><div style="font-size:7px;color:#334155;letter-spacing:.8px;text-transform:uppercase;margin-bottom:4px;">Corrente</div><div id="home-res-corrente" style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:#fb923c;">— <span style="font-size:7px;color:#1e293b;">A</span></div></div>
-                        <div style="background:#0a1220;padding:8px 6px;text-align:center;"><div style="font-size:7px;color:#334155;letter-spacing:.8px;text-transform:uppercase;margin-bottom:4px;">Disjuntor</div><div id="home-res-disjuntor" style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:#60a5fa;">— <span style="font-size:7px;color:#1e293b;">A</span></div></div>
-                        <div style="background:#0a1220;padding:8px 6px;text-align:center;"><div style="font-size:7px;color:#334155;letter-spacing:.8px;text-transform:uppercase;margin-bottom:4px;">Bitola</div><div id="home-res-fio" style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:#34d399;">— <span style="font-size:7px;color:#1e293b;">mm²</span></div></div>
-                    </div>
-                    <!-- footer -->
-                    <div style="padding:8px 12px 10px;display:flex;align-items:center;justify-content:space-between;">
-                        <div style="display:flex;gap:4px;align-items:center;">
-                            <div id="hfc-mono" style="font-size:8px;font-weight:700;padding:3px 7px;border-radius:6px;border:1px solid rgba(245,158,11,.3);background:rgba(245,158,11,.12);color:#fbbf24;cursor:pointer;" onclick="event.stopPropagation();setBadgeSistema('mono')">Mono</div>
-                            <div id="hfc-bi" style="font-size:9px;font-weight:700;padding:4px 9px;border-radius:8px;border:1px solid rgba(255,255,255,.07);color:#334155;background:rgba(255,255,255,.03);cursor:pointer;" onclick="event.stopPropagation();setBadgeSistema('bi')">Bi</div>
-                            <div id="hfc-tri" style="font-size:9px;font-weight:700;padding:4px 9px;border-radius:8px;border:1px solid rgba(255,255,255,.07);color:#334155;background:rgba(255,255,255,.03);cursor:pointer;" onclick="event.stopPropagation();setBadgeSistema('tri')">Tri</div>
-                            <div id="hfc-v" style="font-size:9px;font-weight:700;color:#334155;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:4px 8px;margin-left:2px;">220V</div>
-                        </div>
-                        <button onclick="event.stopPropagation();abrirDemanda()" style="background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;border:none;border-radius:10px;font-family:'Inter',sans-serif;font-size:11px;font-weight:900;letter-spacing:.5px;padding:8px 14px;cursor:pointer;box-shadow:0 4px 14px rgba(245,158,11,.35),inset 0 1px 0 rgba(255,255,255,.2);">⚡ Calcular</button>
-                    </div>
-                </div>
-
-                <!-- SEC: Ferramentas -->
-                <div style="font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#334155;margin-bottom:10px;display:flex;align-items:center;gap:8px;">Ferramentas <span style="flex:1;height:1px;background:linear-gradient(90deg,rgba(255,255,255,.07),transparent);display:block;"></span></div>
-                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px;">
-
-                    <!-- QUEDA -->
-                    <div onclick="abrirQueda()" style="border-radius:14px;padding:10px 10px;cursor:pointer;position:relative;overflow:hidden;background:linear-gradient(145deg,#071824 0%,#060f1a 100%);border:1px solid rgba(6,182,212,.25);box-shadow:0 8px 24px rgba(6,182,212,.12),0 4px 12px rgba(0,0,0,.4),inset 0 1px 0 rgba(6,182,212,.15);transform:perspective(600px) rotateX(4deg);transition:transform .18s;" ontouchstart="this.style.transform='perspective(600px) rotateX(1deg) scale(.95)'" ontouchend="this.style.transform='perspective(600px) rotateX(4deg)'">
-                        <div style="position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(180deg,rgba(255,255,255,.07),transparent);border-radius:16px 16px 0 0;pointer-events:none;"></div>
-                        <div style="position:absolute;bottom:0;left:0;right:0;height:2px;border-radius:0 0 16px 16px;background:rgba(6,182,212,.2);"></div>
-                        <div style="width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;margin-bottom:7px;background:linear-gradient(145deg,rgba(6,182,212,.2),rgba(6,182,212,.08));border:1px solid rgba(6,182,212,.2);box-shadow:0 4px 12px rgba(6,182,212,.15),inset 0 1px 0 rgba(255,255,255,.1);">📉</div>
-                        <div style="font-size:11px;font-weight:700;margin-bottom:2px;color:#22d3ee;position:relative;z-index:2;">Queda</div>
-                        <div style="font-size:8px;opacity:.55;color:#164e63;line-height:1.4;position:relative;z-index:2;">Verificar tensão</div>
-                    </div>
-
-                    <!-- ORÇAMENTO -->
-                    <div onclick="abrirOrcamento()" style="border-radius:14px;padding:10px 10px;cursor:pointer;position:relative;overflow:hidden;background:linear-gradient(145deg,#041a0f 0%,#050f0a 100%);border:1px solid rgba(16,185,129,.25);box-shadow:0 8px 24px rgba(16,185,129,.12),0 4px 12px rgba(0,0,0,.4),inset 0 1px 0 rgba(16,185,129,.15);transform:perspective(600px) rotateX(4deg);transition:transform .18s;" ontouchstart="this.style.transform='perspective(600px) rotateX(1deg) scale(.95)'" ontouchend="this.style.transform='perspective(600px) rotateX(4deg)'">
-                        <div style="position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(180deg,rgba(255,255,255,.07),transparent);border-radius:16px 16px 0 0;pointer-events:none;"></div>
-                        <div style="position:absolute;bottom:0;left:0;right:0;height:2px;border-radius:0 0 16px 16px;background:rgba(16,185,129,.2);"></div>
-                        <div style="width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;margin-bottom:7px;background:linear-gradient(145deg,rgba(16,185,129,.2),rgba(16,185,129,.08));border:1px solid rgba(16,185,129,.2);box-shadow:0 4px 12px rgba(16,185,129,.15),inset 0 1px 0 rgba(255,255,255,.1);">🧾</div>
-                        <div style="font-size:11px;font-weight:700;margin-bottom:2px;color:#34d399;position:relative;z-index:2;">Orçamento</div>
-                        <div style="font-size:8px;opacity:.55;color:#064e3b;line-height:1.4;position:relative;z-index:2;">Mat. e MO</div>
-                    </div>
-
-                    <!-- CHECKLIST -->
-                    <div onclick="abrirChecklistHome()" style="border-radius:14px;padding:10px 10px;cursor:pointer;position:relative;overflow:hidden;background:linear-gradient(145deg,#1a0a02 0%,#100804 100%);border:1px solid rgba(249,115,22,.25);box-shadow:0 8px 24px rgba(249,115,22,.12),0 4px 12px rgba(0,0,0,.4),inset 0 1px 0 rgba(249,115,22,.15);transform:perspective(600px) rotateX(4deg);transition:transform .18s;" ontouchstart="this.style.transform='perspective(600px) rotateX(1deg) scale(.95)'" ontouchend="this.style.transform='perspective(600px) rotateX(4deg)'">
-                        <div style="position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(180deg,rgba(255,255,255,.07),transparent);border-radius:16px 16px 0 0;pointer-events:none;"></div>
-                        <div style="position:absolute;bottom:0;left:0;right:0;height:2px;border-radius:0 0 16px 16px;background:rgba(249,115,22,.2);"></div>
-                        <div style="width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;margin-bottom:7px;background:linear-gradient(145deg,rgba(249,115,22,.2),rgba(249,115,22,.08));border:1px solid rgba(249,115,22,.2);box-shadow:0 4px 12px rgba(249,115,22,.15),inset 0 1px 0 rgba(255,255,255,.1);">📋</div>
-                        <div style="font-size:11px;font-weight:700;margin-bottom:2px;color:#fb923c;position:relative;z-index:2;">Checklist</div>
-                        <div style="font-size:8px;opacity:.55;color:#431407;line-height:1.4;position:relative;z-index:2;">Inspeção</div>
-                    </div>
-
-                </div>
-
-                <!-- SEC: Gestão -->
-                <div style="font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#334155;margin-bottom:10px;display:flex;align-items:center;gap:8px;">Gestão <span style="flex:1;height:1px;background:linear-gradient(90deg,rgba(255,255,255,.07),transparent);display:block;"></span></div>
-
-                <!-- STRIP GESTÃO -->
-                <div style="display:flex;justify-content:space-around;align-items:flex-start;background:linear-gradient(145deg,#0a0f1e,#080c18);border:1px solid rgba(255,255,255,.07);border-radius:20px;padding:16px 8px 12px;margin-bottom:18px;gap:4px;">
-
-                    <div onclick="toggleAgenda()" style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;flex:1;-webkit-tap-highlight-color:transparent;" ontouchstart="this.querySelector('.ico-btn').style.transform='scale(.88)';this.querySelector('.ico-btn').style.opacity='.7'" ontouchend="this.querySelector('.ico-btn').style.transform='';this.querySelector('.ico-btn').style.opacity=''">
-                        <div class="ico-btn" style="width:56px;height:56px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:26px;border:1px solid rgba(255,255,255,.08);box-shadow:0 4px 14px rgba(0,0,0,.4);transition:transform .15s,opacity .15s;background:linear-gradient(145deg,rgba(59,130,246,.25),rgba(29,78,216,.15));box-shadow:0 4px 14px rgba(59,130,246,.25);">📅</div>
-                        <div style="font-size:10px;font-weight:700;letter-spacing:.3px;color:#60a5fa;">Agenda</div>
-                        <div style="font-size:8px;font-weight:500;letter-spacing:.2px;margin-top:-3px;opacity:.55;color:#60a5fa;">visitas</div>
-                        <!-- hidden badge holders for JS -->
-                    <span id="home-agenda-badge"  style="display:none;"></span>
-                    <span id="home-clientes-badge" style="display:none;"></span>
-                    <span id="home-hist-badge"    style="display:none;"></span>
-                </div>
-                    <div onclick="abrirClientes()" style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;flex:1;-webkit-tap-highlight-color:transparent;" ontouchstart="this.querySelector('.ico-btn').style.transform='scale(.88)';this.querySelector('.ico-btn').style.opacity='.7'" ontouchend="this.querySelector('.ico-btn').style.transform='';this.querySelector('.ico-btn').style.opacity=''">
-                        <div class="ico-btn" style="width:56px;height:56px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:26px;border:1px solid rgba(255,255,255,.08);box-shadow:0 4px 14px rgba(0,0,0,.4);transition:transform .15s,opacity .15s;background:linear-gradient(145deg,rgba(139,92,246,.25),rgba(109,40,217,.15));box-shadow:0 4px 14px rgba(139,92,246,.25);">👥</div>
-                        <div style="font-size:10px;font-weight:700;letter-spacing:.3px;color:#a78bfa;">Clientes</div>
-                        <div style="font-size:8px;font-weight:500;letter-spacing:.2px;margin-top:-3px;opacity:.55;color:#a78bfa;">cadastros</div>
-                    </div>
-                    <div onclick="abrirRelatorio()" style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;flex:1;-webkit-tap-highlight-color:transparent;" ontouchstart="this.querySelector('.ico-btn').style.transform='scale(.88)';this.querySelector('.ico-btn').style.opacity='.7'" ontouchend="this.querySelector('.ico-btn').style.transform='';this.querySelector('.ico-btn').style.opacity=''">
-                        <div class="ico-btn" style="width:56px;height:56px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:26px;border:1px solid rgba(255,255,255,.08);box-shadow:0 4px 14px rgba(0,0,0,.4);transition:transform .15s,opacity .15s;background:linear-gradient(145deg,rgba(236,72,153,.25),rgba(190,24,93,.15));box-shadow:0 4px 14px rgba(236,72,153,.25);">📊</div>
-                        <div style="font-size:10px;font-weight:700;letter-spacing:.3px;color:#f472b6;">Relatório</div>
-                        <div style="font-size:8px;font-weight:500;letter-spacing:.2px;margin-top:-3px;opacity:.55;color:#f472b6;">mensal</div>
-                    </div>
-                    <div onclick="toggleHistory()" style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;flex:1;-webkit-tap-highlight-color:transparent;" ontouchstart="this.querySelector('.ico-btn').style.transform='scale(.88)';this.querySelector('.ico-btn').style.opacity='.7'" ontouchend="this.querySelector('.ico-btn').style.transform='';this.querySelector('.ico-btn').style.opacity=''">
-                        <div class="ico-btn" style="width:56px;height:56px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:26px;border:1px solid rgba(255,255,255,.08);box-shadow:0 4px 14px rgba(0,0,0,.4);transition:transform .15s,opacity .15s;background:linear-gradient(145deg,rgba(167,139,250,.25),rgba(109,40,217,.15));box-shadow:0 4px 14px rgba(167,139,250,.25);">🕘</div>
-                        <div style="font-size:10px;font-weight:700;letter-spacing:.3px;color:#c4b5fd;">Histórico</div>
-                        <div style="font-size:8px;font-weight:500;letter-spacing:.2px;margin-top:-3px;opacity:.55;color:#c4b5fd;">salvos</div>
-                    </div>
-                </div>
-                            </div>
-            </div>
-
-
-            <div id="tela-orcamento" style="display:none;flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain;">
-            <div class="relative -mt-6 rounded-t-[1.5rem] flex-grow shadow-[0_-10px_20px_-5px_rgba(0,0,0,0.1)] z-30 overflow-y-auto" style="background:#f0f7ff;padding-bottom:140px;">
+            <div id="tela-orcamento" style="display:none;" class="relative -mt-6 rounded-t-[1.5rem] flex-grow shadow-[0_-10px_20px_-5px_rgba(0,0,0,0.1)] z-30 overflow-y-auto" style="background:#f0f7ff;padding-bottom:140px;">
                 <div class="p-5 pt-6">
 
                     <div id="input-section" class="space-y-5">
@@ -661,56 +743,44 @@
         </div>
     </div>
 
+    <nav id="bottom-nav" class="no-print" style="display:none!important;position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:28rem;background:#fff;border-top:1px solid #e2e8f0;display:none;z-index:40;padding-bottom:env(safe-area-inset-bottom);">
+
+        <button onclick="window.scrollTo(0,0)" id="bnav-inicio" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 4px 8px;border:none;background:transparent;cursor:pointer;">
+            <div style="width:34px;height:34px;background:#eff6ff;border-radius:12px;display:flex;align-items:center;justify-content:center;transition:all .2s;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H5a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
             </div>
+            <span style="font-size:8px;font-weight:800;color:#2563eb;text-transform:uppercase;letter-spacing:0.4px;">Início</span>
+        </button>
 
-    <nav id="bottom-nav" class="no-print" style="position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:28rem;background:rgba(9,12,19,.97);backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,.07);display:none;z-index:400;padding-bottom:env(safe-area-inset-bottom);">
-        <div style="display:flex;align-items:center;justify-content:space-around;padding:4px 4px 8px;">
-            <button onclick="irParaHome()" id="bnav-inicio"
-                style="border:none;background:transparent;cursor:pointer;-webkit-tap-highlight-color:transparent;display:flex;flex-direction:column;align-items:center;gap:0;flex:1;padding:6px 2px 4px;min-width:0;">
-                <div id="bnav-pill-inicio"
-                    style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:56px;padding:7px 4px 5px;border-radius:14px;transition:background .2s,border-color .2s;border:1px solid transparent;background:rgba(245,158,11,.18);border-color:rgba(245,158,11,.3);color:#f59e0b;">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                    <span style="font-size:8px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:#f59e0b;white-space:nowrap;">Home</span>
-                </div>
-            </button>
+        <button onclick="toggleAgenda()" id="bnav-agenda" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 4px 8px;border:none;background:transparent;cursor:pointer;">
+            <div style="width:34px;height:34px;border-radius:12px;display:flex;align-items:center;justify-content:center;transition:all .2s;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg>
+            </div>
+            <span style="font-size:8px;font-weight:800;color:#94a3b8;text-transform:uppercase;letter-spacing:0.4px;">Agenda</span>
+        </button>
 
-            <button onclick="abrirDemanda()" id="bnav-ferramentas"
-                style="border:none;background:transparent;cursor:pointer;-webkit-tap-highlight-color:transparent;display:flex;flex-direction:column;align-items:center;gap:0;flex:1;padding:6px 2px 4px;min-width:0;">
-                <div id="bnav-pill-ferramentas"
-                    style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:56px;padding:7px 4px 5px;border-radius:14px;transition:background .2s,border-color .2s;border:1px solid transparent;background:transparent;border-color:transparent;color:#3a4a60;">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                    <span style="font-size:8px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#3a4a60;white-space:nowrap;">Calc.</span>
-                </div>
-            </button>
+        <button onclick="toggleFerramentas()" id="bnav-ferramentas" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 4px 8px;border:none;background:transparent;cursor:pointer;">
+            <div style="width:34px;height:34px;border-radius:12px;display:flex;align-items:center;justify-content:center;transition:all .2s;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+            </div>
+            <span style="font-size:8px;font-weight:800;color:#94a3b8;text-transform:uppercase;letter-spacing:0.4px;">Ferramentas</span>
+        </button>
 
-            <button onclick="toggleAgenda()" id="bnav-agenda"
-                style="border:none;background:transparent;cursor:pointer;-webkit-tap-highlight-color:transparent;display:flex;flex-direction:column;align-items:center;gap:0;flex:1;padding:6px 2px 4px;min-width:0;">
-                <div id="bnav-pill-agenda"
-                    style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:56px;padding:7px 4px 5px;border-radius:14px;transition:background .2s,border-color .2s;border:1px solid transparent;background:transparent;border-color:transparent;color:#3a4a60;">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                    <span style="font-size:8px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#3a4a60;white-space:nowrap;">Agenda</span>
-                </div>
-            </button>
+        <button onclick="toggleHistory()" id="bnav-historico" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 4px 8px;border:none;background:transparent;cursor:pointer;">
+            <div style="width:34px;height:34px;border-radius:12px;display:flex;align-items:center;justify-content:center;transition:all .2s;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <span style="font-size:8px;font-weight:800;color:#94a3b8;text-transform:uppercase;letter-spacing:0.4px;">Histórico</span>
+        </button>
 
-            <button onclick="toggleHistory()" id="bnav-historico"
-                style="border:none;background:transparent;cursor:pointer;-webkit-tap-highlight-color:transparent;display:flex;flex-direction:column;align-items:center;gap:0;flex:1;padding:6px 2px 4px;min-width:0;">
-                <div id="bnav-pill-historico"
-                    style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:56px;padding:7px 4px 5px;border-radius:14px;transition:background .2s,border-color .2s;border:1px solid transparent;background:transparent;border-color:transparent;color:#3a4a60;">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                    <span style="font-size:8px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#3a4a60;white-space:nowrap;">Hist.</span>
-                </div>
-            </button>
+        <button onclick="toggleSettings();setTimeout(()=>trocarAbaConfig('perfil'),50);" id="bnav-ajustes" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 4px 8px;border:none;background:transparent;cursor:pointer;">
+            <div style="width:34px;height:34px;border-radius:12px;display:flex;align-items:center;justify-content:center;transition:all .2s;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+            </div>
+            <span style="font-size:8px;font-weight:800;color:#94a3b8;text-transform:uppercase;letter-spacing:0.4px;">Ajustes</span>
+        </button>
 
-            <button onclick="toggleSettings();setTimeout(()=>trocarAbaConfig('perfil'),50);" id="bnav-ajustes"
-                style="border:none;background:transparent;cursor:pointer;-webkit-tap-highlight-color:transparent;display:flex;flex-direction:column;align-items:center;gap:0;flex:1;padding:6px 2px 4px;min-width:0;">
-                <div id="bnav-pill-ajustes"
-                    style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:56px;padding:7px 4px 5px;border-radius:14px;transition:background .2s,border-color .2s;border:1px solid transparent;background:transparent;border-color:transparent;color:#3a4a60;">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
-                    <span style="font-size:8px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#3a4a60;white-space:nowrap;">Config</span>
-                </div>
-            </button>
-        </div>
-    </div>
+    </nav>
 
     <div class="fab-calcular no-print" id="fab-calcular" style="display:none;">
         <button onclick="calcularPrecos()" id="btn-calcular-agora" class="w-full text-white font-black py-4 rounded-2xl shadow-lg active:scale-[0.98] transition-transform text-sm flex items-center justify-center gap-3" style="background:#f97316;box-shadow:0 4px 20px rgba(249,115,22,0.5);">
@@ -722,31 +792,25 @@
 
     <div id="agendaModal" class="fixed inset-0 z-50 hidden">
         <div class="modal-overlay absolute inset-0 w-full h-full" onclick="toggleAgenda()"></div>
-        <div class="modal-top-sheet" id="agendaContent" style="background:#0d1117;">
+        <div class="absolute inset-x-0 bottom-0 sm:inset-auto sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 w-full max-w-lg bg-white rounded-t-3xl sm:rounded-3xl h-[92vh] sm:max-h-[90vh] flex flex-col transform transition-transform duration-300 shadow-2xl translate-y-full" id="agendaContent">
 
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:#0d1117;border-bottom:1px solid rgba(255,255,255,.06);position:sticky;top:0;z-index:10;flex-shrink:0;">
-                <div style="display:flex;align-items:center;gap:12px;">
-                    <div style="width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 14px rgba(0,0,0,.35);background:linear-gradient(135deg,#0ea5e9,#0369a1);">
-                        <svg class="ico" style="color:white;width:18px;height:18px;" aria-hidden="true"><use href="#i-clock"></use></svg>
-                    </div>
-                    <div>
-                        <div style="font-size:18px;font-weight:900;color:white;line-height:1.2;">Agenda & Clientes</div>
-                        <div style="font-size:10px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.1em;">Visitas · Clientes · Garantias</div>
-                    </div>
-                </div>
-                <button onclick="toggleAgenda()" style="width:34px;height:34px;background:#1a2435;border:1px solid rgba(255,255,255,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">
-                    <svg class="ico" style="color:#94a3b8;" aria-hidden="true"><use href="#i-xmark"></use></svg>
+            <div class="flex justify-between items-center p-6 border-b sticky top-0 bg-white z-10">
+                <h2 class="text-lg font-black text-slate-800 uppercase flex items-center gap-2">
+                    <svg class="ico text-blue-600" aria-hidden="true"><use href="#i-clock"></use></svg> Agenda & Clientes
+                </h2>
+                <button onclick="toggleAgenda()" class="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center hover:bg-slate-200">
+                    <svg class="ico" aria-hidden="true"><use href="#i-xmark"></use></svg>
                 </button>
             </div>
 
-            <div style="display:flex;background:#0d1117;border-bottom:1px solid rgba(255,255,255,.06);flex-shrink:0;">
-                <button onclick="trocarAbaAgenda('visitas')"   id="atab-visitas"   class="agenda-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-blue-600 border-b-2 border-blue-600" style="background:transparent;">Agenda</button>
-                <button onclick="trocarAbaAgenda('clientes')"  id="atab-clientes"  class="agenda-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-slate-400 border-b-2 border-transparent" style="background:transparent;">Clientes</button>
-                <button onclick="trocarAbaAgenda('garantias')" id="atab-garantias" class="agenda-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-slate-400 border-b-2 border-transparent" style="background:transparent;">Garantias</button>
-                <button onclick="trocarAbaAgenda('relatorio')" id="atab-relatorio" class="agenda-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-slate-400 border-b-2 border-transparent" style="background:transparent;">Relatório</button>
+            <div class="flex border-b bg-slate-50 sticky top-[73px] z-10">
+                <button onclick="trocarAbaAgenda('visitas')"   id="atab-visitas"   class="agenda-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-blue-600 border-b-2 border-blue-600">Agenda</button>
+                <button onclick="trocarAbaAgenda('clientes')"  id="atab-clientes"  class="agenda-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-slate-400 border-b-2 border-transparent">Clientes</button>
+                <button onclick="trocarAbaAgenda('garantias')" id="atab-garantias" class="agenda-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-slate-400 border-b-2 border-transparent">Garantias</button>
+                <button onclick="trocarAbaAgenda('relatorio')" id="atab-relatorio" class="agenda-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-slate-400 border-b-2 border-transparent">Relatório</button>
             </div>
 
-            <div class="p-5 space-y-4 overflow-y-auto flex-grow pb-safe modal-scroll" style="-webkit-overflow-scrolling:touch;overscroll-behavior:contain;background:#0d1117;">
+            <div class="p-5 space-y-4 overflow-y-auto flex-grow pb-safe modal-scroll">
 
                 <div id="agenda-visitas">
                     <div class="flex justify-between items-center mb-3">
@@ -756,7 +820,7 @@
                         </button>
                     </div>
 
-                    <div id="form-visita" class="hidden p-4 rounded-2xl space-y-3 mb-4" style="background:#0d1b2a;border:1px solid rgba(255,255,255,.08);">
+                    <div id="form-visita" class="hidden bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 mb-4">
                         <p class="text-xs font-bold text-blue-600 uppercase">Nova Visita</p>
                         <input type="text" id="visita-cliente" placeholder="Nome do cliente" class="input-field w-full p-3 bg-white border border-slate-200 rounded-xl text-sm font-bold text-slate-700 focus:outline-none">
                         <input type="text" id="visita-endereco" placeholder="Endereço" class="input-field w-full p-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-700 focus:outline-none">
@@ -795,7 +859,7 @@
                         </button>
                     </div>
 
-                    <div id="form-cliente" class="hidden p-4 rounded-2xl space-y-3 mb-4" style="background:#0d1b2a;border:1px solid rgba(255,255,255,.08);">
+                    <div id="form-cliente" class="hidden bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 mb-4">
                         <p class="text-xs font-bold text-blue-600 uppercase">Novo Cliente</p>
                         <input type="text" id="cli-nome" placeholder="Nome completo" class="input-field w-full p-3 bg-white border border-slate-200 rounded-xl text-sm font-bold text-slate-700 focus:outline-none">
                         <input type="tel" id="cli-tel" placeholder="(DD) 9XXXX-XXXX" maxlength="15" onkeyup="mascaraTelefone(this)" class="input-field w-full p-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-700 focus:outline-none">
@@ -808,7 +872,7 @@
                         </div>
                     </div>
 
-                    <input type="text" id="busca-cliente" placeholder="🔍 Buscar cliente..." oninput="renderClientes()" style="background:#0a1628;border:1px solid rgba(255,255,255,.1);color:#e2e8f0;" class="input-field w-full p-3 rounded-xl text-sm text-slate-700 focus:outline-none mb-3">
+                    <input type="text" id="busca-cliente" placeholder="🔍 Buscar cliente..." oninput="renderClientes()" class="input-field w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-700 focus:outline-none mb-3">
                     <div id="lista-clientes" class="space-y-2"></div>
                 </div>
 
@@ -863,37 +927,31 @@
 
     <div id="ferramentasModal" class="fixed inset-0 z-50 hidden">
         <div class="modal-overlay absolute inset-0 w-full h-full" onclick="toggleFerramentas()"></div>
-        <div class="modal-top-sheet" id="ferramentasContent" style="background:#0d1117;">
+        <div class="absolute inset-x-0 bottom-0 sm:inset-auto sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 w-full max-w-lg bg-white rounded-t-3xl sm:rounded-3xl h-[92vh] sm:max-h-[90vh] flex flex-col transform transition-transform duration-300 shadow-2xl translate-y-full" id="ferramentasContent">
 
-            <div <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:#0d1117;border-bottom:1px solid rgba(255,255,255,.06);position:sticky;top:0;z-index:10;flex-shrink:0;">
-                <div style="display:flex;align-items:center;gap:12px;">
-                    <div style="width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 14px rgba(0,0,0,.35);background:linear-gradient(135deg,#3b82f6,#1d4ed8);">
-                        <svg class="ico" style="color:white;width:18px;height:18px;" aria-hidden="true"><use href="#i-screwdriver-wrench"></use></svg>
-                    </div>
-                    <div>
-                        <div style="font-size:18px;font-weight:900;color:white;line-height:1.2;">Ferramentas</div>
-                        <div style="font-size:10px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.1em;">Elétrica NBR 5410</div>
-                    </div>
-                </div>
-                <button onclick="toggleFerramentas()" style="width:34px;height:34px;background:#1a2435;border:1px solid rgba(255,255,255,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">
-                    <svg class="ico" style="color:#94a3b8;" aria-hidden="true"><use href="#i-xmark"></use></svg>
+            <div class="flex justify-between items-center p-6 border-b sticky top-0 bg-white z-10">
+                <h2 class="text-lg font-black text-slate-800 uppercase flex items-center gap-2">
+                    <svg class="ico text-blue-600" aria-hidden="true"><use href="#i-screwdriver-wrench"></use></svg> Ferramentas
+                </h2>
+                <button onclick="toggleFerramentas()" class="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center hover:bg-slate-200">
+                    <svg class="ico" aria-hidden="true"><use href="#i-xmark"></use></svg>
                 </button>
             </div>
 
-            <div <div style="display:flex;background:#0d1117;border-bottom:1px solid rgba(255,255,255,.06);flex-shrink:0;">
-                <button onclick="trocarAbaFerr('nbr')"     id="tab-nbr"     class="ferr-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-blue-600 border-b-2 border-blue-600" style="background:transparent;">NBR 5410</button>
-                <button onclick="trocarAbaFerr('carga')"   id="tab-carga"   class="ferr-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-slate-400 border-b-2 border-transparent" style="background:transparent;">Demanda</button>
-                <button onclick="trocarAbaFerr('queda')"   id="tab-queda"   class="ferr-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-slate-400 border-b-2 border-transparent" style="background:transparent;">Queda V</button>
-                <button onclick="trocarAbaFerr('check')"   id="tab-check"   class="ferr-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-slate-400 border-b-2 border-transparent" style="background:transparent;">Check</button>
+            <div class="flex border-b bg-slate-50 sticky top-[73px] z-10">
+                <button onclick="trocarAbaFerr('nbr')"     id="tab-nbr"     class="ferr-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-blue-600 border-b-2 border-blue-600">NBR 5410</button>
+                <button onclick="trocarAbaFerr('carga')"   id="tab-carga"   class="ferr-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-slate-400 border-b-2 border-transparent">Demanda</button>
+                <button onclick="trocarAbaFerr('queda')"   id="tab-queda"   class="ferr-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-slate-400 border-b-2 border-transparent">Queda V</button>
+                <button onclick="trocarAbaFerr('check')"   id="tab-check"   class="ferr-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-slate-400 border-b-2 border-transparent">Check</button>
             </div>
 
-            <div class="p-5 space-y-4 overflow-y-auto flex-grow pb-safe modal-scroll" style="-webkit-overflow-scrolling:touch;overscroll-behavior:contain;background:#0d1117;">
+            <div class="p-5 space-y-4 overflow-y-auto flex-grow pb-safe modal-scroll">
 
                 <div id="ferr-nbr" class="space-y-4">
 
-                    <div class="p-3 rounded-xl" style="background:#0d1b2a;border:1px solid rgba(255,255,255,.08);">
-                        <label style="font-size:10px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.08em;display:block;margin-bottom:6px;">Método de instalação — Tabela 33</label>
-                        <select id="nbr-metodo" onchange="renderTabelaNBR()" style="width:100%;padding:10px 12px;border-radius:8px;font-size:12px;font-weight:700;color:#e2e8f0;background:#0a1628;border:1px solid rgba(255,255,255,.12);outline:none;">
+                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                        <label class="text-[10px] font-bold text-slate-400 uppercase mb-2 block">Método de instalação (Tabela 33 — NBR 5410)</label>
+                        <select id="nbr-metodo" onchange="renderTabelaNBR()" class="input-field w-full p-2 bg-white border border-slate-200 rounded-lg text-xs font-bold text-slate-700 focus:outline-none">
                             <option value="B1">B1 — Eletroduto embutido em alvenaria (mais comum)</option>
                             <option value="B2">B2 — Cabo multipolar em eletroduto embutido</option>
                             <option value="C">C — Cabo sobre parede / superfície</option>
@@ -902,14 +960,14 @@
                         </select>
                     </div>
 
-                    <div id="nbr-descricao" class="px-1" style="font-size:10px;color:#64748b;"></div>
+                    <div id="nbr-descricao" class="text-[10px] text-slate-500 px-1"></div>
 
-                    <div class="overflow-x-auto rounded-xl" id="nbr-tabela-wrap" style="border:1px solid rgba(255,255,255,.08);"></div>
+                    <div class="overflow-x-auto rounded-xl border border-slate-200" id="nbr-tabela-wrap"></div>
 
-                    <div id="acc-nbr-temp" class="rounded-xl overflow-hidden" style="background:rgba(154,52,18,.18);border:1px solid rgba(154,52,18,.3);">
+                    <div id="acc-nbr-temp" class="bg-orange-50 rounded-xl border border-orange-100 overflow-hidden">
                         <button onclick="toggleAccordion('acc-nbr-temp')" class="w-full p-3 flex justify-between items-center">
-                            <span style="font-size:11px;font-weight:800;color:#fb923c;text-transform:uppercase;letter-spacing:.05em;">Fatores de correção — Temperatura</span>
-                            <svg class="ico text-xs accordion-icon" style="color:#fb923c;" aria-hidden="true"><use href="#i-chevron-down"></use></svg>
+                            <span class="text-xs font-bold text-orange-700 uppercase">Fatores de correção — Temperatura (Tabela 40)</span>
+                            <svg class="ico text-orange-400 text-xs accordion-icon" aria-hidden="true"><use href="#i-chevron-down"></use></svg>
                         </button>
                         <div class="accordion-content">
                             <div class="overflow-x-auto p-2">
@@ -932,10 +990,10 @@
                         </div>
                     </div>
 
-                    <div id="acc-nbr-agrup" class="rounded-xl overflow-hidden" style="background:rgba(29,78,216,.15);border:1px solid rgba(59,130,246,.25);">
+                    <div id="acc-nbr-agrup" class="bg-blue-50 rounded-xl border border-blue-100 overflow-hidden">
                         <button onclick="toggleAccordion('acc-nbr-agrup')" class="w-full p-3 flex justify-between items-center">
-                            <span style="font-size:11px;font-weight:800;color:#60a5fa;text-transform:uppercase;letter-spacing:.05em;">Fatores de agrupamento — Circuitos</span>
-                            <svg class="ico text-xs accordion-icon" style="color:#60a5fa;" aria-hidden="true"><use href="#i-chevron-down"></use></svg>
+                            <span class="text-xs font-bold text-blue-700 uppercase">Fatores de agrupamento — Circuitos (Tabela 42)</span>
+                            <svg class="ico text-blue-400 text-xs accordion-icon" aria-hidden="true"><use href="#i-chevron-down"></use></svg>
                         </button>
                         <div class="accordion-content">
                             <div class="overflow-x-auto p-2">
@@ -959,10 +1017,10 @@
                         </div>
                     </div>
 
-                    <div id="acc-nbr-min" class="rounded-xl overflow-hidden" style="background:rgba(21,128,61,.15);border:1px solid rgba(34,197,94,.25);">
+                    <div id="acc-nbr-min" class="bg-green-50 rounded-xl border border-green-100 overflow-hidden">
                         <button onclick="toggleAccordion('acc-nbr-min')" class="w-full p-3 flex justify-between items-center">
-                            <span style="font-size:11px;font-weight:800;color:#4ade80;text-transform:uppercase;letter-spacing:.05em;">Bitola mínima por circuito</span>
-                            <svg class="ico text-xs accordion-icon" style="color:#4ade80;" aria-hidden="true"><use href="#i-chevron-down"></use></svg>
+                            <span class="text-xs font-bold text-green-700 uppercase">Bitola mínima por tipo de circuito</span>
+                            <svg class="ico text-green-400 text-xs accordion-icon" aria-hidden="true"><use href="#i-chevron-down"></use></svg>
                         </button>
                         <div class="accordion-content">
                             <div class="overflow-x-auto p-2">
@@ -986,7 +1044,7 @@
                         </div>
                     </div>
 
-                    <p style="font-size:10px;color:#374151;text-align:center;">Ref: ABNT NBR 5410:2004 — Tabelas 33, 36, 40, 42. Cobre PVC 70°C, temp. amb. 30°C.</p>
+                    <p class="text-[10px] text-slate-400 text-center">Ref: ABNT NBR 5410:2004 — Tabelas 33, 36, 40, 42. Cobre PVC 70°C, temp. amb. 30°C.</p>
                 </div>
 
                 <div id="ferr-carga" class="hidden space-y-3">
@@ -1024,10 +1082,10 @@
                         </div>
                     </div>
 
-                    <div id="acc-nbr-comodo" class="rounded-xl overflow-hidden" style="background:rgba(109,40,217,.15);border:1px solid rgba(167,139,250,.25);">
+                    <div id="acc-nbr-comodo" class="bg-purple-50 rounded-xl border border-purple-100 overflow-hidden">
                         <button onclick="toggleAccordion('acc-nbr-comodo'); setTimeout(initGridComodosPre, 50);" class="w-full p-3 flex justify-between items-center">
-                            <span style="font-size:11px;font-weight:800;color:#c084fc;text-transform:uppercase;letter-spacing:.05em;">📐 Demanda mínima por cômodo (NBR 5410)</span>
-                            <svg class="ico text-xs accordion-icon" style="color:#c084fc;" aria-hidden="true"><use href="#i-chevron-down"></use></svg>
+                            <span class="text-xs font-bold text-purple-700 uppercase">📐 Demanda mínima por cômodo (NBR 5410)</span>
+                            <svg class="ico text-purple-400 text-xs accordion-icon" aria-hidden="true"><use href="#i-chevron-down"></use></svg>
                         </button>
                         <div class="accordion-content">
                             <div class="p-3 space-y-3">
@@ -1124,8 +1182,6 @@
                                 <button onclick="setBadgeMetodo('E')"  id="badge-met-E"  style="flex:1;padding:5px;border-radius:6px;font-size:11px;font-weight:900;cursor:pointer;border:1.5px solid #334155;background:transparent;color:#475569;">E</button>
                                 <button onclick="setBadgeMetodo('D')"  id="badge-met-D"  style="flex:1;padding:5px;border-radius:6px;font-size:11px;font-weight:900;cursor:pointer;border:1.5px solid #334155;background:transparent;color:#475569;">D</button>
                             </div>
-
-                            <p id="res-metodo-desc" style="font-size:9px;color:#94a3b8;font-style:italic;margin:0;padding:0 2px;"></p>
 
                             <div style="height:1px;background:rgba(255,255,255,.06);"></div>
 
@@ -1235,58 +1291,6 @@
                             <button onclick="importarParaQueda()" style="font-size:10px;font-weight:900;padding:6px 10px;border-radius:8px;border:none;background:#2563eb;color:white;cursor:pointer;white-space:nowrap;">
                                 Calcular queda →
                             </button>
-                        </div>
-
-                        <!-- Painel verificação rápida NBR 5410 (acord-*) -->
-                        <div style="background:#0a1628;border:1px solid #1e3a5f;border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:8px;">
-                            <p style="font-size:9px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.08em;margin:0;">Verificação rápida — NBR 5410</p>
-                            <div style="display:flex;gap:4px;align-items:center;">
-                                <span style="font-size:9px;color:#64748b;white-space:nowrap;">Material</span>
-                                <button onclick="setAcordMat('cu')" id="ab-cu" style="flex:1;padding:5px;border-radius:6px;font-size:11px;font-weight:900;cursor:pointer;border:1.5px solid #f97316;background:#431407;color:#fb923c;">Cu</button>
-                                <button onclick="setAcordMat('al')" id="ab-al" style="flex:1;padding:5px;border-radius:6px;font-size:11px;font-weight:900;cursor:pointer;border:1.5px solid #334155;background:transparent;color:#475569;">Al</button>
-                                <span style="font-size:9px;color:#64748b;white-space:nowrap;margin-left:4px;">Bitola</span>
-                                <select id="acord-sel-bit" onchange="calcAcordQueda()" style="flex:2;padding:5px;border-radius:6px;font-size:10px;font-weight:900;border:1px solid #1e3a5f;background:#0d1b2a;color:#93c5fd;outline:none;">
-                                    <option value="1.5">1,5mm²</option>
-                                    <option value="2.5">2,5mm²</option>
-                                    <option value="4">4mm²</option>
-                                    <option value="6">6mm²</option>
-                                    <option value="10">10mm²</option>
-                                    <option value="16">16mm²</option>
-                                    <option value="25">25mm²</option>
-                                    <option value="35">35mm²</option>
-                                    <option value="50">50mm²</option>
-                                </select>
-                            </div>
-                            <div style="display:flex;gap:4px;align-items:center;">
-                                <span style="font-size:9px;color:#64748b;white-space:nowrap;">Dist (m)</span>
-                                <input type="number" id="acord-dist" value="" min="1" placeholder="Ex: 15" oninput="calcAcordQueda()"
-                                    style="width:64px;padding:5px;border-radius:6px;font-size:11px;font-weight:700;border:1px solid #1e3a5f;background:#0d1b2a;color:white;outline:none;text-align:center;">
-                                <select id="acord-tipo" onchange="calcAcordQueda()" style="flex:1;padding:5px;border-radius:6px;font-size:9px;font-weight:700;border:1px solid #1e3a5f;background:#0d1b2a;color:#93c5fd;outline:none;">
-                                    <option value="4">Terminal 4%</option>
-                                    <option value="7">Alimentador 7%</option>
-                                </select>
-                            </div>
-                            <div style="background:#0d1b2a;border-radius:8px;padding:8px;display:flex;justify-content:space-between;align-items:center;gap:6px;">
-                                <div style="display:flex;gap:10px;">
-                                    <div style="text-align:center;">
-                                        <p style="font-size:8px;color:#64748b;margin:0;">Iz</p>
-                                        <p id="acord-liz" style="font-size:13px;font-weight:900;color:#86efac;margin:0;">—</p>
-                                    </div>
-                                    <div style="text-align:center;">
-                                        <p style="font-size:8px;color:#64748b;margin:0;">Ib</p>
-                                        <p id="acord-lib" style="font-size:13px;font-weight:900;color:#fdba74;margin:0;">—</p>
-                                    </div>
-                                    <div style="text-align:center;">
-                                        <p style="font-size:8px;color:#64748b;margin:0;">Iz≥Ib</p>
-                                        <p id="acord-okiz" style="font-size:13px;font-weight:900;color:#86efac;margin:0;">—</p>
-                                    </div>
-                                    <div style="text-align:center;">
-                                        <p style="font-size:8px;color:#64748b;margin:0;">Queda</p>
-                                        <p id="acord-pct" style="font-size:13px;font-weight:900;color:#86efac;margin:0;">—</p>
-                                    </div>
-                                </div>
-                                <div id="acord-status" style="font-size:10px;font-weight:900;padding:5px 8px;border-radius:6px;background:#1e3a5f;color:#93c5fd;white-space:nowrap;">—</div>
-                            </div>
                         </div>
 
                         <div style="height:1px;background:rgba(255,255,255,.06);"></div>
@@ -1771,24 +1775,14 @@
     </div>
     <div id="settingsModal" class="fixed inset-0 z-50 hidden">
         <div class="modal-overlay absolute inset-0 w-full h-full" onclick="toggleSettings()"></div>
-        <div class="modal-top-sheet" id="modalContent" style="background:#0d1117;">
+        <div class="absolute inset-x-0 bottom-0 sm:inset-auto sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 w-full max-w-lg bg-white rounded-t-3xl sm:rounded-3xl h-[92vh] sm:max-h-[90vh] flex flex-col transform transition-transform duration-300 shadow-2xl translate-y-full" id="modalContent">
 
-            <div <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:#0d1117;border-bottom:1px solid rgba(255,255,255,.06);position:sticky;top:0;z-index:10;flex-shrink:0;">
-                <div style="display:flex;align-items:center;gap:12px;">
-                    <div style="width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 14px rgba(0,0,0,.35);background:linear-gradient(135deg,#94a3b8,#475569);">
-                        <svg class="ico" style="color:white;width:18px;height:18px;" aria-hidden="true"><use href="#i-sliders"></use></svg>
-                    </div>
-                    <div>
-                        <div style="font-size:18px;font-weight:900;color:white;line-height:1.2;">Ajustes</div>
-                        <div style="font-size:10px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.1em;">Configurações do app</div>
-                    </div>
-                </div>
-                <button onclick="toggleSettings()" style="width:34px;height:34px;background:#1a2435;border:1px solid rgba(255,255,255,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">
-                    <svg class="ico" style="color:#94a3b8;" aria-hidden="true"><use href="#i-xmark"></use></svg>
-                </button>
+            <div class="flex justify-between items-center p-5 border-b bg-white z-10 flex-shrink-0 rounded-t-3xl">
+                <h2 class="text-lg font-black text-slate-800 uppercase flex items-center gap-2"><svg class="ico text-blue-600" aria-hidden="true"><use href="#i-sliders"></use></svg> Ajustes</h2>
+                <button onclick="toggleSettings()" class="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center hover:bg-slate-200"><svg class="ico" aria-hidden="true"><use href="#i-xmark"></use></svg></button>
             </div>
 
-            <div style="display:flex;background:#0d1117;border-bottom:1px solid rgba(255,255,255,.06);flex-shrink:0;overflow-x:auto;">
+            <div class="flex bg-slate-50 border-b border-slate-200 flex-shrink-0 overflow-x-auto">
                 <button onclick="trocarAbaConfig('perfil')" id="cfg-tab-perfil" class="cfg-tab flex-1 min-w-[64px] py-3 flex flex-col items-center gap-0.5 text-[9px] font-bold uppercase tracking-wide border-b-2 border-blue-600 text-blue-600 bg-white transition-all">
                     <svg class="ico text-sm" aria-hidden="true"><use href="#i-user-tag"></use></svg> Perfil
                 </button>
@@ -1806,7 +1800,7 @@
                 </button>
             </div>
 
-            <div class="overflow-y-auto flex-grow pb-safe modal-scroll" style="-webkit-overflow-scrolling:touch;overscroll-behavior:contain;background:#0d1117;">
+            <div class="overflow-y-auto flex-grow pb-safe modal-scroll" style="-webkit-overflow-scrolling:touch;overscroll-behavior:contain;">
 
                 <div id="cfg-aba-perfil" class="p-5 space-y-4">
                     <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-4">
@@ -1895,8 +1889,8 @@
                 </div>
 
                 <div id="cfg-aba-catalogo" class="hidden p-5 space-y-3">
-                    <div class="flex gap-1 rounded-xl p-1" style="background:#0a1628;">
-                        <button onclick="trocarSubCatalogo('servicos')" id="sub-tab-servicos" class="flex-1 py-2 rounded-lg text-xs font-bold bg-white text-slate-700 shadow-sm transition-all" style="background:rgba(255,255,255,.1);color:#e2e8f0;">🔧 Preços Base</button>
+                    <div class="flex gap-1 bg-slate-100 rounded-xl p-1">
+                        <button onclick="trocarSubCatalogo('servicos')" id="sub-tab-servicos" class="flex-1 py-2 rounded-lg text-xs font-bold bg-white text-slate-700 shadow-sm transition-all">🔧 Preços Base</button>
                         <button onclick="trocarSubCatalogo('materiais')" id="sub-tab-materiais" class="flex-1 py-2 rounded-lg text-xs font-bold text-slate-400 transition-all">📦 Materiais</button>
                     </div>
                     <div id="sub-aba-servicos">
@@ -1962,11 +1956,11 @@
                     <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
                         <h3 class="text-xs font-bold text-slate-500 uppercase"><svg class="ico text-blue-500 mr-1" aria-hidden="true"><use href="#i-cloud-arrow-up"></use></svg> Backup &amp; Segurança</h3>
                         <div class="grid grid-cols-2 gap-2">
-                            <button onclick="exportarDados()" class="flex flex-col items-center justify-center p-4 rounded-xl transition-colors" style="background:#0d1b2a;border:1px solid rgba(34,197,94,.2);">
+                            <button onclick="exportarDados()" class="flex flex-col items-center justify-center p-4 bg-white border border-green-200 rounded-xl hover:bg-green-50 transition-colors">
                                 <svg class="ico text-green-500 text-lg mb-1" aria-hidden="true"><use href="#i-download"></use></svg>
                                 <span class="text-[10px] font-bold text-slate-600">BAIXAR BACKUP</span>
                             </button>
-                            <label class="flex flex-col items-center justify-center p-4 rounded-xl transition-colors cursor-pointer" style="background:#0d1b2a;border:1px solid rgba(59,130,246,.2);">
+                            <label class="flex flex-col items-center justify-center p-4 bg-white border border-blue-200 rounded-xl hover:bg-blue-50 transition-colors cursor-pointer">
                                 <svg class="ico text-blue-500 text-lg mb-1" aria-hidden="true"><use href="#i-upload"></use></svg>
                                 <span class="text-[10px] font-bold text-slate-600">RESTAURAR</span>
                                 <input type="file" accept=".json" onchange="importarDados(this)" class="hidden">
@@ -1978,7 +1972,7 @@
                                 <span>Armazenamento usado</span>
                                 <span id="storage-label">—</span>
                             </div>
-                            <div class="w-full rounded-full h-2" style="background:#1e293b;">
+                            <div class="w-full bg-slate-200 rounded-full h-2">
                                 <div id="storage-bar" class="h-2 rounded-full transition-all" style="width:0%;background:#22c55e;"></div>
                             </div>
                             <p id="storage-aviso" class="hidden text-[10px] font-bold text-orange-600 bg-orange-50 border border-orange-200 rounded-lg p-2 text-center"></p>
@@ -1995,23 +1989,16 @@
 
     <div id="historyModal" class="fixed inset-0 z-50 hidden">
         <div class="modal-overlay absolute inset-0 w-full h-full" onclick="toggleHistory()"></div>
-        <div class="modal-top-sheet" id="historyContent" style="background:#0d1117;">
-            <div <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:#0d1117;border-bottom:1px solid rgba(255,255,255,.06);position:sticky;top:0;z-index:10;flex-shrink:0;">
-                <div style="display:flex;align-items:center;gap:12px;">
-                    <div style="width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 14px rgba(0,0,0,.35);background:linear-gradient(135deg,#c084fc,#7c3aed);">
-                        <svg class="ico" style="color:white;width:18px;height:18px;" aria-hidden="true"><use href="#i-clock-rotate-left"></use></svg>
-                    </div>
-                    <div>
-                        <div style="font-size:18px;font-weight:900;color:white;line-height:1.2;">Histórico</div>
-                        <div style="font-size:10px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.1em;">Orçamentos salvos</div>
-                    </div>
+        <div class="absolute inset-y-0 right-0 w-full max-w-sm bg-white p-0 h-full flex flex-col transform transition-transform duration-300 translate-x-full shadow-2xl" id="historyContent">
+            <div class="bg-[#0f172a] text-white p-6 pb-6 flex justify-between items-center sticky top-0 z-10">
+                <div>
+                    <h2 class="text-lg font-black uppercase"><svg class="ico mr-2" aria-hidden="true"><use href="#i-clock-rotate-left"></use></svg> Histórico</h2>
+                    <p class="text-[10px] text-slate-400">Últimos orçamentos salvos</p>
                 </div>
-                <button onclick="toggleHistory()" style="width:34px;height:34px;background:#1a2435;border:1px solid rgba(255,255,255,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">
-                    <svg class="ico" style="color:#94a3b8;" aria-hidden="true"><use href="#i-xmark"></use></svg>
-                </button>
+                <button onclick="toggleHistory()" class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20"><svg class="ico" aria-hidden="true"><use href="#i-xmark"></use></svg></button>
             </div>
-            <div id="historyList" class="flex-grow p-4 space-y-3 overflow-y-auto modal-scroll" style="-webkit-overflow-scrolling:touch;overscroll-behavior:contain;background:#0d1117;"></div>
-            <div style="padding:16px;border-top:1px solid rgba(255,255,255,.06);background:#0d1117;" class="pb-safe">
+            <div id="historyList" class="flex-grow p-4 space-y-3 bg-slate-50 overflow-y-auto modal-scroll"></div>
+            <div class="p-4 border-t border-slate-200 bg-white pb-safe">
                 <button onclick="limparHistorico()" class="w-full py-3 text-red-500 font-bold text-xs border border-red-100 rounded-xl hover:bg-red-50">LIMPAR TUDO</button>
             </div>
         </div>
@@ -2148,8 +2135,8 @@
             _hashMaster   = await _sha256('POWER@2025');
             _hashDefaultU = await _sha256('admin');
             _hashDefaultP = await _sha256('eletricista123');
-            let oldU, oldP;
-            try { oldU = localStorage.getItem('ep_user'); oldP = localStorage.getItem('ep_pass'); } catch(e) { oldU = null; oldP = null; }
+            const oldU = localStorage.getItem('ep_user');
+            const oldP = localStorage.getItem('ep_pass');
             if (oldU && oldU.length < 60) {
                 try { localStorage.setItem('ep_user', await _sha256(atob(oldU))); } catch(e) {}
             }
@@ -2162,12 +2149,10 @@
         });
 
         async function _getHashesCredenciais() {
-            try {
-                return {
-                    u: localStorage.getItem('ep_user') || _hashDefaultU,
-                    p: localStorage.getItem('ep_pass') || _hashDefaultP,
-                };
-            } catch(e) { return { u: _hashDefaultU, p: _hashDefaultP }; }
+            return {
+                u: localStorage.getItem('ep_user') || _hashDefaultU,
+                p: localStorage.getItem('ep_pass') || _hashDefaultP,
+            };
         }
 
         function bloqueado(funcao) {
@@ -2229,14 +2214,9 @@
             if ((hu === cred.u && hp === cred.p) || isMaster || isTeste_) {
                 _modoTeste = isTeste_;
                 document.getElementById('login-screen').style.display = 'none';
-                const bnav = document.getElementById('bottom-nav');
-
-                const telaHome = document.getElementById('tela-home');
-                if (telaHome) telaHome.style.display = 'block';
-                const telaOrc = document.getElementById('tela-orcamento');
-                if (telaOrc) telaOrc.style.display = 'none';
-                setTimeout(() => { _atualizarHomeBadges(); _destacarNavBtnDark('bnav-inicio'); _atualizarDot(); }, 200);
-                if (bnav) bnav.style.display = 'flex';
+                var bnav = document.getElementById('bottom-nav');
+                if (bnav) bnav.style.display = 'none'; // kept hidden
+                setTimeout(function(){ irParaHome(); }, 100);
                 _atualizarFAB();
                 sessionStorage.setItem('ep_auth', '1');
                 if (_modoTeste) mostrarBannerTeste();
@@ -2268,13 +2248,6 @@
         }
 
         document.addEventListener('click', function(e) {
-            const panel = document.getElementById('notif-panel');
-            if (panel && panel.style.display === 'block') {
-                const bell = e.target.closest('[onclick="toggleNotif()"]');
-                if (!bell && !panel.contains(e.target)) {
-                    panel.style.display = 'none';
-                }
-            }
             if (sessionStorage.getItem('ep_auth') !== '1') {
                 const tela = document.getElementById('login-screen');
                 if (tela && !tela.contains(e.target)) {
@@ -2344,15 +2317,12 @@
 
         function loadState() {
             state.veiculo = state.veiculo || 'hatch';
-            let legado = null, saved = null;
-            try {
-                legado = localStorage.getItem('refrigBlindadoV5');
-                if (legado && !localStorage.getItem('eletristapower_v1')) {
-                    localStorage.setItem('eletristapower_v1', legado);
-                    localStorage.removeItem('refrigBlindadoV5');
-                }
-                saved = localStorage.getItem('eletristapower_v1');
-            } catch(e) { console.warn('localStorage indisponível', e); }
+            const legado = localStorage.getItem('refrigBlindadoV5');
+            if (legado && !localStorage.getItem('eletristapower_v1')) {
+                localStorage.setItem('eletristapower_v1', legado);
+                localStorage.removeItem('refrigBlindadoV5');
+            }
+            const saved = localStorage.getItem('eletristapower_v1');
             if (saved) {
                 try {
                     state = { ...state, ...JSON.parse(saved) };
@@ -3245,29 +3215,17 @@
         }
 
         function toggleHistory() {
-            const _th = document.getElementById('tela-home');
             const m = document.getElementById('historyModal');
+            _destacarNavBtn(m.classList.contains('hidden') ? 'bnav-historico' : 'bnav-inicio');
             const c = document.getElementById('historyContent');
             if (m.classList.contains('hidden')) {
-                if (_th && _th.style.display !== 'none') _th.style.display = 'none';
-                _destacarNavBtn('bnav-historico');
-                _fecharTodosModais('historyModal');
                 lockScroll();
                 renderHistoricoUI();
                 m.classList.remove('hidden');
-                requestAnimationFrame(() => requestAnimationFrame(() => c.classList.add('modal-visible')));
+                requestAnimationFrame(() => requestAnimationFrame(() => c.classList.remove('translate-x-full')));
             } else {
-                _destacarNavBtn('bnav-inicio');
-                c.classList.remove('modal-visible');
-                setTimeout(() => {
-                    m.classList.add('hidden'); unlockScroll();
-            const _torc = document.getElementById('tela-orcamento');
-                if (_th && (!_torc || _torc.style.display === 'none')) {
-                    _th.style.display = 'block';
-                    _destacarNavBtnDark('bnav-inicio');
-                    _atualizarHomeBadges();
-                }
-                }, 300);
+                c.classList.add('translate-x-full');
+                setTimeout(() => { m.classList.add('hidden'); unlockScroll(); irParaHome(); }, 300);
             }
         }
 
@@ -3396,6 +3354,7 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+
         function limparHistorico() {
             if (bloqueado('limpar')) return;
             if (confirm('Apagar todo o histórico?')) {
@@ -3413,7 +3372,25 @@
         }
 
         function _destacarNavBtn(id) {
-            if (typeof _destacarNavBtnDark === 'function') _destacarNavBtnDark(id);
+            const config = {
+                'bnav-inicio':      { bg:'#eff6ff', cor:'#2563eb' },
+                'bnav-agenda':      { bg:'#f0fdf4', cor:'#16a34a' },
+                'bnav-ferramentas': { bg:'#fff7ed', cor:'#ea580c' },
+                'bnav-historico':   { bg:'#faf5ff', cor:'#7c3aed' },
+                'bnav-ajustes':     { bg:'#f1f5f9', cor:'#475569' },
+            };
+            Object.keys(config).forEach(btnId => {
+                const btn = document.getElementById(btnId);
+                if (!btn) return;
+                const ico  = btn.querySelector('div');
+                const lbl  = btn.querySelector('span');
+                const svg  = btn.querySelector('svg');
+                const ativo = btnId === id;
+                const { bg, cor } = config[btnId];
+                if (ico) ico.style.background = ativo ? bg : 'transparent';
+                if (lbl) lbl.style.color = ativo ? cor : '#94a3b8';
+                if (svg) svg.setAttribute('stroke', ativo ? cor : '#94a3b8');
+            });
         }
 
         function _camposPreenchidos() {
@@ -3463,31 +3440,19 @@
         }
 
         function toggleSettings() {
-            const _th = document.getElementById('tela-home');
             const m = document.getElementById('settingsModal');
+            _destacarNavBtn(m.classList.contains('hidden') ? 'bnav-ajustes' : 'bnav-inicio');
             const c = document.getElementById('modalContent');
             if (m.classList.contains('hidden')) {
-                if (_th && _th.style.display !== 'none') _th.style.display = 'none';
-                _destacarNavBtn('bnav-ajustes');
-                _fecharTodosModais('settingsModal');
                 lockScroll();
                 m.classList.remove('hidden');
-                requestAnimationFrame(() => requestAnimationFrame(() => c.classList.add('modal-visible')));
+                requestAnimationFrame(() => requestAnimationFrame(() => c.classList.remove('translate-y-full')));
                 renderListaServicosBase();
                 renderListaMateriaisBase();
                 _syncLogoCfgUI();
             } else {
-                _destacarNavBtn('bnav-inicio');
-                c.classList.remove('modal-visible');
-                setTimeout(() => {
-                    m.classList.add('hidden'); unlockScroll();
-            const _torc = document.getElementById('tela-orcamento');
-                if (_th && (!_torc || _torc.style.display === 'none')) {
-                    _th.style.display = 'block';
-                    _destacarNavBtnDark('bnav-inicio');
-                    _atualizarHomeBadges();
-                }
-                }, 300);
+                c.classList.add('translate-y-full');
+                setTimeout(() => { m.classList.add('hidden'); unlockScroll(); irParaHome(); }, 300);
             }
         }
 
@@ -3650,10 +3615,8 @@
                     _toastSimples('❌ A senha deve ter pelo menos 4 caracteres.');
                     return;
                 }
-                try {
-                    if (novoUser) localStorage.setItem('ep_user', await _sha256(novoUser));
-                    if (novaSenha) localStorage.setItem('ep_pass', await _sha256(novaSenha));
-                } catch(e) { _toastSimples('⚠️ Não foi possível salvar as credenciais.'); }
+                if (novoUser) localStorage.setItem('ep_user', await _sha256(novoUser));
+                if (novaSenha) localStorage.setItem('ep_pass', await _sha256(novaSenha));
                 _toastSimples('✅ Usuário/senha atualizados com sucesso!');
                 document.getElementById('configUsuario').value = '';
                 document.getElementById('configSenha').value = '';
@@ -3931,31 +3894,19 @@
             renderChecklist();
         }
 
-function toggleFerramentas() {
-            const _th = document.getElementById('tela-home');
+        function toggleFerramentas() {
             const m = document.getElementById('ferramentasModal');
+            _destacarNavBtn(m.classList.contains('hidden') ? 'bnav-ferramentas' : 'bnav-inicio');
             const c = document.getElementById('ferramentasContent');
             if (m.classList.contains('hidden')) {
-                if (_th && _th.style.display !== 'none') _th.style.display = 'none';
-                _destacarNavBtn('bnav-ferramentas');
-                _fecharTodosModais('ferramentasModal');
                 lockScroll();
                 m.classList.remove('hidden');
-                requestAnimationFrame(() => requestAnimationFrame(() => c.classList.add('modal-visible')));
+                requestAnimationFrame(() => requestAnimationFrame(() => c.classList.remove('translate-y-full')));
                 renderModelosCheck();
                 renderTabelaNBR();
             } else {
-                _destacarNavBtn('bnav-inicio');
-                c.classList.remove('modal-visible');
-                setTimeout(() => {
-                    m.classList.add('hidden'); unlockScroll();
-            const _torc = document.getElementById('tela-orcamento');
-                if (_th && (!_torc || _torc.style.display === 'none')) {
-                    _th.style.display = 'block';
-                    _destacarNavBtnDark('bnav-inicio');
-                    _atualizarHomeBadges();
-                }
-                }, 300);
+                c.classList.add('translate-y-full');
+                setTimeout(() => { m.classList.add('hidden'); unlockScroll(); irParaHome(); }, 300);
                 ['cbtn-mono','cbtn-bi','cbtn-tri','btn127','btn220','btn380'].forEach(id => {
                     const btn = document.getElementById(id);
                     if (btn) btn.disabled = false;
@@ -5594,16 +5545,13 @@ function toggleFerramentas() {
         if (!state.clientes) state.clientes = [];
 
         function toggleAgenda() {
-            const _th = document.getElementById('tela-home');
             const m = document.getElementById('agendaModal');
+            _destacarNavBtn(m.classList.contains('hidden') ? 'bnav-agenda' : 'bnav-inicio');
             const c = document.getElementById('agendaContent');
             if (m.classList.contains('hidden')) {
-                if (_th && _th.style.display !== 'none') _th.style.display = 'none';
-                _destacarNavBtn('bnav-agenda');
-                _fecharTodosModais('agendaModal');
                 lockScroll();
                 m.classList.remove('hidden');
-                requestAnimationFrame(() => requestAnimationFrame(() => c.classList.add('modal-visible')));
+                requestAnimationFrame(() => requestAnimationFrame(() => c.classList.remove('translate-y-full')));
                 const hoje = new Date();
                 document.getElementById('rel-mes').value = hoje.getMonth();
                 document.getElementById('rel-ano').value = hoje.getFullYear();
@@ -5611,17 +5559,8 @@ function toggleFerramentas() {
                 renderClientes();
                 renderGarantias();
             } else {
-                _destacarNavBtn('bnav-inicio');
-                c.classList.remove('modal-visible');
-                setTimeout(() => {
-                    m.classList.add('hidden'); unlockScroll();
-            const _torc = document.getElementById('tela-orcamento');
-                if (_th && (!_torc || _torc.style.display === 'none')) {
-                    _th.style.display = 'block';
-                    _destacarNavBtnDark('bnav-inicio');
-                    _atualizarHomeBadges();
-                }
-                }, 300);
+                c.classList.add('translate-y-full');
+                setTimeout(() => { m.classList.add('hidden'); unlockScroll(); irParaHome(); }, 300);
             }
         }
 
@@ -5916,286 +5855,98 @@ function toggleFerramentas() {
             });
         }
     
-        function _fecharTodosModais(exceto) {
-            const modais = [
-                { id:'ferramentasModal', content:'ferramentasContent' },
-                { id:'agendaModal',      content:'agendaContent'      },
-                { id:'historyModal',     content:'historyContent'     },
-                { id:'settingsModal',    content:'modalContent'       },
-            ];
-            modais.forEach(({ id, content: cid }) => {
-                if (id === exceto) return;
-                const m = document.getElementById(id);
-                const c = document.getElementById(cid);
-                if (m && !m.classList.contains('hidden')) {
-                    if (c) c.classList.remove('modal-visible');
-                    setTimeout(() => { if (m) m.classList.add('hidden'); }, 300);
-                }
-            });
-        }
+        // ══ HOME SCREEN FUNCTIONS ══════════════════════════════
+        var _tipoDemandaFd = '1.0';
 
         function irParaHome() {
-            document.getElementById('tela-home').style.display = 'block';
-            document.getElementById('tela-orcamento').style.display = 'none';
-            ['agendaModal','ferramentasModal','historyModal','settingsModal'].forEach(id => {
-                const m = document.getElementById(id);
-                if (m && !m.classList.contains('hidden')) m.classList.add('hidden');
+            document.getElementById('tela-home').style.display = 'flex';
+            // hide original app areas
+            var bnav = document.getElementById('bottom-nav');
+            if (bnav) bnav.style.display = 'none';
+            var hdr = document.getElementById('app-header');
+            if (hdr) hdr.style.display = 'none';
+            var orc = document.getElementById('tela-orcamento');
+            if (orc) orc.style.display = 'none';
+            // close any open modal
+            ['ferramentasModal','agendaModal','historyModal','settingsModal'].forEach(function(id) {
+                var m = document.getElementById(id);
+                if (m) m.classList.add('hidden');
             });
             unlockScroll();
-            _destacarNavBtnDark('bnav-inicio');
-            _atualizarHomeBadges();
+            _atualizarHomeUI();
         }
 
-        function abrirDemanda() {
-            ['agendaModal','historyModal','settingsModal'].forEach(id => {
-                const m = document.getElementById(id);
-                if (m && !m.classList.contains('hidden')) m.classList.add('hidden');
-            });
-            unlockScroll();
+        function _sairHome(mostrarOrc) {
             document.getElementById('tela-home').style.display = 'none';
-            document.getElementById('tela-orcamento').style.display = 'none';
-            setTimeout(() => { toggleFerramentas(); trocarAbaFerr('carga'); }, 50);
-            _destacarNavBtnDark('bnav-ferramentas');
-        }
-
-        function abrirQueda() {
-            document.getElementById('tela-home').style.display = 'none';
-            setTimeout(() => { toggleFerramentas(); trocarAbaFerr('queda'); }, 50);
-            _destacarNavBtnDark('bnav-ferramentas');
-        }
-
-        function abrirOrcamento() {
-            document.getElementById('tela-home').style.display = 'none';
-            document.getElementById('tela-orcamento').style.display = 'block';
-            _destacarNavBtnDark('bnav-inicio');
-        }
-
-        function abrirChecklistHome() {
-            document.getElementById('tela-home').style.display = 'none';
-            setTimeout(() => { toggleFerramentas(); trocarAbaFerr('check'); }, 50);
-            _destacarNavBtnDark('bnav-ferramentas');
-        }
-
-        function abrirClientes() {
-            if (bloqueado('clientes')) return;
-            toggleAgenda();
-            setTimeout(() => trocarAbaAgenda('clientes'), 80);
-            _destacarNavBtnDark('bnav-agenda');
-        }
-
-        function abrirRelatorio() {
-            if (bloqueado('relatorio')) return;
-            toggleAgenda();
-            setTimeout(() => trocarAbaAgenda('relatorio'), 80);
-            _destacarNavBtnDark('bnav-agenda');
-        }
-
-        function toggleNotif() {
-            const panel = document.getElementById('notif-panel');
-            if (!panel) return;
-            const isOpen = panel.style.display === 'block';
-            if (isOpen) {
-                panel.style.display = 'none';
-            } else {
-                _renderNotifPanel();
-                panel.style.display = 'block';
+            if (mostrarOrc) {
+                var bnav = document.getElementById('bottom-nav');
+                if (bnav) bnav.style.display = 'flex';
+                var hdr = document.getElementById('app-header');
+                if (hdr) hdr.style.display = '';
+                var orc = document.getElementById('tela-orcamento');
+                if (orc) orc.style.display = '';
             }
         }
 
-        function _gerarNotificacoes() {
-            const alertas = [];
-            const hoje = new Date();
-            hoje.setHours(0, 0, 0, 0);
-            const hojeStr = hoje.toISOString().slice(0, 10);
-            const amanhaStr = new Date(hoje.getTime() + 86400000).toISOString().slice(0, 10);
-
-            // ── Visitas de hoje ───────────────────────────────────────────
-            const visitasHoje = (state.visitas || []).filter(v =>
-                v.data && v.data.slice(0, 10) === hojeStr && v.status !== 'concluida'
-            );
-            if (visitasHoje.length > 0) {
-                visitasHoje.forEach(v => {
-                    alertas.push({
-                        id: 'visita-hoje-' + v.id,
-                        tipo: 'hoje',
-                        icon: '📅',
-                        titulo: 'Visita hoje' + (v.hora ? ' às ' + v.hora : ''),
-                        sub: v.cliente + (v.endereco ? ' • ' + v.endereco : ''),
-                        acao: () => { toggleAgenda(); setTimeout(() => trocarAbaAgenda('visitas'), 80); }
-                    });
-                });
-            }
-
-            // ── Visitas atrasadas (passaram da data, ainda pendentes) ─────
-            const visitasAtrasadas = (state.visitas || []).filter(v => {
-                if (!v.data || v.status === 'concluida') return false;
-                const d = new Date(v.data);
-                d.setHours(0, 0, 0, 0);
-                return d < hoje;
-            });
-            if (visitasAtrasadas.length > 0) {
-                const nomes = visitasAtrasadas.slice(0, 2).map(v => v.cliente).join(', ');
-                const extra = visitasAtrasadas.length > 2 ? ' e mais ' + (visitasAtrasadas.length - 2) : '';
-                alertas.push({
-                    id: 'visitas-atrasadas',
-                    tipo: 'alerta',
-                    icon: '⚠️',
-                    titulo: visitasAtrasadas.length + ' visita' + (visitasAtrasadas.length > 1 ? 's atrasadas' : ' atrasada'),
-                    sub: nomes + extra,
-                    acao: () => { toggleAgenda(); setTimeout(() => trocarAbaAgenda('visitas'), 80); }
-                });
-            }
-
-            // ── Garantias vencendo (≤ 7 dias) ────────────────────────────
-            (state.historico || []).forEach(h => {
-                if (!h.data || !h.garantia) return;
-                const partes = h.data.split('/');
-                if (partes.length < 3) return;
-                const dataServ = new Date(+partes[2], +partes[1] - 1, +partes[0]);
-                const dias = parseInt((h.garantia || '90').replace(/\D/g, ''), 10) || 90;
-                const venc = new Date(dataServ);
-                venc.setDate(venc.getDate() + dias);
-                const restantes = Math.ceil((venc - hoje) / 86400000);
-                if (restantes >= 0 && restantes <= 7) {
-                    alertas.push({
-                        id: 'garantia-' + (h.id || h.data),
-                        tipo: restantes <= 2 ? 'critico' : 'aviso',
-                        icon: restantes === 0 ? '🔴' : restantes <= 2 ? '🟠' : '🟡',
-                        titulo: 'Garantia vence em ' + restantes + ' dia' + (restantes !== 1 ? 's' : ''),
-                        sub: (h.cliente || 'Cliente') + ' • ' + h.data,
-                        acao: () => toggleHistory()
-                    });
-                } else if (restantes < 0 && restantes >= -30) {
-                    alertas.push({
-                        id: 'garantia-venc-' + (h.id || h.data),
-                        tipo: 'vencida',
-                        icon: '🔴',
-                        titulo: 'Garantia vencida há ' + Math.abs(restantes) + ' dia' + (Math.abs(restantes) !== 1 ? 's' : ''),
-                        sub: (h.cliente || 'Cliente') + ' • ' + h.data,
-                        acao: () => toggleHistory()
-                    });
-                }
-            });
-
-            return alertas;
-        }
-
-        function _renderNotifPanel() {
-            const list = document.getElementById('notif-list');
-            if (!list) return;
-            const alertas = _gerarNotificacoes();
-            const lidas = JSON.parse(sessionStorage.getItem('notif-lidas') || '[]');
-            const visiveis = alertas.filter(a => !lidas.includes(a.id));
-
-            if (visiveis.length === 0) {
-                list.innerHTML = '<div class="np-empty">✅ Nenhuma notificação pendente</div>';
-            } else {
-                list.innerHTML = visiveis.map(a => `
-                    <div class="ni" onclick="_notifAcao('${a.id}')">
-                        <div class="ni-icon">${a.icon}</div>
-                        <div class="ni-body">
-                            <div class="ni-title">${a.titulo}</div>
-                            <div class="ni-sub">${a.sub}</div>
-                        </div>
-                        <button class="ni-del" onclick="event.stopPropagation();_descartarNotif('${a.id}')" title="Descartar">✕</button>
-                    </div>
-                `).join('');
-            }
-            _atualizarDot();
-        }
-
-        function _notifAcao(id) {
-            const alertas = _gerarNotificacoes();
-            const alerta = alertas.find(a => a.id === id);
-            _descartarNotif(id);
-            document.getElementById('notif-panel').style.display = 'none';
-            if (alerta && alerta.acao) alerta.acao();
-        }
-
-        function _descartarNotif(id) {
-            const lidas = JSON.parse(sessionStorage.getItem('notif-lidas') || '[]');
-            if (!lidas.includes(id)) lidas.push(id);
-            sessionStorage.setItem('notif-lidas', JSON.stringify(lidas));
-            _renderNotifPanel();
-        }
-
-        function limparNotificacoes() {
-            const alertas = _gerarNotificacoes();
-            const lidas = JSON.parse(sessionStorage.getItem('notif-lidas') || '[]');
-            alertas.forEach(a => { if (!lidas.includes(a.id)) lidas.push(a.id); });
-            sessionStorage.setItem('notif-lidas', JSON.stringify(lidas));
-            _renderNotifPanel();
-            document.getElementById('notif-panel').style.display = 'none';
-        }
-
-        function _atualizarDot() {
-            const dot = document.getElementById('notif-dot');
-            if (!dot) return;
-            const alertas = _gerarNotificacoes();
-            const lidas = JSON.parse(sessionStorage.getItem('notif-lidas') || '[]');
-            const pendentes = alertas.filter(a => !lidas.includes(a.id)).length;
-            dot.style.display = pendentes > 0 ? 'block' : 'none';
-        }
-
-        function _destacarNavBtnDark(id) {
-            const cfg = {
-                'bnav-inicio':      { cor:'#f59e0b', bg:'rgba(245,158,11,.14)', borda:'rgba(245,158,11,.28)' },
-                'bnav-ferramentas': { cor:'#f59e0b', bg:'rgba(245,158,11,.14)', borda:'rgba(245,158,11,.28)' },
-                'bnav-agenda':      { cor:'#60a5fa', bg:'rgba(96,165,250,.14)',  borda:'rgba(96,165,250,.28)'  },
-                'bnav-historico':   { cor:'#c4b5fd', bg:'rgba(196,181,253,.14)', borda:'rgba(196,181,253,.28)' },
-                'bnav-ajustes':     { cor:'#94a3b8', bg:'rgba(148,163,184,.14)', borda:'rgba(148,163,184,.28)' },
-            };
-            Object.keys(cfg).forEach(btnId => {
-                const pill = document.getElementById('bnav-pill-' + btnId.replace('bnav-',''));
-                if (!pill) return;
-                const ativo = btnId === id;
-                const c = cfg[btnId];
-                pill.style.background = ativo ? c.bg : 'transparent';
-                pill.style.borderColor = ativo ? c.borda : 'transparent';
-                pill.style.color = ativo ? c.cor : '#3a4a60';
-                const spans = pill.querySelectorAll('span');
-                spans.forEach(s => {
-                    s.style.color = ativo ? c.cor : '#3a4a60';
-                });
-            });
-        }
-
-        function _atualizarHomeBadges() {
-            const hist = (state.historico || []).length;
-            const clientes = (state.clientes || []).length;
-            const hoje = new Date().toISOString().slice(0,10);
-            const visitsHoje = (state.visitas || []).filter(v => v.data && v.data.slice(0,10) === hoje).length;
-            const hb = document.getElementById('home-hist-badge');
-            if (hb) hb.innerHTML = '<div style="width:5px;height:5px;border-radius:50%;background:#a78bfa;box-shadow:0 0 5px #8b5cf6;"></div>' + (hist || 0) + ' salvos';
-            const hpn = document.getElementById('home-proj-num');
-            if (hpn) hpn.textContent = hist || '—';
-            const cab = document.getElementById('home-agenda-badge');
-            if (cab) {
-                const txt = visitsHoje > 0 ? visitsHoje + ' hoje' : 'agenda';
-                cab.innerHTML = '<div style="width:5px;height:5px;border-radius:50%;background:#60a5fa;box-shadow:0 0 5px #3b82f6;"></div>' + txt;
-            }
-            const ccb = document.getElementById('home-clientes-badge');
-            if (ccb) {
-                const txt = clientes > 0 ? clientes + ' ativos' : 'clientes';
-                ccb.innerHTML = '<div style="width:5px;height:5px;border-radius:50%;background:#8b5cf6;box-shadow:0 0 5px #7c3aed;"></div>' + txt;
-            }
-            const rd = document.getElementById('res-demanda');
-            const rc = document.getElementById('res-corrente');
-            const rj = document.getElementById('res-disjuntor');
-            const rf = document.getElementById('res-fio');
-            const hrd = document.getElementById('home-res-demanda');
-            const hrc = document.getElementById('home-res-corrente');
-            const hrj = document.getElementById('home-res-disjuntor');
-            const hrf = document.getElementById('home-res-fio');
-            if (hrd && rd && rd.textContent !== '— VA') hrd.innerHTML = rd.textContent + ' <span style="font-size:7px;color:#1e293b;">VA</span>';
-            if (hrc && rc && rc.textContent !== '— A') hrc.innerHTML = rc.textContent + ' <span style="font-size:7px;color:#1e293b;">A</span>';
-            if (hrj && rj && rj.textContent !== '— A') hrj.innerHTML = rj.textContent + ' <span style="font-size:7px;color:#1e293b;">A</span>';
-            if (hrf && rf && rf.textContent !== '— mm²') hrf.innerHTML = rf.textContent.replace(' mm²','') + ' <span style="font-size:7px;color:#1e293b;">mm²</span>';
-            const nome = state.prestadorPadrao || state.nomeEletricista || '';
-            const hn = document.getElementById('homeNome');
+        function _atualizarHomeUI() {
+            var nome = state.prestadorPadrao || state.nomeEletricista || '';
+            var hn = document.getElementById('homeNome');
             if (hn && nome) hn.textContent = nome;
-            _atualizarDot();
+            var hpn = document.getElementById('home-proj-num');
+            if (hpn) hpn.textContent = (state.historico || []).length || '—';
         }
+
+        function selecionarTipoDemanda(el, fd) {
+            document.querySelectorAll('.htc').forEach(function(c){ c.classList.remove('sel'); });
+            el.classList.add('sel');
+            _tipoDemandaFd = fd;
+        }
+
+        function comecarCalculo() {
+            _sairHome();
+            // pre-set fd
+            var sel = document.getElementById('carga-tipo-inst');
+            if (sel) sel.value = _tipoDemandaFd;
+            toggleFerramentas();
+            setTimeout(function(){ trocarAbaFerr('carga'); }, 60);
+        }
+
+        function abrirQuedaHome() {
+            _sairHome();
+            toggleFerramentas();
+            setTimeout(function(){ trocarAbaFerr('queda'); }, 60);
+        }
+
+        function abrirOrcamentoHome() {
+            _sairHome(true);
+        }
+
+        function abrirCheckHome() {
+            _sairHome();
+            toggleFerramentas();
+            setTimeout(function(){ trocarAbaFerr('check'); }, 60);
+        }
+
+        function abrirClientesHome() {
+            toggleAgenda();
+            setTimeout(function(){ trocarAbaAgenda('clientes'); }, 80);
+        }
+
+        function abrirRelatorioHome() {
+            toggleAgenda();
+            setTimeout(function(){ trocarAbaAgenda('relatorio'); }, 80);
+        }
+
+        function irParaPerfil() {
+            _sairHome();
+            toggleSettings();
+            setTimeout(function(){ trocarAbaConfig('perfil'); }, 60);
+        }
+
+        function toggleNotifHome() {
+            // placeholder for notification panel
+        }
+        // ═══════════════════════════════════════════════════════
 
         </script>
 </body>
