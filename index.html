@@ -743,58 +743,10 @@
         </div>
     </div>
 
-    <nav id="bottom-nav" class="no-print" style="display:none!important;position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:28rem;background:#fff;border-top:1px solid #e2e8f0;display:none;z-index:40;padding-bottom:env(safe-area-inset-bottom);">
 
-        <button onclick="window.scrollTo(0,0)" id="bnav-inicio" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 4px 8px;border:none;background:transparent;cursor:pointer;">
-            <div style="width:34px;height:34px;background:#eff6ff;border-radius:12px;display:flex;align-items:center;justify-content:center;transition:all .2s;">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H5a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
-            </div>
-            <span style="font-size:8px;font-weight:800;color:#2563eb;text-transform:uppercase;letter-spacing:0.4px;">Início</span>
-        </button>
+        <div style="position:fixed;bottom:0;left:0;right:0;width:100%;height:92vh;background:#0d1117;border-radius:20px 20px 0 0;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .3s ease;box-shadow:0 -8px 40px rgba(0,0,0,.6);z-index:301;" id="agendaContent">
 
-        <button onclick="toggleAgenda()" id="bnav-agenda" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 4px 8px;border:none;background:transparent;cursor:pointer;">
-            <div style="width:34px;height:34px;border-radius:12px;display:flex;align-items:center;justify-content:center;transition:all .2s;">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg>
-            </div>
-            <span style="font-size:8px;font-weight:800;color:#94a3b8;text-transform:uppercase;letter-spacing:0.4px;">Agenda</span>
-        </button>
-
-        <button onclick="toggleFerramentas()" id="bnav-ferramentas" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 4px 8px;border:none;background:transparent;cursor:pointer;">
-            <div style="width:34px;height:34px;border-radius:12px;display:flex;align-items:center;justify-content:center;transition:all .2s;">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
-            </div>
-            <span style="font-size:8px;font-weight:800;color:#94a3b8;text-transform:uppercase;letter-spacing:0.4px;">Ferramentas</span>
-        </button>
-
-        <button onclick="toggleHistory()" id="bnav-historico" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 4px 8px;border:none;background:transparent;cursor:pointer;">
-            <div style="width:34px;height:34px;border-radius:12px;display:flex;align-items:center;justify-content:center;transition:all .2s;">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-            </div>
-            <span style="font-size:8px;font-weight:800;color:#94a3b8;text-transform:uppercase;letter-spacing:0.4px;">Histórico</span>
-        </button>
-
-        <button onclick="toggleSettings();setTimeout(()=>trocarAbaConfig('perfil'),50);" id="bnav-ajustes" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 4px 8px;border:none;background:transparent;cursor:pointer;">
-            <div style="width:34px;height:34px;border-radius:12px;display:flex;align-items:center;justify-content:center;transition:all .2s;">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
-            </div>
-            <span style="font-size:8px;font-weight:800;color:#94a3b8;text-transform:uppercase;letter-spacing:0.4px;">Ajustes</span>
-        </button>
-
-    </nav>
-
-    <div class="fab-calcular no-print" id="fab-calcular" style="display:none;">
-        <button onclick="calcularPrecos()" id="btn-calcular-agora" class="w-full text-white font-black py-4 rounded-2xl shadow-lg active:scale-[0.98] transition-transform text-sm flex items-center justify-center gap-3" style="background:#f97316;box-shadow:0 4px 20px rgba(249,115,22,0.5);">
-            <svg class="ico" aria-hidden="true"><use href="#i-bolt"></use></svg>
-            CALCULAR AGORA
-            <svg class="ico" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
-        </button>
-    </div>
-
-    <div id="agendaModal" class="fixed inset-0 z-50 hidden">
-        <div class="modal-overlay absolute inset-0 w-full h-full" onclick="toggleAgenda()"></div>
-        <div class="absolute inset-x-0 bottom-0 sm:inset-auto sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 w-full max-w-lg bg-white rounded-t-3xl sm:rounded-3xl h-[92vh] sm:max-h-[90vh] flex flex-col transform transition-transform duration-300 shadow-2xl translate-y-full" id="agendaContent">
-
-            <div class="flex justify-between items-center p-6 border-b sticky top-0 bg-white z-10">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:20px 20px 16px;border-bottom:1px solid rgba(255,255,255,.07);position:sticky;top:0;background:#0d1117;z-index:10;">
                 <h2 class="text-lg font-black text-slate-800 uppercase flex items-center gap-2">
                     <svg class="ico text-blue-600" aria-hidden="true"><use href="#i-clock"></use></svg> Agenda & Clientes
                 </h2>
@@ -803,14 +755,14 @@
                 </button>
             </div>
 
-            <div class="flex border-b bg-slate-50 sticky top-[73px] z-10">
+            <div style="display:flex;border-bottom:1px solid rgba(255,255,255,.07);background:#0a0f1a;position:sticky;top:73px;z-index:10;">
                 <button onclick="trocarAbaAgenda('visitas')"   id="atab-visitas"   class="agenda-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-blue-600 border-b-2 border-blue-600">Agenda</button>
                 <button onclick="trocarAbaAgenda('clientes')"  id="atab-clientes"  class="agenda-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-slate-400 border-b-2 border-transparent">Clientes</button>
                 <button onclick="trocarAbaAgenda('garantias')" id="atab-garantias" class="agenda-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-slate-400 border-b-2 border-transparent">Garantias</button>
                 <button onclick="trocarAbaAgenda('relatorio')" id="atab-relatorio" class="agenda-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-slate-400 border-b-2 border-transparent">Relatório</button>
             </div>
 
-            <div class="p-5 space-y-4 overflow-y-auto flex-grow pb-safe modal-scroll">
+            <div class="p-5 space-y-4 overflow-y-auto flex-grow pb-safe modal-scroll" style="background:#0d1117;">
 
                 <div id="agenda-visitas">
                     <div class="flex justify-between items-center mb-3">
@@ -925,11 +877,146 @@
         </div>
     </div>
 
-    <div id="ferramentasModal" class="fixed inset-0 z-50 hidden">
-        <div class="modal-overlay absolute inset-0 w-full h-full" onclick="toggleFerramentas()"></div>
-        <div class="absolute inset-x-0 bottom-0 sm:inset-auto sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 w-full max-w-lg bg-white rounded-t-3xl sm:rounded-3xl h-[92vh] sm:max-h-[90vh] flex flex-col transform transition-transform duration-300 shadow-2xl translate-y-full" id="ferramentasContent">
+    <div id="agendaModal" class="fixed inset-0 hidden" style="z-index:300;">
+        <div class="modal-overlay" style="position:absolute;inset:0;background:rgba(0,0,0,.7);" onclick="toggleAgenda()"></div>
+        <div style="position:fixed;bottom:0;left:0;right:0;width:100%;height:92vh;background:#0d1117;border-radius:20px 20px 0 0;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .3s ease;box-shadow:0 -8px 40px rgba(0,0,0,.6);z-index:301;" id="agendaContent">
 
-            <div class="flex justify-between items-center p-6 border-b sticky top-0 bg-white z-10">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:20px 20px 16px;border-bottom:1px solid rgba(255,255,255,.07);position:sticky;top:0;background:#0d1117;z-index:10;">
+                <h2 class="text-lg font-black text-slate-800 uppercase flex items-center gap-2">
+                    <svg class="ico text-blue-600" aria-hidden="true"><use href="#i-clock"></use></svg> Agenda & Clientes
+                </h2>
+                <button onclick="toggleAgenda()" class="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center hover:bg-slate-200">
+                    <svg class="ico" aria-hidden="true"><use href="#i-xmark"></use></svg>
+                </button>
+            </div>
+
+            <div style="display:flex;border-bottom:1px solid rgba(255,255,255,.07);background:#0a0f1a;position:sticky;top:73px;z-index:10;">
+                <button onclick="trocarAbaAgenda('visitas')"   id="atab-visitas"   class="agenda-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-blue-600 border-b-2 border-blue-600">Agenda</button>
+                <button onclick="trocarAbaAgenda('clientes')"  id="atab-clientes"  class="agenda-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-slate-400 border-b-2 border-transparent">Clientes</button>
+                <button onclick="trocarAbaAgenda('garantias')" id="atab-garantias" class="agenda-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-slate-400 border-b-2 border-transparent">Garantias</button>
+                <button onclick="trocarAbaAgenda('relatorio')" id="atab-relatorio" class="agenda-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-slate-400 border-b-2 border-transparent">Relatório</button>
+            </div>
+
+            <div class="p-5 space-y-4 overflow-y-auto flex-grow pb-safe modal-scroll" style="background:#0d1117;">
+
+                <div id="agenda-visitas">
+                    <div class="flex justify-between items-center mb-3">
+                        <p class="text-xs text-slate-500">Seus agendamentos</p>
+                        <button onclick="abrirFormVisita()" class="bg-blue-600 text-white text-xs font-bold px-3 py-2 rounded-xl flex items-center gap-1">
+                            <svg class="ico" aria-hidden="true"><use href="#i-plus"></use></svg> Nova visita
+                        </button>
+                    </div>
+
+                    <div id="form-visita" class="hidden bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 mb-4">
+                        <p class="text-xs font-bold text-blue-600 uppercase">Nova Visita</p>
+                        <input type="text" id="visita-cliente" placeholder="Nome do cliente" class="input-field w-full p-3 bg-white border border-slate-200 rounded-xl text-sm font-bold text-slate-700 focus:outline-none">
+                        <input type="text" id="visita-endereco" placeholder="Endereço" class="input-field w-full p-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-700 focus:outline-none">
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="text-[10px] font-bold text-slate-400 uppercase ml-1">Data</label>
+                                <input type="date" id="visita-data" class="input-field w-full p-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-700 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="text-[10px] font-bold text-slate-400 uppercase ml-1">Hora</label>
+                                <input type="time" id="visita-hora" value="08:00" class="input-field w-full p-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-700 focus:outline-none">
+                            </div>
+                        </div>
+                        <select id="visita-tipo" class="input-field w-full p-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-700 focus:outline-none">
+                            <option value="Visita técnica">Visita técnica</option>
+                            <option value="Instalação">Instalação</option>
+                            <option value="Manutenção">Manutenção</option>
+                            <option value="Orçamento">Orçamento</option>
+                            <option value="Retorno">Retorno</option>
+                        </select>
+                        <textarea id="visita-obs" rows="2" placeholder="Observações..." class="input-field w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-700 focus:outline-none resize-none"></textarea>
+                        <div class="flex gap-2">
+                            <button onclick="salvarVisita()" class="flex-1 bg-blue-600 text-white font-bold py-2 rounded-xl text-xs">SALVAR</button>
+                            <button onclick="fecharFormVisita()" class="flex-1 bg-slate-100 text-slate-600 font-bold py-2 rounded-xl text-xs">CANCELAR</button>
+                        </div>
+                    </div>
+
+                    <div id="lista-visitas" class="space-y-2"></div>
+                </div>
+
+                <div id="agenda-clientes" class="hidden">
+                    <div class="flex justify-between items-center mb-3">
+                        <p class="text-xs text-slate-500">Base de clientes</p>
+                        <button onclick="abrirFormCliente()" class="bg-blue-600 text-white text-xs font-bold px-3 py-2 rounded-xl flex items-center gap-1">
+                            <svg class="ico" aria-hidden="true"><use href="#i-plus"></use></svg> Novo cliente
+                        </button>
+                    </div>
+
+                    <div id="form-cliente" class="hidden bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 mb-4">
+                        <p class="text-xs font-bold text-blue-600 uppercase">Novo Cliente</p>
+                        <input type="text" id="cli-nome" placeholder="Nome completo" class="input-field w-full p-3 bg-white border border-slate-200 rounded-xl text-sm font-bold text-slate-700 focus:outline-none">
+                        <input type="tel" id="cli-tel" placeholder="(DD) 9XXXX-XXXX" maxlength="15" onkeyup="mascaraTelefone(this)" class="input-field w-full p-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-700 focus:outline-none">
+                        <input type="text" id="cli-endereco" placeholder="Endereço completo" class="input-field w-full p-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-700 focus:outline-none">
+                        <input type="text" id="cli-bairro" placeholder="Bairro / Cidade" class="input-field w-full p-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-700 focus:outline-none">
+                        <textarea id="cli-obs" rows="2" placeholder="Observações do cliente..." class="input-field w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-700 focus:outline-none resize-none"></textarea>
+                        <div class="flex gap-2">
+                            <button onclick="salvarCliente()" class="flex-1 bg-blue-600 text-white font-bold py-2 rounded-xl text-xs">SALVAR</button>
+                            <button onclick="fecharFormCliente()" class="flex-1 bg-slate-100 text-slate-600 font-bold py-2 rounded-xl text-xs">CANCELAR</button>
+                        </div>
+                    </div>
+
+                    <input type="text" id="busca-cliente" placeholder="🔍 Buscar cliente..." oninput="renderClientes()" class="input-field w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-700 focus:outline-none mb-3">
+                    <div id="lista-clientes" class="space-y-2"></div>
+                </div>
+
+                <div id="agenda-garantias" class="hidden">
+                    <p class="text-xs text-slate-500 mb-3">Garantias dos orçamentos salvos. Alertas para vencimentos próximos.</p>
+                    <div id="lista-garantias" class="space-y-2"></div>
+                </div>
+
+                <div id="agenda-relatorio" class="hidden space-y-4">
+                    <div class="flex gap-2 items-center">
+                        <select id="rel-mes" class="input-field flex-1 p-3 bg-white border border-slate-200 rounded-xl text-sm font-bold text-slate-700 focus:outline-none">
+                            <option value="0">Janeiro</option><option value="1">Fevereiro</option>
+                            <option value="2">Março</option><option value="3">Abril</option>
+                            <option value="4">Maio</option><option value="5">Junho</option>
+                            <option value="6">Julho</option><option value="7">Agosto</option>
+                            <option value="8">Setembro</option><option value="9">Outubro</option>
+                            <option value="10">Novembro</option><option value="11">Dezembro</option>
+                        </select>
+                        <input type="number" id="rel-ano" class="input-field w-24 p-3 bg-white border border-slate-200 rounded-xl text-sm font-bold text-slate-700 focus:outline-none" placeholder="Ano">
+                        <button onclick="gerarRelatorio()" class="bg-blue-600 text-white p-3 rounded-xl"><svg class="ico" aria-hidden="true"><use href="#i-calculator"></use></svg></button>
+                    </div>
+
+                    <div id="resultado-relatorio" class="hidden space-y-3">
+                        <div class="bg-[#0f172a] text-white p-5 rounded-2xl">
+                            <p class="text-[10px] font-bold text-blue-300 uppercase tracking-widest mb-3" id="rel-titulo">Relatório</p>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-white/10 p-3 rounded-xl">
+                                    <p class="text-[9px] text-slate-400 uppercase font-bold">Faturamento</p>
+                                    <p class="text-lg font-black text-green-400" id="rel-total">R$ 0,00</p>
+                                </div>
+                                <div class="bg-white/10 p-3 rounded-xl">
+                                    <p class="text-[9px] text-slate-400 uppercase font-bold">Orçamentos</p>
+                                    <p class="text-lg font-black text-white" id="rel-qtd">0</p>
+                                </div>
+                                <div class="bg-white/10 p-3 rounded-xl">
+                                    <p class="text-[9px] text-slate-400 uppercase font-bold">Ticket Médio</p>
+                                    <p class="text-lg font-black text-yellow-300" id="rel-ticket">R$ 0,00</p>
+                                </div>
+                                <div class="bg-white/10 p-3 rounded-xl">
+                                    <p class="text-[9px] text-slate-400 uppercase font-bold">Materiais</p>
+                                    <p class="text-lg font-black text-red-300" id="rel-mat">R$ 0,00</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="rel-lista" class="space-y-2"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="ferramentasModal" class="fixed inset-0 hidden" style="z-index:300;">
+        <div class="modal-overlay" style="position:absolute;inset:0;background:rgba(0,0,0,.7);" onclick="toggleFerramentas()"></div>
+        <div style="position:fixed;bottom:0;left:0;right:0;width:100%;height:92vh;background:#0d1117;border-radius:20px 20px 0 0;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .3s ease;box-shadow:0 -8px 40px rgba(0,0,0,.6);z-index:301;" id="ferramentasContent">
+
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:20px 20px 16px;border-bottom:1px solid rgba(255,255,255,.07);position:sticky;top:0;background:#0d1117;z-index:10;">
                 <h2 class="text-lg font-black text-slate-800 uppercase flex items-center gap-2">
                     <svg class="ico text-blue-600" aria-hidden="true"><use href="#i-screwdriver-wrench"></use></svg> Ferramentas
                 </h2>
@@ -938,14 +1025,14 @@
                 </button>
             </div>
 
-            <div class="flex border-b bg-slate-50 sticky top-[73px] z-10">
+            <div style="display:flex;border-bottom:1px solid rgba(255,255,255,.07);background:#0a0f1a;position:sticky;top:73px;z-index:10;">
                 <button onclick="trocarAbaFerr('nbr')"     id="tab-nbr"     class="ferr-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-blue-600 border-b-2 border-blue-600">NBR 5410</button>
                 <button onclick="trocarAbaFerr('carga')"   id="tab-carga"   class="ferr-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-slate-400 border-b-2 border-transparent">Demanda</button>
                 <button onclick="trocarAbaFerr('queda')"   id="tab-queda"   class="ferr-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-slate-400 border-b-2 border-transparent">Queda V</button>
                 <button onclick="trocarAbaFerr('check')"   id="tab-check"   class="ferr-tab flex-1 py-3 text-[10px] font-bold uppercase tracking-wide text-slate-400 border-b-2 border-transparent">Check</button>
             </div>
 
-            <div class="p-5 space-y-4 overflow-y-auto flex-grow pb-safe modal-scroll">
+            <div class="p-5 space-y-4 overflow-y-auto flex-grow pb-safe modal-scroll" style="background:#0d1117;">
 
                 <div id="ferr-nbr" class="space-y-4">
 
@@ -1773,16 +1860,16 @@
             </div>
         </div>
     </div>
-    <div id="settingsModal" class="fixed inset-0 z-50 hidden">
-        <div class="modal-overlay absolute inset-0 w-full h-full" onclick="toggleSettings()"></div>
-        <div class="absolute inset-x-0 bottom-0 sm:inset-auto sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 w-full max-w-lg bg-white rounded-t-3xl sm:rounded-3xl h-[92vh] sm:max-h-[90vh] flex flex-col transform transition-transform duration-300 shadow-2xl translate-y-full" id="modalContent">
+    <div id="settingsModal" class="fixed inset-0 hidden" style="z-index:300;">
+        <div class="modal-overlay" style="position:absolute;inset:0;background:rgba(0,0,0,.7);" onclick="toggleSettings()"></div>
+        <div style="position:fixed;bottom:0;left:0;right:0;width:100%;height:92vh;background:#0d1117;border-radius:20px 20px 0 0;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .3s ease;box-shadow:0 -8px 40px rgba(0,0,0,.6);z-index:301;" id="modalContent">
 
-            <div class="flex justify-between items-center p-5 border-b bg-white z-10 flex-shrink-0 rounded-t-3xl">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid rgba(255,255,255,.07);background:#0d1117;z-index:10;flex-shrink:0;">
                 <h2 class="text-lg font-black text-slate-800 uppercase flex items-center gap-2"><svg class="ico text-blue-600" aria-hidden="true"><use href="#i-sliders"></use></svg> Ajustes</h2>
                 <button onclick="toggleSettings()" class="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center hover:bg-slate-200"><svg class="ico" aria-hidden="true"><use href="#i-xmark"></use></svg></button>
             </div>
 
-            <div class="flex bg-slate-50 border-b border-slate-200 flex-shrink-0 overflow-x-auto">
+            <div style="display:flex;background:#0a0f1a;border-bottom:1px solid rgba(255,255,255,.07);flex-shrink:0;overflow-x:auto;">
                 <button onclick="trocarAbaConfig('perfil')" id="cfg-tab-perfil" class="cfg-tab flex-1 min-w-[64px] py-3 flex flex-col items-center gap-0.5 text-[9px] font-bold uppercase tracking-wide border-b-2 border-blue-600 text-blue-600 bg-white transition-all">
                     <svg class="ico text-sm" aria-hidden="true"><use href="#i-user-tag"></use></svg> Perfil
                 </button>
@@ -1800,7 +1887,7 @@
                 </button>
             </div>
 
-            <div class="overflow-y-auto flex-grow pb-safe modal-scroll" style="-webkit-overflow-scrolling:touch;overscroll-behavior:contain;">
+            <div class="overflow-y-auto flex-grow pb-safe modal-scroll" style="background:#0d1117;" style="-webkit-overflow-scrolling:touch;overscroll-behavior:contain;">
 
                 <div id="cfg-aba-perfil" class="p-5 space-y-4">
                     <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-4">
@@ -1987,9 +2074,9 @@
         </div>
     </div>
 
-    <div id="historyModal" class="fixed inset-0 z-50 hidden">
-        <div class="modal-overlay absolute inset-0 w-full h-full" onclick="toggleHistory()"></div>
-        <div class="absolute inset-y-0 right-0 w-full max-w-sm bg-white p-0 h-full flex flex-col transform transition-transform duration-300 translate-x-full shadow-2xl" id="historyContent">
+    <div id="historyModal" class="fixed inset-0 hidden" style="z-index:300;">
+        <div class="modal-overlay" style="position:absolute;inset:0;background:rgba(0,0,0,.7);" onclick="toggleHistory()"></div>
+        <div style="position:fixed;top:0;right:0;width:100%;max-width:22rem;height:100vh;background:#0d1117;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .3s ease;box-shadow:-8px 0 40px rgba(0,0,0,.6);z-index:301;" id="historyContent">
             <div class="bg-[#0f172a] text-white p-6 pb-6 flex justify-between items-center sticky top-0 z-10">
                 <div>
                     <h2 class="text-lg font-black uppercase"><svg class="ico mr-2" aria-hidden="true"><use href="#i-clock-rotate-left"></use></svg> Histórico</h2>
@@ -1997,8 +2084,8 @@
                 </div>
                 <button onclick="toggleHistory()" class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20"><svg class="ico" aria-hidden="true"><use href="#i-xmark"></use></svg></button>
             </div>
-            <div id="historyList" class="flex-grow p-4 space-y-3 bg-slate-50 overflow-y-auto modal-scroll"></div>
-            <div class="p-4 border-t border-slate-200 bg-white pb-safe">
+            <div id="historyList" class="flex-grow p-4 space-y-3 overflow-y-auto modal-scroll" style="background:#0d1117;"></div>
+            <div style="padding:16px;border-top:1px solid rgba(255,255,255,.07);background:#0d1117;" class="pb-safe">
                 <button onclick="limparHistorico()" class="w-full py-3 text-red-500 font-bold text-xs border border-red-100 rounded-xl hover:bg-red-50">LIMPAR TUDO</button>
             </div>
         </div>
@@ -2215,7 +2302,7 @@
                 _modoTeste = isTeste_;
                 document.getElementById('login-screen').style.display = 'none';
                 var bnav = document.getElementById('bottom-nav');
-                if (bnav) bnav.style.display = 'none'; // kept hidden
+                // nav antigo removido
                 setTimeout(function(){ irParaHome(); }, 100);
                 _atualizarFAB();
                 sessionStorage.setItem('ep_auth', '1');
@@ -2388,7 +2475,7 @@
                 document.getElementById('printLogo').src = state.logoBase64;
                 document.getElementById('printLogo').style.display = 'block';
             } else {
-                document.getElementById('headerLogoArea').classList.add('hidden');
+                (function(){var _e=document.getElementById('headerLogoArea');if(_e)_e.classList.add('hidden')})();
                 document.getElementById('printLogo').style.display = 'none';
             }
             const npField = document.getElementById('nomePrestador');
@@ -2675,7 +2762,7 @@
             container.innerHTML = '';
             state.meusMateriais.forEach((mat, index) => {
                 const div = document.createElement('div');
-                div.className = 'flex justify-between items-center bg-white p-2 rounded border border-slate-100 text-xs';
+                div.className = 'flex justify-between items-center p-2 rounded text-xs';div.style.cssText='background:#0d1b2a;border:1px solid rgba(255,255,255,.07);';
 
                 const nomeSpan = document.createElement('span');
                 nomeSpan.className = 'font-medium truncate';
@@ -2818,8 +2905,8 @@
             document.getElementById('displayPrecoFinal').textContent   = formatBRL(totais.totalFinal);
             document.getElementById('displayLucroLiquido').textContent = formatBRL(totalServicos - mat - totais.custoLog - totais.custoHoras);
             document.getElementById('displayDespesas').textContent     = formatBRL(mat + totais.custoLog + totais.custoHoras);
-            document.getElementById('input-section').classList.add('hidden');
-            document.getElementById('results-section').classList.remove('hidden');
+            (function(){var _e=document.getElementById('input-section');if(_e)_e.classList.add('hidden')})();
+            (function(){var _e=document.getElementById('results-section');if(_e)_e.classList.remove('hidden')})();
             _atualizarFAB();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -3206,7 +3293,7 @@
         }
         function unlockScroll() {
             const abertos = ['agendaModal','ferramentasModal','historyModal','settingsModal']
-                .some(id => !document.getElementById(id).classList.contains('hidden'));
+                .some(id => { var m = document.getElementById(id); return m && !m.classList.contains('hidden'); });
             if (!abertos) {
                 document.body.classList.remove('modal-open');
                 document.body.style.top = '';
@@ -3215,17 +3302,26 @@
         }
 
         function toggleHistory() {
-            const m = document.getElementById('historyModal');
-            _destacarNavBtn(m.classList.contains('hidden') ? 'bnav-historico' : 'bnav-inicio');
-            const c = document.getElementById('historyContent');
+            var m = document.getElementById('historyModal');
+            var c = document.getElementById('historyContent');
+            if (!m || !c) return;
             if (m.classList.contains('hidden')) {
+                document.getElementById('tela-home').style.display = 'none';
                 lockScroll();
-                renderHistoricoUI();
+                c.style.transform = 'translateX(100%)';
+                c.style.transition = 'transform .3s ease';
                 m.classList.remove('hidden');
-                requestAnimationFrame(() => requestAnimationFrame(() => c.classList.remove('translate-x-full')));
+                requestAnimationFrame(function() { requestAnimationFrame(function() {
+                    c.style.transform = 'translateX(0)';
+                }); });
+                  renderHistoricoUI();
             } else {
-                c.classList.add('translate-x-full');
-                setTimeout(() => { m.classList.add('hidden'); unlockScroll(); irParaHome(); }, 300);
+                c.style.transform = 'translateX(100%)';
+                setTimeout(function() {
+                    m.classList.add('hidden');
+                    unlockScroll();
+                    irParaHome();
+                }, 300);
             }
         }
 
@@ -3238,7 +3334,7 @@
             }
             state.historico.forEach(item => {
                 const div = document.createElement('div');
-                div.className = 'bg-white p-3 rounded-xl border border-slate-200 shadow-sm hover:border-blue-300 transition-colors cursor-pointer';
+                div.className = 'p-3 rounded-xl border cursor-pointer'; div.style.background='#0d1b2a'; div.style.borderColor='rgba(255,255,255,.08)';
                 div.onclick = () => carregarDoHistorico(item);
                 const row1 = document.createElement('div');
                 row1.className = 'flex justify-between items-start mb-1';
@@ -3348,8 +3444,8 @@
             _atualizarBadgeSrv();
             _atualizarBadgeMat();
             toggleHistory();
-            document.getElementById('input-section').classList.remove('hidden');
-            document.getElementById('results-section').classList.add('hidden');
+            (function(){var _e=document.getElementById('input-section');if(_e)_e.classList.remove('hidden')})();
+            (function(){var _e=document.getElementById('results-section');if(_e)_e.classList.add('hidden')})();
             _atualizarFAB();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -3365,34 +3461,25 @@
         }
 
         function reiniciar() {
-            document.getElementById('input-section').classList.remove('hidden');
-            document.getElementById('results-section').classList.add('hidden');
+            (function(){var _e=document.getElementById('input-section');if(_e)_e.classList.remove('hidden')})();
+            (function(){var _e=document.getElementById('results-section');if(_e)_e.classList.add('hidden')})();
             document.querySelectorAll('.accordion-open').forEach(el => el.classList.remove('accordion-open'));
             _atualizarFAB();
         }
 
         function _destacarNavBtn(id) {
-            const config = {
-                'bnav-inicio':      { bg:'#eff6ff', cor:'#2563eb' },
-                'bnav-agenda':      { bg:'#f0fdf4', cor:'#16a34a' },
-                'bnav-ferramentas': { bg:'#fff7ed', cor:'#ea580c' },
-                'bnav-historico':   { bg:'#faf5ff', cor:'#7c3aed' },
-                'bnav-ajustes':     { bg:'#f1f5f9', cor:'#475569' },
+            // Update home nav active state
+            var niMap = {
+                'bnav-inicio': 0, 'bnav-ferramentas': 1,
+                'bnav-agenda': 2, 'bnav-historico': 3, 'bnav-ajustes': 4
             };
-            Object.keys(config).forEach(btnId => {
-                const btn = document.getElementById(btnId);
-                if (!btn) return;
-                const ico  = btn.querySelector('div');
-                const lbl  = btn.querySelector('span');
-                const svg  = btn.querySelector('svg');
-                const ativo = btnId === id;
-                const { bg, cor } = config[btnId];
-                if (ico) ico.style.background = ativo ? bg : 'transparent';
-                if (lbl) lbl.style.color = ativo ? cor : '#94a3b8';
-                if (svg) svg.setAttribute('stroke', ativo ? cor : '#94a3b8');
+            var nis = document.querySelectorAll('.bnav-home .ni');
+            var activeIdx = niMap[id];
+            nis.forEach(function(ni, i) {
+                if (i === activeIdx) { ni.classList.add('on'); }
+                else { ni.classList.remove('on'); }
             });
         }
-
         function _camposPreenchidos() {
             let temServico = false;
             document.querySelectorAll('.service-row').forEach(row => {
@@ -3413,7 +3500,7 @@
 
         function trocarAbaConfig(aba) {
             ['perfil','pagamento','catalogo','acesso','backup'].forEach(a => {
-                document.getElementById('cfg-aba-' + a).classList.toggle('hidden', a !== aba);
+                var _ca = document.getElementById('cfg-aba-' + a); if(_ca) _ca.classList.toggle('hidden', a !== aba);
                 const tab = document.getElementById('cfg-tab-' + a);
                 if (a === aba) {
                     tab.classList.add('border-blue-600','text-blue-600','bg-white');
@@ -3427,7 +3514,7 @@
 
         function trocarSubCatalogo(sub) {
             ['servicos','materiais'].forEach(s => {
-                document.getElementById('sub-aba-' + s).classList.toggle('hidden', s !== sub);
+                var _sa=document.getElementById('sub-aba-'+s); if(_sa) _sa.classList.toggle('hidden', s !== sub);
                 const tab = document.getElementById('sub-tab-' + s);
                 if (s === sub) {
                     tab.classList.add('bg-white','text-slate-700','shadow-sm');
@@ -3440,24 +3527,33 @@
         }
 
         function toggleSettings() {
-            const m = document.getElementById('settingsModal');
-            _destacarNavBtn(m.classList.contains('hidden') ? 'bnav-ajustes' : 'bnav-inicio');
-            const c = document.getElementById('modalContent');
+            var m = document.getElementById('settingsModal');
+            var c = document.getElementById('modalContent');
+            if (!m || !c) return;
             if (m.classList.contains('hidden')) {
+                document.getElementById('tela-home').style.display = 'none';
                 lockScroll();
+                c.style.transform = 'translateY(100%)';
+                c.style.transition = 'transform .3s ease';
                 m.classList.remove('hidden');
-                requestAnimationFrame(() => requestAnimationFrame(() => c.classList.remove('translate-y-full')));
-                renderListaServicosBase();
-                renderListaMateriaisBase();
-                _syncLogoCfgUI();
+                requestAnimationFrame(function() { requestAnimationFrame(function() {
+                    c.style.transform = 'translateY(0)';
+                }); });
+                  renderListaServicosBase();
+                  renderListaMateriaisBase();
+                  _syncLogoCfgUI();
             } else {
-                c.classList.add('translate-y-full');
-                setTimeout(() => { m.classList.add('hidden'); unlockScroll(); irParaHome(); }, 300);
+                c.style.transform = 'translateY(100%)';
+                setTimeout(function() {
+                    m.classList.add('hidden');
+                    unlockScroll();
+                    irParaHome();
+                }, 300);
             }
         }
 
         function toggleAccordion(id) {
-            document.getElementById(id).classList.toggle('accordion-open');
+            var _ao=document.getElementById(id); if(_ao) _ao.classList.toggle('accordion-open');
         }
 
         function handleLogoUpload(input) {
@@ -3545,7 +3641,7 @@
             container.innerHTML = '';
             state.meusServicos.forEach((srv, index) => {
                 const div = document.createElement('div');
-                div.className = 'flex justify-between items-center bg-white p-2 rounded border border-slate-100 text-xs';
+                div.className = 'flex justify-between items-center p-2 rounded text-xs';div.style.cssText='background:#0d1b2a;border:1px solid rgba(255,255,255,.07);';
                 const nomeSpan = document.createElement('span');
                 nomeSpan.className = 'font-medium truncate';
                 nomeSpan.textContent = srv.nome;
@@ -3751,9 +3847,9 @@
             modeloAtualIdx = -1;
             checklistItems = [];
             document.getElementById('check-modelo-nome').value = '';
-            document.getElementById('check-modelos').classList.add('hidden');
-            document.getElementById('check-uso').classList.add('hidden');
-            document.getElementById('check-editor').classList.remove('hidden');
+            (function(){var _e=document.getElementById('check-modelos');if(_e)_e.classList.add('hidden')})();
+            (function(){var _e=document.getElementById('check-uso');if(_e)_e.classList.add('hidden')})();
+            (function(){var _e=document.getElementById('check-editor');if(_e)_e.classList.remove('hidden')})();
             renderEditorItens();
         }
 
@@ -3762,9 +3858,9 @@
             const m = state.modelosCheck[idx];
             checklistItems = m.itens.map(t => ({ texto: t, ok: false }));
             document.getElementById('check-modelo-nome').value = m.nome;
-            document.getElementById('check-modelos').classList.add('hidden');
-            document.getElementById('check-uso').classList.add('hidden');
-            document.getElementById('check-editor').classList.remove('hidden');
+            (function(){var _e=document.getElementById('check-modelos');if(_e)_e.classList.add('hidden')})();
+            (function(){var _e=document.getElementById('check-uso');if(_e)_e.classList.add('hidden')})();
+            (function(){var _e=document.getElementById('check-editor');if(_e)_e.classList.remove('hidden')})();
             renderEditorItens();
         }
 
@@ -3793,7 +3889,7 @@
             if (!txt) return;
             checklistItems.push({ texto: txt, ok: false });
             input.value = '';
-            if (!document.getElementById('check-editor').classList.contains('hidden')) {
+            if (!(document.getElementById('check-editor') && document.getElementById('check-editor').classList.contains('hidden'))) {
                 renderEditorItens();
             } else {
                 renderChecklist();
@@ -3818,16 +3914,16 @@
             const m = state.modelosCheck[idx];
             checklistItems = m.itens.map(t => ({ texto: t, ok: false }));
             document.getElementById('check-uso-titulo').textContent = m.nome;
-            document.getElementById('check-modelos').classList.add('hidden');
-            document.getElementById('check-editor').classList.add('hidden');
-            document.getElementById('check-uso').classList.remove('hidden');
+            (function(){var _e=document.getElementById('check-modelos');if(_e)_e.classList.add('hidden')})();
+            (function(){var _e=document.getElementById('check-editor');if(_e)_e.classList.add('hidden')})();
+            (function(){var _e=document.getElementById('check-uso');if(_e)_e.classList.remove('hidden')})();
             renderChecklist();
         }
 
         function voltarModelos() {
-            document.getElementById('check-editor').classList.add('hidden');
-            document.getElementById('check-uso').classList.add('hidden');
-            document.getElementById('check-modelos').classList.remove('hidden');
+            (function(){var _e=document.getElementById('check-editor');if(_e)_e.classList.add('hidden')})();
+            (function(){var _e=document.getElementById('check-uso');if(_e)_e.classList.add('hidden')})();
+            (function(){var _e=document.getElementById('check-modelos');if(_e)_e.classList.remove('hidden')})();
             renderModelosCheck();
         }
 
@@ -3895,26 +3991,27 @@
         }
 
         function toggleFerramentas() {
-            const m = document.getElementById('ferramentasModal');
-            _destacarNavBtn(m.classList.contains('hidden') ? 'bnav-ferramentas' : 'bnav-inicio');
-            const c = document.getElementById('ferramentasContent');
+            var m = document.getElementById('ferramentasModal');
+            var c = document.getElementById('ferramentasContent');
+            if (!m || !c) return;
             if (m.classList.contains('hidden')) {
+                document.getElementById('tela-home').style.display = 'none';
                 lockScroll();
+                c.style.transform = 'translateY(100%)';
+                c.style.transition = 'transform .3s ease';
                 m.classList.remove('hidden');
-                requestAnimationFrame(() => requestAnimationFrame(() => c.classList.remove('translate-y-full')));
-                renderModelosCheck();
-                renderTabelaNBR();
+                requestAnimationFrame(function() { requestAnimationFrame(function() {
+                    c.style.transform = 'translateY(0)';
+                }); });
+                  renderModelosCheck();
+                  renderTabelaNBR();
             } else {
-                c.classList.add('translate-y-full');
-                setTimeout(() => { m.classList.add('hidden'); unlockScroll(); irParaHome(); }, 300);
-                ['cbtn-mono','cbtn-bi','cbtn-tri','btn127','btn220','btn380'].forEach(id => {
-                    const btn = document.getElementById(id);
-                    if (btn) btn.disabled = false;
-                });
-                const qbtnTri = document.getElementById('qbtn-tri');
-                if (qbtnTri) { qbtnTri.disabled = false; qbtnTri.style.opacity = '1'; qbtnTri.style.pointerEvents = 'auto'; }
-                const selQueda = document.getElementById('queda-tensao');
-                if (selQueda) Array.from(selQueda.options).forEach(o => { o.disabled = false; });
+                c.style.transform = 'translateY(100%)';
+                setTimeout(function() {
+                    m.classList.add('hidden');
+                    unlockScroll();
+                    irParaHome();
+                }, 300);
             }
         }
 
@@ -3933,12 +4030,12 @@
                 }, 50);
             }
             ['nbr','carga','queda','check'].forEach(a => {
-                document.getElementById('ferr-' + a).classList.add('hidden');
+                var _fe = document.getElementById('ferr-' + a); if(_fe) _fe.classList.add('hidden');
                 const tab = document.getElementById('tab-' + a);
                 tab.classList.remove('text-blue-600','border-blue-600');
                 tab.classList.add('text-slate-400','border-transparent');
             });
-            document.getElementById('ferr-' + aba).classList.remove('hidden');
+            var _fa=document.getElementById('ferr-'+aba); if(_fa) _fa.classList.remove('hidden');
             const tabAtiva = document.getElementById('tab-' + aba);
             tabAtiva.classList.add('text-blue-600','border-blue-600');
             tabAtiva.classList.remove('text-slate-400','border-transparent');
@@ -5339,7 +5436,7 @@
             const nRes = circQD.filter(c => c.reserva).length;
             document.getElementById('res-quadro-obs').textContent = nPos + ' posições · ' + nRes + ' reservas (NBR 5410 — mín. 20%)';
 
-            document.getElementById('resultado-carga').classList.remove('hidden');
+            (function(){var _e=document.getElementById('resultado-carga');if(_e)_e.classList.remove('hidden')})();
             document.getElementById('resultado-carga').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
 
@@ -5545,22 +5642,33 @@
         if (!state.clientes) state.clientes = [];
 
         function toggleAgenda() {
-            const m = document.getElementById('agendaModal');
-            _destacarNavBtn(m.classList.contains('hidden') ? 'bnav-agenda' : 'bnav-inicio');
-            const c = document.getElementById('agendaContent');
+            var m = document.getElementById('agendaModal');
+            var c = document.getElementById('agendaContent');
+            if (!m || !c) return;
             if (m.classList.contains('hidden')) {
+                document.getElementById('tela-home').style.display = 'none';
                 lockScroll();
+                c.style.transform = 'translateY(100%)';
+                c.style.transition = 'transform .3s ease';
                 m.classList.remove('hidden');
-                requestAnimationFrame(() => requestAnimationFrame(() => c.classList.remove('translate-y-full')));
-                const hoje = new Date();
-                document.getElementById('rel-mes').value = hoje.getMonth();
-                document.getElementById('rel-ano').value = hoje.getFullYear();
-                renderVisitas();
-                renderClientes();
-                renderGarantias();
+                requestAnimationFrame(function() { requestAnimationFrame(function() {
+                    c.style.transform = 'translateY(0)';
+                }); });
+                  const hoje = new Date();
+                  var relMes = document.getElementById('rel-mes');
+                  var relAno = document.getElementById('rel-ano');
+                  if(relMes) relMes.value = hoje.getMonth();
+                  if(relAno) relAno.value = hoje.getFullYear();
+                  renderVisitas();
+                  renderClientes();
+                  renderGarantias();
             } else {
-                c.classList.add('translate-y-full');
-                setTimeout(() => { m.classList.add('hidden'); unlockScroll(); irParaHome(); }, 300);
+                c.style.transform = 'translateY(100%)';
+                setTimeout(function() {
+                    m.classList.add('hidden');
+                    unlockScroll();
+                    irParaHome();
+                }, 300);
             }
         }
 
@@ -5568,12 +5676,12 @@
             if (aba === 'clientes' && bloqueado('clientes')) return;
             if (aba === 'relatorio' && bloqueado('relatorio')) return;
             ['visitas','clientes','garantias','relatorio'].forEach(a => {
-                document.getElementById('agenda-' + a).classList.add('hidden');
-                const tab = document.getElementById('atab-' + a);
+                var _el = document.getElementById('agenda-' + a); if(_el) _el.classList.add('hidden');
+                const tab = document.getElementById('atab-' + a); if(!tab) return;
                 tab.classList.remove('text-blue-600','border-blue-600');
                 tab.classList.add('text-slate-400','border-transparent');
             });
-            document.getElementById('agenda-' + aba).classList.remove('hidden');
+            var _aa=document.getElementById('agenda-'+aba); if(_aa) _aa.classList.remove('hidden');
             const t = document.getElementById('atab-' + aba);
             t.classList.add('text-blue-600','border-blue-600');
             t.classList.remove('text-slate-400','border-transparent');
@@ -5586,11 +5694,11 @@
         }
 
         function abrirFormVisita() {
-            document.getElementById('form-visita').classList.remove('hidden');
+            (function(){var _e=document.getElementById('form-visita');if(_e)_e.classList.remove('hidden')})();
             document.getElementById('visita-data').valueAsDate = new Date();
         }
         function fecharFormVisita() {
-            document.getElementById('form-visita').classList.add('hidden');
+            (function(){var _e=document.getElementById('form-visita');if(_e)_e.classList.add('hidden')})();
         }
         function salvarVisita() {
             const cliente  = document.getElementById('visita-cliente').value.trim();
@@ -5676,8 +5784,8 @@
             });
         }
 
-        function abrirFormCliente() { if (bloqueado('clientes')) return; document.getElementById('form-cliente').classList.remove('hidden'); }
-        function fecharFormCliente() { document.getElementById('form-cliente').classList.add('hidden'); }
+        function abrirFormCliente() { if (bloqueado('clientes')) return; (function(){var _e=document.getElementById('form-cliente');if(_e)_e.classList.remove('hidden')})(); }
+        function fecharFormCliente() { (function(){var _e=document.getElementById('form-cliente');if(_e)_e.classList.add('hidden')})(); }
         function salvarCliente() {
             const nome     = document.getElementById('cli-nome').value.trim();
             const tel      = document.getElementById('cli-tel').value.trim();
@@ -5826,7 +5934,7 @@
             document.getElementById('rel-qtd').textContent     = filtrados.length;
             document.getElementById('rel-ticket').textContent  = formatBRL(ticket);
             document.getElementById('rel-mat').textContent     = formatBRL(totalMat);
-            document.getElementById('resultado-relatorio').classList.remove('hidden');
+            (function(){var _e=document.getElementById('resultado-relatorio');if(_e)_e.classList.remove('hidden')})();
 
             const relLista = document.getElementById('rel-lista');
             relLista.innerHTML = '';
@@ -5868,9 +5976,14 @@
             var orc = document.getElementById('tela-orcamento');
             if (orc) orc.style.display = 'none';
             // close any open modal
+            var _cMap = {ferramentasModal:'ferramentasContent',agendaModal:'agendaContent',historyModal:'historyContent',settingsModal:'modalContent'};
             ['ferramentasModal','agendaModal','historyModal','settingsModal'].forEach(function(id) {
                 var m = document.getElementById(id);
-                if (m) m.classList.add('hidden');
+                if (m && !m.classList.contains('hidden')) {
+                    var c = document.getElementById(_cMap[id]);
+                    if (c) c.style.transform = id === 'historyModal' ? 'translateX(100%)' : 'translateY(100%)';
+                    m.classList.add('hidden');
+                }
             });
             unlockScroll();
             _atualizarHomeUI();
