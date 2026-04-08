@@ -277,7 +277,11 @@
 
       <!-- bottom nav home -->
       <div class="bnav-home">
-        <div class="ni on" onclick="irParaHome()"><div class="ni-i">🏠</div>Home<div class="ni-bar"></div></div>
+        <div onclick="irParaHome()" class="ni on"><div class="ni-i">🏠</div>Home<div class="ni-bar"></div></div>
+        <div onclick="comecarCalculo()" class="ni"><div class="ni-i">⚡</div>Calcular<div class="ni-bar"></div></div>
+        <div onclick="toggleAgenda()" class="ni"><div class="ni-i">📅</div>Agenda<div class="ni-bar"></div></div>
+        <div onclick="toggleSettings()" class="ni"><div class="ni-i">⚙️</div>Config<div class="ni-bar"></div></div>
+      </div>Home<div class="ni-bar"></div></div>
         <div class="ni" onclick="comecarCalculo()"><div class="ni-i">⚡</div>Calcular<div class="ni-bar"></div></div>
         <div class="ni" onclick="toggleAgenda()"><div class="ni-i">📅</div>Agenda<div class="ni-bar"></div></div>
         <div class="ni" onclick="toggleHistory()"><div class="ni-i">🕘</div>Hist.<div class="ni-bar"></div></div>
@@ -370,7 +374,7 @@
         #tela-home{display:none;position:fixed;inset:0;z-index:200;background:#07090f;flex-direction:column;overflow:hidden;}
 
         /* header home */
-        .hdr-home{background:rgba(11,14,24,.97);border-bottom:1px solid rgba(255,255,255,.07);padding:12px 14px;display:flex;align-items:center;justify-content:space-between;}
+        .hdr-home{background:rgba(11,14,24,.97);border-bottom:1px solid rgba(255,255,255,.07);padding:20px 14px 14px;display:flex;align-items:center;justify-content:space-between;}
         .hdr-logo{display:flex;align-items:center;gap:8px;}
         .hdr-bolt{width:28px;height:28px;background:linear-gradient(145deg,#fbbf24,#d97706);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;box-shadow:0 4px 12px rgba(245,158,11,.4);}
         .hdr-name{font-family:'Syne',sans-serif;font-size:16px;font-weight:800;background:linear-gradient(90deg,#f1f5f9,#94a3b8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
@@ -383,7 +387,7 @@
         .home-body::-webkit-scrollbar{display:none;}
 
         /* greeting */
-        .greet{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+        .greet{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;margin-top:4px;}
         .g-name{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;line-height:1.2;color:#f1f5f9;}
         .g-name span{color:#f59e0b;}
         .g-pill{background:#0b0e18;border:1px solid rgba(255,255,255,.07);border-radius:11px;padding:5px 10px;text-align:right;}
@@ -461,11 +465,11 @@
         .gi-lbl{font-size:8px;font-weight:700;}
 
         /* BOTTOM NAV HOME */
-        .bnav-home{background:rgba(11,14,24,.98);border-top:1px solid rgba(255,255,255,.07);display:grid;grid-template-columns:repeat(5,1fr);padding:7px 0 13px;}
-        .ni{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:7px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#1e2a3a;cursor:pointer;padding:2px 0;}
+        .bnav-home{background:rgba(11,14,24,.98);border-top:1px solid rgba(255,255,255,.07);display:grid;grid-template-columns:repeat(4,1fr);padding:10px 0 20px;}
+        .ni{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:9px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#1e2a3a;cursor:pointer;padding:2px 0;}
         .ni.on{color:#f59e0b;}
-        .ni-i{font-size:18px;line-height:1;}
-        .ni-bar{width:14px;height:2px;border-radius:1px;background:transparent;margin-top:2px;}
+        .ni-i{font-size:24px;line-height:1;}
+        .ni-bar{width:20px;height:2px;border-radius:1px;background:transparent;margin-top:2px;}
         .ni.on .ni-bar{background:#f59e0b;box-shadow:0 0 5px rgba(245,158,11,.5);}
 
         
@@ -488,6 +492,68 @@
         .ctab{flex:1;min-width:56px;padding:9px 4px 7px;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:7px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;color:#334155;border-bottom:2px solid transparent;transition:.2s;}
         .ctab.on{color:#f59e0b;border-bottom-color:#f59e0b;}
         .ctab svg{width:16px;height:16px;}
+
+        
+        /* ── Ferramentas Internal Design ────────────────────── */
+        .f-card{background:#0d1b2a;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:12px;margin-bottom:10px;}
+        .f-label{font-size:8px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#475569;margin-bottom:7px;display:block;}
+        .f-select{width:100%;padding:9px 12px;border-radius:10px;background:#0a1628;border:1px solid rgba(255,255,255,.1);color:#e2e8f0;font-size:11px;font-family:'IBM Plex Sans',sans-serif;outline:none;appearance:none;cursor:pointer;}
+        .f-input{width:100%;padding:9px 12px;border-radius:10px;background:#0a1628;border:1px solid rgba(255,255,255,.08);color:#e2e8f0;font-size:12px;font-family:'IBM Plex Sans',sans-serif;outline:none;}
+        .f-input::placeholder{color:#334155;}
+        .f-input:focus{border-color:rgba(245,158,11,.4);}
+        .f-btn-group{display:flex;gap:5px;}
+        .f-btn{flex:1;padding:8px 6px;border-radius:9px;font-size:10px;font-weight:800;letter-spacing:.3px;text-align:center;cursor:pointer;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);color:#475569;transition:all .15s;}
+        .f-btn.on{background:rgba(245,158,11,.14);border-color:rgba(245,158,11,.3);color:#f59e0b;}
+        .f-btn:active{transform:scale(.96);}
+        .f-sec{font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#334155;margin:12px 0 7px;display:flex;align-items:center;gap:6px;}
+        .f-sec::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(255,255,255,.07),transparent);}
+        .f-result{background:linear-gradient(145deg,#0d1b2a,#0a1220);border:1px solid rgba(245,158,11,.15);border-radius:14px;padding:12px;margin-bottom:10px;}
+        .f-result-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px;}
+        .f-res-cell{background:rgba(255,255,255,.04);border-radius:9px;padding:9px 10px;}
+        .f-res-lbl{font-size:7px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#334155;margin-bottom:3px;}
+        .f-res-val{font-family:'IBM Plex Mono',monospace;font-size:18px;font-weight:700;line-height:1;}
+        .f-cta{width:100%;padding:11px;border:none;border-radius:11px;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-family:'Syne',sans-serif;font-size:12px;font-weight:800;cursor:pointer;box-shadow:0 4px 14px rgba(245,158,11,.28);margin-top:4px;}
+        .f-acc{border-radius:12px;overflow:hidden;margin-bottom:8px;border:1px solid;}
+        .f-acc-hdr{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;cursor:pointer;width:100%;background:transparent;border:none;text-align:left;}
+        .f-acc-title{font-size:9px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;}
+        .f-acc-body{padding:10px 12px;border-top:1px solid rgba(255,255,255,.06);}
+        .f-acc.orange{background:rgba(249,115,22,.06);border-color:rgba(249,115,22,.2);}
+        .f-acc.orange .f-acc-title{color:#fb923c;}
+        .f-acc.blue{background:rgba(59,130,246,.06);border-color:rgba(59,130,246,.2);}
+        .f-acc.blue .f-acc-title{color:#60a5fa;}
+        .f-tbl{width:100%;border-collapse:collapse;font-size:11px;}
+        .f-tbl th{padding:7px 8px;font-size:8px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#fff;text-align:center;background:#1e293b;}
+        .f-tbl td{padding:7px 8px;text-align:center;color:#94a3b8;border-top:1px solid rgba(255,255,255,.04);}
+        .f-tbl tr:nth-child(even) td{background:rgba(255,255,255,.02);}
+        .f-tbl td:first-child{text-align:left;color:#cbd5e1;}
+        .f-banner{border-radius:11px;padding:10px 12px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:8px;background:#0f1e3a;border:1px solid rgba(59,130,246,.3);}
+        /* check */
+        .f-check-card{background:#0d1b2a;border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:11px 12px;margin-bottom:7px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:.15s;}
+        .f-check-card:active{transform:scale(.98);}
+
+        
+        /* ── Tema Light ─────────────────────────────────────── */
+        body.tema-light { background: #f8fafc !important; color: #0f172a; }
+        body.tema-light .w-full.max-w-md { background: #ffffff !important; }
+        body.tema-light #tela-home { background: #f1f5f9 !important; }
+        body.tema-light .hdr-home { background: rgba(255,255,255,.97) !important; border-bottom-color: rgba(0,0,0,.08) !important; }
+        body.tema-light .hdr-name { background: linear-gradient(90deg,#0f172a,#475569) !important; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        body.tema-light .g-name { color: #0f172a !important; }
+        body.tema-light .g-pill { background: #e2e8f0 !important; border-color: rgba(0,0,0,.08) !important; }
+        body.tema-light .sec::after { background: linear-gradient(90deg,rgba(0,0,0,.1),transparent) !important; }
+        body.tema-light .hero { background: linear-gradient(145deg,#fff8e7,#fffbf0 60%,#f8fafc) !important; }
+        body.tema-light .tc3 { filter: brightness(1.3) saturate(0.8); }
+        body.tema-light .gestao-strip { background: #e2e8f0 !important; border-color: rgba(0,0,0,.08) !important; }
+        body.tema-light .modal-hdr { background: #ffffff !important; border-bottom-color: rgba(0,0,0,.08) !important; }
+        body.tema-light .modal-tabs { background: #f8fafc !important; border-bottom-color: rgba(0,0,0,.06) !important; }
+        body.tema-light .mtab.on { background: rgba(245,158,11,.15) !important; }
+        body.tema-light .f-card { background: #f1f5f9 !important; border-color: rgba(0,0,0,.08) !important; }
+        body.tema-light .f-input { background: #ffffff !important; border-color: rgba(0,0,0,.15) !important; color: #0f172a !important; }
+        body.tema-light .f-btn { background: rgba(0,0,0,.05) !important; color: #475569 !important; border-color: rgba(0,0,0,.1) !important; }
+        body.tema-light .f-btn.on { background: rgba(245,158,11,.15) !important; color: #d97706 !important; }
+        body.tema-light .bnav-home { background: rgba(255,255,255,.98) !important; border-top-color: rgba(0,0,0,.08) !important; }
+        body.tema-light .ni { color: #94a3b8 !important; }
+        body.tema-light .ni.on { color: #f59e0b !important; }
 
         </style>
                       <g class="bf">
@@ -559,7 +625,7 @@
                             <label class="block text-xs font-bold uppercase tracking-wide mb-2 flex items-center gap-2" style="color:#2563eb;">
                                 <svg class="ico" aria-hidden="true"><use href="#i-user-tag"></use></svg> Dados do Orçamento
                             </label>
-                            <input type="text" id="nomePrestador" placeholder="Seu Nome / Sua Empresa" class="input-field w-full p-3 bg-white border border-slate-200 rounded-xl text-sm font-bold text-slate-700 focus:outline-none placeholder-slate-400 transition-all">
+                            <input type="text" id="nomePrestador" placeholder="Seu Nome / Sua Empresa" class="f-input" style="font-weight:700;" placeholder-slate-400 transition-all">
                             <div class="grid grid-cols-2 gap-3">
                                 <input type="text" id="nomeCliente" placeholder="Nome do Cliente" class="col-span-2 input-field w-full p-3 bg-white border border-slate-200 rounded-xl text-sm font-bold text-slate-700 focus:outline-none placeholder-slate-400 transition-all">
                                 <input type="text" id="enderecoCliente" placeholder="Endereço (Rua, Nº, Bairro)" class="col-span-2 input-field w-full p-3 bg-white border border-slate-200 rounded-xl text-sm font-bold text-slate-700 focus:outline-none placeholder-slate-400 transition-all">
@@ -784,12 +850,12 @@
                 <button onclick="trocarAbaAgenda('relatorio')" id="atab-relatorio" class="mtab">Relatório</button>
             </div>
 
-            <div class="p-5 space-y-4 overflow-y-auto flex-grow pb-safe modal-scroll" style="background:#0d1117;">
+            <div class="p-4 overflow-y-auto flex-grow pb-safe" style="background:#07090f;">
 
                 <div id="agenda-visitas">
                     <div class="flex justify-between items-center mb-3">
                         <p class="text-xs text-slate-500">Seus agendamentos</p>
-                        <button onclick="abrirFormVisita()" class="bg-blue-600 text-white text-xs font-bold px-3 py-2 rounded-xl flex items-center gap-1">
+                        <button onclick="abrirFormVisita()" class="f-cta" style="padding:8px 14px;width:auto;font-size:10px;border-radius:9px;">
                             <svg class="ico" aria-hidden="true"><use href="#i-plus"></use></svg> Nova visita
                         </button>
                     </div>
@@ -828,7 +894,7 @@
                 <div id="agenda-clientes" class="hidden">
                     <div class="flex justify-between items-center mb-3">
                         <p class="text-xs text-slate-500">Base de clientes</p>
-                        <button onclick="abrirFormCliente()" class="bg-blue-600 text-white text-xs font-bold px-3 py-2 rounded-xl flex items-center gap-1">
+                        <button onclick="abrirFormCliente()" class="f-cta" style="padding:8px 14px;width:auto;font-size:10px;border-radius:9px;">
                             <svg class="ico" aria-hidden="true"><use href="#i-plus"></use></svg> Novo cliente
                         </button>
                     </div>
@@ -919,12 +985,12 @@
                 <button onclick="trocarAbaAgenda('relatorio')" id="atab-relatorio" class="mtab">Relatório</button>
             </div>
 
-            <div class="p-5 space-y-4 overflow-y-auto flex-grow pb-safe modal-scroll" style="background:#0d1117;">
+            <div class="p-4 overflow-y-auto flex-grow pb-safe" style="background:#07090f;">
 
                 <div id="agenda-visitas">
                     <div class="flex justify-between items-center mb-3">
                         <p class="text-xs text-slate-500">Seus agendamentos</p>
-                        <button onclick="abrirFormVisita()" class="bg-blue-600 text-white text-xs font-bold px-3 py-2 rounded-xl flex items-center gap-1">
+                        <button onclick="abrirFormVisita()" class="f-cta" style="padding:8px 14px;width:auto;font-size:10px;border-radius:9px;">
                             <svg class="ico" aria-hidden="true"><use href="#i-plus"></use></svg> Nova visita
                         </button>
                     </div>
@@ -963,7 +1029,7 @@
                 <div id="agenda-clientes" class="hidden">
                     <div class="flex justify-between items-center mb-3">
                         <p class="text-xs text-slate-500">Base de clientes</p>
-                        <button onclick="abrirFormCliente()" class="bg-blue-600 text-white text-xs font-bold px-3 py-2 rounded-xl flex items-center gap-1">
+                        <button onclick="abrirFormCliente()" class="f-cta" style="padding:8px 14px;width:auto;font-size:10px;border-radius:9px;">
                             <svg class="ico" aria-hidden="true"><use href="#i-plus"></use></svg> Novo cliente
                         </button>
                     </div>
@@ -1049,19 +1115,19 @@
                 <button onclick="toggleFerramentas()" class="modal-close">✕</button>
             </div>
             <div class="modal-tabs">
-                <button onclick="trocarAbaFerr('nbr')"     id="tab-nbr"     class="mtab on">NBR 5410</button>
-                <button onclick="trocarAbaFerr('carga')"   id="tab-carga"   class="mtab">Demanda</button>
-                <button onclick="trocarAbaFerr('queda')"   id="tab-queda"   class="mtab">Queda V</button>
-                <button onclick="trocarAbaFerr('check')"   id="tab-check"   class="mtab">Check</button>
+                <button onclick="trocarAbaFerr('carga')"   id="tab-carga"   class="mtab on">Demanda Elétrica</button>
+                <button onclick="trocarAbaFerr('queda')"   id="tab-queda"   class="mtab">Queda V por Cabo</button>
+                <button onclick="trocarAbaFerr('nbr')"     id="tab-nbr"     class="mtab">Tabelas NBR 5410</button>
+                <button onclick="trocarAbaFerr('check')"   id="tab-check"   class="mtab">Check Serviços</button>
             </div>
 
-            <div class="p-5 space-y-4 overflow-y-auto flex-grow pb-safe modal-scroll" style="background:#0d1117;">
+            <div class="p-4 overflow-y-auto flex-grow pb-safe" style="background:#07090f;">
 
-                <div id="ferr-nbr" class="space-y-4">
+                <div id="ferr-nbr" class="hidden">
 
-                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
-                        <label class="text-[10px] font-bold text-slate-400 uppercase mb-2 block">Método de instalação (Tabela 33 — NBR 5410)</label>
-                        <select id="nbr-metodo" onchange="renderTabelaNBR()" class="input-field w-full p-2 bg-white border border-slate-200 rounded-lg text-xs font-bold text-slate-700 focus:outline-none">
+                    <div class="f-card">
+                        <span class="f-label">Método de Instalação — Tabela 33</span>
+                        <select id="nbr-metodo" onchange="renderTabelaNBR()" class="f-select">
                             <option value="B1">B1 — Eletroduto embutido em alvenaria (mais comum)</option>
                             <option value="B2">B2 — Cabo multipolar em eletroduto embutido</option>
                             <option value="C">C — Cabo sobre parede / superfície</option>
@@ -1070,71 +1136,71 @@
                         </select>
                     </div>
 
-                    <div id="nbr-descricao" class="text-[10px] text-slate-500 px-1"></div>
+                    <div id="nbr-descricao" style="font-size:10px;color:#64748b;padding:0 4px 6px;line-height:1.6;"></div>
 
-                    <div class="overflow-x-auto rounded-xl border border-slate-200" id="nbr-tabela-wrap"></div>
+                    <div id="nbr-tabela-wrap" class="f-card" style="padding:8px;overflow-x:auto;"></div>
 
-                    <div id="acc-nbr-temp" class="bg-orange-50 rounded-xl border border-orange-100 overflow-hidden">
-                        <button onclick="toggleAccordion('acc-nbr-temp')" class="w-full p-3 flex justify-between items-center">
-                            <span class="text-xs font-bold text-orange-700 uppercase">Fatores de correção — Temperatura (Tabela 40)</span>
+                    <div id="acc-nbr-temp" class="f-acc orange">
+                        <button onclick="toggleAccordion('acc-nbr-temp')" class="f-acc-hdr">
+                            <span class="f-acc-title">🌡 Temperatura — Tabela 40</span>
                             <svg class="ico text-orange-400 text-xs accordion-icon" aria-hidden="true"><use href="#i-chevron-down"></use></svg>
                         </button>
-                        <div class="accordion-content">
-                            <div class="overflow-x-auto p-2">
-                                <table style="width:100%;border-collapse:collapse;font-size:11px;">
-                                    <thead><tr style="background:#ea580c;color:white;">
+                        <div class="accordion-content f-acc-body" style="padding:8px;">
+                            <div class="overflow-x-auto">
+                                <table class="f-tbl">
+                                    <thead><tr style="background:#7c2d12;">
                                         <th style="padding:7px 6px;text-align:center;">Temp. Amb.</th>
                                         <th style="padding:7px 6px;text-align:center;">PVC (70°C)</th>
                                         <th style="padding:7px 6px;text-align:center;">EPR/XLPE (90°C)</th>
                                     </tr></thead>
                                     <tbody>
-                                        <tr style="background:#fff7ed"><td style="padding:6px;text-align:center;font-weight:700;">25°C</td><td style="padding:6px;text-align:center;color:#16a34a;font-weight:700;">1,06</td><td style="padding:6px;text-align:center;color:#16a34a;font-weight:700;">1,04</td></tr>
-                                        <tr style="background:#ffedd5"><td style="padding:6px;text-align:center;font-weight:700;">30°C</td><td style="padding:6px;text-align:center;">1,00</td><td style="padding:6px;text-align:center;">1,00</td></tr>
-                                        <tr style="background:#fff7ed"><td style="padding:6px;text-align:center;font-weight:700;">35°C</td><td style="padding:6px;text-align:center;color:#ea580c;font-weight:700;">0,94</td><td style="padding:6px;text-align:center;color:#ea580c;font-weight:700;">0,96</td></tr>
-                                        <tr style="background:#ffedd5"><td style="padding:6px;text-align:center;font-weight:700;">40°C</td><td style="padding:6px;text-align:center;color:#dc2626;font-weight:700;">0,87</td><td style="padding:6px;text-align:center;color:#dc2626;font-weight:700;">0,91</td></tr>
-                                        <tr style="background:#fff7ed"><td style="padding:6px;text-align:center;font-weight:700;">45°C</td><td style="padding:6px;text-align:center;color:#dc2626;font-weight:700;">0,79</td><td style="padding:6px;text-align:center;color:#dc2626;font-weight:700;">0,87</td></tr>
-                                        <tr style="background:#ffedd5"><td style="padding:6px;text-align:center;font-weight:700;">50°C</td><td style="padding:6px;text-align:center;color:#991b1b;font-weight:700;">0,71</td><td style="padding:6px;text-align:center;color:#991b1b;font-weight:700;">0,82</td></tr>
+                                        <tr ><td style="padding:7px 8px;text-align:center;font-weight:700;color:#e2e8f0;">25°C</td><td style="padding:7px 6px;text-align:center;color:#4ade80;font-weight:700;">1,06</td><td style="padding:7px 6px;text-align:center;color:#4ade80;font-weight:700;">1,04</td></tr>
+                                        <tr ><td style="padding:7px 8px;text-align:center;font-weight:700;color:#e2e8f0;">30°C</td><td style="padding:7px 6px;text-align:center;color:#94a3b8;">1,00</td><td style="padding:7px 6px;text-align:center;color:#94a3b8;">1,00</td></tr>
+                                        <tr ><td style="padding:7px 8px;text-align:center;font-weight:700;color:#e2e8f0;">35°C</td><td style="padding:6px;text-align:center;color:#ea580c;font-weight:700;">0,94</td><td style="padding:6px;text-align:center;color:#ea580c;font-weight:700;">0,96</td></tr>
+                                        <tr ><td style="padding:7px 8px;text-align:center;font-weight:700;color:#fca5a5;">40°C</td><td style="padding:7px 6px;text-align:center;color:#f87171;font-weight:700;">0,87</td><td style="padding:7px 6px;text-align:center;color:#f87171;font-weight:700;">0,91</td></tr>
+                                        <tr ><td style="padding:7px 8px;text-align:center;font-weight:700;color:#f87171;">45°C</td><td style="padding:7px 6px;text-align:center;color:#f87171;font-weight:700;">0,79</td><td style="padding:7px 6px;text-align:center;color:#f87171;font-weight:700;">0,87</td></tr>
+                                        <tr ><td style="padding:7px 8px;text-align:center;font-weight:700;color:#ef4444;">50°C</td><td style="padding:6px;text-align:center;color:#991b1b;font-weight:700;">0,71</td><td style="padding:6px;text-align:center;color:#991b1b;font-weight:700;">0,82</td></tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
 
-                    <div id="acc-nbr-agrup" class="bg-blue-50 rounded-xl border border-blue-100 overflow-hidden">
-                        <button onclick="toggleAccordion('acc-nbr-agrup')" class="w-full p-3 flex justify-between items-center">
+                    <div id="acc-nbr-agrup" class="f-acc blue">
+                        <button onclick="toggleAccordion('acc-nbr-agrup')" class="f-acc-hdr">
                             <span class="text-xs font-bold text-blue-700 uppercase">Fatores de agrupamento — Circuitos (Tabela 42)</span>
                             <svg class="ico text-blue-400 text-xs accordion-icon" aria-hidden="true"><use href="#i-chevron-down"></use></svg>
                         </button>
-                        <div class="accordion-content">
-                            <div class="overflow-x-auto p-2">
-                                <table style="width:100%;border-collapse:collapse;font-size:11px;">
+                        <div class="accordion-content f-acc-body" style="padding:8px;">
+                            <div class="overflow-x-auto">
+                                <table class="f-tbl">
                                     <thead><tr style="background:#1d4ed8;color:white;">
                                         <th style="padding:7px 6px;text-align:center;">Nº de circuitos</th>
                                         <th style="padding:7px 6px;text-align:center;">Fator</th>
                                         <th style="padding:7px 6px;text-align:center;">Exemplo 2,5mm²</th>
                                     </tr></thead>
                                     <tbody>
-                                        <tr style="background:#eff6ff"><td style="padding:6px;text-align:center;font-weight:700;">1</td><td style="padding:6px;text-align:center;color:#16a34a;font-weight:700;">1,00</td><td style="padding:6px;text-align:center;">21A</td></tr>
-                                        <tr style="background:#dbeafe"><td style="padding:6px;text-align:center;font-weight:700;">2</td><td style="padding:6px;text-align:center;color:#ca8a04;font-weight:700;">0,80</td><td style="padding:6px;text-align:center;">16,8A</td></tr>
-                                        <tr style="background:#eff6ff"><td style="padding:6px;text-align:center;font-weight:700;">3</td><td style="padding:6px;text-align:center;color:#ea580c;font-weight:700;">0,70</td><td style="padding:6px;text-align:center;">14,7A</td></tr>
-                                        <tr style="background:#dbeafe"><td style="padding:6px;text-align:center;font-weight:700;">4~5</td><td style="padding:6px;text-align:center;color:#dc2626;font-weight:700;">0,65</td><td style="padding:6px;text-align:center;">13,7A</td></tr>
-                                        <tr style="background:#eff6ff"><td style="padding:6px;text-align:center;font-weight:700;">6~7</td><td style="padding:6px;text-align:center;color:#dc2626;font-weight:700;">0,57</td><td style="padding:6px;text-align:center;">12,0A</td></tr>
-                                        <tr style="background:#dbeafe"><td style="padding:6px;text-align:center;font-weight:700;">8~9</td><td style="padding:6px;text-align:center;color:#991b1b;font-weight:700;">0,52</td><td style="padding:6px;text-align:center;">10,9A</td></tr>
-                                        <tr style="background:#eff6ff"><td style="padding:6px;text-align:center;font-weight:700;">10~12</td><td style="padding:6px;text-align:center;color:#991b1b;font-weight:700;">0,50</td><td style="padding:6px;text-align:center;">10,5A</td></tr>
+                                        <tr ><td style="padding:6px;text-align:center;font-weight:700;">1</td><td style="padding:7px 6px;text-align:center;color:#4ade80;font-weight:700;">1,00</td><td style="padding:7px 6px;text-align:center;color:#94a3b8;">21A</td></tr>
+                                        <tr ><td style="padding:6px;text-align:center;font-weight:700;">2</td><td style="padding:6px;text-align:center;color:#ca8a04;font-weight:700;">0,80</td><td style="padding:7px 6px;text-align:center;color:#94a3b8;">16,8A</td></tr>
+                                        <tr ><td style="padding:6px;text-align:center;font-weight:700;">3</td><td style="padding:6px;text-align:center;color:#ea580c;font-weight:700;">0,70</td><td style="padding:7px 6px;text-align:center;color:#94a3b8;">14,7A</td></tr>
+                                        <tr ><td style="padding:6px;text-align:center;font-weight:700;">4~5</td><td style="padding:7px 6px;text-align:center;color:#f87171;font-weight:700;">0,65</td><td style="padding:7px 6px;text-align:center;color:#94a3b8;">13,7A</td></tr>
+                                        <tr ><td style="padding:6px;text-align:center;font-weight:700;">6~7</td><td style="padding:7px 6px;text-align:center;color:#f87171;font-weight:700;">0,57</td><td style="padding:7px 6px;text-align:center;color:#94a3b8;">12,0A</td></tr>
+                                        <tr ><td style="padding:6px;text-align:center;font-weight:700;">8~9</td><td style="padding:6px;text-align:center;color:#991b1b;font-weight:700;">0,52</td><td style="padding:7px 6px;text-align:center;color:#94a3b8;">10,9A</td></tr>
+                                        <tr ><td style="padding:6px;text-align:center;font-weight:700;">10~12</td><td style="padding:6px;text-align:center;color:#991b1b;font-weight:700;">0,50</td><td style="padding:7px 6px;text-align:center;color:#94a3b8;">10,5A</td></tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
 
-                    <div id="acc-nbr-min" class="bg-green-50 rounded-xl border border-green-100 overflow-hidden">
-                        <button onclick="toggleAccordion('acc-nbr-min')" class="w-full p-3 flex justify-between items-center">
+                    <div id="acc-nbr-min" class="f-acc" style="background:rgba(16,185,129,.06);border-color:rgba(16,185,129,.2);">
+                        <button onclick="toggleAccordion('acc-nbr-min')" class="f-acc-hdr">
                             <span class="text-xs font-bold text-green-700 uppercase">Bitola mínima por tipo de circuito</span>
                             <svg class="ico text-green-400 text-xs accordion-icon" aria-hidden="true"><use href="#i-chevron-down"></use></svg>
                         </button>
-                        <div class="accordion-content">
-                            <div class="overflow-x-auto p-2">
-                                <table style="width:100%;border-collapse:collapse;font-size:11px;">
+                        <div class="accordion-content f-acc-body" style="padding:8px;">
+                            <div class="overflow-x-auto">
+                                <table class="f-tbl">
                                     <thead><tr style="background:#15803d;color:white;">
                                         <th style="padding:7px 6px;text-align:left;">Tipo de circuito</th>
                                         <th style="padding:7px 6px;text-align:center;">Bitola mín.</th>
@@ -1157,31 +1223,30 @@
                     <p class="text-[10px] text-slate-400 text-center">Ref: ABNT NBR 5410:2004 — Tabelas 33, 36, 40, 42. Cobre PVC 70°C, temp. amb. 30°C.</p>
                 </div>
 
-                <div id="ferr-carga" class="hidden space-y-3">
+                <div id="ferr-carga">
 
-                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-3">
-
+                    <div class="f-card">
                         <div>
-                            <label class="text-[10px] font-bold text-slate-400 uppercase mb-1 block">Sistema elétrico</label>
-                            <div class="flex gap-2">
-                                <button onclick="setCargaSistema('mono')" id="cbtn-mono" class="flex-1 py-2 rounded-lg text-xs font-bold border-2 border-blue-500 bg-blue-50 text-blue-700">Monofásico</button>
-                                <button onclick="setCargaSistema('bi')"   id="cbtn-bi"   class="flex-1 py-2 rounded-lg text-xs font-bold border-2 border-slate-200 text-slate-500">Bifásico</button>
-                                <button onclick="setCargaSistema('tri')"  id="cbtn-tri"  class="flex-1 py-2 rounded-lg text-xs font-bold border-2 border-slate-200 text-slate-500">Trifásico</button>
+                            <span class="f-label">Sistema elétrico</span>
+                            <div class="f-btn-group">
+                                <button onclick="setCargaSistema('mono')" id="cbtn-mono" class="f-btn on">Monofásico</button>
+                                <button onclick="setCargaSistema('bi')"   id="cbtn-bi" class="f-btn">Bifásico</button>
+                                <button onclick="setCargaSistema('tri')"  id="cbtn-tri" class="f-btn">Trifásico</button>
                             </div>
                         </div>
 
                         <div>
-                            <label class="text-[10px] font-bold text-slate-400 uppercase mb-1 block">Tensão da rede</label>
-                            <div class="flex gap-2">
-                                <button onclick="setTensao(127)" id="btn127" class="flex-1 py-2 rounded-lg text-xs font-bold border-2 border-blue-500 bg-blue-50 text-blue-700">127V</button>
-                                <button onclick="setTensao(220)" id="btn220" class="flex-1 py-2 rounded-lg text-xs font-bold border-2 border-slate-200 text-slate-500">220V</button>
-                                <button onclick="setTensao(380)" id="btn380" class="flex-1 py-2 rounded-lg text-xs font-bold border-2 border-slate-200 text-slate-500">380V</button>
+                            <span class="f-label" style="margin-top:10px;">Tensão da rede</span>
+                            <div class="f-btn-group">
+                                <button onclick="setTensao(127)" id="btn127" class="f-btn on">127V</button>
+                                <button onclick="setTensao(220)" id="btn220" class="f-btn">220V</button>
+                                <button onclick="setTensao(380)" id="btn380" class="f-btn">380V</button>
                             </div>
                         </div>
 
                         <div>
-                            <label class="text-[10px] font-bold text-slate-400 uppercase mb-1 block">Tipo de instalação (fator de demanda NBR)</label>
-                            <select id="carga-tipo-inst" class="input-field w-full p-2 bg-white border border-slate-200 rounded-lg text-xs font-bold text-slate-700 focus:outline-none" onchange="if(_modoTeste){this.value='1.0';}">
+                            <span class="f-label" style="margin-top:10px;">Tipo de instalação (fator de demanda NBR)</label>
+                            <select id="carga-tipo-inst" class="f-select" onchange="if(_modoTeste){this.value='1.0';}">
                                 <option value="1.0">Residencial simples (1 pavimento) — fd 1,00</option>
                                 <option value="0.8">Residencial médio (2~3 pavimentos) — fd 0,80</option>
                                 <option value="0.6">Residencial grande / condomínio — fd 0,60</option>
@@ -1193,7 +1258,7 @@
                     </div>
 
                     <div id="acc-nbr-comodo" class="bg-purple-50 rounded-xl border border-purple-100 overflow-hidden">
-                        <button onclick="toggleAccordion('acc-nbr-comodo'); setTimeout(initGridComodosPre, 50);" class="w-full p-3 flex justify-between items-center">
+                        <button onclick="toggleAccordion('acc-nbr-comodo'); setTimeout(initGridComodosPre, 50);" class="f-acc-hdr">
                             <span class="text-xs font-bold text-purple-700 uppercase">📐 Demanda mínima por cômodo (NBR 5410)</span>
                             <svg class="ico text-purple-400 text-xs accordion-icon" aria-hidden="true"><use href="#i-chevron-down"></use></svg>
                         </button>
@@ -1232,11 +1297,11 @@
                     </div>
 
                     <div class="flex justify-between items-center px-1">
-                        <label class="text-xs font-bold text-slate-500 uppercase">Equipamentos</label>
+                        <label class="f-label" style="display:flex;align-items:center;gap:6px;">Equipamentos</label>
                         <button id="btn-da-lista" onclick="abrirListaEquip()" class="text-[10px] bg-blue-100 text-blue-700 px-2 py-1 rounded-full font-bold hover:bg-blue-200">+ da lista</button>
                     </div>
 
-                    <div id="modal-equip" class="hidden bg-slate-50 border border-slate-200 rounded-xl p-3 space-y-2 max-h-48 overflow-y-auto">
+                    <div id="modal-equip" class="hidden f-card" style="max-height:180px;overflow-y:auto;">
                         <p class="text-[10px] font-bold text-slate-400 uppercase">Toque para adicionar:</p>
                         <div id="lista-equip-pre" class="space-y-1"></div>
                     </div>
@@ -1251,7 +1316,7 @@
                         <svg class="ico" aria-hidden="true"><use href="#i-calculator"></use></svg> CALCULAR DEMANDA ELÉTRICA
                     </button>
 
-                    <div id="resultado-carga" class="hidden  text-white p-4 rounded-2xl space-y-4">
+                    <div id="resultado-carga" class="hidden f-result">
 
                         <p class="text-[10px] font-bold text-blue-300 uppercase tracking-widest">⚡ Resultado — Demanda Elétrica NBR 5410</p>
 
@@ -1423,9 +1488,9 @@
                     </div>
                 </div>
 
-                <div id="ferr-queda" class="hidden space-y-3">
+                <div id="ferr-queda" class="hidden">
 
-                    <div id="queda-banner-demanda" style="display:none;background:#1e3a5f;border:1px solid #2563eb;border-radius:10px;padding:10px 12px;display:none;justify-content:space-between;align-items:center;gap:8px;">
+                    <div id="queda-banner-demanda" class="f-banner" style="display:none;">
                         <div>
                             <p style="font-size:10px;font-weight:700;color:#93c5fd;margin:0;">Dados da Demanda disponíveis</p>
                             <p style="font-size:9px;color:#64748b;margin:2px 0 0;" id="queda-banner-info">—</p>
@@ -1435,18 +1500,17 @@
                         </button>
                     </div>
 
-                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
-
+                    <div class="f-card">
                         <div>
-                            <label class="text-[10px] font-bold text-slate-400 uppercase mb-1 block">Sistema elétrico</label>
-                            <div class="flex gap-2">
-                                <button onclick="setQuedaSistema('mono')" id="qbtn-mono" class="flex-1 py-2 rounded-lg text-xs font-bold border-2 border-blue-500 bg-blue-50 text-blue-700">Monofásico</button>
-                                <button onclick="setQuedaSistema('tri')"  id="qbtn-tri"  class="flex-1 py-2 rounded-lg text-xs font-bold border-2 border-slate-200 text-slate-500">Trifásico</button>
+                            <span class="f-label">Sistema elétrico</span>
+                            <div class="f-btn-group">
+                                <button onclick="setQuedaSistema('mono')" id="qbtn-mono" class="f-btn on">Monofásico</button>
+                                <button onclick="setQuedaSistema('tri')"  id="qbtn-tri" class="f-btn">Trifásico</button>
                             </div>
                         </div>
 
                         <div>
-                            <label class="text-[10px] font-bold text-slate-400 uppercase mb-1 block">Tipo de circuito (limite NBR 5410)</label>
+                            <span class="f-label">Tipo de circuito</span>
                             <div class="flex gap-2">
                                 <button onclick="setQuedaTipo('terminal')" id="qbtn-terminal" class="flex-1 py-2 rounded-lg text-xs font-bold border-2 border-green-500 bg-green-50 text-green-700">Terminal (4%)</button>
                                 <button onclick="setQuedaTipo('alimentador')" id="qbtn-alimentador" class="flex-1 py-2 rounded-lg text-xs font-bold border-2 border-slate-200 text-slate-500">Alimentador (7%)</button>
@@ -1502,7 +1566,7 @@
                         <div>
                             <label class="text-[10px] font-bold text-slate-400 uppercase ml-1">Isolamento do cabo</label>
                             <div class="flex gap-2 mt-1">
-                                <button onclick="setIsolamento('pvc')" id="qbtn-pvc" class="flex-1 py-2 rounded-lg text-xs font-bold border-2 border-blue-500 bg-blue-50 text-blue-700">PVC (70°C)</button>
+                                <button onclick="setIsolamento('pvc')" id="qbtn-pvc" class="f-btn on">PVC (70°C)</button>
                                 <button onclick="if(_modoTeste){_toastTeste('🚀 Você está no modo TESTE — Upgrade para PRO e use sem restrições');}else{setIsolamento('epr');}" id="qbtn-epr" class="flex-1 py-2 rounded-lg text-xs font-bold border-2 border-slate-200 text-slate-500">EPR/XLPE (90°C)</button>
                             </div>
                         </div>
@@ -1543,7 +1607,7 @@
                         <div>
                             <label class="text-[10px] font-bold text-slate-400 uppercase ml-1">Material do condutor</label>
                             <div class="flex gap-2 mt-1">
-                                <button onclick="setQuedaMaterial('cu')" id="qbtn-cu" class="flex-1 py-2 rounded-lg text-xs font-bold border-2 border-blue-500 bg-blue-50 text-blue-700">Cobre (Cu)</button>
+                                <button onclick="setQuedaMaterial('cu')" id="qbtn-cu" class="f-btn on">Cobre (Cu)</button>
                                 <button onclick="setQuedaMaterial('al')" id="qbtn-al" class="flex-1 py-2 rounded-lg text-xs font-bold border-2 border-slate-200 text-slate-500">Alumínio (Al)</button>
                             </div>
                         </div>
@@ -1578,7 +1642,7 @@
                         <svg class="ico" aria-hidden="true"><use href="#i-calculator"></use></svg> CALCULAR QUEDA DE TENSÃO
                     </button>
 
-                    <div id="resultado-queda" class="hidden space-y-3">
+                    <div id="resultado-queda" class="hidden">
 
                         <div id="queda-card-principal" class="p-4 rounded-2xl border-2 space-y-3">
                             <div class="flex justify-between items-center">
@@ -1616,12 +1680,12 @@
 
                 </div>
 
-                <div id="ferr-check" class="hidden space-y-3">
+                <div id="ferr-check" class="hidden">
 
                     <div id="check-modelos">
                         <div class="flex justify-between items-center mb-3">
                             <p class="text-xs text-slate-500">Checklists por tipo de serviço</p>
-                            <button onclick="abrirNovoModelo()" class="bg-blue-600 text-white text-xs font-bold px-3 py-2 rounded-xl flex items-center gap-1">
+                            <button onclick="abrirNovoModelo()" class="f-cta" style="padding:8px 14px;width:auto;font-size:10px;border-radius:9px;">
                                 <svg class="ico" aria-hidden="true"><use href="#i-plus"></use></svg> Novo
                             </button>
                         </div>
@@ -1729,7 +1793,7 @@
 
             <div style="margin-bottom:16px;">
                 <p style="font-size:10px;font-weight:700;color:#0f172a;text-transform:uppercase;margin:0 0 8px;border-bottom:2px solid #0f172a;padding-bottom:6px;">Circuitos sugeridos</p>
-                <table style="width:100%;border-collapse:collapse;font-size:11px;">
+                <table class="f-tbl">
                     <thead><tr style="background:#0f172a;color:white;">
                         <th style="padding:7px 10px;text-align:left;">Circuito</th>
                         <th style="padding:7px 10px;text-align:center;">Bitola</th>
@@ -1898,28 +1962,23 @@
                 <button onclick="toggleSettings()" class="modal-close">✕</button>
             </div>
             <div class="cfg-tabs">
-                <button onclick="trocarAbaConfig('perfil')" id="cfg-tab-perfil" class="ctab  on">
-                    <svg class="ico text-sm" aria-hidden="true"><use href="#i-user-tag"></use></svg> Perfil
+                <button onclick="trocarAbaConfig('perfil')" id="cfg-tab-perfil" class="ctab on">👤 Perfil
                 </button>
-                <button onclick="trocarAbaConfig('pagamento')" id="cfg-tab-pagamento" class="ctab">
-                    <svg class="ico text-sm" aria-hidden="true"><use href="#i-percent"></use></svg> Pagamento
+                <button onclick="trocarAbaConfig('pagamento')" id="cfg-tab-pagamento" class="ctab">💳 Pagamento
                 </button>
-                <button onclick="trocarAbaConfig('catalogo')" id="cfg-tab-catalogo" class="ctab">
-                    <svg class="ico text-sm" aria-hidden="true"><use href="#i-box-open"></use></svg> Catálogo
+                <button onclick="trocarAbaConfig('catalogo')" id="cfg-tab-catalogo" class="ctab">📦 Catálogo
                 </button>
-                <button onclick="trocarAbaConfig('acesso')" id="cfg-tab-acesso" class="ctab">
-                    <svg class="ico text-sm" aria-hidden="true"><use href="#i-lock"></use></svg> Acesso
+                <button onclick="trocarAbaConfig('acesso')" id="cfg-tab-acesso" class="ctab">🔒 Acesso
                 </button>
-                <button onclick="trocarAbaConfig('backup')" id="cfg-tab-backup" class="ctab">
-                    <svg class="ico text-sm" aria-hidden="true"><use href="#i-cloud-arrow-up"></use></svg> Backup
+                <button onclick="trocarAbaConfig('backup')" id="cfg-tab-backup" class="ctab">☁️ Backup
                 </button>
             </div>
 
             <div class="overflow-y-auto flex-grow pb-safe modal-scroll" style="background:#0d1117;" style="-webkit-overflow-scrolling:touch;overscroll-behavior:contain;">
 
-                <div id="cfg-aba-perfil" class="p-5 space-y-4">
-                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-4">
-                        <h3 class="text-xs font-bold text-slate-500 uppercase"><svg class="ico text-blue-500 mr-1" aria-hidden="true"><use href="#i-image"></use></svg> Logótipo</h3>
+                <div id="cfg-aba-perfil" class="p-4">
+                    <div class="f-card">
+                        <h3 class="f-label" style="display:flex;align-items:center;gap:6px;"> Logótipo</h3>
 
                         <div class="flex items-center gap-4">
                             <div id="logoCfgPreviewWrap" style="flex-shrink:0;width:64px;height:64px;background:#e2e8f0;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center;border:2px dashed #cbd5e1;">
@@ -1936,97 +1995,105 @@
                         </div>
 
                         <div>
-                            <label class="text-[10px] font-bold text-slate-500 uppercase block mb-1">Tamanho</label>
+                            <label class="f-label">Tamanho</label>
                             <div class="flex items-center gap-2">
                                 <input type="range" min="28" max="64" value="40" id="logoSizeRange" oninput="atualizarLogoConfig()" class="flex-1">
-                                <span class="text-xs font-bold text-slate-600 w-10 text-right" id="logoSizeLabel">40px</span>
+                                <span class="f-label" style="width:2.5rem;text-align:right;margin:0;" id="logoSizeLabel">40px</span>
                             </div>
                         </div>
 
                         <div>
-                            <label class="text-[10px] font-bold text-slate-500 uppercase block mb-2">Forma</label>
+                            <label class="f-label">Forma</label>
                             <div class="flex gap-2">
-                                <button onclick="setLogoShape('square')" id="logoBtnSquare" class="flex-1 py-2 rounded-lg text-xs font-bold border-2 border-blue-500 bg-blue-600 text-white transition-all">⬛ Quadrado</button>
-                                <button onclick="setLogoShape('rounded')" id="logoBtnRounded" class="flex-1 py-2 rounded-lg text-xs font-bold border border-slate-200 bg-white text-slate-600 transition-all">🔲 Arredondado</button>
-                                <button onclick="setLogoShape('circle')" id="logoBtnCircle" class="flex-1 py-2 rounded-lg text-xs font-bold border border-slate-200 bg-white text-slate-600 transition-all">⭕ Círculo</button>
+                                <button onclick="setLogoShape('square')" id="logoBtnSquare" class="f-btn on">⬛ Quadrado</button>
+                                <button onclick="setLogoShape('rounded')" id="logoBtnRounded" class="f-btn">🔲 Arredondado</button>
+                                <button onclick="setLogoShape('circle')" id="logoBtnCircle" class="f-btn">⭕ Círculo</button>
                             </div>
                         </div>
                     </div>
-                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
-                        <h3 class="text-xs font-bold text-slate-500 uppercase"><svg class="ico text-blue-500 mr-1" aria-hidden="true"><use href="#i-user-tag"></use></svg> Dados do Prestador</h3>
-                        <input type="text" id="configNomePrestador" placeholder="Seu Nome / Sua Empresa" class="input-field w-full p-3 bg-white border border-slate-200 rounded-xl text-sm font-bold text-slate-700 focus:outline-none placeholder-slate-400 transition-all">
-                        <input type="text" id="configDocumento" placeholder="CPF / CNPJ" class="input-field w-full p-2 rounded-lg border border-slate-200 text-xs font-bold text-slate-700 outline-none">
+                    <div class="f-card">
+                        <h3 class="f-label" style="display:flex;align-items:center;gap:6px;"> Dados do Prestador</h3>
+                        <input type="text" id="configNomePrestador" placeholder="Seu Nome / Sua Empresa" class="f-input" style="font-weight:700;" placeholder-slate-400 transition-all">
+                        <input type="text" id="configDocumento" placeholder="CPF / CNPJ" class="f-input">
                         <div class="flex items-center gap-2">
                             <div class="flex items-center justify-center w-8 h-8 rounded-lg flex-shrink-0" style="background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 448 512" fill="white"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
                             </div>
-                            <input type="text" id="configInstagram" placeholder="@seuinstagram" class="input-field flex-grow p-2 bg-white border border-slate-200 rounded-lg text-xs font-bold text-slate-700 outline-none placeholder-slate-400">
+                            <input type="text" id="configInstagram" placeholder="@seuinstagram" class="f-input">
                         </div>
                         <p class="text-[10px] text-slate-400">Nome e dados que aparecem nos orçamentos e PDF.</p>
                     </div>
-                    <button onclick="salvarConfiguracoes()" class="w-full  text-white font-bold py-3.5 rounded-2xl hover:bg-black transition-all">SALVAR</button>
+                    <div class="f-card">
+                        <h3 class="f-label" style="display:flex;align-items:center;gap:6px;">🎨 Aparência</h3>
+                        <div class="f-btn-group" style="margin-top:4px;">
+                            <button onclick="setTema('dark')"  id="tema-dark"  class="f-btn on">🌑 Dark</button>
+                            <button onclick="setTema('light')" id="tema-light" class="f-btn">☀️ Light</button>
+                            <button onclick="setTema('auto')"  id="tema-auto"  class="f-btn">⚙️ Auto</button>
+                        </div>
+                    </div>
+                    <button onclick="salvarConfiguracoes()" class="f-cta">💾 Salvar Perfil</button>
                 </div>
 
-                <div id="cfg-aba-pagamento" class="hidden p-5 space-y-4">
-                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
-                        <h3 class="text-xs font-bold text-slate-500 uppercase"><svg class="ico text-blue-500 mr-1" aria-hidden="true"><use href="#i-percent"></use></svg> Pagamento</h3>
+                <div id="cfg-aba-pagamento" class="hidden p-4">
+                    <div class="f-card">
+                        <h3 class="f-label" style="display:flex;align-items:center;gap:6px;"> Pagamento</h3>
                         <div class="flex items-center justify-between">
                             <label class="text-xs font-bold text-slate-700">Sinal exigido</label>
                             <div class="relative w-24">
-                                <input type="number" id="configSinal" placeholder="30" class="input-field w-full p-2 pr-6 rounded-lg border border-slate-200 text-xs text-center font-bold text-slate-700 outline-none">
+                                <input type="number" id="configSinal" placeholder="30" class="f-input">
                                 <span class="absolute right-2 top-1/2 -translate-y-1/2 text-[10px] text-slate-400 font-bold">%</span>
                             </div>
                         </div>
                         <div class="flex items-center justify-between">
                             <label class="text-xs font-bold text-slate-700">Validade do orçamento</label>
                             <div class="relative w-28">
-                                <input type="number" id="configValidadeDias" placeholder="15" min="1" max="90" class="input-field w-full p-2 pr-10 rounded-lg border border-slate-200 text-xs text-center font-bold text-slate-700 outline-none">
+                                <input type="number" id="configValidadeDias" placeholder="15" min="1" max="90" class="f-input">
                                 <span class="absolute right-2 top-1/2 -translate-y-1/2 text-[10px] text-slate-400 font-bold">dias</span>
                             </div>
                         </div>
                         <div class="flex items-center justify-between">
                             <label class="text-xs font-bold text-slate-700">Desconto à vista</label>
                             <div class="relative w-24">
-                                <input type="number" id="configDesconto" placeholder="0" min="0" max="50" class="input-field w-full p-2 pr-6 rounded-lg border border-slate-200 text-xs text-center font-bold text-slate-700 outline-none">
+                                <input type="number" id="configDesconto" placeholder="0" min="0" max="50" class="f-input">
                                 <span class="absolute right-2 top-1/2 -translate-y-1/2 text-[10px] text-slate-400 font-bold">%</span>
                             </div>
                         </div>
                         <div>
                             <label class="text-xs font-bold text-slate-700 block mb-1">Chave Pix</label>
-                            <input type="text" id="configPix" placeholder="CPF, e-mail, telefone ou chave aleatória" class="input-field w-full p-2 rounded-lg border border-slate-200 text-xs font-bold text-slate-700 outline-none">
+                            <input type="text" id="configPix" placeholder="CPF, e-mail, telefone ou chave aleatória" class="f-input">
                         </div>
                         <div>
                             <label class="text-xs font-bold text-slate-700 block mb-1">Cartões aceitos</label>
-                            <input type="text" id="configCartoes" placeholder="Visa, Mastercard, Elo..." class="input-field w-full p-2 rounded-lg border border-slate-200 text-xs font-bold text-slate-700 outline-none">
+                            <input type="text" id="configCartoes" placeholder="Visa, Mastercard, Elo..." class="f-input">
                         </div>
                     </div>
                     <button onclick="salvarConfiguracoes()" class="w-full  text-white font-bold py-3.5 rounded-2xl hover:bg-black transition-all">SALVAR</button>
                 </div>
 
-                <div id="cfg-aba-catalogo" class="hidden p-5 space-y-3">
-                    <div class="flex gap-1 bg-slate-100 rounded-xl p-1">
-                        <button onclick="trocarSubCatalogo('servicos')" id="sub-tab-servicos" class="flex-1 py-2 rounded-lg text-xs font-bold bg-white text-slate-700 shadow-sm transition-all">🔧 Preços Base</button>
-                        <button onclick="trocarSubCatalogo('materiais')" id="sub-tab-materiais" class="flex-1 py-2 rounded-lg text-xs font-bold text-slate-400 transition-all">📦 Materiais</button>
+                <div id="cfg-aba-catalogo" class="hidden p-4">
+                    <div class="f-btn-group" style="padding:4px;background:#0a1628;border-radius:11px;border:1px solid rgba(255,255,255,.07);">
+                        <button onclick="trocarSubCatalogo('servicos')" id="sub-tab-servicos" class="f-btn on">🔧 Preços Base</button>
+                        <button onclick="trocarSubCatalogo('materiais')" id="sub-tab-materiais" class="f-btn">📦 Materiais</button>
                     </div>
                     <div id="sub-aba-servicos">
                         <div class="flex gap-2 mb-3">
-                            <input type="text" id="novoServicoNome" placeholder="Nome do Serviço" class="input-field flex-grow p-2 rounded-lg border border-slate-200 text-xs">
-                            <input type="number" id="novoServicoValor" placeholder="R$" class="input-field w-20 p-2 rounded-lg border border-slate-200 text-xs">
+                            <input type="text" id="novoServicoNome" placeholder="Nome do Serviço" class="f-input">
+                            <input type="number" id="novoServicoValor" placeholder="R$" class="f-input">
                             <button onclick="adicionarServicoBase()" class="bg-blue-600 text-white p-2 rounded-lg"><svg class="ico" aria-hidden="true"><use href="#i-plus"></use></svg></button>
                         </div>
                         <div id="listaServicosBase" class="space-y-1 pr-1"></div>
                     </div>
                     <div id="sub-aba-materiais" class="hidden space-y-2">
                         <div class="flex gap-2">
-                            <input type="text" id="novoMaterialNome" placeholder="Nome do Material" class="input-field flex-grow p-2 rounded-lg border border-slate-200 text-xs">
-                            <input type="number" id="novoMaterialValor" placeholder="R$" class="input-field w-20 p-2 rounded-lg border border-slate-200 text-xs">
+                            <input type="text" id="novoMaterialNome" placeholder="Nome do Material" class="f-input">
+                            <input type="number" id="novoMaterialValor" placeholder="R$" class="f-input">
                         </div>
                         <div class="flex gap-2">
-                            <select id="novoMaterialUnidade" class="input-field flex-1 p-2 rounded-lg border border-slate-200 text-xs">
+                            <select id="novoMaterialUnidade" class="f-input">
                                 <option value="rolo100">Rolo 100m</option>
                                 <option value="un" selected>Unidade (un)</option>
                             </select>
-                            <select id="novoMaterialTipo" class="input-field flex-1 p-2 rounded-lg border border-slate-200 text-xs">
+                            <select id="novoMaterialTipo" class="f-input">
                                 <option value="">Tipo...</option>
                                 <option value="fio">🟠 Fio</option>
                                 <option value="interruptor">🔵 Interruptor</option>
@@ -2044,38 +2111,38 @@
                     </div>
                 </div>
 
-                <div id="cfg-aba-acesso" class="hidden p-5 space-y-4">
-                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
-                        <h3 class="text-xs font-bold text-slate-500 uppercase"><svg class="ico text-blue-500 mr-1" aria-hidden="true"><use href="#i-lock"></use></svg> Usuário e Senha</h3>
+                <div id="cfg-aba-acesso" class="hidden p-4">
+                    <div class="f-card">
+                        <h3 class="f-label" style="display:flex;align-items:center;gap:6px;"> Usuário e Senha</h3>
                         <div>
                             <label class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Novo usuário</label>
-                            <input type="text" id="configUsuario" placeholder="Digite o novo usuário" autocomplete="off" autocorrect="off" autocapitalize="off" class="input-field w-full p-3 bg-white border border-slate-200 rounded-xl text-sm font-bold text-slate-700 focus:outline-none placeholder-slate-400 transition-all">
+                            <input type="text" id="configUsuario" placeholder="Digite o novo usuário" autocomplete="off" autocorrect="off" autocapitalize="off" class="f-input" style="font-weight:700;" placeholder-slate-400 transition-all">
                         </div>
                         <div>
                             <label class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Nova senha</label>
                             <div class="relative">
-                                <input type="password" id="configSenha" placeholder="Digite a nova senha" autocomplete="off" class="input-field w-full p-3 pr-12 bg-white border border-slate-200 rounded-xl text-sm font-bold text-slate-700 focus:outline-none placeholder-slate-400 transition-all">
+                                <input type="password" id="configSenha" placeholder="Digite a nova senha" autocomplete="off" class="f-input">
                                 <button onclick="toggleSenhaConfig()" type="button" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 text-base">👁</button>
                             </div>
                         </div>
                         <div>
                             <label class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Confirmar nova senha</label>
-                            <input type="password" id="configSenhaConfirm" placeholder="Repita a nova senha" autocomplete="off" class="input-field w-full p-3 bg-white border border-slate-200 rounded-xl text-sm font-bold text-slate-700 focus:outline-none placeholder-slate-400 transition-all">
+                            <input type="password" id="configSenhaConfirm" placeholder="Repita a nova senha" autocomplete="off" class="f-input" style="font-weight:700;" placeholder-slate-400 transition-all">
                         </div>
                         <p class="text-[10px] text-slate-400">Deixe em branco para manter o usuário/senha atual.</p>
                     </div>
                     <button onclick="salvarConfiguracoes()" class="w-full  text-white font-bold py-3.5 rounded-2xl hover:bg-black transition-all">SALVAR</button>
                 </div>
 
-                <div id="cfg-aba-backup" class="hidden p-5 space-y-4">
-                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
-                        <h3 class="text-xs font-bold text-slate-500 uppercase"><svg class="ico text-blue-500 mr-1" aria-hidden="true"><use href="#i-cloud-arrow-up"></use></svg> Backup &amp; Segurança</h3>
+                <div id="cfg-aba-backup" class="hidden p-4">
+                    <div class="f-card">
+                        <h3 class="f-label" style="display:flex;align-items:center;gap:6px;"> Backup &amp; Segurança</h3>
                         <div class="grid grid-cols-2 gap-2">
-                            <button onclick="exportarDados()" class="flex flex-col items-center justify-center p-4 bg-white border border-green-200 rounded-xl hover:bg-green-50 transition-colors">
+                            <button onclick="exportarDados()" class="flex flex-col items-center justify-center p-4 rounded-xl cursor-pointer" style="background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);">
                                 <svg class="ico text-green-500 text-lg mb-1" aria-hidden="true"><use href="#i-download"></use></svg>
                                 <span class="text-[10px] font-bold text-slate-600">BAIXAR BACKUP</span>
                             </button>
-                            <label class="flex flex-col items-center justify-center p-4 bg-white border border-blue-200 rounded-xl hover:bg-blue-50 transition-colors cursor-pointer">
+                            <label class="flex flex-col items-center justify-center p-4 rounded-xl cursor-pointer" style="background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.2);">
                                 <svg class="ico text-blue-500 text-lg mb-1" aria-hidden="true"><use href="#i-upload"></use></svg>
                                 <span class="text-[10px] font-bold text-slate-600">RESTAURAR</span>
                                 <input type="file" accept=".json" onchange="importarDados(this)" class="hidden">
@@ -3267,7 +3334,7 @@
             if (itens.length > 0 && equip) {
                 equip.style.marginBottom = '16px';
                 let tbl = '<p style="font-size:10px;font-weight:700;color:#0f172a;text-transform:uppercase;margin:0 0 8px;border-bottom:2px solid #0f172a;padding-bottom:6px;">Equipamentos</p>';
-                tbl += '<table style="width:100%;border-collapse:collapse;font-size:11px;"><thead><tr style="background:#0f172a;color:white;"><th style="padding:7px 10px;text-align:left;">Equipamento</th><th style="padding:7px 10px;text-align:center;">Qtd</th><th style="padding:7px 10px;text-align:center;">fp</th><th style="padding:7px 10px;text-align:right;">Potência</th></tr></thead><tbody>';
+                tbl += '<table class="f-tbl"><thead><tr style="background:#0f172a;color:white;"><th style="padding:7px 10px;text-align:left;">Equipamento</th><th style="padding:7px 10px;text-align:center;">Qtd</th><th style="padding:7px 10px;text-align:center;">fp</th><th style="padding:7px 10px;text-align:right;">Potência</th></tr></thead><tbody>';
                 itens.forEach((i, idx) => {
                     const bg = idx % 2 === 0 ? '#f8fafc' : '#fff';
                     tbl += `<tr style="background:${bg};border-bottom:1px solid #f1f5f9;"><td style="padding:7px 10px;">${i.nome}</td><td style="padding:7px 10px;text-align:center;">${i.qtd}</td><td style="padding:7px 10px;text-align:center;">${i.fp}</td><td style="padding:7px 10px;text-align:right;font-weight:700;">${i.w} W</td></tr>`;
@@ -3500,16 +3567,14 @@
         }
 
         function _destacarNavBtn(id) {
-            // Update home nav active state
             var niMap = {
                 'bnav-inicio': 0, 'bnav-ferramentas': 1,
-                'bnav-agenda': 2, 'bnav-historico': 3, 'bnav-ajustes': 4
+                'bnav-agenda': 2, 'bnav-ajustes': 3
             };
             var nis = document.querySelectorAll('.bnav-home .ni');
             var activeIdx = niMap[id];
             nis.forEach(function(ni, i) {
-                if (i === activeIdx) { ni.classList.add('on'); }
-                else { ni.classList.remove('on'); }
+                ni.classList.toggle('on', i === activeIdx);
             });
         }
         function _camposPreenchidos() {
@@ -3772,10 +3837,10 @@
             const d = NBR_DADOS[m]; if (!d) return;
             document.getElementById('nbr-descricao').textContent = d.desc;
             const wrap = document.getElementById('nbr-tabela-wrap');
-            let html = `<table style="width:100%;border-collapse:collapse;font-size:11px;"><thead><tr style="background:#0f172a;color:white;"><th style="padding:9px 6px;text-align:left;">Bitola</th><th style="padding:9px 6px;text-align:center;">${d.cols[0]}</th><th style="padding:9px 6px;text-align:center;">${d.cols[1]}</th><th style="padding:9px 6px;text-align:center;">Disj.</th><th style="padding:9px 6px;text-align:center;">Uso</th></tr></thead><tbody>`;
+            let html = `<table style="width:100%;border-collapse:collapse;font-size:12px;"><thead><tr style="background:#1e293b;"><th style="padding:9px 8px;text-align:left;color:#94a3b8;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;">Bitola</th><th style="padding:9px 6px;text-align:center;color:#94a3b8;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;">${d.cols[0]}</th><th style="padding:9px 6px;text-align:center;color:#94a3b8;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;">${d.cols[1]}</th><th style="padding:9px 6px;text-align:center;color:#94a3b8;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;">Disj.</th><th style="padding:9px 6px;text-align:center;color:#94a3b8;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;">Uso</th></tr></thead><tbody>`;
             d.rows.forEach((r, i) => {
-                const bg = i%2===0?'#fff':'#f8fafc';
-                html += `<tr style="border-bottom:1px solid #f1f5f9;background:${bg};"><td style="padding:8px 6px;font-weight:700;">${r.b}</td><td style="padding:8px 6px;text-align:center;">${r.v[0]}A</td><td style="padding:8px 6px;text-align:center;">${r.v[1]}A</td><td style="padding:8px 6px;text-align:center;color:#2563eb;font-weight:700;">${r.d}A</td><td style="padding:8px 6px;text-align:center;color:#64748b;font-size:10px;">${r.u}</td></tr>`;
+                const bg = i%2===0?'#0d1b2a':'#0a1220';
+                html += `<tr style="border-bottom:1px solid rgba(255,255,255,.05);background:${bg};"><td style="padding:9px 8px;font-weight:700;color:#e2e8f0;">${r.b}</td><td style="padding:9px 6px;text-align:center;color:#60a5fa;font-weight:600;">${r.v[0]}A</td><td style="padding:9px 6px;text-align:center;color:#60a5fa;font-weight:600;">${r.v[1]}A</td><td style="padding:9px 6px;text-align:center;color:#f59e0b;font-weight:700;">${r.d}A</td><td style="padding:9px 6px;text-align:center;color:#475569;font-size:10px;">${r.u}</td></tr>`;
             });
             html += '</tbody></table>';
             wrap.innerHTML = html;
@@ -4033,8 +4098,8 @@
                 requestAnimationFrame(function() { requestAnimationFrame(function() {
                     c.style.transform = 'translateY(0)';
                 }); });
-                  renderModelosCheck();
                   renderTabelaNBR();
+                  trocarAbaFerr('carga');
             } else {
                 c.style.transform = 'translateY(100%)';
                 setTimeout(function() {
@@ -4383,8 +4448,8 @@
             ['mono','bi','tri'].forEach(s => {
                 const el = document.getElementById('cbtn-'+s);
                 if (el) el.className = s === v
-                    ? 'flex-1 py-2 rounded-lg text-xs font-bold border-2 border-blue-500 bg-blue-50 text-blue-700'
-                    : 'flex-1 py-2 rounded-lg text-xs font-bold border-2 border-slate-200 text-slate-500';
+                    ? 'f-btn on'
+                    : 'f-btn';
             });
             _syncBadgeBtns();
             calcularCarga();
@@ -4396,8 +4461,8 @@
             [127,220,380].forEach(t => {
                 const el = document.getElementById('btn'+t);
                 if (el) el.className = t === v
-                    ? 'flex-1 py-2 rounded-lg text-xs font-bold border-2 border-blue-500 bg-blue-50 text-blue-700'
-                    : 'flex-1 py-2 rounded-lg text-xs font-bold border-2 border-slate-200 text-slate-500';
+                    ? 'f-btn on'
+                    : 'f-btn';
             });
             _syncBadgeBtns();
             calcularCarga();
@@ -4408,8 +4473,8 @@
             cargaSistema = v;
             ['mono','bi','tri'].forEach(s => {
                 document.getElementById('cbtn-'+s).className = s === v
-                    ? 'flex-1 py-2 rounded-lg text-xs font-bold border-2 border-blue-500 bg-blue-50 text-blue-700'
-                    : 'flex-1 py-2 rounded-lg text-xs font-bold border-2 border-slate-200 text-slate-500';
+                    ? 'f-btn on'
+                    : 'f-btn';
             });
         }
 
@@ -4419,8 +4484,8 @@
             [127,220,380].forEach(t => {
                 const el = document.getElementById('btn'+t);
                 if (el) el.className = t === v
-                    ? 'flex-1 py-2 rounded-lg text-xs font-bold border-2 border-blue-500 bg-blue-50 text-blue-700'
-                    : 'flex-1 py-2 rounded-lg text-xs font-bold border-2 border-slate-200 text-slate-500';
+                    ? 'f-btn on'
+                    : 'f-btn';
             });
         }
 
@@ -4902,7 +4967,7 @@
             const totalCarga = totalWIlum + totalWTomadas + totalEquip;
 
             let html = `<div class="overflow-x-auto rounded-xl border border-slate-200">
-                <table style="width:100%;border-collapse:collapse;font-size:11px;">
+                <table class="f-tbl">
                     <thead><tr style="background:#0f172a;color:white;">
                         <th style="padding:8px 6px;text-align:left;">Cômodo</th>
                         <th style="padding:8px 6px;text-align:center;">Área</th>
@@ -5485,11 +5550,11 @@
         function setIsolamento(v) {
             quedaIsolamento = v;
             document.getElementById('qbtn-pvc').className = v==='pvc'
-                ? 'flex-1 py-2 rounded-lg text-xs font-bold border-2 border-blue-500 bg-blue-50 text-blue-700'
-                : 'flex-1 py-2 rounded-lg text-xs font-bold border-2 border-slate-200 text-slate-500';
+                ? 'f-btn on'
+                : 'f-btn';
             document.getElementById('qbtn-epr').className = v==='epr'
-                ? 'flex-1 py-2 rounded-lg text-xs font-bold border-2 border-blue-500 bg-blue-50 text-blue-700'
-                : 'flex-1 py-2 rounded-lg text-xs font-bold border-2 border-slate-200 text-slate-500';
+                ? 'f-btn on'
+                : 'f-btn';
             atualizarInfoBitola();
         }
 
@@ -5532,31 +5597,31 @@
             if (_modoTeste && v === 'tri') return;
             quedaSistema = v;
             document.getElementById('qbtn-mono').className = v==='mono'
-                ? 'flex-1 py-2 rounded-lg text-xs font-bold border-2 border-blue-500 bg-blue-50 text-blue-700'
-                : 'flex-1 py-2 rounded-lg text-xs font-bold border-2 border-slate-200 text-slate-500';
+                ? 'f-btn on'
+                : 'f-btn';
             document.getElementById('qbtn-tri').className = v==='tri'
-                ? 'flex-1 py-2 rounded-lg text-xs font-bold border-2 border-blue-500 bg-blue-50 text-blue-700'
-                : 'flex-1 py-2 rounded-lg text-xs font-bold border-2 border-slate-200 text-slate-500';
+                ? 'f-btn on'
+                : 'f-btn';
         }
 
         function setQuedaTipo(v) {
             quedaTipoCirc = v;
             document.getElementById('qbtn-terminal').className = v==='terminal'
-                ? 'flex-1 py-2 rounded-lg text-xs font-bold border-2 border-green-500 bg-green-50 text-green-700'
-                : 'flex-1 py-2 rounded-lg text-xs font-bold border-2 border-slate-200 text-slate-500';
+                ? 'f-btn on'
+                : 'f-btn';
             document.getElementById('qbtn-alimentador').className = v==='alimentador'
                 ? 'flex-1 py-2 rounded-lg text-xs font-bold border-2 border-orange-500 bg-orange-50 text-orange-700'
-                : 'flex-1 py-2 rounded-lg text-xs font-bold border-2 border-slate-200 text-slate-500';
+                : 'f-btn';
         }
 
         function setQuedaMaterial(v) {
             quedaMaterial = v;
             document.getElementById('qbtn-cu').className = v==='cu'
-                ? 'flex-1 py-2 rounded-lg text-xs font-bold border-2 border-blue-500 bg-blue-50 text-blue-700'
-                : 'flex-1 py-2 rounded-lg text-xs font-bold border-2 border-slate-200 text-slate-500';
+                ? 'f-btn on'
+                : 'f-btn';
             document.getElementById('qbtn-al').className = v==='al'
-                ? 'flex-1 py-2 rounded-lg text-xs font-bold border-2 border-blue-500 bg-blue-50 text-blue-700'
-                : 'flex-1 py-2 rounded-lg text-xs font-bold border-2 border-slate-200 text-slate-500';
+                ? 'f-btn on'
+                : 'f-btn';
         }
 
         function calcularQuedaBitola(bitola, corrente, comprimento, tensao, fp, fAgrup, sistema) {
@@ -6086,6 +6151,29 @@
             // placeholder for notification panel
         }
         // ═══════════════════════════════════════════════════════
+
+        
+        // ── TEMA ───────────────────────────────────────────────
+        function setTema(t) {
+            localStorage.setItem('ep_tema', t);
+            _aplicarTema(t);
+            ['dark','light','auto'].forEach(function(k) {
+                var b = document.getElementById('tema-'+k);
+                if (b) b.className = k === t ? 'f-btn on' : 'f-btn';
+            });
+        }
+        function _aplicarTema(t) {
+            var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            var useDark = t === 'dark' || (t === 'auto' && prefersDark);
+            document.body.classList.toggle('tema-light', !useDark);
+        }
+        function _iniciarTema() {
+            var t = localStorage.getItem('ep_tema') || 'dark';
+            _aplicarTema(t);
+            var btn = document.getElementById('tema-'+t);
+            if (btn) btn.className = 'f-btn on';
+        }
+        // ───────────────────────────────────────────────────────
 
         </script>
 </body>
