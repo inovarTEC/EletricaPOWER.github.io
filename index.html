@@ -954,21 +954,72 @@ const MAT = [
 const MAT_PRECOS_CFG = {};
 MAT.forEach(m => { MAT_PRECOS_CFG[m.id] = m.p; });
 
+// Mapa de bitola → id do cabo flexível no catálogo MAT
+const CABO_BITOLA_ID = {
+  '1,5mm²':'m001','2,5mm²':'m002','4mm²':'m003',
+  '6mm²':'m004','10mm²':'m005','16mm²':'m006','25mm²':'m007'
+};
+// Preço por metro de cada bitola
+const CABO_PRECO = {
+  '1,5mm²':2.50,'2,5mm²':3.80,'4mm²':5.80,
+  '6mm²':8.50,'10mm²':13.50,'16mm²':21.00,'25mm²':32.00
+};
+// Cores padrão dos 3 fios
+const FIOS_PADRAO = [
+  {cor:'Verde/Amarelo (Terra)', emoji:'🟢'},
+  {cor:'Azul (Neutro)',         emoji:'🔵'},
+  {cor:'Vermelho (Fase)',       emoji:'🔴'}
+];
+
 const SERVICOS_CFG = {
+  // ─── TOMADA ───────────────────────────────────────────────
   tomada: {
     label:'Ponto de Tomada',
-    campos:[
-      {k:'tipo', label:'Tipo de tomada', chips:['TUG 10A','TUG 20A','TUE 32A']},
-      {k:'qt', label:'Quantidade de pontos', type:'number', default:1, min:1},
-      {k:'cabo', label:'Bitola do cabo', chips:['2,5mm²','4mm²','6mm²']},
-    ],
-    toggles:[
-      {k:'placa',label:'Com placa de acabamento'},
-      {k:'rasgo',label:'Incluir abertura de rasgo'},
-    ],
-    mats:['m031','m002','m038'],
     basePrice:{tipo:{'TUG 10A':80,'TUG 20A':130,'TUE 32A':180}},
+    modulos:[
+      // 1. Tipo + quantidade
+      {
+        tipo:'chips', k:'tipo', label:'Tipo de tomada',
+        chips:['TUG 10A','TUG 20A','TUE 32A'], default:'TUG 10A'
+      },
+      {
+        tipo:'number', k:'qt', label:'Quantidade de pontos', default:1, min:1
+      },
+      // 2. Tomada ON/OFF → subtipo + caixa
+      {
+        tipo:'secao', k:'tem_tomada', label:'Tomadas',
+        cor:'#f59e0b', icone:'🔌',
+        filhos:[
+          {tipo:'chips', k:'tom_tipo', label:'Tipo de instalação', chips:['Embutir','Sobrepor'], default:'Embutir'},
+          {tipo:'chips', k:'tom_caixa', label:'Caixa', chips:['4×2','4×4'], default:'4×2'},
+          {tipo:'chips', k:'tom_amp', label:'Amperagem', chips:['10A','20A','32A'], default:'10A'},
+          {tipo:'chips', k:'tom_placa', label:'Placa de acabamento', chips:['Com placa','Sem placa'], default:'Com placa'},
+        ]
+      },
+      // 3. Cabeamento ON/OFF
+      {
+        tipo:'secao', k:'tem_cabo', label:'Cabeamento',
+        cor:'#ef4444', icone:'🔴',
+        filhos:[
+          {tipo:'chips', k:'cabo_bitola', label:'Bitola do cabo', chips:['1,5mm²','2,5mm²','4mm²','6mm²','10mm²'], default:'2,5mm²'},
+          {tipo:'number', k:'cabo_metros', label:'Comprimento (metros)', default:3, min:1},
+          {tipo:'chips', k:'cabo_forma', label:'Como comprar', chips:['Por metro','Rolo 25m','Rolo 50m','Rolo 100m'], default:'Por metro'},
+          {tipo:'fios', k:'fios', label:'Fios (cores padrão — 3 fios)', default:FIOS_PADRAO},
+        ]
+      },
+      // 4. Conduíte ON/OFF
+      {
+        tipo:'secao', k:'tem_conduíte', label:'Conduíte',
+        cor:'#3b82f6', icone:'⬜',
+        filhos:[
+          {tipo:'chips', k:'cond_tipo', label:'Tipo de conduíte', chips:['Rígido PVC','Flexível PVC','Canaleta PVC'], default:'Rígido PVC'},
+          {tipo:'chips', k:'cond_diam', label:'Diâmetro', chips:['1/2"','3/4"','1"'], default:'3/4"'},
+          {tipo:'number', k:'cond_metros', label:'Comprimento (metros)', default:3, min:1},
+        ]
+      },
+    ]
   },
+  // ─── CHUVEIRO ─────────────────────────────────────────────
   chuveiro: {
     label:'Chuveiro Elétrico',
     campos:[
@@ -982,6 +1033,7 @@ const SERVICOS_CFG = {
     mats:['m003','m014','m026'],
     basePrice:{pot:{'4400W / 20A':150,'5500W / 25A':170,'6800W / 32A':200}},
   },
+  // ─── AR-CONDICIONADO ──────────────────────────────────────
   ar: {
     label:'Ar-condicionado Split',
     campos:[
@@ -996,6 +1048,7 @@ const SERVICOS_CFG = {
     mats:['m002','m016','m024'],
     basePrice:{btu:{'9.000':350,'12.000':380,'18.000':430,'24.000':500}},
   },
+  // ─── BOMBA ────────────────────────────────────────────────
   bomba: {
     label:"Bomba d'água",
     campos:[
@@ -1011,6 +1064,7 @@ const SERVICOS_CFG = {
     mats:['m003','m016','m024'],
     basePrice:{cv:{'0,5 CV':250,'1 CV':280,'2 CV':320,'3 CV':380}},
   },
+  // ─── QUADRO ───────────────────────────────────────────────
   qd: {
     label:'Quadro de Distribuição',
     campos:[
@@ -1111,12 +1165,31 @@ function abrirConfigurador(srvData) {
   scpSrvData = srvData;
   scpEstado = {};
   const cfg = SERVICOS_CFG[scpAtivo];
-  // inicializar estado com primeiros valores
-  (cfg.campos||[]).forEach(c => {
-    if (c.chips) scpEstado[c.k] = c.chips[0];
-    else if (c.type === 'number') scpEstado[c.k] = c.default || 1;
-  });
-  (cfg.toggles||[]).forEach(t => { scpEstado[t.k] = false; });
+
+  if (cfg.modulos) {
+    // sistema modular novo
+    cfg.modulos.forEach(mod => {
+      if (mod.tipo === 'chips')  scpEstado[mod.k] = mod.default || mod.chips[0];
+      if (mod.tipo === 'number') scpEstado[mod.k] = mod.default || 1;
+      if (mod.tipo === 'fios')   scpEstado[mod.k] = JSON.parse(JSON.stringify(mod.default));
+      if (mod.tipo === 'secao') {
+        scpEstado[mod.k] = false;
+        (mod.filhos||[]).forEach(f => {
+          if (f.tipo === 'chips')  scpEstado[f.k] = f.default || f.chips[0];
+          if (f.tipo === 'number') scpEstado[f.k] = f.default || 1;
+          if (f.tipo === 'fios')   scpEstado[f.k] = JSON.parse(JSON.stringify(f.default));
+        });
+      }
+    });
+  } else {
+    // sistema legado (campos/toggles)
+    (cfg.campos||[]).forEach(c => {
+      if (c.chips) scpEstado[c.k] = c.chips[0];
+      else if (c.type === 'number') scpEstado[c.k] = c.default || 1;
+    });
+    (cfg.toggles||[]).forEach(t => { scpEstado[t.k] = false; });
+  }
+
   document.getElementById('scp-hdr-ico').textContent = srvData.ico;
   document.getElementById('scp-hdr-name').textContent = srvData.n;
   document.getElementById('scp-hdr-cat').textContent = srvData.cat;
@@ -1128,46 +1201,123 @@ function abrirConfigurador(srvData) {
 function renderConfigurador() {
   const cfg = SERVICOS_CFG[scpAtivo];
   let html = '';
-  (cfg.campos||[]).forEach(c => {
-    html += `<div style="margin-bottom:16px"><div class="ilbl" style="margin-bottom:8px">${c.label}</div>`;
-    if (c.chips) {
-      html += `<div style="display:flex;flex-wrap:wrap;gap:6px">`;
-      c.chips.forEach(v => {
-        const on = scpEstado[c.k] === v ? ' on' : '';
-        html += `<button class="scp-chip${on}" onclick="scpSetChip('${c.k}','${v}',this)">${v}</button>`;
+
+  if (cfg.modulos) {
+    // ── sistema modular ──────────────────────────────────────
+    cfg.modulos.forEach(mod => {
+      if (mod.tipo === 'chips') {
+        html += `<div style="margin-bottom:16px"><div class="ilbl" style="margin-bottom:8px">${mod.label}</div>`;
+        html += `<div style="display:flex;flex-wrap:wrap;gap:6px">`;
+        mod.chips.forEach(v => {
+          const on = scpEstado[mod.k] === v ? ' on' : '';
+          html += `<button class="scp-chip${on}" onclick="scpSetChip('${mod.k}','${v}',this)">${v}</button>`;
+        });
+        html += `</div></div>`;
+
+      } else if (mod.tipo === 'number') {
+        html += `<div style="margin-bottom:16px"><div class="ilbl" style="margin-bottom:8px">${mod.label}</div>`;
+        html += `<div style="display:flex;align-items:center;gap:10px">
+          <button class="qty-btn" onclick="scpSetVal('${mod.k}',Math.max(${mod.min||1},(scpEstado['${mod.k}']||1)-1));renderConfigurador();scpAtualizarPreview()">−</button>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:18px;font-weight:700;color:var(--text);min-width:32px;text-align:center">${scpEstado[mod.k]||1}</span>
+          <button class="qty-btn" onclick="scpSetVal('${mod.k}',(scpEstado['${mod.k}']||1)+1);renderConfigurador();scpAtualizarPreview()">+</button>
+        </div></div>`;
+
+      } else if (mod.tipo === 'secao') {
+        const ativo = !!scpEstado[mod.k];
+        const swClass = ativo ? 'scp-toggle-sw on' : 'scp-toggle-sw';
+        html += `<div class="scp-secao-wrap" style="margin-bottom:14px;border:1px solid ${ativo ? mod.cor : 'var(--border-input)'};border-radius:14px;overflow:hidden;transition:border-color .2s">`;
+        html += `<div class="scp-secao-hdr" style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:${ativo ? mod.cor+'18' : 'var(--bg-input)'};cursor:pointer" onclick="scpTogSecao('${mod.k}',this)">
+          <span style="font-size:18px">${mod.icone}</span>
+          <span style="flex:1;font-size:13px;font-weight:700;color:${ativo ? mod.cor : 'var(--text2)'}">${mod.label}</span>
+          <div class="${swClass}" style="pointer-events:none"></div>
+        </div>`;
+        if (ativo) {
+          html += `<div style="padding:12px 14px 4px;border-top:1px solid ${mod.cor}33">`;
+          (mod.filhos||[]).forEach(f => {
+            if (f.tipo === 'chips') {
+              html += `<div style="margin-bottom:14px"><div class="ilbl" style="margin-bottom:8px">${f.label}</div>`;
+              html += `<div style="display:flex;flex-wrap:wrap;gap:6px">`;
+              f.chips.forEach(v => {
+                const on = scpEstado[f.k] === v ? ' on' : '';
+                html += `<button class="scp-chip${on}" onclick="scpSetChip('${f.k}','${v}',this)">${v}</button>`;
+              });
+              html += `</div></div>`;
+            } else if (f.tipo === 'number') {
+              html += `<div style="margin-bottom:14px"><div class="ilbl" style="margin-bottom:8px">${f.label}</div>`;
+              html += `<div style="display:flex;align-items:center;gap:10px">
+                <button class="qty-btn" onclick="scpSetVal('${f.k}',Math.max(${f.min||1},(scpEstado['${f.k}']||1)-1));renderConfigurador();scpAtualizarPreview()">−</button>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:18px;font-weight:700;color:var(--text);min-width:32px;text-align:center">${scpEstado[f.k]||1}</span>
+                <button class="qty-btn" onclick="scpSetVal('${f.k}',(scpEstado['${f.k}']||1)+1);renderConfigurador();scpAtualizarPreview()">+</button>
+              </div></div>`;
+            } else if (f.tipo === 'fios') {
+              const fios = scpEstado[f.k] || f.default;
+              html += `<div style="margin-bottom:14px"><div class="ilbl" style="margin-bottom:8px">${f.label}</div>`;
+              html += `<div style="display:flex;flex-direction:column;gap:6px">`;
+              fios.forEach((fio, idx) => {
+                html += `<div style="display:flex;align-items:center;gap:8px;background:var(--bg-card);border:1px solid var(--border-card);border-radius:10px;padding:8px 12px">
+                  <span style="font-size:16px">${fio.emoji}</span>
+                  <span style="flex:1;font-size:12px;font-weight:600;color:var(--text2)">${fio.cor}</span>
+                </div>`;
+              });
+              html += `</div></div>`;
+            }
+          });
+          html += `</div>`;
+        }
+        html += `</div>`;
+      }
+    });
+
+  } else {
+    // ── sistema legado ───────────────────────────────────────
+    (cfg.campos||[]).forEach(c => {
+      html += `<div style="margin-bottom:16px"><div class="ilbl" style="margin-bottom:8px">${c.label}</div>`;
+      if (c.chips) {
+        html += `<div style="display:flex;flex-wrap:wrap;gap:6px">`;
+        c.chips.forEach(v => {
+          const on = scpEstado[c.k] === v ? ' on' : '';
+          html += `<button class="scp-chip${on}" onclick="scpSetChip('${c.k}','${v}',this)">${v}</button>`;
+        });
+        html += `</div>`;
+      } else if (c.type === 'number') {
+        html += `<div style="display:flex;align-items:center;gap:10px">
+          <button class="qty-btn" onclick="scpSetVal('${c.k}',Math.max(${c.min||1},(scpEstado['${c.k}']||1)-1));renderConfigurador();scpAtualizarPreview()">−</button>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:18px;font-weight:700;color:var(--text);min-width:32px;text-align:center">${scpEstado[c.k]||1}</span>
+          <button class="qty-btn" onclick="scpSetVal('${c.k}',(scpEstado['${c.k}']||1)+1);renderConfigurador();scpAtualizarPreview()">+</button>
+        </div>`;
+      }
+      html += `</div>`;
+    });
+    if (cfg.toggles && cfg.toggles.length) {
+      html += `<div class="ilbl" style="margin-bottom:6px">Opções</div><div style="background:var(--bg-input);border:1px solid var(--border-input);border-radius:12px;padding:0 12px;margin-bottom:16px">`;
+      cfg.toggles.forEach(t => {
+        const on = scpEstado[t.k] ? ' on' : '';
+        html += `<div class="scp-toggle">
+          <span class="scp-toggle-lbl">${t.label}</span>
+          <div class="scp-toggle-sw${on}" onclick="scpSetTog('${t.k}',this)"></div>
+        </div>`;
       });
       html += `</div>`;
-    } else if (c.type === 'number') {
-      html += `<div style="display:flex;align-items:center;gap:10px">
-        <button class="qty-btn" onclick="scpSetVal('${c.k}',Math.max(${c.min||1},(scpEstado['${c.k}']||1)-1));renderConfigurador();scpAtualizarPreview()">−</button>
-        <span style="font-family:'IBM Plex Mono',monospace;font-size:18px;font-weight:700;color:var(--text);min-width:32px;text-align:center">${scpEstado[c.k]||1}</span>
-        <button class="qty-btn" onclick="scpSetVal('${c.k}',(scpEstado['${c.k}']||1)+1);renderConfigurador();scpAtualizarPreview()">+</button>
-      </div>`;
     }
-    html += `</div>`;
-  });
-  if (cfg.toggles && cfg.toggles.length) {
-    html += `<div class="ilbl" style="margin-bottom:6px">Opções</div><div style="background:var(--bg-input);border:1px solid var(--border-input);border-radius:12px;padding:0 12px;margin-bottom:16px">`;
-    cfg.toggles.forEach(t => {
-      const on = scpEstado[t.k] ? ' on' : '';
-      html += `<div class="scp-toggle">
-        <span class="scp-toggle-lbl">${t.label}</span>
-        <div class="scp-toggle-sw${on}" onclick="scpSetTog('${t.k}',this)"></div>
-      </div>`;
-    });
-    html += `</div>`;
+    if (cfg.mats && cfg.mats.length) {
+      html += `<div class="ilbl" style="margin-bottom:8px">Materiais sugeridos</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px">`;
+      cfg.mats.forEach(mid => {
+        const m = MAT.find(x => x.id === mid);
+        if (!m) return;
+        html += `<button class="scp-chip mat-chip" onclick="addMaterial(null,MAT.find(x=>x.id==='${mid}'),1,${m.p});flashButton(this)">${m.ico} ${m.n}</button>`;
+      });
+      html += `</div>`;
+    }
   }
-  if (cfg.mats && cfg.mats.length) {
-    html += `<div class="ilbl" style="margin-bottom:8px">Materiais sugeridos</div>
-    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px">`;
-    cfg.mats.forEach(mid => {
-      const m = MAT.find(x => x.id === mid);
-      if (!m) return;
-      html += `<button class="scp-chip mat-chip" onclick="addMaterial(null,MAT.find(x=>x.id==='${mid}'),1,${m.p});flashButton(this)">${m.ico} ${m.n}</button>`;
-    });
-    html += `</div>`;
-  }
+
   document.getElementById('scp-body').innerHTML = html;
+}
+
+function scpTogSecao(k, hdrEl) {
+  scpEstado[k] = !scpEstado[k];
+  renderConfigurador();
+  scpAtualizarPreview();
 }
 
 function scpSetChip(k, v, el) {
@@ -1189,7 +1339,7 @@ function scpAtualizarPreview() {
   const cfg = SERVICOS_CFG[scpAtivo];
   if (!cfg) return;
   let price = scpSrvData.p;
-  // Aplicar preço baseado no chip principal
+  // preço base pelo chip principal
   if (cfg.basePrice) {
     for (const [chaveK, mapa] of Object.entries(cfg.basePrice)) {
       if (scpEstado[chaveK] && mapa[scpEstado[chaveK]]) {
@@ -1198,38 +1348,130 @@ function scpAtualizarPreview() {
       }
     }
   }
-  // multiplicar por qty se tiver
   const qt = scpEstado.qt || 1;
-  // adicionar extra por toggles
-  if (scpEstado.rasgo) price += 40 * qt;
-  if (scpEstado.qd) price += 80;
+  // extras legado
+  if (scpEstado.rasgo)   price += 40 * qt;
+  if (scpEstado.qd)      price += 80;
   if (scpEstado.suporte) price += 60;
-  if (scpEstado.dreno) price += 80;
+  if (scpEstado.dreno)   price += 80;
   price = price * qt;
   document.getElementById('scp-preview-price').textContent = 'R$ ' + scpFmtBRL(price);
-  // tags de seleção
-  const tags = Object.entries(scpEstado)
-    .filter(([k,v]) => v && v !== false && k !== 'qt')
-    .map(([k,v]) => typeof v === 'boolean'
-      ? `<span style="background:var(--acc-bg);border:1px solid var(--acc-border);border-radius:6px;padding:3px 8px;font-size:9px;font-weight:700;color:var(--acc)">${(cfg.toggles||[]).find(t=>t.k===k)?.label||k}</span>`
-      : `<span style="background:var(--acc-bg);border:1px solid var(--acc-border);border-radius:6px;padding:3px 8px;font-size:9px;font-weight:700;color:var(--acc)">${v}${k==='qt'?' un':''}</span>`
-    );
-  document.getElementById('scp-preview-tags').innerHTML = tags.join('');
+  // tags resumo
+  const tags = [];
+  if (cfg.modulos) {
+    cfg.modulos.forEach(mod => {
+      if (mod.tipo === 'chips' && scpEstado[mod.k]) tags.push(scpEstado[mod.k]);
+      if (mod.tipo === 'secao' && scpEstado[mod.k]) {
+        tags.push(mod.label + ' ✓');
+        if (scpEstado['cabo_metros'] && mod.k === 'tem_cabo') {
+          const bitola = scpEstado['cabo_bitola'] || '';
+          const metros = scpEstado['cabo_metros'] || 3;
+          const forma  = scpEstado['cabo_forma'] || 'Por metro';
+          tags.push(`${bitola} · ${forma === 'Por metro' ? metros + 'm' : forma} × 3 fios`);
+        }
+        if (mod.k === 'tem_conduíte') {
+          tags.push(`${scpEstado['cond_tipo']||''} ${scpEstado['cond_diam']||''}`);
+        }
+      }
+    });
+  } else {
+    Object.entries(scpEstado)
+      .filter(([k,v]) => v && v !== false && k !== 'qt')
+      .forEach(([k,v]) => {
+        tags.push(typeof v === 'boolean'
+          ? (cfg.toggles||[]).find(t=>t.k===k)?.label||k
+          : String(v));
+      });
+  }
+  document.getElementById('scp-preview-tags').innerHTML = tags
+    .map(t => `<span style="background:var(--acc-bg);border:1px solid var(--acc-border);border-radius:6px;padding:3px 8px;font-size:9px;font-weight:700;color:var(--acc)">${t}</span>`)
+    .join('');
   window._scpPrice = price;
 }
 
 function scpAdicionar() {
+  const cfg = SERVICOS_CFG[scpAtivo];
   const price = window._scpPrice || scpSrvData.p;
   const qt = scpEstado.qt || 1;
-  const tagParts = Object.entries(scpEstado)
-    .filter(([k,v]) => v && v !== false && k !== 'qt')
-    .map(([k,v]) => typeof v === 'boolean'
-      ? (SERVICOS_CFG[scpAtivo]?.toggles||[]).find(t=>t.k===k)?.label||k
-      : String(v)
-    );
+
+  // ── montar nome do serviço ────────────────────────────────
+  let tagParts = [];
+  if (cfg.modulos) {
+    cfg.modulos.forEach(mod => {
+      if (mod.tipo === 'chips' && mod.k !== 'qt' && scpEstado[mod.k])
+        tagParts.push(scpEstado[mod.k]);
+      if (mod.tipo === 'secao' && scpEstado[mod.k])
+        tagParts.push(mod.label);
+    });
+  } else {
+    Object.entries(scpEstado)
+      .filter(([k,v]) => v && v !== false && k !== 'qt')
+      .forEach(([k,v]) => {
+        tagParts.push(typeof v === 'boolean'
+          ? (cfg.toggles||[]).find(t=>t.k===k)?.label||k
+          : String(v));
+      });
+  }
   const nome = tagParts.length ? `${scpSrvData.n} (${tagParts.join(', ')})` : scpSrvData.n;
   const s = {...scpSrvData, n: nome, p: price / qt};
   for (let i = 0; i < qt; i++) addService(null, s);
+
+  // ── injetar materiais automáticos (só sistema modular) ────
+  if (cfg.modulos) {
+    // TOMADA
+    if (scpEstado['tem_tomada']) {
+      const amp = scpEstado['tom_amp'] || '10A';
+      const caixa = scpEstado['tom_caixa'] || '4×2';
+      const temPlaca = scpEstado['tom_placa'] === 'Com placa';
+      // tomada
+      const matTomadaId = amp === '32A' ? 'm033' : amp === '20A' ? 'm031' : 'm032';
+      const matTomada = MAT.find(x => x.id === matTomadaId);
+      if (matTomada) addMaterial(null, {...matTomada, n: `${matTomada.n} (${amp}) — ${scpEstado['tom_tipo']||'Embutir'}`}, qt, matTomada.p);
+      // caixa
+      const matCaixaId = caixa === '4×4' ? 'm027' : 'm026';
+      const matCaixa = MAT.find(x => x.id === matCaixaId);
+      if (matCaixa) addMaterial(null, {...matCaixa, n: `${matCaixa.n} (${caixa})`}, qt, matCaixa.p);
+      // placa
+      if (temPlaca) {
+        const matPlaca = MAT.find(x => x.id === 'm038');
+        if (matPlaca) addMaterial(null, {...matPlaca, n: `Placa de acabamento (${caixa})`}, qt, matPlaca.p);
+      }
+    }
+
+    // CABEAMENTO
+    if (scpEstado['tem_cabo']) {
+      const bitola = scpEstado['cabo_bitola'] || '2,5mm²';
+      const forma  = scpEstado['cabo_forma']  || 'Por metro';
+      const metros = scpEstado['cabo_metros'] || 3;
+      const precoM = CABO_PRECO[bitola] || 3.80;
+      const matCaboBase = MAT.find(x => x.id === (CABO_BITOLA_ID[bitola] || 'm002'));
+
+      // quantidade em metros (3 fios)
+      let qtMetros = metros;
+      if (forma === 'Rolo 25m')  qtMetros = 25;
+      if (forma === 'Rolo 50m')  qtMetros = 50;
+      if (forma === 'Rolo 100m') qtMetros = 100;
+
+      const fios = scpEstado['fios'] || FIOS_PADRAO;
+      fios.forEach(fio => {
+        if (matCaboBase) addMaterial(null,
+          {...matCaboBase, n: `Cabo ${bitola} — ${fio.cor} (${forma === 'Por metro' ? qtMetros+'m' : forma})`},
+          qtMetros, precoM
+        );
+      });
+    }
+
+    // CONDUÍTE
+    if (scpEstado['tem_conduíte']) {
+      const tipo = scpEstado['cond_tipo'] || 'Rígido PVC';
+      const diam = scpEstado['cond_diam'] || '3/4"';
+      const condMetros = scpEstado['cond_metros'] || 3;
+      const matCondId = tipo === 'Rígido PVC' ? 'm024' : tipo === 'Flexível PVC' ? 'm025' : 'm028';
+      const matCond = MAT.find(x => x.id === matCondId);
+      if (matCond) addMaterial(null, {...matCond, n: `${tipo} ${diam}`}, condMetros, matCond.p);
+    }
+  }
+
   fecharConfigurador();
 }
 
