@@ -287,9 +287,48 @@ input[type=range]{width:100%;accent-color:var(--acc)}
 .check-cb.done{background:var(--acc);border-color:var(--acc);color:#000}
 .check-txt{font-size:13px;color:var(--text2);transition:color .2s}
 .check-txt.done{text-decoration:line-through;color:var(--text3)}
+/* ── TELA RESULTADO ── */
+.res-total-lbl{font-size:10px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--acc);margin-bottom:8px}
+.res-total-val{font-family:'Syne',sans-serif;font-size:48px;font-weight:900;color:var(--acc);line-height:1;letter-spacing:-1px}
+.res-card{border-radius:12px;padding:12px 14px;flex:1}
+.res-card-lbl{font-size:9px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;margin-bottom:5px}
+.res-card-val{font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:700}
+.res-row{display:flex;align-items:center;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--border)}
+.res-row:last-child{border-bottom:none}
+.res-row-lbl{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text2)}
+.res-row-val{font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:700;color:var(--text)}
+.forn-pill{flex:1;padding:10px 6px;border-radius:11px;border:1px solid var(--border-input);background:var(--bg-input);font-size:11px;font-weight:800;color:var(--text2);cursor:pointer;text-align:center;line-height:1.4;transition:all .2s}
+.forn-pill.on{background:var(--acc-bg);border-color:var(--acc);color:var(--acc)}
+.msg-hdr{display:flex;align-items:center;justify-content:space-between;padding:13px 14px;background:var(--bg-input);border:1px solid var(--border-input);border-radius:12px;cursor:pointer;transition:border-color .2s,border-radius .2s}
+.msg-hdr.open{border-radius:12px 12px 0 0;border-color:var(--acc)}
+.msg-hdr-left{display:flex;align-items:center;gap:10px}
+.msg-num{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff;flex-shrink:0}
+.msg-title{font-size:12px;font-weight:800;letter-spacing:.5px;color:var(--text)}
+.msg-chevron{font-size:14px;color:var(--text3);transition:transform .2s}
+.msg-hdr.open .msg-chevron{transform:rotate(90deg)}
+.msg-body{display:none;background:var(--bg-card);border:1px solid var(--acc);border-top:none;border-radius:0 0 12px 12px;padding:12px 14px;margin-bottom:8px}
+.msg-body.open{display:block}
+.msg-txt{font-size:12px;color:var(--text2);line-height:1.7;white-space:pre-wrap;margin-bottom:10px}
+.btn-copiar{width:100%;padding:10px;background:var(--acc-bg);border:1px solid var(--acc-border);border-radius:9px;font-family:'Syne',sans-serif;font-size:11px;font-weight:800;color:var(--acc);cursor:pointer}
+/* ── STICKY TOTAL BAR ── */
+.orc-sticky{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--bg-bnav);border-top:1px solid rgba(245,158,11,.22);flex-shrink:0;backdrop-filter:blur(12px);gap:12px}
+.orc-sticky-left{min-width:0}
+.orc-sticky-val{font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:700;color:var(--acc);line-height:1}
+.orc-sticky-sub{font-size:9px;color:var(--text3);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.orc-sticky-btns{display:flex;gap:7px;flex-shrink:0}
+/* ── FORMA DE PAGAMENTO ── */
+.pagbtn{padding:7px 12px;border-radius:20px;font-size:12px;font-weight:700;border:1px solid var(--border-input);background:var(--bg-input);color:var(--text2);cursor:pointer;transition:all .2s;white-space:nowrap}
+.pagbtn.on{background:var(--acc-bg);border-color:var(--acc);color:var(--acc)}
+/* ── ITEM CUSTOMIZADO ── */
+.cx-nf{border-radius:12px;padding:12px 14px;margin-top:4px;border:1px dashed;display:none}
+.cx-nf.srv{border-color:rgba(99,102,241,.3);background:rgba(99,102,241,.06)}
+.cx-nf.mat{border-color:rgba(167,139,250,.3);background:rgba(167,139,250,.06)}
+.cx-form{border-radius:14px;padding:14px;margin-top:4px;border:1px solid;display:none}
+.cx-form.srv{border-color:rgba(99,102,241,.3);background:rgba(99,102,241,.07)}
+.cx-form.mat{border-color:rgba(167,139,250,.3);background:rgba(167,139,250,.07)}
 @media print{
   body>*{display:none!important}
-  #print-area{display:block!important;position:fixed;inset:0;background:#fff;color:#000;padding:20px;font-family:Arial,sans-serif;font-size:12px;z-index:9999}
+  #print-area{display:block!important;position:fixed;inset:0;background:#fff;color:#000;padding:20px;font-family:Arial,sans-serif;font-size:12px;z-index:9999;overflow:auto}
 }
 </style>
 </head>
@@ -351,21 +390,39 @@ input[type=range]{width:100%;accent-color:var(--acc)}
 <div id="tela-orcamento" class="tela">
   <div class="hdr">
     <div class="hbk" onclick="navTo('home')">←</div>
-    <div class="hdr-title">Novo Orçamento</div>
-    <button class="btn-acc">SALVAR</button>
+    <div style="display:flex;flex-direction:column;align-items:center">
+      <div class="hdr-title" id="orc-titulo">Novo Orçamento</div>
+      <div id="orc-num-badge" style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;color:var(--acc);letter-spacing:.5px;margin-top:1px"></div>
+    </div>
+    <div style="display:flex;gap:7px">
+      <button onclick="abrirConfigPDF()" style="width:36px;height:36px;border-radius:10px;border:1px solid var(--border-input);background:var(--bg-card);color:var(--text2);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center" title="Configurar PDF">⚙️</button>
+      <button onclick="gerarPDF()" style="width:36px;height:36px;border-radius:10px;border:1px solid #3b82f6;background:rgba(59,130,246,.15);color:#60a5fa;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center">📄</button>
+      <button class="btn-acc">SALVAR</button>
+    </div>
   </div>
   <div class="scroll">
     <div class="orc-pad">
       <div class="card">
         <div class="sec-head"><div class="sec-lbl"><div class="dot" style="background:#f59e0b"></div>Dados do Orçamento</div></div>
-        <input class="inp" type="text" placeholder="Seu Nome / Sua Empresa">
-        <input class="inp" type="text" placeholder="Nome do Cliente">
-        <input class="inp" type="text" placeholder="Endereço (Rua, Nº, Bairro)">
-        <input class="inp" type="tel" placeholder="(DD) 9XXXX-XXXX">
-        <div class="row3" style="margin-bottom:0">
-          <div><div class="ilbl">Data</div><input class="inp" type="date" id="orc-data"></div>
-          <div><div class="ilbl">Hora</div><input class="inp" type="time" value="09:00"></div>
-          <div><div class="ilbl">Garantia</div><input class="inp" type="number" placeholder="90"></div>
+        <input class="inp" id="orc-empresa" type="text" placeholder="Seu Nome / Sua Empresa">
+        <input class="inp" id="orc-cliente" type="text" placeholder="Nome do Cliente">
+        <input class="inp" id="orc-endereco" type="text" placeholder="Endereço (Rua, Nº, Bairro)">
+        <input class="inp" id="orc-tel" type="tel" placeholder="(DD) 9XXXX-XXXX">
+        <div class="row3" style="margin-bottom:7px">
+          <div><div class="ilbl">Data</div><input class="inp" type="date" id="orc-data" style="margin-bottom:0"></div>
+          <div><div class="ilbl">Hora</div><input class="inp" type="time" id="orc-hora" value="09:00" style="margin-bottom:0"></div>
+          <div><div class="ilbl">Garantia (d)</div><input class="inp" id="orc-garantia" type="number" placeholder="90" style="margin-bottom:0"></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:0">
+          <div>
+            <div class="ilbl">Validade da proposta (dias)</div>
+            <input class="inp" id="orc-validade" type="number" placeholder="15" value="15" style="margin-bottom:0;margin-top:4px">
+          </div>
+          <div>
+            <div class="ilbl">Nº do Orçamento</div>
+            <input class="inp" id="orc-numero" type="text" readonly
+              style="margin-bottom:0;margin-top:4px;font-family:'IBM Plex Mono',monospace;font-weight:700;color:var(--acc);background:var(--acc-bg);border-color:var(--acc-border);cursor:default">
+          </div>
         </div>
       </div>
       <div class="card">
@@ -378,7 +435,10 @@ input[type=range]{width:100%;accent-color:var(--acc)}
       <div class="card" style="border-color:rgba(34,197,94,.2)">
         <div class="sec-head">
           <div class="sec-lbl"><div class="dot" style="background:#22c55e"></div>Serviços Elétricos</div>
-          <span id="orc-serv-count" style="font-size:10px;color:var(--text3)">0 itens</span>
+          <div style="display:flex;align-items:center;gap:8px">
+            <button onclick="abrirCatalogo('srv')" style="display:flex;align-items:center;gap:5px;padding:5px 10px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.25);border-radius:8px;font-size:10px;font-weight:800;color:#4ade80;cursor:pointer;letter-spacing:.4px">📋 Catálogo</button>
+            <span id="orc-serv-count" style="font-size:10px;color:var(--text3)">0 itens</span>
+          </div>
         </div>
         <div class="sw">
           <span class="sw-ico">🔍</span>
@@ -390,6 +450,9 @@ input[type=range]{width:100%;accent-color:var(--acc)}
         </div>
         <!-- dropdown resultados -->
         <div id="srv-inline-results" class="inline-results"></div>
+        <!-- card não encontrado / form custom -->
+        <div id="cx-nf-srv" class="cx-nf srv"></div>
+        <div id="cx-form-srv" class="cx-form srv"></div>
         <!-- card pendente -->
         <div id="srv-pending-card" class="pending-card srv">
           <span id="srv-pending-icon" class="pending-ico">⚡</span>
@@ -413,7 +476,10 @@ input[type=range]{width:100%;accent-color:var(--acc)}
       <div class="card" style="border-color:rgba(167,139,250,.2)">
         <div class="sec-head">
           <div class="sec-lbl"><div class="dot" style="background:#a78bfa"></div>Materiais Elétricos</div>
-          <span id="orc-mat-count" style="font-size:10px;color:var(--text3)">0 itens</span>
+          <div style="display:flex;align-items:center;gap:8px">
+            <button onclick="abrirCatalogo('mat')" style="display:flex;align-items:center;gap:5px;padding:5px 10px;background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.25);border-radius:8px;font-size:10px;font-weight:800;color:#c4b5fd;cursor:pointer;letter-spacing:.4px">📦 Catálogo</button>
+            <span id="orc-mat-count" style="font-size:10px;color:var(--text3)">0 itens</span>
+          </div>
         </div>
         <div class="sw">
           <span class="sw-ico">🔍</span>
@@ -425,6 +491,9 @@ input[type=range]{width:100%;accent-color:var(--acc)}
         </div>
         <!-- dropdown resultados -->
         <div id="mat-inline-results" class="inline-results"></div>
+        <!-- card não encontrado / form custom -->
+        <div id="cx-nf-mat" class="cx-nf mat"></div>
+        <div id="cx-form-mat" class="cx-form mat"></div>
         <!-- card pendente -->
         <div id="mat-pending-card" class="pending-card mat">
           <span id="mat-pending-icon" class="pending-ico">📦</span>
@@ -452,12 +521,168 @@ input[type=range]{width:100%;accent-color:var(--acc)}
           <div class="custo-c"><div class="custo-top">Km Total</div><div class="custo-row"><span>📍</span><input class="custo-inp" id="orc-km" type="number" value="0" min="0" onchange="orcCalcTotal()"></div></div>
           <div class="custo-c"><div class="custo-top">R$/km</div><div class="custo-row"><span>💲</span><input class="custo-inp" id="orc-km-val" type="number" value="2" min="0" onchange="orcCalcTotal()"></div></div>
         </div>
-        <button class="btn-calc" onclick="orcCalcTotal()">⚡ CALCULAR TOTAL</button>
+        <!-- ── FORMA DE PAGAMENTO ── -->
+        <div style="margin-bottom:12px">
+          <div class="ilbl" style="margin-bottom:8px">Forma de Pagamento</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px">
+            <button class="pagbtn on" onclick="selPagamento(this,'pix')">💠 Pix</button>
+            <button class="pagbtn" onclick="selPagamento(this,'dinheiro')">💵 Dinheiro</button>
+            <button class="pagbtn" onclick="selPagamento(this,'credito')">💳 Crédito</button>
+            <button class="pagbtn" onclick="selPagamento(this,'debito')">💳 Débito</button>
+            <button class="pagbtn" onclick="selPagamento(this,'boleto')">📄 Boleto</button>
+          </div>
+          <div id="orc-parcelas-wrap" style="display:none;margin-bottom:10px">
+            <div class="ilbl" style="margin-bottom:6px">Parcelamento</div>
+            <select class="inp" id="orc-parcelas" style="margin-bottom:0" onchange="orcCalcTotal()">
+              <option value="1">1× sem juros</option>
+              <option value="2">2× sem juros</option>
+              <option value="3">3× sem juros</option>
+              <option value="6">6× sem juros</option>
+              <option value="12">12× sem juros</option>
+            </select>
+          </div>
+          <div style="background:var(--acc-bg);border:1px solid var(--acc-border);border-radius:11px;padding:10px 13px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px">
+              <div style="font-size:9px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3)">Sinal / Entrada</div>
+              <div style="display:flex;align-items:center;gap:5px">
+                <input type="number" id="orc-sinal-pct" value="30" min="0" max="100"
+                  style="width:42px;background:transparent;border:none;border-bottom:1px solid var(--acc-border);outline:none;color:var(--acc);font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:700;text-align:right;padding:2px 0"
+                  oninput="orcCalcTotal()">
+                <span style="font-size:12px;color:var(--text3);font-weight:700">%</span>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <div id="orc-parcela-info" style="font-size:10px;color:var(--text3)"></div>
+              <div id="orc-sinal-val" style="font-family:'IBM Plex Mono',monospace;font-size:18px;font-weight:700;color:var(--acc)">R$ 0,00</div>
+            </div>
+          </div>
+        </div>
+        <button class="btn-calc" onclick="mostrarResultado()">⚡ CALCULAR TOTAL</button>
       </div>
-      <div class="total-bar">
-        <div><div class="total-lbl">Total do Orçamento</div><div class="total-sub" id="orc-total-sub">Serviços + Materiais + Custos</div></div>
-        <div class="total-val" id="orc-total-val">R$ 0,00</div>
+    </div>
+  </div>
+  <!-- ── STICKY MINI (feedback ao adicionar itens) ── -->
+  <div class="orc-sticky" id="orc-sticky-wrap" style="display:none">
+    <div class="orc-sticky-left">
+      <div class="orc-sticky-val" id="orc-sticky-val">R$ 0,00</div>
+      <div class="orc-sticky-sub" id="orc-sticky-sub">Serviços + Materiais</div>
+    </div>
+    <button onclick="mostrarResultado()" style="display:flex;align-items:center;gap:5px;padding:9px 14px;background:var(--acc);border:none;border-radius:10px;font-family:'Syne',sans-serif;font-size:11px;font-weight:800;color:#000;cursor:pointer">⚡ Ver resultado</button>
+  </div>
+  <div class="bnav">
+    <div class="ni" onclick="navTo('home')"><div class="ni-i">🏠</div>Home<div class="ni-bar"></div></div>
+    <div class="ni" onclick="abrirModal('modal-ferramentas')"><div class="ni-i">🔧</div>Ferramentas<div class="ni-bar"></div></div>
+    <div class="ni" onclick="navTo('agenda')"><div class="ni-i">📅</div>Agendar<div class="ni-bar"></div></div>
+    <div class="ni" onclick="abrirModal('modal-relatorio')"><div class="ni-i">📊</div>Relatório<div class="ni-bar"></div></div>
+  </div>
+</div>
+
+<!-- ══ TELA RESULTADO ══ -->
+<div id="tela-resultado" class="tela">
+  <div class="hdr">
+    <div class="hbk" onclick="navTo('orcamento')">←</div>
+    <div style="display:flex;flex-direction:column;align-items:center">
+      <div class="hdr-title">Orçamento</div>
+      <div id="res-num-badge" style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;color:var(--acc);margin-top:1px"></div>
+    </div>
+    <div style="display:flex;gap:7px">
+      <button onclick="abrirConfigPDF()" style="width:36px;height:36px;border-radius:10px;border:1px solid var(--border-input);background:var(--bg-card);color:var(--text2);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center">⚙️</button>
+    </div>
+  </div>
+  <div class="scroll">
+    <div style="padding:14px 12px 100px">
+
+      <!-- TOTAL -->
+      <div class="card" style="margin-bottom:12px">
+        <div class="res-total-lbl">⚡ VALOR TOTAL</div>
+        <div class="res-total-val" id="res-total-val">R$ 0,00</div>
+        <div style="display:flex;gap:10px;margin-top:14px">
+          <div class="res-card" style="background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.25)">
+            <div class="res-card-lbl" style="color:#4ade80">Lucro Líquido</div>
+            <div class="res-card-val" style="color:#4ade80" id="res-lucro-val">R$ 0,00</div>
+          </div>
+          <div class="res-card" style="background:rgba(239,68,68,.10);border:1px solid rgba(239,68,68,.25)">
+            <div class="res-card-lbl" style="color:#f87171">Despesas</div>
+            <div class="res-card-val" style="color:#f87171" id="res-despesa-val">R$ 0,00</div>
+          </div>
+        </div>
       </div>
+
+      <!-- BREAKDOWN -->
+      <div class="card" style="margin-bottom:12px">
+        <div class="res-row">
+          <span class="res-row-lbl">🚗 Logística</span>
+          <span class="res-row-val" id="res-km-val">R$ 0,00</span>
+        </div>
+        <div class="res-row">
+          <span class="res-row-lbl">🔧 Mão de obra</span>
+          <span class="res-row-val" id="res-serv-val">R$ 0,00</span>
+        </div>
+        <div class="res-row">
+          <span class="res-row-lbl">📦 Materiais</span>
+          <span class="res-row-val" id="res-mat-val">R$ 0,00</span>
+        </div>
+      </div>
+
+      <!-- FORNECIMENTO -->
+      <div class="card" style="margin-bottom:12px">
+        <div class="ilbl" style="margin-bottom:10px">📦 FORNECIMENTO DE MATERIAL</div>
+        <div style="display:flex;gap:8px">
+          <button class="forn-pill on" id="forn-eletricista" onclick="selFornecimento(this,'eletricista')">✅ Eletricista<br>fornece</button>
+          <button class="forn-pill" id="forn-cliente" onclick="selFornecimento(this,'cliente')">🛒 Cliente<br>compra</button>
+          <button class="forn-pill" id="forn-nao" onclick="selFornecimento(this,'nao_incluir')">— Não<br>incluir</button>
+        </div>
+      </div>
+
+      <!-- AÇÕES -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px">
+        <button onclick="gerarPDF()" style="padding:13px 6px;background:var(--acc);border:none;border-radius:12px;font-family:'Syne',sans-serif;font-size:12px;font-weight:800;color:#000;cursor:pointer">↗ PDF</button>
+        <button onclick="navTo('orcamento')" style="padding:13px 6px;background:#3b82f6;border:none;border-radius:12px;font-family:'Syne',sans-serif;font-size:12px;font-weight:800;color:#fff;cursor:pointer">✏️ Editar</button>
+        <button onclick="novoOrcamento()" style="padding:13px 6px;background:var(--bg-card);border:1px solid var(--border-card);border-radius:12px;font-family:'Syne',sans-serif;font-size:12px;font-weight:800;color:var(--text2);cursor:pointer">↺ Novo</button>
+      </div>
+
+      <!-- MENSAGENS PRONTAS -->
+      <div class="sec" style="margin-bottom:10px">Mensagens prontas</div>
+      <div>
+        <div class="msg-hdr" onclick="toggleMsg(this)">
+          <div class="msg-hdr-left">
+            <div class="msg-num" style="background:#3b82f6">1</div>
+            <span class="msg-title">PROPOSTA</span>
+          </div>
+          <span class="msg-chevron">›</span>
+        </div>
+        <div class="msg-body">
+          <div class="msg-txt" id="msg-proposta"></div>
+          <button class="btn-copiar" onclick="copiarMsg('msg-proposta')">📋 Copiar mensagem</button>
+        </div>
+      </div>
+      <div style="margin-top:8px">
+        <div class="msg-hdr" onclick="toggleMsg(this)">
+          <div class="msg-hdr-left">
+            <div class="msg-num" style="background:#f59e0b">2</div>
+            <span class="msg-title">COBRANÇA DE SINAL</span>
+          </div>
+          <span class="msg-chevron">›</span>
+        </div>
+        <div class="msg-body">
+          <div class="msg-txt" id="msg-sinal"></div>
+          <button class="btn-copiar" onclick="copiarMsg('msg-sinal')">📋 Copiar mensagem</button>
+        </div>
+      </div>
+      <div style="margin-top:8px">
+        <div class="msg-hdr" onclick="toggleMsg(this)">
+          <div class="msg-hdr-left">
+            <div class="msg-num" style="background:#22c55e">3</div>
+            <span class="msg-title">CONCLUSÃO DO SERVIÇO</span>
+          </div>
+          <span class="msg-chevron">›</span>
+        </div>
+        <div class="msg-body">
+          <div class="msg-txt" id="msg-conclusao"></div>
+          <button class="btn-copiar" onclick="copiarMsg('msg-conclusao')">📋 Copiar mensagem</button>
+        </div>
+      </div>
+
     </div>
   </div>
   <div class="bnav">
@@ -538,59 +763,157 @@ input[type=range]{width:100%;accent-color:var(--acc)}
         </table>
       </div>
     </div>
-    <!-- ABA 1: DEMANDA (resumida) -->
-    <div id="ferr-1" class="ferr-panel" style="padding:14px">
-      <div style="display:flex;border-bottom:1px solid var(--border);margin-bottom:14px">
+    <!-- ABA 1: DEMANDA -->
+    <div id="ferr-1" class="ferr-panel" style="padding:0">
+      <!-- SUB-ABAS -->
+      <div style="display:flex;border-bottom:1px solid var(--border);background:var(--bg-hdr);flex-shrink:0">
         <div class="dem-stab on" onclick="demSubAba(0,this)">📐 NBR 5410</div>
         <div class="dem-stab" onclick="demSubAba(1,this)">🏢 MUC</div>
       </div>
-      <div id="dem-s0" class="dem-spanel on">
+
+      <!-- ══ SUB-ABA 0: NBR 5410 ══ -->
+      <div id="dem-s0" class="dem-spanel on" style="padding:14px">
+        <!-- SISTEMA -->
         <div class="ilbl">Sistema Elétrico</div>
         <div style="display:flex;gap:8px;margin:6px 0 14px">
           <button class="ferr-pill on" onclick="demSistema(this,'mono')">Monofásico</button>
           <button class="ferr-pill" onclick="demSistema(this,'bi')">Bifásico</button>
           <button class="ferr-pill" onclick="demSistema(this,'tri')">Trifásico</button>
         </div>
-        <div class="ilbl">Tensão</div>
+        <!-- TENSÃO -->
+        <div class="ilbl">Tensão da Rede</div>
         <div id="dem-tensoes" style="display:flex;gap:8px;margin:6px 0 14px">
           <button class="ferr-pill on" onclick="demTensao(this)">127V</button>
           <button class="ferr-pill" onclick="demTensao(this)">220V</button>
         </div>
-        <div class="ilbl">Fator de Demanda</div>
-        <select class="inp" id="dem-tipo" style="margin:6px 0 14px">
-          <option value="1.00">Residencial simples — fd 1,00</option>
-          <option value="0.80">Residencial médio — fd 0,80</option>
-          <option value="0.60">Residencial grande — fd 0,60</option>
+        <!-- TIPO -->
+        <div class="ilbl">Tipo de Instalação (Fator de Demanda)</div>
+        <select class="inp" id="dem-tipo" style="margin-top:6px;margin-bottom:14px">
+          <option value="1.00">Residencial simples (1 pavimento) — fd 1,00</option>
+          <option value="0.80">Residencial médio (2~3 pavimentos) — fd 0,80</option>
+          <option value="0.60">Residencial grande / condomínio — fd 0,60</option>
           <option value="0.90">Comercial pequeno — fd 0,90</option>
           <option value="0.70">Comercial médio — fd 0,70</option>
           <option value="0.60">Industrial — fd 0,60</option>
         </select>
+        <!-- CÔMODOS -->
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-          <div class="ilbl" style="margin:0">Cômodos</div>
+          <div class="ilbl" style="margin:0">Planta — NBR 5410</div>
           <button class="tag tag-green" onclick="demTipica()">+ Residência típica</button>
         </div>
         <div id="dem-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:10px"></div>
+
+        <!-- CÔMODOS SELECIONADOS (acordeão) -->
         <div id="dem-sel-wrap" style="display:none;margin-bottom:10px">
-          <div id="dem-sel-lista"></div>
-        </div>
-        <div id="dem-nbr-res" style="display:none;margin-bottom:12px">
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
-            <div style="background:var(--bg-card);border:1px solid var(--border-card);border-radius:10px;padding:10px;text-align:center"><div style="font-size:9px;color:var(--text3);margin-bottom:4px">Carga Demandada</div><div id="nbr-r-cd" style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:600;color:var(--acc)">—</div></div>
-            <div style="background:var(--bg-card);border:1px solid var(--border-card);border-radius:10px;padding:10px;text-align:center"><div style="font-size:9px;color:var(--text3);margin-bottom:4px">Disjuntor Geral</div><div id="nbr-r-disj" style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:600;color:#4ade80">—</div></div>
-            <div style="background:var(--bg-card);border:1px solid var(--border-card);border-radius:10px;padding:10px;text-align:center"><div style="font-size:9px;color:var(--text3);margin-bottom:4px">Corrente</div><div id="nbr-r-cor" style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:600;color:#60a5fa">—</div></div>
-            <div style="background:var(--acc-bg);border:1px solid var(--acc-border);border-radius:10px;padding:10px;text-align:center"><div style="font-size:9px;color:var(--text3);margin-bottom:4px">Bitola Mínima</div><div id="nbr-r-bit" style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:600;color:var(--acc)">—</div></div>
+          <div onclick="demToggleAcord('dem-sel-body','dem-sel-arrow','dem-sel-status')" style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;background:var(--bg-input);border:1px solid var(--border-input);border-radius:10px;padding:10px 12px;margin-bottom:6px">
+            <div style="display:flex;align-items:center;gap:8px">
+              <span style="font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--acc)">Cômodos Selecionados</span>
+              <span id="dem-sel-status" style="font-size:10px;color:var(--text3)"></span>
+            </div>
+            <span id="dem-sel-arrow" style="font-size:12px;color:var(--text3);transition:transform .2s">▼</span>
+          </div>
+          <div id="dem-sel-body">
+            <div id="dem-sel-lista"></div>
           </div>
         </div>
-        <button class="btn-salvar-full" style="margin-top:4px" onclick="demCalcNBR()">⚡ CALCULAR DEMANDA</button>
+
+        <!-- TABELA MÍNIMO NBR (acordeão) -->
+        <div id="dem-tab-wrap" style="display:none;margin-bottom:10px">
+          <div onclick="demToggleAcord('dem-tab-body','dem-tab-arrow','dem-tab-status')" style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;background:var(--bg-input);border:1px solid var(--border-input);border-radius:10px;padding:10px 12px;margin-bottom:6px">
+            <div style="display:flex;align-items:center;gap:8px">
+              <span style="font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--text2)">📋 Planta — Mínimo NBR 5410</span>
+              <span id="dem-tab-status" style="font-size:10px;color:var(--text3)"></span>
+            </div>
+            <span id="dem-tab-arrow" style="font-size:12px;color:var(--text3);transition:transform .2s">▼</span>
+          </div>
+          <div id="dem-tab-body">
+            <div style="overflow-x:auto;border-radius:10px;border:1px solid var(--border-card)">
+              <table style="width:100%;border-collapse:collapse;font-size:11px">
+                <thead>
+                  <tr style="background:var(--bg-input)">
+                    <th style="padding:8px 10px;text-align:left;color:var(--text3);font-size:9px;letter-spacing:.8px;text-transform:uppercase;font-weight:700">Cômodo</th>
+                    <th style="padding:8px 6px;text-align:center;color:var(--text3);font-size:9px;letter-spacing:.8px;text-transform:uppercase;font-weight:700">Área</th>
+                    <th style="padding:8px 6px;text-align:center;color:var(--text3);font-size:9px;letter-spacing:.8px;text-transform:uppercase;font-weight:700">Pts I</th>
+                    <th style="padding:8px 6px;text-align:center;color:var(--text3);font-size:9px;letter-spacing:.8px;text-transform:uppercase;font-weight:700">Pts T</th>
+                    <th style="padding:8px 6px;text-align:center;color:var(--text3);font-size:9px;letter-spacing:.8px;text-transform:uppercase;font-weight:700">Equip.</th>
+                    <th style="padding:8px 6px;text-align:center;color:var(--acc);font-size:9px;letter-spacing:.8px;text-transform:uppercase;font-weight:700">VA</th>
+                    <th style="padding:8px 6px;text-align:center;color:var(--text3);font-size:9px;letter-spacing:.8px;text-transform:uppercase;font-weight:700">✏️</th>
+                  </tr>
+                </thead>
+                <tbody id="dem-tab-tbody"></tbody>
+              </table>
+            </div>
+            <div id="dem-tab-total" style="display:flex;align-items:center;justify-content:space-between;background:var(--bg-card);border:1px solid var(--border-card);border-radius:10px;padding:10px 12px;margin-top:8px">
+              <div style="font-size:11px;font-weight:800;color:var(--text2)">TOTAL</div>
+              <div style="display:flex;gap:16px">
+                <div style="text-align:center"><div style="font-size:9px;color:var(--text3)">m²</div><div id="dem-tab-tot-area" style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;color:var(--text)">—</div></div>
+                <div style="text-align:center"><div style="font-size:9px;color:var(--text3)">Pts I</div><div id="dem-tab-tot-i" style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;color:var(--text)">—</div></div>
+                <div style="text-align:center"><div style="font-size:9px;color:var(--text3)">Pts T</div><div id="dem-tab-tot-t" style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;color:var(--text)">—</div></div>
+                <div style="text-align:center"><div style="font-size:9px;color:var(--acc)">VA</div><div id="dem-tab-tot-va" style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;color:var(--acc)">—</div></div>
+              </div>
+            </div>
+            <button class="btn-salvar-full" style="margin-top:8px;background:var(--bg-input);border:1px solid var(--border-input);color:var(--text);font-size:12px;padding:11px" onclick="demRenderTabela()">↺ RECALCULAR</button>
+          </div>
+        </div>
+
+        <!-- BOTÃO CALCULAR MÍNIMO -->
+        <button id="dem-btn-minimo" class="btn-salvar-full" style="display:none;margin-bottom:8px;background:var(--bg-input);border:1px solid var(--border-input);color:var(--text);font-size:12px;padding:11px" onclick="demCalcMinimo()">📋 CALCULAR MÍNIMO NBR →</button>
+
+        <!-- RESULTADO NBR (acordeão) -->
+        <div id="dem-nbr-res" style="display:none;margin-bottom:12px">
+          <div onclick="demToggleAcord('dem-nbr-body','dem-nbr-arrow','dem-nbr-status')" style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;background:var(--acc-bg);border:1px solid var(--acc-border);border-radius:10px;padding:10px 12px;margin-bottom:6px">
+            <div style="display:flex;align-items:center;gap:8px">
+              <span style="font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--acc)">⚡ Resultado NBR 5410</span>
+              <span id="dem-nbr-status" style="font-size:10px;color:var(--acc);opacity:.8"></span>
+            </div>
+            <span id="dem-nbr-arrow" style="font-size:12px;color:var(--acc);transition:transform .2s">▼</span>
+          </div>
+          <div id="dem-nbr-body">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+              <div style="background:var(--bg-card);border:1px solid var(--border-card);border-radius:10px;padding:10px;text-align:center">
+                <div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px">Carga Instalada</div>
+                <div id="nbr-r-ci" style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:600;color:var(--text)">—</div>
+              </div>
+              <div style="background:var(--bg-card);border:1px solid var(--border-card);border-radius:10px;padding:10px;text-align:center">
+                <div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px">Carga Demandada</div>
+                <div id="nbr-r-cd" style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:600;color:var(--acc)">—</div>
+              </div>
+              <div style="background:var(--bg-card);border:1px solid var(--border-card);border-radius:10px;padding:10px;text-align:center">
+                <div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px">Corrente</div>
+                <div id="nbr-r-cor" style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:600;color:#60a5fa">—</div>
+              </div>
+              <div style="background:var(--bg-card);border:1px solid var(--border-card);border-radius:10px;padding:10px;text-align:center">
+                <div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px">Disjuntor Geral</div>
+                <div id="nbr-r-disj" style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:600;color:#4ade80">—</div>
+              </div>
+            </div>
+            <div style="background:var(--acc-bg);border:1px solid var(--acc-border);border-radius:10px;padding:12px;display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+              <div><div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px">Bitola Mínima</div><div id="nbr-r-bit" style="font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:600;color:var(--acc)">—</div></div>
+              <div><div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px">Proteção DR</div><div style="font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:600;color:var(--acc)">30 mA</div></div>
+            </div>
+            <div id="nbr-r-alertas" style="margin-bottom:8px"></div>
+            <div id="nbr-r-circs" style="background:var(--bg-card);border:1px solid var(--border-card);border-radius:10px;padding:12px">
+              <div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px">Circuitos Sugeridos</div>
+              <div id="nbr-r-circs-lista"></div>
+            </div>
+            <button class="btn-salvar-full" style="margin-top:10px;background:#1d4ed8;color:#fff;font-size:12px;padding:12px" onclick="demLevarMUC()">🏢 Levar resultado para MUC</button>
+            <button class="btn-salvar-full" style="margin-top:6px;background:rgba(99,102,241,.15);color:#818cf8;border:1px solid rgba(99,102,241,.25);font-size:12px;padding:12px" onclick="demLevarQuedaV()">📉 Verificar Queda de Tensão</button>
+            <button class="btn-salvar-full" style="margin-top:6px;background:rgba(34,197,94,.15);color:#4ade80;border:1px solid rgba(34,197,94,.25);font-size:12px;padding:12px" onclick="demExportarPDF()">📄 COMPARTILHAR / EXPORTAR PDF</button>
+          </div>
+        </div>
+
+        <button class="btn-salvar-full" style="margin-top:4px" onclick="demCalcNBR()">⚡ CALCULAR DEMANDA ELÉTRICA</button>
       </div>
-      <div id="dem-s1" class="dem-spanel" style="padding-top:8px">
+
+      <!-- ══ SUB-ABA 1: MUC ══ -->
+      <div id="dem-s1" class="dem-spanel" style="padding:14px">
         <div class="ilbl">Distribuidora</div>
         <select class="inp" id="muc-dist" style="margin:6px 0 14px">
-          <option value="pe">Neoenergia PE / Cosern / Brasília</option>
+          <option value="pe">Neoenergia Pernambuco / Cosern / Brasília</option>
           <option value="ba">Neoenergia Coelba</option>
           <option value="ek">Neoenergia Elektro</option>
         </select>
-        <div class="ilbl">Tensão</div>
+        <div class="ilbl">Tensão de Fornecimento</div>
         <div style="display:flex;gap:8px;margin:6px 0 14px">
           <button class="ferr-pill on" onclick="ferrPill(this,'muc-v')">380/220V</button>
           <button class="ferr-pill" onclick="ferrPill(this,'muc-v')">220/127V</button>
@@ -600,16 +923,51 @@ input[type=range]{width:100%;accent-color:var(--acc)}
           <button class="tag tag-blue" onclick="mucAddTipo()">+ Tipo</button>
         </div>
         <div id="muc-tipos" style="margin-bottom:10px"></div>
-        <input class="inp" id="muc-ds" type="number" placeholder="Demanda serviço condomínio (kW)">
-        <input class="inp" id="muc-dc" type="number" placeholder="Demanda comercial (kW)">
+        <div class="ilbl" style="margin-top:4px">Demanda de Serviço — condomínio (kW)</div>
+        <input class="inp" id="muc-ds" type="number" placeholder="Ex: 15" style="margin-top:6px">
+        <div class="ilbl" style="margin-top:4px">Demanda Comercial (kW) — se houver</div>
+        <input class="inp" id="muc-dc" type="number" placeholder="Ex: 0" style="margin-top:6px;margin-bottom:14px">
+
+        <!-- RESULTADO MUC (acordeão) -->
         <div id="muc-resultado" style="display:none;margin-bottom:12px">
-          <div style="background:var(--bg-card);border:1px solid var(--border-card);border-radius:12px;padding:14px">
-            <div style="font-size:9px;color:var(--text3);margin-bottom:6px">RESULTADO MUC</div>
-            <div id="muc-r-cat" style="font-family:'IBM Plex Mono',monospace;font-size:18px;font-weight:700;color:#60a5fa">—</div>
-            <div id="muc-r-total" style="font-size:12px;color:var(--text2);margin-top:4px">—</div>
+          <div onclick="demToggleAcord('muc-res-body','muc-res-arrow','muc-res-status')" style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.25);border-radius:10px;padding:10px 12px;margin-bottom:6px">
+            <div style="display:flex;align-items:center;gap:8px">
+              <span style="font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:#60a5fa">🏢 Resultado MUC</span>
+              <span id="muc-res-status" style="font-size:10px;color:#60a5fa;opacity:.8"></span>
+            </div>
+            <span id="muc-res-arrow" style="font-size:12px;color:#60a5fa;transition:transform .2s">▼</span>
+          </div>
+          <div id="muc-res-body">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+              <div style="background:var(--bg-card);border:1px solid var(--border-card);border-radius:10px;padding:10px;text-align:center">
+                <div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px">Dem. Residencial</div>
+                <div id="muc-r-drf" style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:600;color:#60a5fa">—</div>
+              </div>
+              <div style="background:var(--bg-card);border:1px solid var(--border-card);border-radius:10px;padding:10px;text-align:center">
+                <div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px">Fc Aplicado</div>
+                <div id="muc-r-fc" style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:600;color:#4ade80">—</div>
+              </div>
+              <div style="background:var(--bg-card);border:1px solid var(--border-card);border-radius:10px;padding:10px;text-align:center">
+                <div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px">Fr Aplicado</div>
+                <div id="muc-r-fr" style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:600;color:#fb923c">—</div>
+              </div>
+              <div style="background:var(--bg-card);border:1px solid var(--border-card);border-radius:10px;padding:10px;text-align:center">
+                <div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px">Demanda Total</div>
+                <div id="muc-r-total" style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:600;color:var(--acc)">—</div>
+              </div>
+            </div>
+            <div style="background:var(--bg-card);border:1px solid var(--border-card);border-radius:12px;padding:14px;margin-bottom:8px">
+              <div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px">Categoria / Padrão de Entrada</div>
+              <div id="muc-r-cat" style="font-family:'IBM Plex Mono',monospace;font-size:18px;font-weight:700;color:#60a5fa">—</div>
+              <div id="muc-r-disj" style="font-size:12px;color:var(--text2);margin-top:4px">—</div>
+              <div id="muc-r-cabo" style="font-size:11px;color:var(--text3);margin-top:3px">—</div>
+            </div>
+            <div id="muc-r-tensao" style="border-radius:10px;padding:10px;text-align:center;font-size:12px;font-weight:700;margin-bottom:8px"></div>
+            <button class="btn-salvar-full" style="background:rgba(99,102,241,.15);color:#818cf8;border:1px solid rgba(99,102,241,.25);font-size:12px;padding:12px" onclick="demLevarQuedaV()">📉 Levar para Queda de Tensão</button>
           </div>
         </div>
-        <button class="btn-salvar-full" style="background:#1d4ed8;color:#fff" onclick="demCalcMUC()">🏢 CALCULAR MUC</button>
+
+        <button class="btn-salvar-full" style="margin-top:4px;background:#1d4ed8;color:#fff" onclick="demCalcMUC()">🏢 CALCULAR DEMANDA MUC</button>
       </div>
     </div>
     <!-- ABA 2: QUEDA V -->
@@ -797,73 +1155,75 @@ input[type=range]{width:100%;accent-color:var(--acc)}
   </div>
 </div>
 
-<div id="print-area" style="display:none"></div>
+<div id="print-area" style="display:none;position:fixed;inset:0;z-index:9999;background:#fff;overflow-y:auto;-webkit-overflow-scrolling:touch"></div>
 
 <script>
 // ══════════════════════════════════════════════════════════════
 // INIT
 // ══════════════════════════════════════════════════════════════
 document.getElementById('orc-data').value = new Date().toISOString().split('T')[0];
+gerarNumeroOrc();
+_carregarCustomLocal();
 
 // ══════════════════════════════════════════════════════════════
 // BLOCO 1 — DADOS: SERVIÇOS
 // ══════════════════════════════════════════════════════════════
-const SRV_CATS = ['Instalação','Manutenção','Quadros','Iluminação','Infraestrutura','Projetos/Laudos','Automação','Outros'];
+const SRV_CATS = ['Instalação','Manutenção','Quadros','Iluminação','Infraestrutura','Projetos/Laudos','Automação','Energia Solar','SPDA/Aterramento','Industrial','Segurança Eletrônica','Outros'];
 
 const SRV = [
   // Instalação
   {id:'s001',ico:'🔌',n:'Ponto de tomada TUG',cat:'Instalação',p:80,un:'pt',cfg:'tomada'},
   {id:'s002',ico:'🔌',n:'Ponto de tomada TUE 20A',cat:'Instalação',p:130,un:'pt',cfg:'tomada'},
-  {id:'s003',ico:'💡',n:'Ponto de iluminação',cat:'Instalação',p:70,un:'pt'},
+  {id:'s003',ico:'💡',n:'Ponto de iluminação',cat:'Instalação',p:70,un:'pt',cfg:'iluminacao'},
   {id:'s004',ico:'🚿',n:'Instalação de chuveiro elétrico',cat:'Instalação',p:150,un:'un',cfg:'chuveiro'},
   {id:'s005',ico:'❄️',n:'Instalação de ar-condicionado split',cat:'Instalação',p:380,un:'un',cfg:'ar'},
   {id:'s006',ico:'💧',n:"Instalação de bomba d'água",cat:'Instalação',p:300,un:'un',cfg:'bomba'},
   {id:'s007',ico:'🚗',n:'Instalação de portão elétrico',cat:'Instalação',p:350,un:'un'},
-  {id:'s008',ico:'🔆',n:'Instalação de luminária de teto',cat:'Instalação',p:80,un:'un'},
-  {id:'s009',ico:'🔆',n:'Instalação de lustre/pendente',cat:'Instalação',p:120,un:'un'},
+  {id:'s008',ico:'🔆',n:'Instalação de luminária de teto',cat:'Instalação',p:80,un:'un',cfg:'iluminacao'},
+  {id:'s009',ico:'🔆',n:'Instalação de lustre/pendente',cat:'Instalação',p:120,un:'un',cfg:'iluminacao'},
   {id:'s010',ico:'📺',n:'Tomada TV / antena / rede',cat:'Instalação',p:90,un:'pt'},
-  {id:'s011',ico:'⚡',n:'Interruptor simples',cat:'Instalação',p:60,un:'pt'},
-  {id:'s012',ico:'⚡',n:'Interruptor duplo',cat:'Instalação',p:80,un:'pt'},
-  {id:'s013',ico:'⚡',n:'Interruptor three-way',cat:'Instalação',p:120,un:'pt'},
-  {id:'s014',ico:'💡',n:'Dimmer',cat:'Instalação',p:150,un:'pt'},
+  {id:'s011',ico:'⚡',n:'Interruptor simples',cat:'Instalação',p:60,un:'pt',cfg:'interruptor'},
+  {id:'s012',ico:'⚡',n:'Interruptor duplo',cat:'Instalação',p:80,un:'pt',cfg:'interruptor'},
+  {id:'s013',ico:'⚡',n:'Interruptor three-way',cat:'Instalação',p:120,un:'pt',cfg:'interruptor'},
+  {id:'s014',ico:'💡',n:'Dimmer',cat:'Instalação',p:150,un:'pt',cfg:'interruptor'},
   {id:'s015',ico:'🏠',n:'Instalação elétrica residencial completa',cat:'Instalação',p:4500,un:'un'},
   {id:'s016',ico:'🏢',n:'Instalação elétrica comercial completa',cat:'Instalação',p:8000,un:'un'},
   {id:'s017',ico:'☀️',n:'Instalação solar fotovoltaica',cat:'Instalação',p:3500,un:'un'},
   {id:'s018',ico:'🔋',n:'Instalação de nobreak / estabilizador',cat:'Instalação',p:180,un:'un'},
   {id:'s019',ico:'🔌',n:'Tomada 3P+T industrial 32A',cat:'Instalação',p:160,un:'pt'},
   {id:'s020',ico:'🚿',n:'Instalação de aquecedor de passagem',cat:'Instalação',p:200,un:'un'},
-  {id:'s021',ico:'🔦',n:'Instalação de refletor externo',cat:'Instalação',p:130,un:'un'},
+  {id:'s021',ico:'🔦',n:'Instalação de refletor externo',cat:'Instalação',p:130,un:'un',cfg:'iluminacao'},
   {id:'s022',ico:'📡',n:'Cabeamento de dados (ponto RJ45)',cat:'Instalação',p:120,un:'pt'},
   // Manutenção
   {id:'s023',ico:'🔧',n:'Revisão geral da instalação',cat:'Manutenção',p:250,un:'un'},
   {id:'s024',ico:'🔍',n:'Diagnóstico e localização de defeito',cat:'Manutenção',p:150,un:'un'},
-  {id:'s025',ico:'🔧',n:'Substituição de tomada',cat:'Manutenção',p:60,un:'pt'},
-  {id:'s026',ico:'🔧',n:'Substituição de interruptor',cat:'Manutenção',p:60,un:'pt'},
+  {id:'s025',ico:'🔧',n:'Substituição de tomada',cat:'Manutenção',p:60,un:'pt',cfg:'tomada'},
+  {id:'s026',ico:'🔧',n:'Substituição de interruptor',cat:'Manutenção',p:60,un:'pt',cfg:'interruptor'},
   {id:'s027',ico:'🔧',n:'Substituição de chuveiro elétrico',cat:'Manutenção',p:100,un:'un'},
   {id:'s028',ico:'🔧',n:'Reparo em curto-circuito',cat:'Manutenção',p:200,un:'un'},
   {id:'s029',ico:'🔧',n:'Troca de cabo queimado',cat:'Manutenção',p:20,un:'m'},
-  {id:'s030',ico:'🔆',n:'Substituição de lâmpada',cat:'Manutenção',p:30,un:'pt'},
+  {id:'s030',ico:'🔆',n:'Substituição de lâmpada',cat:'Manutenção',p:30,un:'pt',mats:['m039','m040']},
   {id:'s031',ico:'🔆',n:'Substituição de luminária',cat:'Manutenção',p:80,un:'un'},
-  {id:'s032',ico:'⚡',n:'Instalação de DPS (proteção surto)',cat:'Manutenção',p:200,un:'un'},
+  {id:'s032',ico:'⚡',n:'Instalação de DPS (proteção surto)',cat:'Manutenção',p:200,un:'un',cfg:'dr'},
   // Quadros
   {id:'s033',ico:'🗂️',n:'Montagem de quadro de distribuição (QD)',cat:'Quadros',p:350,un:'un',cfg:'qd'},
   {id:'s034',ico:'🗂️',n:'Revisão de quadro de distribuição',cat:'Quadros',p:180,un:'un'},
-  {id:'s035',ico:'⚙️',n:'Substituição de disjuntor',cat:'Quadros',p:80,un:'un'},
-  {id:'s036',ico:'⚙️',n:'Instalação de DR/DPS no QD',cat:'Quadros',p:150,un:'un'},
+  {id:'s035',ico:'⚙️',n:'Substituição de disjuntor',cat:'Quadros',p:80,un:'un',cfg:'disjuntor'},
+  {id:'s036',ico:'⚙️',n:'Instalação de DR/DPS no QD',cat:'Quadros',p:150,un:'un',cfg:'dr'},
   {id:'s037',ico:'🗂️',n:'Identificação e etiquetagem do QD',cat:'Quadros',p:120,un:'un'},
   // Iluminação
-  {id:'s038',ico:'💡',n:'Instalação de spot LED embutir',cat:'Iluminação',p:60,un:'pt'},
-  {id:'s039',ico:'💡',n:'Instalação de fita LED',cat:'Iluminação',p:45,un:'m'},
-  {id:'s040',ico:'🔆',n:'Instalação de luminária de sobrepor',cat:'Iluminação',p:80,un:'un'},
-  {id:'s041',ico:'🔆',n:'Iluminação externa (ponto)',cat:'Iluminação',p:150,un:'pt'},
-  {id:'s042',ico:'💡',n:'Instalação de arandela',cat:'Iluminação',p:90,un:'un'},
-  {id:'s043',ico:'💡',n:'Iluminação de emergência',cat:'Iluminação',p:180,un:'un'},
+  {id:'s038',ico:'💡',n:'Instalação de spot LED embutir',cat:'Iluminação',p:60,un:'pt',cfg:'iluminacao'},
+  {id:'s039',ico:'💡',n:'Instalação de fita LED',cat:'Iluminação',p:45,un:'m',mats:['m041']},
+  {id:'s040',ico:'🔆',n:'Instalação de luminária de sobrepor',cat:'Iluminação',p:80,un:'un',cfg:'iluminacao'},
+  {id:'s041',ico:'🔆',n:'Iluminação externa (ponto)',cat:'Iluminação',p:150,un:'pt',cfg:'iluminacao'},
+  {id:'s042',ico:'💡',n:'Instalação de arandela',cat:'Iluminação',p:90,un:'un',cfg:'iluminacao'},
+  {id:'s043',ico:'💡',n:'Iluminação de emergência',cat:'Iluminação',p:180,un:'un',cfg:'iluminacao'},
   // Infraestrutura
   {id:'s044',ico:'🏗️',n:'Abertura e fechamento de rasgo',cat:'Infraestrutura',p:45,un:'m'},
   {id:'s045',ico:'🏗️',n:'Passagem de eletroduto',cat:'Infraestrutura',p:28,un:'m'},
   {id:'s046',ico:'🏗️',n:'Passagem de cabo',cat:'Infraestrutura',p:15,un:'m'},
   {id:'s047',ico:'📦',n:'Instalação de eletrocalha',cat:'Infraestrutura',p:55,un:'m'},
-  {id:'s048',ico:'🌐',n:'Instalação de aterramento',cat:'Infraestrutura',p:380,un:'un'},
+  {id:'s048',ico:'🌐',n:'Instalação de aterramento',cat:'Infraestrutura',p:380,un:'un',mats:['m054','m055','m057','m058','m059']},
   {id:'s049',ico:'🌐',n:'Passagem de rede lógica (ponto)',cat:'Infraestrutura',p:120,un:'pt'},
   // Projetos/Laudos
   {id:'s050',ico:'📋',n:'Laudo técnico de instalação',cat:'Projetos/Laudos',p:450,un:'un'},
@@ -878,12 +1238,51 @@ const SRV = [
   {id:'s058',ico:'📱',n:'Configuração de automação residencial',cat:'Automação',p:350,un:'un'},
   {id:'s059',ico:'🔔',n:'Instalação de sensor de presença',cat:'Automação',p:140,un:'pt'},
   {id:'s060',ico:'🔒',n:'Instalação de fechadura eletrônica',cat:'Automação',p:220,un:'un'},
+  // Energia Solar
+  {id:'s061',ico:'☀️',n:'Instalação de sistema fotovoltaico',cat:'Energia Solar',p:3500,un:'un',cfg:'solar'},
+  {id:'s062',ico:'☀️',n:'Instalação de microinversor',cat:'Energia Solar',p:800,un:'un'},
+  {id:'s063',ico:'🔋',n:'Instalação de bateria de armazenamento',cat:'Energia Solar',p:1200,un:'un'},
+  {id:'s064',ico:'📊',n:'Comissionamento de sistema solar',cat:'Energia Solar',p:600,un:'un'},
+  {id:'s065',ico:'🔧',n:'Manutenção preventiva sistema solar',cat:'Energia Solar',p:350,un:'un'},
+  {id:'s066',ico:'📋',n:'Projeto fotovoltaico + ART',cat:'Energia Solar',p:1800,un:'un'},
+  {id:'s067',ico:'☀️',n:'Ampliação de sistema fotovoltaico',cat:'Energia Solar',p:1500,un:'un'},
+  // SPDA / Aterramento
+  {id:'s068',ico:'⚡',n:'Instalação de SPDA (para-raios)',cat:'SPDA/Aterramento',p:2800,un:'un',cfg:'spda'},
+  {id:'s069',ico:'🌐',n:'Instalação de sistema de aterramento',cat:'SPDA/Aterramento',p:650,un:'un'},
+  {id:'s070',ico:'🔍',n:'Medição de resistência de aterramento',cat:'SPDA/Aterramento',p:250,un:'un'},
+  {id:'s071',ico:'📋',n:'Laudo de SPDA',cat:'SPDA/Aterramento',p:500,un:'un'},
+  {id:'s072',ico:'🔧',n:'Manutenção de SPDA',cat:'SPDA/Aterramento',p:400,un:'un'},
+  {id:'s073',ico:'🌐',n:'Malha de aterramento industrial',cat:'SPDA/Aterramento',p:3500,un:'un'},
+  // Industrial
+  {id:'s074',ico:'🏭',n:'Instalação elétrica industrial completa',cat:'Industrial',p:15000,un:'un'},
+  {id:'s075',ico:'⚙️',n:'Instalação de motor trifásico',cat:'Industrial',p:450,un:'un',cfg:'motor'},
+  {id:'s076',ico:'🔌',n:'Instalação de painel de comando',cat:'Industrial',p:1200,un:'un'},
+  {id:'s077',ico:'⚙️',n:'Instalação de inversor de frequência',cat:'Industrial',p:800,un:'un',cfg:'inversor'},
+  {id:'s078',ico:'🔧',n:'Manutenção elétrica industrial',cat:'Industrial',p:380,un:'h'},
+  {id:'s079',ico:'📋',n:'Laudo técnico NR-10',cat:'Industrial',p:1500,un:'un'},
+  {id:'s080',ico:'🏭',n:'Instalação de transformador',cat:'Industrial',p:2500,un:'un'},
+  {id:'s081',ico:'⚙️',n:'Instalação de banco de capacitores',cat:'Industrial',p:1800,un:'un'},
+  {id:'s082',ico:'🔌',n:'Ponto trifásico 380V',cat:'Industrial',p:350,un:'pt',cfg:'trifasico'},
+  {id:'s083',ico:'📊',n:'Análise de qualidade de energia',cat:'Industrial',p:900,un:'un'},
+  // Segurança Eletrônica
+  {id:'s084',ico:'📹',n:'Instalação de câmera CFTV',cat:'Segurança Eletrônica',p:180,un:'un',cfg:'cftv'},
+  {id:'s085',ico:'🎥',n:'Instalação de DVR/NVR',cat:'Segurança Eletrônica',p:300,un:'un'},
+  {id:'s086',ico:'🔔',n:'Instalação de alarme de segurança',cat:'Segurança Eletrônica',p:600,un:'un',cfg:'alarme'},
+  {id:'s087',ico:'🔒',n:'Instalação de controle de acesso',cat:'Segurança Eletrônica',p:450,un:'un'},
+  {id:'s088',ico:'🔔',n:'Instalação de interfone/videoporteiro',cat:'Segurança Eletrônica',p:350,un:'un'},
+  {id:'s089',ico:'⚡',n:'Instalação de cerca elétrica',cat:'Segurança Eletrônica',p:850,un:'un',cfg:'cerca'},
+  {id:'s090',ico:'💡',n:'Iluminação de segurança perimetral',cat:'Segurança Eletrônica',p:280,un:'pt'},
+  {id:'s091',ico:'📟',n:'Instalação de sirene de alarme',cat:'Segurança Eletrônica',p:120,un:'un'},
+  // Outros
+  {id:'s092',ico:'🔌',n:'Hora técnica',cat:'Outros',p:120,un:'h'},
+  {id:'s093',ico:'🚗',n:'Taxa de deslocamento',cat:'Outros',p:80,un:'un'},
+  {id:'s094',ico:'📦',n:'Serviço personalizado',cat:'Outros',p:100,un:'un'},
 ];
 
 // ══════════════════════════════════════════════════════════════
 // BLOCO 1 — DADOS: MATERIAIS
 // ══════════════════════════════════════════════════════════════
-const MAT_CATS = ['Condutores','Proteção','Infraestrutura','Tomadas/Interruptores','Iluminação','Caixas','Fixação','Outros'];
+const MAT_CATS = ['Condutores','Proteção','Infraestrutura','Tomadas/Interruptores','Iluminação','Caixas','Fixação','Aterramento','Solar/Energia','Automação/Segurança','Industrial','Outros'];
 
 const MAT = [
   // Condutores
@@ -946,6 +1345,57 @@ const MAT = [
   {id:'m051',ico:'🔗',n:'Conector Wago 3 vias',cat:'Fixação',p:2.50,un:'un'},
   {id:'m052',ico:'🔗',n:'Conector Wago 5 vias',cat:'Fixação',p:3.20,un:'un'},
   {id:'m053',ico:'🔩',n:'Fita autofusão 19mm',cat:'Fixação',p:6.80,un:'un'},
+  // Aterramento
+  {id:'m054',ico:'🌐',n:'Haste de aterramento cobreada 5/8" x 2,4m',cat:'Aterramento',p:65.00,un:'un'},
+  {id:'m055',ico:'🌐',n:'Cabo de aterramento 16mm² verde/amarelo',cat:'Aterramento',p:11.50,un:'m'},
+  {id:'m056',ico:'🌐',n:'Cabo de aterramento 25mm² verde/amarelo',cat:'Aterramento',p:18.00,un:'m'},
+  {id:'m057',ico:'🔩',n:'Conector de aterramento (grampo haste)',cat:'Aterramento',p:12.00,un:'un'},
+  {id:'m058',ico:'📦',n:'Caixa de inspeção para aterramento',cat:'Aterramento',p:45.00,un:'un'},
+  {id:'m059',ico:'🌐',n:'Barra de aterramento barramento 10 furos',cat:'Aterramento',p:38.00,un:'un'},
+  {id:'m060',ico:'🌐',n:'Gel condutor para aterramento 500g',cat:'Aterramento',p:28.00,un:'un'},
+  // Solar / Energia
+  {id:'m061',ico:'☀️',n:'Painel solar monocristalino 450W',cat:'Solar/Energia',p:850.00,un:'un',specs:{potencia:['330W','400W','450W','550W','600W']}},
+  {id:'m062',ico:'🔋',n:'Inversor solar string 3kW',cat:'Solar/Energia',p:2200.00,un:'un',specs:{potencia:['1kW','2kW','3kW','5kW','8kW','10kW']}},
+  {id:'m063',ico:'🔋',n:'Microinversor 600W',cat:'Solar/Energia',p:900.00,un:'un'},
+  {id:'m064',ico:'🔋',n:'Bateria lítio 5kWh',cat:'Solar/Energia',p:7500.00,un:'un',specs:{capacidade:['2,4kWh','5kWh','10kWh']}},
+  {id:'m065',ico:'📊',n:'String box DC proteção solar',cat:'Solar/Energia',p:280.00,un:'un'},
+  {id:'m066',ico:'⬜',n:'Cabo solar 6mm² (UV)',cat:'Solar/Energia',p:9.50,un:'m',specs:{bitola:['4mm²','6mm²'],cor:['Vermelho','Preto']}},
+  {id:'m067',ico:'🔩',n:'Conector MC4 par (solar)',cat:'Solar/Energia',p:8.50,un:'par'},
+  {id:'m068',ico:'🏗️',n:'Estrutura fixação telhado cerâmico (placa)',cat:'Solar/Energia',p:85.00,un:'un'},
+  {id:'m069',ico:'🏗️',n:'Estrutura fixação telhado metálico (placa)',cat:'Solar/Energia',p:70.00,un:'un'},
+  {id:'m070',ico:'🔋',n:'Nobreak 1kVA',cat:'Solar/Energia',p:650.00,un:'un',specs:{potencia:['600VA','1kVA','2kVA','3kVA']}},
+  // Automação / Segurança
+  {id:'m071',ico:'📹',n:'Câmera CFTV dome 2MP',cat:'Automação/Segurança',p:180.00,un:'un',specs:{resolucao:['2MP','4MP','8MP'],tipo:['Dome','Bullet','PTZ']}},
+  {id:'m072',ico:'📹',n:'Câmera IP externa 4MP',cat:'Automação/Segurança',p:320.00,un:'un',specs:{resolucao:['2MP','4MP','8MP'],tipo:['Dome','Bullet','PTZ']}},
+  {id:'m073',ico:'🎥',n:'DVR 4 canais 1080p',cat:'Automação/Segurança',p:420.00,un:'un',specs:{canais:['4','8','16','32']}},
+  {id:'m074',ico:'🎥',n:'NVR 8 canais PoE',cat:'Automação/Segurança',p:680.00,un:'un',specs:{canais:['4','8','16','32']}},
+  {id:'m075',ico:'💾',n:'HD 1TB para DVR/NVR',cat:'Automação/Segurança',p:320.00,un:'un',specs:{capacidade:['1TB','2TB','4TB','6TB']}},
+  {id:'m076',ico:'⚡',n:'Central de alarme 8 zonas',cat:'Automação/Segurança',p:380.00,un:'un',specs:{zonas:['4','8','16','32']}},
+  {id:'m077',ico:'🔔',n:'Sirene externa 120dB',cat:'Automação/Segurança',p:95.00,un:'un'},
+  {id:'m078',ico:'🔔',n:'Sensor de presença infravermelho',cat:'Automação/Segurança',p:65.00,un:'un'},
+  {id:'m079',ico:'🔔',n:'Sensor magnético porta/janela',cat:'Automação/Segurança',p:25.00,un:'un'},
+  {id:'m080',ico:'🔒',n:'Eletroimã 150kg controle acesso',cat:'Automação/Segurança',p:180.00,un:'un'},
+  {id:'m081',ico:'⚡',n:'Central de cerca elétrica 5.000m',cat:'Automação/Segurança',p:350.00,un:'un',specs:{extensao:['2.500m','5.000m','10.000m']}},
+  {id:'m082',ico:'⚡',n:'Fio de aço galvanizado cerca elétrica',cat:'Automação/Segurança',p:1.80,un:'m'},
+  {id:'m083',ico:'🤖',n:'Interruptor inteligente Wi-Fi 1 gang',cat:'Automação/Segurança',p:85.00,un:'un'},
+  {id:'m084',ico:'🤖',n:'Tomada inteligente Wi-Fi 10A',cat:'Automação/Segurança',p:75.00,un:'un'},
+  {id:'m085',ico:'🔔',n:'Sensor de presença smart (Wi-Fi/Zigbee)',cat:'Automação/Segurança',p:95.00,un:'un'},
+  // Industrial
+  {id:'m086',ico:'⚙️',n:'Inversor de frequência 1CV 220V',cat:'Industrial',p:680.00,un:'un',specs:{potencia:['1CV','2CV','3CV','5CV','7,5CV','10CV'],tensao:['220V','380V','440V']}},
+  {id:'m087',ico:'⚙️',n:'Inversor de frequência 5CV 380V',cat:'Industrial',p:1850.00,un:'un',specs:{potencia:['1CV','2CV','3CV','5CV','7,5CV','10CV'],tensao:['220V','380V','440V']}},
+  {id:'m088',ico:'⚙️',n:'Soft-starter 3CV 220V',cat:'Industrial',p:780.00,un:'un',specs:{potencia:['3CV','5CV','10CV','15CV'],tensao:['220V','380V']}},
+  {id:'m089',ico:'📦',n:'Contator tripolar 9A (bobina 220V)',cat:'Industrial',p:75.00,un:'un',specs:{amperagem:['9A','12A','18A','25A','32A','40A'],bobina:['24V','110V','220V','380V']}},
+  {id:'m090',ico:'📦',n:'Relé de sobrecarga 6-9A',cat:'Industrial',p:65.00,un:'un',specs:{faixa:['1-4A','4-6A','6-9A','9-13A','13-18A']}},
+  {id:'m091',ico:'📦',n:'Disjuntor Motor 3P 6-10A (DM)',cat:'Industrial',p:185.00,un:'un',specs:{faixa:['1,6-2,5A','4-6,3A','6-10A','9-14A','13-18A']}},
+  {id:'m092',ico:'🔌',n:'Tomada industrial 3P+T+N 63A',cat:'Industrial',p:185.00,un:'un',specs:{amperagem:['16A','32A','63A','125A'],fases:['2P+T','3P+T','3P+T+N']}},
+  {id:'m093',ico:'📦',n:'Caixa metálica painel 400x300x200mm',cat:'Industrial',p:220.00,un:'un',specs:{tamanho:['300x200x150','400x300x200','600x400x250']}},
+  {id:'m094',ico:'📏',n:'Calha DIN 35mm (trilho)',cat:'Industrial',p:8.50,un:'m'},
+  {id:'m095',ico:'📏',n:'Canaleta PVC com tampa 40x40mm',cat:'Industrial',p:12.00,un:'m',specs:{tamanho:['25x25','40x40','60x60','80x60','100x60']}},
+  {id:'m096',ico:'🔩',n:'Borne de conexão 2,5mm² (pct 100)',cat:'Industrial',p:65.00,un:'pct',specs:{secao:['1,5mm²','2,5mm²','4mm²','6mm²','10mm²']}},
+  // Outros
+  {id:'m097',ico:'🔩',n:'Terminal ilhós 2,5mm² (pct 100)',cat:'Outros',p:18.00,un:'pct'},
+  {id:'m098',ico:'🔩',n:'Fita zebrada sinalizacao (rolo 200m)',cat:'Outros',p:32.00,un:'un'},
+  {id:'m099',ico:'📦',n:'Material diverso / consumível',cat:'Outros',p:50.00,un:'un'},
 ];
 
 // ══════════════════════════════════════════════════════════════
@@ -971,24 +1421,37 @@ const FIOS_PADRAO = [
   {cor:'Vermelho (Fase)',       emoji:'🔴'}
 ];
 
+// Seções reutilizáveis de cabeamento e conduíte
+const SECAO_CABO = (bitolaDefault='2,5mm²', metrosDefault=3, bitolas=['1,5mm²','2,5mm²','4mm²','6mm²','10mm²']) => ({
+  tipo:'secao', k:'tem_cabo', label:'Cabeamento',
+  cor:'#ef4444', icone:'🔴',
+  filhos:[
+    {tipo:'chips', k:'cabo_bitola', label:'Bitola do cabo', chips: bitolas, default: bitolaDefault},
+    {tipo:'number', k:'cabo_metros', label:'Comprimento (metros)', default: metrosDefault, min:1},
+    {tipo:'chips', k:'cabo_forma', label:'Como comprar', chips:['Por metro','Rolo 25m','Rolo 50m','Rolo 100m'], default:'Por metro'},
+    {tipo:'fios', k:'fios', label:'Fios (cores padrão)', default: FIOS_PADRAO},
+  ]
+});
+
+const SECAO_CONDUITE = () => ({
+  tipo:'secao', k:'tem_conduíte', label:'Conduíte',
+  cor:'#3b82f6', icone:'⬜',
+  filhos:[
+    {tipo:'chips', k:'cond_tipo', label:'Tipo de conduíte', chips:['Rígido PVC','Flexível PVC','Canaleta PVC'], default:'Rígido PVC'},
+    {tipo:'chips', k:'cond_diam', label:'Diâmetro', chips:['1/2"','3/4"','1"','1 1/4"'], default:'3/4"'},
+    {tipo:'number', k:'cond_metros', label:'Comprimento (metros)', default:3, min:1},
+  ]
+});
+
 const SERVICOS_CFG = {
   // ─── TOMADA ───────────────────────────────────────────────
   tomada: {
     label:'Ponto de Tomada',
     basePrice:{tipo:{'TUG 10A':80,'TUG 20A':130,'TUE 32A':180}},
     modulos:[
-      // 1. Tipo + quantidade
-      {
-        tipo:'chips', k:'tipo', label:'Tipo de tomada',
-        chips:['TUG 10A','TUG 20A','TUE 32A'], default:'TUG 10A'
-      },
-      {
-        tipo:'number', k:'qt', label:'Quantidade de pontos', default:1, min:1
-      },
-      // 2. Tomada ON/OFF → subtipo + caixa
-      {
-        tipo:'secao', k:'tem_tomada', label:'Tomadas',
-        cor:'#f59e0b', icone:'🔌',
+      {tipo:'chips', k:'tipo', label:'Tipo de tomada', chips:['TUG 10A','TUG 20A','TUE 32A'], default:'TUG 10A'},
+      {tipo:'number', k:'qt', label:'Quantidade de pontos', default:1, min:1},
+      {tipo:'secao', k:'tem_tomada', label:'Tomadas', cor:'#f59e0b', icone:'🔌',
         filhos:[
           {tipo:'chips', k:'tom_tipo', label:'Tipo de instalação', chips:['Embutir','Sobrepor'], default:'Embutir'},
           {tipo:'chips', k:'tom_caixa', label:'Caixa', chips:['4×2','4×4'], default:'4×2'},
@@ -996,88 +1459,310 @@ const SERVICOS_CFG = {
           {tipo:'chips', k:'tom_placa', label:'Placa de acabamento', chips:['Com placa','Sem placa'], default:'Com placa'},
         ]
       },
-      // 3. Cabeamento ON/OFF
-      {
-        tipo:'secao', k:'tem_cabo', label:'Cabeamento',
-        cor:'#ef4444', icone:'🔴',
+      SECAO_CABO('2,5mm²', 3),
+      SECAO_CONDUITE(),
+    ]
+  },
+  // ─── ILUMINAÇÃO ───────────────────────────────────────────
+  iluminacao: {
+    label:'Ponto de Iluminação',
+    basePrice:{tipo_luz:{'Ponto simples':70,'Spot LED':60,'Luminária sobrepor':80,'Arandela':90,'Emergência':180}},
+    modulos:[
+      {tipo:'chips', k:'tipo_luz', label:'Tipo', chips:['Ponto simples','Spot LED','Luminária sobrepor','Arandela','Emergência'], default:'Ponto simples'},
+      {tipo:'number', k:'qt', label:'Quantidade de pontos', default:1, min:1},
+      {tipo:'secao', k:'tem_caixa', label:'Caixa de instalação', cor:'#f59e0b', icone:'📦',
         filhos:[
-          {tipo:'chips', k:'cabo_bitola', label:'Bitola do cabo', chips:['1,5mm²','2,5mm²','4mm²','6mm²','10mm²'], default:'2,5mm²'},
-          {tipo:'number', k:'cabo_metros', label:'Comprimento (metros)', default:3, min:1},
-          {tipo:'chips', k:'cabo_forma', label:'Como comprar', chips:['Por metro','Rolo 25m','Rolo 50m','Rolo 100m'], default:'Por metro'},
-          {tipo:'fios', k:'fios', label:'Fios (cores padrão — 3 fios)', default:FIOS_PADRAO},
+          {tipo:'chips', k:'caixa_tipo', label:'Tipo de caixa', chips:['4×2 embutir','4×4 embutir','Sobrepor','Sem caixa'], default:'4×2 embutir'},
         ]
       },
-      // 4. Conduíte ON/OFF
-      {
-        tipo:'secao', k:'tem_conduíte', label:'Conduíte',
-        cor:'#3b82f6', icone:'⬜',
+      SECAO_CABO('1,5mm²', 3, ['1,5mm²','2,5mm²','4mm²']),
+      SECAO_CONDUITE(),
+    ]
+  },
+  // ─── INTERRUPTOR ──────────────────────────────────────────
+  interruptor: {
+    label:'Interruptor / Dimmer',
+    basePrice:{tipo_sw:{'Simples':60,'Duplo':80,'Three-way':120,'Dimmer':150}},
+    modulos:[
+      {tipo:'chips', k:'tipo_sw', label:'Tipo', chips:['Simples','Duplo','Three-way','Dimmer'], default:'Simples'},
+      {tipo:'number', k:'qt', label:'Quantidade de pontos', default:1, min:1},
+      {tipo:'secao', k:'tem_placa', label:'Acabamento', cor:'#f59e0b', icone:'🖼️',
         filhos:[
-          {tipo:'chips', k:'cond_tipo', label:'Tipo de conduíte', chips:['Rígido PVC','Flexível PVC','Canaleta PVC'], default:'Rígido PVC'},
-          {tipo:'chips', k:'cond_diam', label:'Diâmetro', chips:['1/2"','3/4"','1"'], default:'3/4"'},
-          {tipo:'number', k:'cond_metros', label:'Comprimento (metros)', default:3, min:1},
+          {tipo:'chips', k:'sw_caixa', label:'Caixa', chips:['4×2','4×4'], default:'4×2'},
+          {tipo:'chips', k:'sw_placa', label:'Placa', chips:['Com placa','Sem placa'], default:'Com placa'},
         ]
       },
+      SECAO_CABO('1,5mm²', 3, ['1,5mm²','2,5mm²']),
+      SECAO_CONDUITE(),
+    ]
+  },
+  // ─── DISJUNTOR ────────────────────────────────────────────
+  disjuntor: {
+    label:'Instalação / Substituição de Disjuntor',
+    basePrice:{polo:{'Monopolar':80,'Bipolar':120,'Tripolar':160}},
+    modulos:[
+      {tipo:'chips', k:'polo', label:'Polo', chips:['Monopolar','Bipolar','Tripolar'], default:'Monopolar'},
+      {tipo:'chips', k:'amp_disj', label:'Amperagem', chips:['10A','16A','20A','25A','32A','40A','50A','63A','80A','100A'], default:'20A'},
+      {tipo:'chips', k:'curva', label:'Curva', chips:['Curva B','Curva C','Curva D'], default:'Curva C'},
+      {tipo:'number', k:'qt', label:'Quantidade', default:1, min:1},
+    ]
+  },
+  // ─── DR / DPS ─────────────────────────────────────────────
+  dr: {
+    label:'Instalação de DR / DPS no QD',
+    basePrice:{tipo_dr:{'DR Bipolar':150,'DR Tetrapolar':220,'DR+DPS (DDR)':280,'DPS isolado':120}},
+    modulos:[
+      {tipo:'chips', k:'tipo_dr', label:'Tipo', chips:['DR Bipolar','DR Tetrapolar','DR+DPS (DDR)','DPS isolado'], default:'DR Bipolar'},
+      {tipo:'chips', k:'amp_dr', label:'Amperagem', chips:['25A','40A','63A'], default:'25A'},
+      {tipo:'chips', k:'sens', label:'Sensibilidade', chips:['30mA','100mA','300mA'], default:'30mA'},
+      {tipo:'number', k:'qt', label:'Quantidade', default:1, min:1},
     ]
   },
   // ─── CHUVEIRO ─────────────────────────────────────────────
   chuveiro: {
     label:'Chuveiro Elétrico',
-    campos:[
-      {k:'pot', label:'Potência', chips:['4400W / 20A','5500W / 25A','6800W / 32A']},
-      {k:'cabo', label:'Bitola do cabo', chips:['4mm²','6mm²']},
-    ],
-    toggles:[
-      {k:'qd',label:'Adicionar disjuntor no QD'},
-      {k:'rasgo',label:'Incluir abertura de rasgo'},
-    ],
-    mats:['m003','m014','m026'],
     basePrice:{pot:{'4400W / 20A':150,'5500W / 25A':170,'6800W / 32A':200}},
+    modulos:[
+      {tipo:'chips', k:'pot', label:'Potência', chips:['4400W / 20A','5500W / 25A','6800W / 32A'], default:'4400W / 20A'},
+      {tipo:'chips', k:'tensao_chv', label:'Tensão', chips:['127V','220V'], default:'220V'},
+      {tipo:'number', k:'qt', label:'Quantidade', default:1, min:1},
+      SECAO_CABO('4mm²', 5, ['2,5mm²','4mm²','6mm²']),
+      SECAO_CONDUITE(),
+      {tipo:'secao', k:'tem_qd_chv', label:'Disjuntor no QD', cor:'#22c55e', icone:'⚡',
+        filhos:[
+          {tipo:'chips', k:'disj_chv', label:'Disjuntor', chips:['20A Monoplar','25A Monopolar','32A Bipolar'], default:'20A Monoplar'},
+        ]
+      },
+    ],
+    mats:['m003','m004','m014','m016','m026'],
   },
   // ─── AR-CONDICIONADO ──────────────────────────────────────
   ar: {
     label:'Ar-condicionado Split',
-    campos:[
-      {k:'btu', label:'BTUs', chips:['9.000','12.000','18.000','24.000']},
-      {k:'cabo', label:'Bitola do cabo', chips:['2,5mm²','4mm²','6mm²']},
-    ],
-    toggles:[
-      {k:'suporte',label:'Incluir suporte externo'},
-      {k:'dreno',label:'Instalação de dreno'},
-      {k:'qd',label:'Disjuntor exclusivo no QD'},
-    ],
-    mats:['m002','m016','m024'],
     basePrice:{btu:{'9.000':350,'12.000':380,'18.000':430,'24.000':500}},
+    modulos:[
+      {tipo:'chips', k:'btu', label:'BTUs', chips:['9.000','12.000','18.000','24.000'], default:'12.000'},
+      {tipo:'chips', k:'fase_ar', label:'Fase', chips:['Monofásico 220V','Trifásico 380V'], default:'Monofásico 220V'},
+      {tipo:'number', k:'qt', label:'Quantidade', default:1, min:1},
+      SECAO_CABO('2,5mm²', 6, ['2,5mm²','4mm²','6mm²']),
+      SECAO_CONDUITE(),
+      {tipo:'secao', k:'tem_extras_ar', label:'Extras', cor:'#8b5cf6', icone:'🔧',
+        filhos:[
+          {tipo:'chips', k:'extras_ar', label:'Incluir', chips:['Suporte externo','Dreno','Disjuntor no QD','Suporte + Dreno'], default:'Disjuntor no QD'},
+        ]
+      },
+    ],
+    mats:['m002','m003','m016','m024'],
   },
   // ─── BOMBA ────────────────────────────────────────────────
   bomba: {
     label:"Bomba d'água",
-    campos:[
-      {k:'cv', label:'Potência', chips:['0,5 CV','1 CV','2 CV','3 CV']},
-      {k:'tensao', label:'Tensão', chips:['220V','380V']},
-      {k:'cabo', label:'Bitola do cabo', chips:['2,5mm²','4mm²','6mm²','10mm²']},
-    ],
-    toggles:[
-      {k:'boia',label:'Instalação de chave boia'},
-      {k:'timer',label:'Instalação de timer'},
-      {k:'qd',label:'Disjuntor exclusivo no QD'},
+    basePrice:{cv:{'0,5 CV':250,'1 CV':280,'2 CV':320,'3 CV':380}},
+    modulos:[
+      {tipo:'chips', k:'cv', label:'Potência', chips:['0,5 CV','1 CV','2 CV','3 CV'], default:'1 CV'},
+      {tipo:'chips', k:'tensao_bom', label:'Tensão', chips:['220V','380V'], default:'220V'},
+      {tipo:'number', k:'qt', label:'Quantidade', default:1, min:1},
+      SECAO_CABO('2,5mm²', 8, ['2,5mm²','4mm²','6mm²','10mm²']),
+      SECAO_CONDUITE(),
+      {tipo:'secao', k:'tem_extras_bom', label:'Extras', cor:'#22c55e', icone:'💧',
+        filhos:[
+          {tipo:'chips', k:'extras_bom', label:'Incluir', chips:['Chave boia','Timer','Disjuntor no QD','Boia + Disjuntor'], default:'Disjuntor no QD'},
+        ]
+      },
     ],
     mats:['m003','m016','m024'],
-    basePrice:{cv:{'0,5 CV':250,'1 CV':280,'2 CV':320,'3 CV':380}},
   },
   // ─── QUADRO ───────────────────────────────────────────────
   qd: {
     label:'Quadro de Distribuição',
-    campos:[
-      {k:'disj', label:'Nº de disjuntores', chips:['6','12','20','24']},
-      {k:'tipo', label:'Tipo', chips:['Embutir','Sobrepor']},
-    ],
-    toggles:[
-      {k:'dr',label:'Incluir DR 30mA'},
-      {k:'dps',label:'Incluir DPS'},
-      {k:'etiq',label:'Etiquetagem dos circuitos'},
+    basePrice:{disj:{'6':280,'12':350,'20':450,'24':520}},
+    modulos:[
+      {tipo:'chips', k:'disj', label:'Nº de disjuntores', chips:['6','12','20','24'], default:'12'},
+      {tipo:'chips', k:'tipo_qd', label:'Tipo', chips:['Embutir','Sobrepor'], default:'Embutir'},
+      {tipo:'number', k:'qt', label:'Quantidade de quadros', default:1, min:1},
+      {tipo:'secao', k:'tem_dr_qd', label:'DR (Diferencial-Residual)', cor:'#3b82f6', icone:'🛡️',
+        filhos:[
+          {tipo:'chips', k:'dr_amp', label:'Amperagem DR', chips:['25A','40A','63A'], default:'25A'},
+          {tipo:'chips', k:'dr_sens', label:'Sensibilidade', chips:['30mA','100mA'], default:'30mA'},
+        ]
+      },
+      {tipo:'secao', k:'tem_dps_qd', label:'DPS (Proteção Surto)', cor:'#f59e0b', icone:'⚡',
+        filhos:[
+          {tipo:'chips', k:'dps_classe', label:'Classe', chips:['Classe I','Classe II','Classe I+II'], default:'Classe II'},
+        ]
+      },
+      {tipo:'secao', k:'tem_etiq', label:'Etiquetagem dos circuitos', cor:'#22c55e', icone:'🏷️',
+        filhos:[
+          {tipo:'chips', k:'etiq_tipo', label:'Tipo de etiqueta', chips:['Adesiva impressa','Plaquinha gravada'], default:'Adesiva impressa'},
+        ]
+      },
     ],
     mats:['m022','m020','m021'],
-    basePrice:{disj:{'6':280,'12':350,'20':450,'24':520}},
+  },
+  // ─── SOLAR ────────────────────────────────────────────────
+  solar: {
+    label:'Sistema Fotovoltaico',
+    modulos:[
+      {tipo:'chips', k:'potencia', label:'Potência do sistema', chips:['1-2kWp (2-4 placas)','3-4kWp (6-8 placas)','5-6kWp (10-12 placas)','8-10kWp (16-20 placas)'], default:'3-4kWp (6-8 placas)'},
+      {tipo:'chips', k:'telhado', label:'Tipo de telhado', chips:['Cerâmico','Metálico','Fibrocimento','Laje/Flat'], default:'Cerâmico'},
+      {tipo:'secao', k:'tem_inversor', label:'Inversor', cor:'#f59e0b', icone:'🔋',
+        filhos:[
+          {tipo:'chips', k:'inv_tipo', label:'Tipo de inversor', chips:['String','Microinversor','Híbrido'], default:'String'},
+          {tipo:'chips', k:'inv_pot', label:'Potência do inversor', chips:['1kW','2kW','3kW','5kW','8kW','10kW'], default:'3kW'},
+        ]
+      },
+      {tipo:'secao', k:'tem_bateria', label:'Armazenamento (opcional)', cor:'#3b82f6', icone:'🔋',
+        filhos:[
+          {tipo:'chips', k:'bat_cap', label:'Capacidade', chips:['2,4kWh','5kWh','10kWh'], default:'5kWh'},
+        ]
+      },
+      SECAO_CABO('6mm²', 15, ['4mm²','6mm²','10mm²']),
+      SECAO_CONDUITE(),
+    ],
+    basePrice:{potencia:{'1-2kWp (2-4 placas)':3500,'3-4kWp (6-8 placas)':6500,'5-6kWp (10-12 placas)':9500,'8-10kWp (16-20 placas)':15000}},
+    mats:['m061','m062','m066','m067','m068'],
+  },
+  // ─── SPDA ─────────────────────────────────────────────────
+  spda: {
+    label:'SPDA (Para-raios)',
+    modulos:[
+      {tipo:'chips', k:'tipo', label:'Tipo de para-raios', chips:['Franklin (haste simples)','Gaiola de Faraday','Dissipador de cargas','Ativo (ESE)'], default:'Franklin (haste simples)'},
+      {tipo:'chips', k:'nivel', label:'Nível de proteção (NBR 5419)', chips:['Nível IV','Nível III','Nível II','Nível I'], default:'Nível III'},
+      {tipo:'secao', k:'tem_descida', label:'Descidas e Aterramento', cor:'#22c55e', icone:'🌐',
+        filhos:[
+          {tipo:'number', k:'descidas', label:'Número de descidas', default:2, min:1},
+          {tipo:'number', k:'hastes', label:'Hastes de aterramento', default:2, min:1},
+          {tipo:'chips', k:'cabo_descida', label:'Cabo de descida', chips:['50mm²','70mm²','95mm²'], default:'50mm²'},
+        ]
+      },
+      {tipo:'secao', k:'tem_dps', label:'DPS (Proteção Surto)', cor:'#f59e0b', icone:'⚡',
+        filhos:[
+          {tipo:'chips', k:'dps_classe', label:'Classe do DPS', chips:['Classe I','Classe II','Classe I+II'], default:'Classe II'},
+        ]
+      },
+      SECAO_CABO('16mm²', 20, ['10mm²','16mm²','25mm²']),
+      SECAO_CONDUITE(),
+    ],
+    basePrice:{tipo:{'Franklin (haste simples)':2800,'Gaiola de Faraday':4500,'Dissipador de cargas':3800,'Ativo (ESE)':5500}},
+    mats:['m029','m055','m056','m057','m058'],
+  },
+  // ─── MOTOR TRIFÁSICO ──────────────────────────────────────
+  motor: {
+    label:'Motor Trifásico',
+    basePrice:{cv:{'0,5 CV':450,'1 CV':500,'2 CV':550,'3 CV':620,'5 CV':750,'7,5 CV':900,'10 CV':1100,'15 CV':1400,'20 CV':1800}},
+    modulos:[
+      {tipo:'chips', k:'cv', label:'Potência do motor', chips:['0,5 CV','1 CV','2 CV','3 CV','5 CV','7,5 CV','10 CV','15 CV','20 CV'], default:'1 CV'},
+      {tipo:'chips', k:'tensao', label:'Tensão', chips:['220V','380V','440V'], default:'380V'},
+      {tipo:'chips', k:'partida', label:'Tipo de partida', chips:['Direta','Estrela-Triângulo','Soft-Starter','Inversor de Frequência'], default:'Direta'},
+      {tipo:'number', k:'qt', label:'Quantidade', default:1, min:1},
+      SECAO_CABO('4mm²', 10, ['2,5mm²','4mm²','6mm²','10mm²','16mm²']),
+      SECAO_CONDUITE(),
+      {tipo:'secao', k:'tem_extras_mot', label:'Extras', cor:'#8b5cf6', icone:'⚙️',
+        filhos:[
+          {tipo:'chips', k:'extras_mot', label:'Incluir', chips:['Reversão de giro','Proteção por termistor','Disjuntor motor (DM)'], default:'Disjuntor motor (DM)'},
+        ]
+      },
+    ],
+    mats:['m086','m089','m090','m091'],
+  },
+  // ─── INVERSOR DE FREQUÊNCIA ───────────────────────────────
+  inversor: {
+    label:'Inversor de Frequência',
+    basePrice:{cv:{'1 CV':800,'2 CV':950,'3 CV':1100,'5 CV':1400,'7,5 CV':1900,'10 CV':2400,'15 CV':3200}},
+    modulos:[
+      {tipo:'chips', k:'cv', label:'Potência', chips:['1 CV','2 CV','3 CV','5 CV','7,5 CV','10 CV','15 CV'], default:'1 CV'},
+      {tipo:'chips', k:'tensao', label:'Tensão', chips:['220V','380V','440V'], default:'380V'},
+      {tipo:'chips', k:'aplicacao', label:'Aplicação', chips:['Bomba','Ventilador','Compressor','Esteira','Outros'], default:'Bomba'},
+      {tipo:'number', k:'qt', label:'Quantidade', default:1, min:1},
+      SECAO_CABO('4mm²', 8, ['2,5mm²','4mm²','6mm²','10mm²']),
+      SECAO_CONDUITE(),
+      {tipo:'secao', k:'tem_extras_inv', label:'Extras', cor:'#8b5cf6', icone:'⚙️',
+        filhos:[
+          {tipo:'chips', k:'extras_inv', label:'Incluir', chips:['Bypass manual','Comunicação RS485/ModBus','Módulo de frenagem'], default:'Bypass manual'},
+        ]
+      },
+    ],
+    mats:['m086','m087','m094','m095'],
+  },
+  // ─── PONTO TRIFÁSICO ──────────────────────────────────────
+  trifasico: {
+    label:'Ponto Trifásico 380V',
+    basePrice:{amp:{'16A':280,'25A':320,'32A':380,'63A':550,'125A':900}},
+    modulos:[
+      {tipo:'chips', k:'amp', label:'Amperagem', chips:['16A','25A','32A','63A','125A'], default:'32A'},
+      {tipo:'chips', k:'tipo', label:'Tipo de instalação', chips:['Tomada industrial','Barramento','Painel'], default:'Tomada industrial'},
+      {tipo:'number', k:'qt', label:'Quantidade de pontos', default:1, min:1},
+      SECAO_CABO('4mm²', 10, ['2,5mm²','4mm²','6mm²','10mm²','16mm²']),
+      SECAO_CONDUITE(),
+      {tipo:'secao', k:'tem_prot_tri', label:'Proteção', cor:'#3b82f6', icone:'🛡️',
+        filhos:[
+          {tipo:'chips', k:'prot_tri', label:'Incluir', chips:['Disjuntor tripolar','DR industrial','Disjuntor + DR'], default:'Disjuntor tripolar'},
+        ]
+      },
+    ],
+    mats:['m019','m092','m024'],
+  },
+  // ─── CFTV ─────────────────────────────────────────────────
+  cftv: {
+    label:'Câmera CFTV',
+    modulos:[
+      {tipo:'chips', k:'tipo', label:'Tipo de câmera', chips:['Dome interna','Dome externa','Bullet externa','PTZ','Mini dome'], default:'Dome externa'},
+      {tipo:'chips', k:'res', label:'Resolução', chips:['2MP (Full HD)','4MP','8MP (4K)'], default:'2MP (Full HD)'},
+      {tipo:'chips', k:'infra', label:'Infravermelho', chips:['Até 20m','Até 40m','Até 80m','Sem IR'], default:'Até 40m'},
+      {tipo:'secao', k:'tem_cabo', label:'Cabeamento', cor:'#3b82f6', icone:'🔵',
+        filhos:[
+          {tipo:'chips', k:'cabo_tipo', label:'Tipo de cabo', chips:['UTP Cat5e','Cabo coaxial RG59','Cabo HDCVI'], default:'UTP Cat5e'},
+          {tipo:'number', k:'cabo_metros', label:'Comprimento por câmera (metros)', default:20, min:5},
+        ]
+      },
+      {tipo:'secao', k:'tem_dvr', label:'Gravador (DVR/NVR)', cor:'#f59e0b', icone:'🎥',
+        filhos:[
+          {tipo:'chips', k:'dvr_tipo', label:'Tipo de gravador', chips:['DVR HDCVI','NVR IP','Sem gravador'], default:'NVR IP'},
+          {tipo:'chips', k:'dvr_ch', label:'Canais', chips:['4 canais','8 canais','16 canais','32 canais'], default:'8 canais'},
+          {tipo:'chips', k:'dvr_hd', label:'Armazenamento', chips:['1TB','2TB','4TB','6TB','Sem HD'], default:'1TB'},
+        ]
+      },
+    ],
+    basePrice:{tipo:{'Dome interna':150,'Dome externa':180,'Bullet externa':200,'PTZ':600,'Mini dome':130}},
+    mats:['m071','m072','m073','m074','m075'],
+  },
+  // ─── ALARME ───────────────────────────────────────────────
+  alarme: {
+    label:'Alarme de Segurança',
+    basePrice:{central:{'4 zonas':500,'8 zonas':650,'16 zonas':950,'32 zonas':1400}},
+    modulos:[
+      {tipo:'chips', k:'central', label:'Capacidade da central', chips:['4 zonas','8 zonas','16 zonas','32 zonas'], default:'8 zonas'},
+      {tipo:'chips', k:'tipo_al', label:'Tecnologia', chips:['Sem fio','Com fio','Híbrido'], default:'Híbrido'},
+      {tipo:'number', k:'qt', label:'Quantidade de centrais', default:1, min:1},
+      {tipo:'secao', k:'tem_cabo_al', label:'Cabeamento', cor:'#3b82f6', icone:'🔵',
+        filhos:[
+          {tipo:'chips', k:'cabo_al', label:'Tipo de cabo', chips:['Par trançado 4×0,5mm','UTP Cat5e'], default:'Par trançado 4×0,5mm'},
+          {tipo:'number', k:'cabo_metros', label:'Comprimento total (metros)', default:30, min:5},
+        ]
+      },
+      {tipo:'secao', k:'tem_perifericos', label:'Periféricos', cor:'#f59e0b', icone:'🔔',
+        filhos:[
+          {tipo:'chips', k:'perifericos', label:'Incluir', chips:['Sirene externa','Sirene interna','Teclado LCD','App + Monitoramento','Sensores PIR','Sensores magnéticos'], default:'Sirene externa'},
+        ]
+      },
+    ],
+    mats:['m076','m077','m078','m079'],
+  },
+  // ─── CERCA ELÉTRICA ───────────────────────────────────────
+  cerca: {
+    label:'Cerca Elétrica',
+    basePrice:{extensao:{'Até 50m':750,'50-100m':1200,'100-200m':2200,'200-500m':4500,'Acima 500m':8000}},
+    modulos:[
+      {tipo:'chips', k:'extensao', label:'Extensão total', chips:['Até 50m','50-100m','100-200m','200-500m','Acima 500m'], default:'Até 50m'},
+      {tipo:'chips', k:'fios_cerca', label:'Número de fios', chips:['6 fios','8 fios','10 fios','12 fios'], default:'8 fios'},
+      SECAO_CABO('1,5mm²', 20, ['1,5mm²','2,5mm²']),
+      {tipo:'secao', k:'tem_extras_cerca', label:'Extras', cor:'#f59e0b', icone:'⚡',
+        filhos:[
+          {tipo:'chips', k:'extras_cerca', label:'Incluir', chips:['Integrar alarme','Energizador duplo','Aterramento dedicado','Placas NBR'], default:'Aterramento dedicado'},
+        ]
+      },
+    ],
+    mats:['m081','m082'],
   },
 };
 
@@ -1095,15 +1780,15 @@ let matOvEspecsSel = {};  // specs do material no overlay
 // BLOCO 4 — CARD PENDENTE (SERVIÇO)
 // ══════════════════════════════════════════════════════════════
 function selecionarPendente(d) {
-  srvPendente = d;
   document.getElementById('srv-inline-results').style.display = 'none';
   document.getElementById('srv-inline-search').value = '';
-  document.getElementById('srv-pending-icon').textContent = d.ico;
-  document.getElementById('srv-pending-name').textContent = d.n;
-  document.getElementById('srv-pending-price').textContent = 'R$ ' + scpFmtBRL(d.p) + ' / ' + d.un;
-  const cfgBtn = document.getElementById('srv-pending-cfg-btn');
-  cfgBtn.style.display = d.cfg ? 'block' : 'none';
-  document.getElementById('srv-pending-card').style.display = 'flex';
+  // serviço com configurador completo → abre direto
+  if (d.cfg && SERVICOS_CFG[d.cfg]) {
+    abrirConfigurador(d);
+    return;
+  }
+  // todos os outros → configurador leve
+  abrirConfiguradorLeve(d);
 }
 
 function limparPendente() {
@@ -1123,13 +1808,97 @@ function addServiceDirect() {
   limparPendente();
 }
 
+// ── CONFIGURADOR LEVE (serviços sem cfg completo) ─────────────
+function abrirConfiguradorLeve(d) {
+  srvPendente = d;
+  const hasMats = d.mats && d.mats.length;
+  let matsHtml = '';
+  if (hasMats) {
+    matsHtml = `<div class="ilbl" style="margin-bottom:8px">Materiais sugeridos</div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px">`;
+    d.mats.forEach(mid => {
+      const m = MAT.find(x => x.id === mid);
+      if (!m) return;
+      matsHtml += `<button class="scp-chip mat-chip" onclick="addMaterial(null,MAT.find(x=>x.id==='${mid}'),1,${m.p});flashButton(this)">${m.ico} ${m.n}</button>`;
+    });
+    matsHtml += `</div>`;
+  }
+
+  const body = document.getElementById('scp-body');
+  body.innerHTML = `
+    <div style="margin-bottom:16px">
+      <div class="ilbl" style="margin-bottom:8px">Quantidade</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <button class="qty-btn" style="width:36px;height:36px;font-size:18px" onclick="leve_qty(-1)">−</button>
+        <input type="number" id="leve-qty" min="1" value="1"
+          style="width:64px;font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:700;color:var(--text);text-align:center;background:var(--bg-input);border:1px solid var(--border-input);border-radius:8px;padding:4px 6px;outline:none"
+          oninput="leveAtualizarPreview()" onfocus="this.select()">
+        <span style="font-size:12px;color:var(--text3)">${d.un}</span>
+        <button class="qty-btn" style="width:36px;height:36px;font-size:18px" onclick="leve_qty(1)">+</button>
+      </div>
+    </div>
+    <div style="margin-bottom:16px">
+      <div class="ilbl" style="margin-bottom:8px">Preço unitário (R$)</div>
+      <input class="inp" id="leve-preco" type="number" value="${d.p.toFixed(2)}" min="0" step="0.01"
+        style="font-family:'IBM Plex Mono',monospace;font-size:16px;margin-bottom:0"
+        oninput="leveAtualizarPreview()">
+    </div>
+    <div style="margin-bottom:16px">
+      <div class="ilbl" style="margin-bottom:8px">Observação (opcional)</div>
+      <input class="inp" id="leve-obs" type="text" placeholder="Ex: piso superior, sala..." style="margin-bottom:0">
+    </div>
+    ${matsHtml}`;
+
+  document.getElementById('scp-hdr-ico').textContent = d.ico;
+  document.getElementById('scp-hdr-name').textContent = d.n;
+  document.getElementById('scp-hdr-cat').textContent = d.cat;
+  leveAtualizarPreview();
+  document.getElementById('scp-overlay').classList.add('open');
+  // trocar botão adicionar para usar leveAdicionar
+  document.querySelector('#scp-footer button[onclick="scpAdicionar()"]')
+    .setAttribute('onclick', 'leveAdicionar()');
+}
+
+function leve_qty(delta) {
+  const el = document.getElementById('leve-qty');
+  const v = Math.max(1, (parseInt(el.value) || 1) + delta);
+  el.value = v;
+  leveAtualizarPreview();
+}
+
+function leveAtualizarPreview() {
+  const qt = parseInt(document.getElementById('leve-qty')?.value || 1);
+  const p  = parseFloat(document.getElementById('leve-preco')?.value || 0);
+  document.getElementById('scp-preview-price').textContent = 'R$ ' + scpFmtBRL(qt * p);
+  document.getElementById('scp-preview-tags').innerHTML =
+    `<span style="background:var(--acc-bg);border:1px solid var(--acc-border);border-radius:6px;padding:3px 8px;font-size:9px;font-weight:700;color:var(--acc)">${qt} ${srvPendente?.un || 'un'}</span>`;
+}
+
+function leveAdicionar() {
+  if (!srvPendente) return;
+  const qt  = Math.max(1, parseInt(document.getElementById('leve-qty')?.value) || 1);
+  const p   = parseFloat(document.getElementById('leve-preco')?.value || srvPendente.p);
+  const obs = document.getElementById('leve-obs')?.value.trim();
+  const nome = obs ? `${srvPendente.n} (${obs})` : srvPendente.n;
+  for (let i = 0; i < qt; i++) addService(null, {...srvPendente, n: nome, p});
+  fecharConfigurador();
+  // restaurar botão para scpAdicionar
+  const btn = document.querySelector('#scp-footer button[onclick="leveAdicionar()"]');
+  if (btn) btn.setAttribute('onclick', 'scpAdicionar()');
+}
+
 // ══════════════════════════════════════════════════════════════
 // BLOCO 5 — CARD PENDENTE (MATERIAL)
 // ══════════════════════════════════════════════════════════════
 function selecionarMaterialPendente(d) {
-  matPendente = d;
   document.getElementById('mat-inline-results').style.display = 'none';
   document.getElementById('mat-inline-search').value = '';
+  // se tem specs, abre configurador direto
+  if (d.specs) {
+    abrirConfiguradorMat(d);
+    return;
+  }
+  matPendente = d;
   document.getElementById('mat-pending-icon').textContent = d.ico;
   document.getElementById('mat-pending-name').textContent = d.n;
   document.getElementById('mat-pending-price').textContent = 'R$ ' + scpFmtBRL(d.p) + ' / ' + d.un;
@@ -1218,7 +1987,10 @@ function renderConfigurador() {
         html += `<div style="margin-bottom:16px"><div class="ilbl" style="margin-bottom:8px">${mod.label}</div>`;
         html += `<div style="display:flex;align-items:center;gap:10px">
           <button class="qty-btn" onclick="scpSetVal('${mod.k}',Math.max(${mod.min||1},(scpEstado['${mod.k}']||1)-1));renderConfigurador();scpAtualizarPreview()">−</button>
-          <span style="font-family:'IBM Plex Mono',monospace;font-size:18px;font-weight:700;color:var(--text);min-width:32px;text-align:center">${scpEstado[mod.k]||1}</span>
+          <input type="number" min="${mod.min||1}" value="${scpEstado[mod.k]||1}"
+            style="width:64px;font-family:'IBM Plex Mono',monospace;font-size:18px;font-weight:700;color:var(--text);text-align:center;background:var(--bg-input);border:1px solid var(--border-input);border-radius:8px;padding:4px 6px;outline:none"
+            oninput="scpSetVal('${mod.k}',Math.max(${mod.min||1},parseInt(this.value)||${mod.min||1}));scpAtualizarPreview()"
+            onfocus="this.select()">
           <button class="qty-btn" onclick="scpSetVal('${mod.k}',(scpEstado['${mod.k}']||1)+1);renderConfigurador();scpAtualizarPreview()">+</button>
         </div></div>`;
 
@@ -1246,7 +2018,10 @@ function renderConfigurador() {
               html += `<div style="margin-bottom:14px"><div class="ilbl" style="margin-bottom:8px">${f.label}</div>`;
               html += `<div style="display:flex;align-items:center;gap:10px">
                 <button class="qty-btn" onclick="scpSetVal('${f.k}',Math.max(${f.min||1},(scpEstado['${f.k}']||1)-1));renderConfigurador();scpAtualizarPreview()">−</button>
-                <span style="font-family:'IBM Plex Mono',monospace;font-size:18px;font-weight:700;color:var(--text);min-width:32px;text-align:center">${scpEstado[f.k]||1}</span>
+                <input type="number" min="${f.min||1}" value="${scpEstado[f.k]||1}"
+                  style="width:64px;font-family:'IBM Plex Mono',monospace;font-size:18px;font-weight:700;color:var(--text);text-align:center;background:var(--bg-input);border:1px solid var(--border-input);border-radius:8px;padding:4px 6px;outline:none"
+                  oninput="scpSetVal('${f.k}',Math.max(${f.min||1},parseInt(this.value)||${f.min||1}));scpAtualizarPreview()"
+                  onfocus="this.select()">
                 <button class="qty-btn" onclick="scpSetVal('${f.k}',(scpEstado['${f.k}']||1)+1);renderConfigurador();scpAtualizarPreview()">+</button>
               </div></div>`;
             } else if (f.tipo === 'fios') {
@@ -1282,7 +2057,10 @@ function renderConfigurador() {
       } else if (c.type === 'number') {
         html += `<div style="display:flex;align-items:center;gap:10px">
           <button class="qty-btn" onclick="scpSetVal('${c.k}',Math.max(${c.min||1},(scpEstado['${c.k}']||1)-1));renderConfigurador();scpAtualizarPreview()">−</button>
-          <span style="font-family:'IBM Plex Mono',monospace;font-size:18px;font-weight:700;color:var(--text);min-width:32px;text-align:center">${scpEstado[c.k]||1}</span>
+          <input type="number" min="${c.min||1}" value="${scpEstado[c.k]||1}"
+            style="width:64px;font-family:'IBM Plex Mono',monospace;font-size:18px;font-weight:700;color:var(--text);text-align:center;background:var(--bg-input);border:1px solid var(--border-input);border-radius:8px;padding:4px 6px;outline:none"
+            oninput="scpSetVal('${c.k}',Math.max(${c.min||1},parseInt(this.value)||${c.min||1}));scpAtualizarPreview()"
+            onfocus="this.select()">
           <button class="qty-btn" onclick="scpSetVal('${c.k}',(scpEstado['${c.k}']||1)+1);renderConfigurador();scpAtualizarPreview()">+</button>
         </div>`;
       }
@@ -1418,6 +2196,62 @@ function scpAdicionar() {
 
   // ── injetar materiais automáticos (só sistema modular) ────
   if (cfg.modulos) {
+    // ILUMINAÇÃO — caixa
+    if (scpEstado['tem_caixa']) {
+      const caixaTipo = scpEstado['caixa_tipo'] || '4×2 embutir';
+      if (!caixaTipo.includes('Sem')) {
+        const caixaId = caixaTipo.includes('4×4') ? 'm027' : 'm026';
+        const matCaixa = MAT.find(x => x.id === caixaId);
+        if (matCaixa) addMaterial(null, {...matCaixa, n: `Caixa ${caixaTipo}`}, qt, matCaixa.p);
+      }
+    }
+
+    // INTERRUPTOR — switch + placa + caixa
+    if (scpEstado['tem_placa']) {
+      const tipo_sw = scpEstado['tipo_sw'] || 'Simples';
+      const swIds   = {Simples:'m034', Duplo:'m035', 'Three-way':'m036', Dimmer:'m037'};
+      const swId    = swIds[tipo_sw] || 'm034';
+      const matSw   = MAT.find(x => x.id === swId);
+      if (matSw) addMaterial(null, {...matSw, n: `${matSw.n} — ${tipo_sw}`}, qt, matSw.p);
+      const caixaId = scpEstado['sw_caixa'] === '4×4' ? 'm027' : 'm026';
+      const matCaixa = MAT.find(x => x.id === caixaId);
+      if (matCaixa) addMaterial(null, matCaixa, qt, matCaixa.p);
+      if (scpEstado['sw_placa'] !== 'Sem placa') {
+        const matPlaca = MAT.find(x => x.id === 'm038');
+        if (matPlaca) addMaterial(null, matPlaca, qt, matPlaca.p);
+      }
+    }
+
+    // DISJUNTOR — injetar material correto pelo polo
+    if (scpAtivo === 'disjuntor') {
+      const polo = scpEstado['polo'] || 'Monopolar';
+      const amp  = scpEstado['amp_disj'] || '20A';
+      const curva = scpEstado['curva'] || 'Curva C';
+      const poloIds = {Monopolar:['m012','m013','m014','m014','m016','m016','m016','m016','m016','m016'],
+                       Bipolar:  ['m017','m017','m017','m017','m018','m018','m018','m018','m018','m018'],
+                       Tripolar: ['m019','m019','m019','m019','m019','m019','m019','m019','m019','m019']};
+      const amps = ['10A','16A','20A','25A','32A','40A','50A','63A','80A','100A'];
+      const idx  = amps.indexOf(amp);
+      const matId = (poloIds[polo] || poloIds.Monopolar)[idx] || 'm012';
+      const matDisj = MAT.find(x => x.id === matId);
+      if (matDisj) addMaterial(null, {...matDisj, n: `Disjuntor ${polo} ${amp} ${curva}`}, qt, matDisj.p);
+    }
+
+    // DR / DPS — injetar material correto
+    if (scpAtivo === 'dr') {
+      const tipo_dr = scpEstado['tipo_dr'] || 'DR Bipolar';
+      const amp_dr  = scpEstado['amp_dr']  || '25A';
+      const sens    = scpEstado['sens']    || '30mA';
+      if (tipo_dr.includes('DPS')) {
+        const matDPS = MAT.find(x => x.id === 'm021');
+        if (matDPS) addMaterial(null, {...matDPS, n: `DPS Classe II`}, qt, matDPS.p);
+      }
+      if (!tipo_dr.includes('isolado')) {
+        const matDR = MAT.find(x => x.id === 'm020');
+        if (matDR) addMaterial(null, {...matDR, n: `DR ${tipo_dr} ${amp_dr} ${sens}`}, qt, matDR.p);
+      }
+    }
+
     // TOMADA
     if (scpEstado['tem_tomada']) {
       const amp = scpEstado['tom_amp'] || '10A';
@@ -1478,6 +2312,10 @@ function scpAdicionar() {
 function fecharConfigurador() {
   document.getElementById('scp-overlay').classList.remove('open');
   scpAtivo = null; scpSrvData = null; scpEstado = {};
+  // sempre restaurar botão para scpAdicionar
+  const btn = document.querySelector('#scp-footer button');
+  if (btn) btn.setAttribute('onclick', 'scpAdicionar()');
+  limparPendente();
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -1548,15 +2386,28 @@ function fecharConfiguradorMat() {
 function inlineSearch(type, q) {
   const resultsId = type === 'srv' ? 'srv-inline-results' : 'mat-inline-results';
   const drop = document.getElementById(resultsId);
-  q = (q||'').trim().toLowerCase();
-  if (!q) { drop.style.display = 'none'; return; }
+  const nfEl = document.getElementById('cx-nf-' + type);
+  const formEl = document.getElementById('cx-form-' + type);
+  const rawQ = (type === 'srv' ? document.getElementById('srv-inline-search') : document.getElementById('mat-inline-search')).value.trim();
+  q = rawQ.toLowerCase();
+  if (!q) {
+    drop.style.display = 'none';
+    nfEl.style.display = 'none';
+    formEl.style.display = 'none';
+    return;
+  }
   const arr = type === 'srv' ? SRV : MAT;
   const res = arr.filter(d =>
     d.n.toLowerCase().includes(q) ||
     d.cat.toLowerCase().includes(q) ||
     (d.id && d.id.toLowerCase().includes(q))
   ).slice(0, 10);
-  if (!res.length) { drop.style.display = 'none'; return; }
+  if (!res.length) {
+    drop.style.display = 'none';
+    if (formEl.style.display !== 'block') _mostrarNF(type, rawQ);
+    return;
+  }
+  nfEl.style.display = 'none';
   const priceColor = type === 'srv' ? 'var(--acc)' : '#a78bfa';
   drop.innerHTML = res.map(d => {
     const onclick = type === 'srv'
@@ -1575,6 +2426,132 @@ function inlineSearch(type, q) {
 }
 
 // ══════════════════════════════════════════════════════════════
+// BLOCO 7B — ITEM CUSTOMIZADO
+// ══════════════════════════════════════════════════════════════
+function gerarIdCustom(type) {
+  return (type === 'srv' ? 'cx_srv_' : 'cx_mat_') + Date.now();
+}
+
+function _mostrarNF(type, query) {
+  const isSrv = type === 'srv';
+  const corRgb = isSrv ? '99,102,241' : '167,139,250';
+  const corTxt = isSrv ? '#818cf8' : '#c4b5fd';
+  const nfEl = document.getElementById('cx-nf-' + type);
+  const safeQ = query.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+  nfEl.innerHTML = `
+    <div style="font-size:13px;font-weight:800;color:${corTxt};margin-bottom:3px">+ Criar item personalizado</div>
+    <div style="font-size:11px;color:var(--text3);margin-bottom:10px">"${query}" não está no catálogo</div>
+    <button onclick="abrirFormCustom('${type}','${safeQ}')"
+      style="width:100%;padding:9px;background:rgba(${corRgb},.15);border:1px solid rgba(${corRgb},.3);border-radius:10px;font-size:12px;font-weight:800;color:${corTxt};cursor:pointer">
+      ✏️ Criar e configurar
+    </button>`;
+  nfEl.style.display = 'block';
+}
+
+function abrirFormCustom(type, nome) {
+  const isSrv = type === 'srv';
+  const corRgb = isSrv ? '99,102,241' : '167,139,250';
+  const corTxt = isSrv ? '#818cf8' : '#c4b5fd';
+  const cats = isSrv ? SRV_CATS : MAT_CATS;
+  const uns = isSrv
+    ? ['pt','un','m','h','vb']
+    : ['un','m','pt','kg','cx','rl','h'];
+  const ico = isSrv ? '⚡' : '📦';
+  const label = isSrv ? 'Serviço' : 'Material';
+  const formEl = document.getElementById('cx-form-' + type);
+  formEl.innerHTML = `
+    <div style="font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:${corTxt};margin-bottom:12px">${ico} Novo ${label}</div>
+    <div style="display:flex;gap:8px;margin-bottom:8px">
+      <input class="inp" id="cx-ico-${type}" type="text" placeholder="${ico}"
+        style="width:56px;text-align:center;margin-bottom:0;font-size:18px">
+      <input class="inp" id="cx-nome-${type}" type="text" placeholder="Nome do ${label.toLowerCase()}"
+        value="${nome}" style="flex:1;margin-bottom:0">
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+      <div>
+        <div class="ilbl">Categoria</div>
+        <select class="inp" id="cx-cat-${type}" style="margin-top:4px;margin-bottom:0">
+          ${cats.map(c => `<option>${c}</option>`).join('')}
+        </select>
+      </div>
+      <div>
+        <div class="ilbl">Unidade</div>
+        <select class="inp" id="cx-un-${type}" style="margin-top:4px;margin-bottom:0">
+          ${uns.map(u => `<option>${u}</option>`).join('')}
+        </select>
+      </div>
+    </div>
+    <div style="margin-bottom:10px">
+      <div class="ilbl">Preço unitário (R$)</div>
+      <input class="inp" id="cx-preco-${type}" type="number" placeholder="0,00" min="0" step="0.01"
+        style="margin-top:4px;margin-bottom:0;font-family:'IBM Plex Mono',monospace">
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <button onclick="addCustomItem('${type}',false)"
+        style="padding:10px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);border-radius:10px;font-size:11px;font-weight:800;color:#4ade80;cursor:pointer">
+        ➕ Só orçamento
+      </button>
+      <button onclick="addCustomItem('${type}',true)"
+        style="padding:10px;background:rgba(${corRgb},.2);border:1px solid rgba(${corRgb},.4);border-radius:10px;font-size:11px;font-weight:800;color:${corTxt};cursor:pointer">
+        💾 Salvar no catálogo
+      </button>
+    </div>
+    <button onclick="cancelarFormCustom('${type}')"
+      style="width:100%;margin-top:8px;padding:8px;background:transparent;border:1px solid var(--border-input);border-radius:9px;font-size:11px;color:var(--text3);cursor:pointer">
+      ✕ Cancelar
+    </button>`;
+  document.getElementById('cx-nf-' + type).style.display = 'none';
+  formEl.style.display = 'block';
+}
+
+function addCustomItem(type, salvarCatalogo) {
+  const nome = document.getElementById('cx-nome-' + type).value.trim();
+  const ico = document.getElementById('cx-ico-' + type).value.trim() || (type === 'srv' ? '⚡' : '📦');
+  const cat = document.getElementById('cx-cat-' + type).value;
+  const preco = parseFloat(document.getElementById('cx-preco-' + type).value) || 0;
+  const un = document.getElementById('cx-un-' + type).value || 'un';
+  if (!nome) { alert('Digite um nome para o item.'); return; }
+  const item = { id: gerarIdCustom(type), ico, n: nome, cat, p: preco, un };
+  if (salvarCatalogo) {
+    if (type === 'srv') SRV.push(item);
+    else MAT.push(item);
+    _salvarCustomLocal(type, item);
+  }
+  if (type === 'srv') addService(null, item);
+  else addMaterial(null, item, 1, preco);
+  document.getElementById('cx-form-' + type).style.display = 'none';
+  document.getElementById('cx-nf-' + type).style.display = 'none';
+  const searchEl = document.getElementById(type === 'srv' ? 'srv-inline-search' : 'mat-inline-search');
+  if (searchEl) searchEl.value = '';
+}
+
+function _salvarCustomLocal(type, item) {
+  try {
+    const key = 'custom_' + type;
+    const lista = JSON.parse(localStorage.getItem(key) || '[]');
+    lista.push(item);
+    localStorage.setItem(key, JSON.stringify(lista));
+  } catch(e) {}
+}
+
+function _carregarCustomLocal() {
+  try {
+    ['srv','mat'].forEach(type => {
+      const lista = JSON.parse(localStorage.getItem('custom_' + type) || '[]');
+      lista.forEach(item => {
+        const arr = type === 'srv' ? SRV : MAT;
+        if (!arr.find(x => x.id === item.id)) arr.push(item);
+      });
+    });
+  } catch(e) {}
+}
+
+function cancelarFormCustom(type) {
+  document.getElementById('cx-form-' + type).style.display = 'none';
+  document.getElementById('cx-nf-' + type).style.display = 'none';
+}
+
+// ══════════════════════════════════════════════════════════════
 // BLOCO 8 — ADICIONAR SERVIÇO E MATERIAL (DOM-DIRETO)
 // ══════════════════════════════════════════════════════════════
 function addService(e, s) {
@@ -1590,7 +2567,9 @@ function addService(e, s) {
     </div>
     <div class="row-qty-wrap">
       <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
-      <span class="qty-val">1</span>
+      <input class="qty-val" type="number" min="1" step="1" value="1"
+        style="width:38px;text-align:center;border:none;border-bottom:1px solid var(--border-input);background:transparent;color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:700;outline:none;padding:0"
+        oninput="orcCalcTotal()" onfocus="this.select()">
       <span class="qty-un">${s.un}</span>
       <button class="qty-btn" onclick="changeQty(this,1)">+</button>
     </div>
@@ -1618,7 +2597,9 @@ function addMaterial(e, m, baseQty, baseUnitPrice) {
     </div>
     <div class="row-qty-wrap">
       <button class="qty-btn" onclick="changeQty(this,-0.1)">−</button>
-      <span class="qty-val">${qt}</span>
+      <input class="qty-val" type="number" min="0.1" step="0.1" value="${qt}"
+        style="width:38px;text-align:center;border:none;border-bottom:1px solid var(--border-input);background:transparent;color:#a78bfa;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:700;outline:none;padding:0"
+        oninput="orcCalcTotal()" onfocus="this.select()">
       <span class="qty-un">${m.un}</span>
       <button class="qty-btn" onclick="changeQty(this,0.1)">+</button>
     </div>
@@ -1632,12 +2613,12 @@ function addMaterial(e, m, baseQty, baseUnitPrice) {
 
 function changeQty(btn, delta) {
   const row = btn.closest('.srv-row, .mat-row');
-  const span = row.querySelector('.qty-val');
+  const inp = row.querySelector('.qty-val');
   const isMat = row.classList.contains('mat-row');
-  let v = parseFloat(span.textContent) + delta;
+  let v = parseFloat(inp.value || 1) + delta;
   if (isMat) v = Math.max(0.1, Math.round(v * 10) / 10);
   else v = Math.max(1, Math.round(v));
-  span.textContent = isMat ? (Number.isInteger(v) ? v : v.toFixed(1)) : v;
+  inp.value = isMat ? (Number.isInteger(v) ? v : v.toFixed(1)) : v;
   orcCalcTotal();
 }
 
@@ -1677,7 +2658,7 @@ function formatPriceInput(input) {
 function collectServices() {
   let total = 0;
   document.querySelectorAll('#srv-container .srv-row').forEach(row => {
-    const qt = parseFloat(row.querySelector('.qty-val')?.textContent || 1);
+    const qt = parseFloat(row.querySelector('.qty-val')?.value || 1);
     const p = parseCurrency(row.querySelector('.row-price-inp')?.value || '0');
     total += qt * p;
   });
@@ -1687,7 +2668,7 @@ function collectServices() {
 function collectMaterials() {
   let total = 0;
   document.querySelectorAll('#mat-container .mat-row').forEach(row => {
-    const qt = parseFloat(row.querySelector('.qty-val')?.textContent || 1);
+    const qt = parseFloat(row.querySelector('.qty-val')?.value || 1);
     const p = parseCurrency(row.querySelector('.row-price-inp')?.value || '0');
     total += qt * p;
   });
@@ -1695,23 +2676,508 @@ function collectMaterials() {
 }
 
 // ══════════════════════════════════════════════════════════════
-// ORÇAMENTO — TOTAL (adaptado para DOM-direto)
+// NÚMERO DE ORÇAMENTO
 // ══════════════════════════════════════════════════════════════
+function gerarNumeroOrc() {
+  const n = (parseInt(localStorage.getItem('orcCounter') || '0') + 1);
+  localStorage.setItem('orcCounter', n);
+  const codigo = 'ORC-' + String(n).padStart(3, '0');
+  document.getElementById('orc-numero').value = codigo;
+  document.getElementById('orc-num-badge').textContent = '#' + codigo;
+  document.getElementById('orc-titulo').textContent = 'Orçamento';
+  return codigo;
+}
+
+// ══════════════════════════════════════════════════════════════
+// HELPER — CÁLCULO DE TOTAIS (fonte única da fórmula)
+// ══════════════════════════════════════════════════════════════
+function calcOrcTotais(servTotal, matTotal) {
+  const desc     = parseFloat(document.getElementById('orc-desc').value)       || 0;
+  const acre     = parseFloat(document.getElementById('orc-acre').value)       || 0;
+  const km       = parseFloat(document.getElementById('orc-km').value)         || 0;
+  const kmVal    = parseFloat(document.getElementById('orc-km-val').value)     || 2;
+  const sinalPct = parseFloat(document.getElementById('orc-sinal-pct')?.value) || 30;
+  const sub      = servTotal + matTotal;
+  const kmTotal  = km * kmVal;
+  const total    = sub - sub * (desc / 100) + acre + kmTotal;
+  const sinal    = total * sinalPct / 100;
+  return { desc, acre, km, kmVal, kmTotal, sub, total, sinalPct, sinal };
+}
+
+// ══════════════════════════════════════════════════════════════
+// ORÇAMENTO — TOTAL
+// ══════════════════════════════════════════════════════════════
+let orcPagamento = 'pix';
+
+function selPagamento(btn, tipo) {
+  document.querySelectorAll('.pagbtn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  orcPagamento = tipo;
+  document.getElementById('orc-parcelas-wrap').style.display = tipo === 'credito' ? 'block' : 'none';
+  orcCalcTotal();
+}
+
 function orcCalcTotal() {
   const { total: servTotal } = collectServices();
-  const { total: matTotal } = collectMaterials();
-  const desc   = parseFloat(document.getElementById('orc-desc').value) || 0;
-  const acre   = parseFloat(document.getElementById('orc-acre').value) || 0;
-  const km     = parseFloat(document.getElementById('orc-km').value) || 0;
-  const kmVal  = parseFloat(document.getElementById('orc-km-val').value) || 2;
-  const sub    = servTotal + matTotal;
-  const kmTotal = km * kmVal;
-  const total  = sub - sub * (desc / 100) + acre + kmTotal;
-  document.getElementById('orc-total-val').textContent = 'R$ ' + scpFmtBRL(total);
-  document.getElementById('orc-total-sub').textContent =
-    `M.O.: R$ ${scpFmtBRL(servTotal)} | Mat: R$ ${scpFmtBRL(matTotal)} | Km: R$ ${scpFmtBRL(kmTotal)}`;
+  const { total: matTotal }  = collectMaterials();
+  const { desc, acre, km, kmVal, kmTotal, sub, total, sinalPct, sinal } =
+    calcOrcTotais(servTotal, matTotal);
+
+  // sticky mini bar
+  const stickyWrap = document.getElementById('orc-sticky-wrap');
+  if (stickyWrap) stickyWrap.style.display = total > 0 ? 'flex' : 'none';
+  document.getElementById('orc-sticky-val').textContent = 'R$ ' + scpFmtBRL(total);
+  document.getElementById('orc-sticky-sub').textContent =
+    `M.O. R$ ${scpFmtBRL(servTotal)} · Mat R$ ${scpFmtBRL(matTotal)}` +
+    (kmTotal > 0 ? ` · Km R$ ${scpFmtBRL(kmTotal)}` : '');
+
+  // sinal e parcela
+  document.getElementById('orc-sinal-val').textContent = 'R$ ' + scpFmtBRL(sinal);
+  const parcelas = parseInt(document.getElementById('orc-parcelas')?.value || 1);
+  const infoEl   = document.getElementById('orc-parcela-info');
+  infoEl.textContent = (orcPagamento === 'credito' && parcelas > 1 && total > 0)
+    ? `${parcelas}× de R$ ${scpFmtBRL(total / parcelas)}` : '';
+
+  // btn-calc label
   document.querySelector('.btn-calc').textContent = total > 0
-    ? `⚡ TOTAL: R$ ${scpFmtBRL(total)} — Recalcular` : '⚡ CALCULAR TOTAL';
+    ? `⚡ TOTAL: R$ ${scpFmtBRL(total)} — Ver resultado` : '⚡ CALCULAR TOTAL';
+
+  return { servTotal, matTotal, kmTotal, sub, total, sinalPct, sinal, desc, acre, km, kmVal };
+}
+
+// ══════════════════════════════════════════════════════════════
+// TELA RESULTADO
+// ══════════════════════════════════════════════════════════════
+let orcFornecimento = 'eletricista';
+
+function mostrarResultado() {
+  orcCalcTotal(); // atualiza sticky bar
+
+  // totais independentes respeitando fornecimento
+  const { total: servTotal } = collectServices();
+  const { total: matTotal }  = collectMaterials();
+  const matEfetivo = orcFornecimento === 'eletricista' ? matTotal : 0;
+  const { kmTotal, total, sinalPct, sinal } = calcOrcTotais(servTotal, matEfetivo);
+
+  // cards resultado
+  document.getElementById('res-total-val').textContent   = 'R$ ' + scpFmtBRL(total);
+  document.getElementById('res-serv-val').textContent    = 'R$ ' + scpFmtBRL(servTotal);
+  document.getElementById('res-mat-val').textContent     = 'R$ ' + scpFmtBRL(matTotal);
+  document.getElementById('res-km-val').textContent      = 'R$ ' + scpFmtBRL(kmTotal);
+  document.getElementById('res-lucro-val').textContent   = 'R$ ' + scpFmtBRL(servTotal);
+  document.getElementById('res-despesa-val').textContent = 'R$ ' + scpFmtBRL(matEfetivo);
+
+  // nota sob card de materiais
+  const matLabel = {
+    eletricista: '',
+    cliente:     '🛒 por conta do cliente',
+    nao_incluir: '— não incluído'
+  }[orcFornecimento];
+  const matEl = document.getElementById('res-mat-val');
+  if (matEl) matEl.title = matLabel;
+
+  // número badge
+  const num = document.getElementById('orc-numero')?.value || '';
+  document.getElementById('res-num-badge').textContent = num ? '#' + num : '';
+
+  // sincronizar pills
+  ['eletricista','cliente','nao_incluir'].forEach(k => {
+    const idMap = {eletricista:'forn-eletricista', cliente:'forn-cliente', nao_incluir:'forn-nao'};
+    document.getElementById(idMap[k])?.classList.toggle('on', k === orcFornecimento);
+  });
+
+  gerarMensagens(servTotal, matTotal, matEfetivo, total, sinalPct, sinal);
+  navTo('resultado');
+}
+
+function selFornecimento(btn, tipo) {
+  orcFornecimento = tipo;
+  ['forn-eletricista','forn-cliente','forn-nao'].forEach(id =>
+    document.getElementById(id)?.classList.remove('on'));
+  btn.classList.add('on');
+  mostrarResultado();
+}
+
+function gerarMensagens(servTotal, matTotal, matEfetivo, total, sinalPct, sinal) {
+  const empresa  = document.getElementById('orc-empresa')?.value  || 'Eletricista Power PRO';
+  const cliente  = document.getElementById('orc-cliente')?.value  || 'cliente';
+  const garantia = document.getElementById('orc-garantia')?.value || '90';
+  const validade = document.getElementById('orc-validade')?.value || '15';
+  const numero   = document.getElementById('orc-numero')?.value   || '';
+  const pagLabels= {pix:'Pix',dinheiro:'dinheiro',credito:'cartão de crédito',debito:'cartão de débito',boleto:'boleto'};
+  const pag      = pagLabels[orcPagamento] || orcPagamento;
+
+  const linhasMat = {
+    eletricista: `📦 Materiais: R$ ${scpFmtBRL(matTotal)}\n`,
+    cliente:     `📦 Materiais: por conta do cliente\n`,
+    nao_incluir: ''
+  }[orcFornecimento];
+
+  const proposta =
+`Olá, *${cliente}*! 👋
+
+Segue o orçamento *${numero}* para o serviço solicitado:
+
+🔧 Mão de obra: R$ ${scpFmtBRL(servTotal)}
+${linhasMat}━━━━━━━━━━━━━━━━━━
+💰 *TOTAL: R$ ${scpFmtBRL(total)}*
+
+💳 Pagamento via ${pag}
+🤝 Sinal de ${sinalPct}%: R$ ${scpFmtBRL(sinal)}
+🛡️ Garantia: ${garantia} dias
+⏳ Proposta válida por ${validade} dias
+
+Qualquer dúvida estou à disposição! ⚡
+*${empresa}*`;
+
+  const cobSinal =
+`Olá, *${cliente}*! ⚡
+
+Tudo certo para iniciarmos o serviço!
+
+Para confirmar o agendamento, solicito o sinal de *${sinalPct}% — R$ ${scpFmtBRL(sinal)}*.
+
+${orcPagamento === 'pix' ? `🔑 Chave Pix: confirme comigo o número.\n\nApós o pagamento, me envie o comprovante. 🙏` : `Forma de pagamento: ${pag}.`}
+
+*${empresa}*`;
+
+  const conclusao =
+`Olá, *${cliente}*! ✅
+
+O serviço foi concluído com sucesso! 🎉
+
+🛡️ Garantia de *${garantia} dias* para todos os itens executados. Qualquer problema, é só me chamar.
+
+Foi um prazer trabalhar para você! Caso precise de outros serviços elétricos, estou à disposição. 💡
+
+*${empresa}* ⚡`;
+
+  const el1 = document.getElementById('msg-proposta');
+  const el2 = document.getElementById('msg-sinal');
+  const el3 = document.getElementById('msg-conclusao');
+  if (el1) el1.textContent = proposta;
+  if (el2) el2.textContent = cobSinal;
+  if (el3) el3.textContent = conclusao;
+}
+
+function toggleMsg(hdr) {
+  const body = hdr.nextElementSibling;
+  const isOpen = body.classList.contains('open');
+  // fechar todos
+  document.querySelectorAll('.msg-hdr').forEach(h => h.classList.remove('open'));
+  document.querySelectorAll('.msg-body').forEach(b => b.classList.remove('open'));
+  if (!isOpen) { hdr.classList.add('open'); body.classList.add('open'); }
+}
+
+function copiarMsg(id) {
+  const txt = document.getElementById(id)?.textContent || '';
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(txt).then(() => {
+      const btn = document.querySelector(`[onclick="copiarMsg('${id}')"]`);
+      if (btn) { btn.textContent = '✅ Copiado!'; setTimeout(() => btn.textContent = '📋 Copiar mensagem', 2000); }
+    });
+  } else {
+    prompt('Copie o texto:', txt);
+  }
+}
+
+function novoOrcamento() {
+  // limpar containers
+  document.getElementById('srv-container').innerHTML = '';
+  document.getElementById('mat-container').innerHTML = '';
+  // limpar obs
+  const se = document.getElementById('orc-serv-obs'); if (se) se.value = '';
+  const me = document.getElementById('orc-mat-obs');  if (me) me.value = '';
+  // resetar custos
+  ['orc-desc','orc-acre','orc-km'].forEach(id => { const el = document.getElementById(id); if(el) el.value = '0'; });
+  // resetar pagamento
+  orcPagamento = 'pix';
+  document.querySelectorAll('.pagbtn').forEach((b,i) => b.classList.toggle('on', i===0));
+  document.getElementById('orc-parcelas-wrap').style.display = 'none';
+  // resetar fornecimento
+  orcFornecimento = 'eletricista';
+  // novo número
+  gerarNumeroOrc();
+  // badges
+  updateServiceBadge(); updateMaterialBadge();
+  // esconder sticky
+  const sw = document.getElementById('orc-sticky-wrap'); if(sw) sw.style.display = 'none';
+  // btn-calc label
+  const bc = document.querySelector('.btn-calc'); if(bc) bc.textContent = '⚡ CALCULAR TOTAL';
+  navTo('orcamento');
+}
+
+// ══════════════════════════════════════════════════════════════
+// PDF / COMPARTILHAR
+// ══════════════════════════════════════════════════════════════
+function gerarPDF() {
+  const cor       = pdfCfg.cor || '#f59e0b';
+  const subtitulo = pdfCfg.subtitulo || 'Serviços Elétricos Profissionais';
+  const msgCliente = pdfCfg.msgCliente || '';
+  const S         = pdfCfg.secoes;
+  const empresa   = document.getElementById('orc-empresa')?.value || 'Eletricista Power PRO';
+  const cliente   = document.getElementById('orc-cliente')?.value || '—';
+  const endereco = document.getElementById('orc-endereco')?.value || '';
+  const tel      = document.getElementById('orc-tel')?.value || '';
+  const data     = document.getElementById('orc-data')?.value || '';
+  const garantia = document.getElementById('orc-garantia')?.value || '90';
+  const validade = document.getElementById('orc-validade')?.value || '15';
+  const numero   = document.getElementById('orc-numero')?.value || gerarNumeroOrc();
+  const obsServ  = document.getElementById('orc-serv-obs')?.value || '';
+  const obsMat   = document.getElementById('orc-mat-obs')?.value || '';
+
+  // coletar serviços
+  let srvRows = '';
+  let servTotal = 0;
+  document.querySelectorAll('#srv-container .srv-row').forEach(row => {
+    const nome  = row.querySelector('.row-name')?.textContent || '';
+    const cat   = row.querySelector('.row-sub')?.textContent || '';
+    const qt    = parseFloat(row.querySelector('.qty-val')?.value || 1);
+    const un    = row.querySelector('.qty-un')?.textContent || '';
+    const p     = parseCurrency(row.querySelector('.row-price-inp')?.value || '0');
+    const sub   = qt * p;
+    servTotal  += sub;
+    srvRows += `<tr>
+      <td>${nome}<br><span style="font-size:10px;color:#888">${cat}</span></td>
+      <td class="center">${qt} ${un}</td>
+      <td class="center">R$ ${scpFmtBRL(p)}</td>
+      <td class="right">R$ ${scpFmtBRL(sub)}</td>
+    </tr>`;
+  });
+
+  // coletar materiais — 3 variantes conforme fornecimento
+  let matRows = '';        // com preços (eletricista fornece)
+  let matRowsSemPreco = ''; // sem preços (cliente compra)
+  let matTotal = 0;
+  document.querySelectorAll('#mat-container .mat-row').forEach(row => {
+    const nome = row.querySelector('.row-name')?.textContent || '';
+    const cat  = row.querySelector('.row-sub')?.textContent  || '';
+    const qt   = parseFloat(row.querySelector('.qty-val')?.value || 1);
+    const un   = row.querySelector('.qty-un')?.textContent   || '';
+    const p    = parseCurrency(row.querySelector('.row-price-inp')?.value || '0');
+    const sub  = qt * p;
+    matTotal  += sub;
+    matRows += `<tr>
+      <td>${nome}<br><span style="font-size:10px;color:#888">${cat}</span></td>
+      <td class="center">${qt} ${un}</td>
+      <td class="center">R$ ${scpFmtBRL(p)}</td>
+      <td class="right">R$ ${scpFmtBRL(sub)}</td>
+    </tr>`;
+    matRowsSemPreco += `<tr>
+      <td>${nome}<br><span style="font-size:10px;color:#888">${cat}</span></td>
+      <td class="center">${qt} ${un}</td>
+    </tr>`;
+  });
+
+  // total respeita fornecimento
+  const matEfetivo = orcFornecimento === 'eletricista' ? matTotal : 0;
+  const { desc, acre, km, kmVal, kmTotal, sub, total, sinalPct, sinal } =
+    calcOrcTotais(servTotal, matEfetivo);
+  const dataBr  = data ? new Date(data + 'T12:00:00').toLocaleDateString('pt-BR') : '—';
+
+  const pagLabels = {pix:'💠 Pix',dinheiro:'💵 Dinheiro',credito:'💳 Cartão de Crédito',debito:'💳 Cartão de Débito',boleto:'📄 Boleto'};
+  const pagLabel  = pagLabels[orcPagamento] || orcPagamento;
+  const parcelas  = parseInt(document.getElementById('orc-parcelas')?.value || 1);
+  const parcelaInfo = orcPagamento === 'credito' && parcelas > 1
+    ? ` — ${parcelas}× de R$ ${scpFmtBRL(total / parcelas)}` : '';
+
+  const html = `
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    html,body{font-family:Arial,sans-serif;font-size:13px;color:#1a1a1a;background:#fff;width:100%}
+    .pdf-wrap{width:100%;max-width:800px;margin:0 auto;padding:28px 32px}
+    .pdf-hdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;padding-bottom:18px;border-bottom:3px solid ${cor}}
+    .pdf-empresa{font-size:20px;font-weight:900;color:#1a1a1a;margin-bottom:4px}
+    .pdf-sub{font-size:11px;color:#888}
+    .pdf-badge{background:${cor};color:#fff;font-size:11px;font-weight:800;border-radius:6px;padding:5px 12px;letter-spacing:.5px;display:inline-block}
+    .pdf-info{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px;background:#fafafa;border:1px solid #eee;border-radius:8px;padding:12px}
+    .pdf-info-lbl{font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#999;margin-bottom:2px}
+    .pdf-info-val{font-weight:700;color:#1a1a1a;font-size:13px}
+    .pdf-sec{font-size:10px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:${cor};margin-bottom:8px;margin-top:18px;display:flex;align-items:center;gap:8px}
+    .pdf-sec::after{content:'';flex:1;height:1px;background:${cor}44}
+    table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:8px;table-layout:fixed}
+    col.c-desc{width:52%}
+    col.c-qty{width:16%}
+    col.c-unit{width:16%}
+    col.c-total{width:16%}
+    col.c-desc2{width:70%}
+    col.c-qty2{width:30%}
+    thead tr{background:${cor}}
+    thead th{padding:8px 10px;font-size:10px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:#fff;overflow:hidden}
+    thead th.left{text-align:left}
+    thead th.center{text-align:center}
+    thead th.right{text-align:right}
+    tbody td{padding:8px 10px;border-bottom:1px solid #f0f0f0;overflow:hidden;word-wrap:break-word}
+    tbody td.center{text-align:center}
+    tbody td.right{text-align:right;font-weight:700}
+    tbody tr:nth-child(even){background:#fafafa}
+    .pdf-totals{display:flex;flex-direction:column;align-items:flex-end;gap:5px;margin-top:12px}
+    .pdf-tot-row{display:flex;gap:16px;font-size:12px}
+    .pdf-tot-lbl{color:#888;min-width:160px;text-align:right}
+    .pdf-tot-val{font-weight:700;min-width:100px;text-align:right}
+    .pdf-grand{display:flex;justify-content:space-between;align-items:center;background:${cor};border-radius:8px;padding:12px 16px;margin:14px 0}
+    .pdf-grand-lbl{font-size:14px;font-weight:900;color:#fff}
+    .pdf-grand-val{font-size:24px;font-weight:900;color:#fff;font-family:monospace;letter-spacing:-0.5px}
+    .pdf-pag{background:#fafafa;border:1px solid #eee;border-radius:8px;padding:11px 14px;display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;font-size:12px}
+    .pdf-msg{background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:10px 12px;font-size:12px;color:#555;margin-bottom:12px;font-style:italic}
+    .pdf-ass{display:flex;justify-content:space-between;margin-top:48px;gap:40px}
+    .pdf-ass-line{flex:1;text-align:center;font-size:10px;color:#aaa;border-top:1px solid #ccc;padding-top:6px}
+    .pdf-foot{margin-top:18px;padding-top:12px;border-top:1px solid #eee;display:flex;justify-content:space-between;font-size:10px;color:#aaa}
+    .pdf-obs{background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:9px 11px;font-size:11px;color:#555;margin-top:6px}
+    @media print{
+      .no-print{display:none!important}
+      html,body{margin:0!important;padding:0!important;background:#fff!important;width:100%!important}
+      .pdf-wrap{max-width:none!important;width:100%!important;margin:0!important;padding:0!important}
+      @page{size:A4 portrait;margin:14mm 16mm 14mm 16mm}
+    }
+  </style>
+  <div class="pdf-wrap">
+    <div class="no-print" style="background:#1e40af;color:#fff;padding:10px 16px;border-radius:10px;display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+      <span style="font-weight:700;font-size:13px">📄 Pré-visualização do Orçamento</span>
+      <div style="display:flex;gap:8px">
+        <button onclick="window.print()" style="background:${cor};color:#fff;border:none;border-radius:8px;padding:8px 16px;font-weight:800;cursor:pointer;font-size:12px">🖨️ Imprimir / PDF</button>
+        <button onclick="document.getElementById('print-area').style.display='none'" style="background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:8px;padding:8px 14px;font-weight:700;cursor:pointer;font-size:12px">✕ Fechar</button>
+      </div>
+    </div>
+
+    ${S.cabecalho !== false ? `
+    <div class="pdf-hdr">
+      <div>
+        <div class="pdf-empresa">⚡ ${empresa}</div>
+        <div class="pdf-sub">${subtitulo}</div>
+      </div>
+      <div style="text-align:right">
+        <div class="pdf-badge">ORÇAMENTO</div>
+        <div style="font-size:12px;color:#555;margin-top:6px;font-family:monospace;font-weight:700">${numero}</div>
+        <div style="font-size:11px;color:#888;margin-top:2px">${dataBr}</div>
+      </div>
+    </div>` : ''}
+
+    ${S.cliente !== false ? `
+    <div class="pdf-info">
+      <div><div class="pdf-info-lbl">Cliente</div><div class="pdf-info-val">${cliente}</div></div>
+      <div><div class="pdf-info-lbl">Telefone</div><div class="pdf-info-val">${tel || '—'}</div></div>
+      <div style="grid-column:1/-1"><div class="pdf-info-lbl">Endereço</div><div class="pdf-info-val">${endereco || '—'}</div></div>
+    </div>` : ''}
+
+    ${S.servicos !== false && srvRows ? `
+    <div class="pdf-sec">⚡ Mão de Obra / Serviços</div>
+    <table>
+      <colgroup><col class="c-desc"><col class="c-qty"><col class="c-unit"><col class="c-total"></colgroup>
+      <thead><tr><th class="left">Descrição</th><th class="center">Qtd</th><th class="center">Unit.</th><th class="right">Total</th></tr></thead>
+      <tbody>${srvRows}</tbody>
+    </table>
+    ${S.obs !== false && obsServ ? `<div class="pdf-obs">📝 ${obsServ}</div>` : ''}` : ''}
+
+    ${S.materiais !== false && orcFornecimento !== 'nao_incluir' && (matRows || matRowsSemPreco) ? `
+    <div class="pdf-sec">📦 Materiais${orcFornecimento === 'cliente' ? ' <span style="font-size:9px;font-weight:700;background:#fef3c7;color:#92400e;border-radius:4px;padding:2px 7px;margin-left:6px">FORNECIDOS PELO CLIENTE</span>' : ''}</div>
+    <table>
+      ${orcFornecimento === 'eletricista'
+        ? `<colgroup><col class="c-desc"><col class="c-qty"><col class="c-unit"><col class="c-total"></colgroup>
+           <thead><tr><th class="left">Descrição</th><th class="center">Qtd</th><th class="center">Unit.</th><th class="right">Total</th></tr></thead>
+           <tbody>${matRows}</tbody>`
+        : `<colgroup><col class="c-desc2"><col class="c-qty2"></colgroup>
+           <thead><tr><th class="left">Descrição</th><th class="center">Quantidade</th></tr></thead>
+           <tbody>${matRowsSemPreco}</tbody>`
+      }
+    </table>
+    ${orcFornecimento === 'cliente' ? `<div style="background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:8px 12px;font-size:11px;color:#92400e;margin-top:6px">🛒 Materiais a serem adquiridos pelo cliente — não incluídos no valor cobrado.</div>` : ''}
+    ${S.obs !== false && obsMat ? `<div class="pdf-obs">📝 ${obsMat}</div>` : ''}` : ''}
+
+    ${S.materiais !== false && orcFornecimento === 'nao_incluir' && S.obs !== false && obsMat ? `<div class="pdf-obs">📝 ${obsMat}</div>` : ''}
+
+    ${S.subtotais !== false ? `
+    <div class="pdf-totals">
+      <div class="pdf-tot-row"><span class="pdf-tot-lbl">Mão de obra</span><span class="pdf-tot-val">R$ ${scpFmtBRL(servTotal)}</span></div>
+      ${orcFornecimento === 'eletricista' && matTotal > 0 ? `<div class="pdf-tot-row"><span class="pdf-tot-lbl">Materiais</span><span class="pdf-tot-val">R$ ${scpFmtBRL(matTotal)}</span></div>` : ''}
+      ${orcFornecimento === 'cliente' && matTotal > 0 ? `<div class="pdf-tot-row"><span class="pdf-tot-lbl">Materiais (cliente)</span><span class="pdf-tot-val" style="color:#888">—</span></div>` : ''}
+      ${kmTotal > 0 ? `<div class="pdf-tot-row"><span class="pdf-tot-lbl">Deslocamento (${km}km)</span><span class="pdf-tot-val">R$ ${scpFmtBRL(kmTotal)}</span></div>` : ''}
+      ${desc > 0 ? `<div class="pdf-tot-row"><span class="pdf-tot-lbl">Desconto (${desc}%)</span><span class="pdf-tot-val" style="color:#dc2626">−R$ ${scpFmtBRL(sub * desc / 100)}</span></div>` : ''}
+      ${acre > 0 ? `<div class="pdf-tot-row"><span class="pdf-tot-lbl">Acréscimo</span><span class="pdf-tot-val">R$ ${scpFmtBRL(acre)}</span></div>` : ''}
+    </div>` : ''}
+
+    <div class="pdf-grand">
+      <span class="pdf-grand-lbl">TOTAL DO ORÇAMENTO</span>
+      <span class="pdf-grand-val">R$ ${scpFmtBRL(total)}</span>
+    </div>
+
+    ${S.pagamento !== false ? `
+    <div class="pdf-pag">
+      <div>
+        <div style="font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#999;margin-bottom:3px">Forma de Pagamento</div>
+        <div style="font-weight:700;font-size:14px">${pagLabel}${parcelaInfo}</div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#999;margin-bottom:3px">Sinal / Entrada (${sinalPct}%)</div>
+        <div style="font-weight:800;font-size:18px;color:${cor}">R$ ${scpFmtBRL(sinal)}</div>
+      </div>
+    </div>` : ''}
+
+    ${S.garantia !== false ? `
+    <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:10px 14px;font-size:11px;color:#166534;margin-bottom:14px">
+      🛡️ <strong>Garantia:</strong> ${garantia || 90} dias &nbsp;·&nbsp; ⏳ <strong>Validade:</strong> ${validade || 15} dias a partir de ${dataBr}
+    </div>` : ''}
+
+    ${msgCliente ? `<div class="pdf-msg">💬 ${msgCliente}</div>` : ''}
+
+    ${pdfCfg.assinatura ? `
+    <div class="pdf-ass">
+      <div class="pdf-ass-line">${cliente}<br><span>Assinatura do Cliente</span></div>
+      <div class="pdf-ass-line">${empresa}<br><span>Assinatura do Prestador</span></div>
+    </div>` : ''}
+
+    ${S.rodape !== false ? `
+    <div class="pdf-foot">
+      <span>Gerado por Eletricista Power PRO</span>
+      <span>${dataBr}</span>
+    </div>` : ''}
+  </div>`;
+
+  const area = document.getElementById('print-area');
+  area.innerHTML = html;
+  area.style.display = 'block';
+  area.scrollTop = 0;
+}
+
+function compartilharOrc() {
+  const cliente  = document.getElementById('orc-cliente')?.value  || 'Cliente';
+  const empresa  = document.getElementById('orc-empresa')?.value  || 'Eletricista Power PRO';
+  const garantia = document.getElementById('orc-garantia')?.value || '90';
+  const validade = document.getElementById('orc-validade')?.value || '15';
+  const numero   = document.getElementById('orc-numero')?.value   || '';
+  const { total: srvTotal } = collectServices();
+  const { total: matTotal } = collectMaterials();
+  const { total: grand, sinalPct, sinal } = calcOrcTotais(srvTotal, matTotal);
+
+  let srv = '';
+  document.querySelectorAll('#srv-container .srv-row').forEach(row => {
+    const n = row.querySelector('.row-name')?.textContent || '';
+    const qt = row.querySelector('.qty-val')?.value || '1';
+    const p = parseCurrency(row.querySelector('.row-price-inp')?.value || '0');
+    srv += `  • ${n} × ${qt} — R$ ${scpFmtBRL(parseFloat(qt) * p)}\n`;
+  });
+  let matTxt = '';
+  document.querySelectorAll('#mat-container .mat-row').forEach(row => {
+    const n = row.querySelector('.row-name')?.textContent || '';
+    const qt = row.querySelector('.qty-val')?.value || '1';
+    const p = parseCurrency(row.querySelector('.row-price-inp')?.value || '0');
+    matTxt += `  • ${n} × ${qt} — R$ ${scpFmtBRL(parseFloat(qt) * p)}\n`;
+  });
+
+  const texto = `*ORÇAMENTO ${numero} — ${empresa.toUpperCase()}*\nCliente: ${cliente}\n\n` +
+    (srv ? `*Serviços:*\n${srv}\n` : '') +
+    (matTxt ? `*Materiais:*\n${matTxt}\n` : '') +
+    `*TOTAL: R$ ${scpFmtBRL(grand)}*\n\nSinal (${sinalPct}%): R$ ${scpFmtBRL(sinal)}\nGarantia: ${garantia} dias · Válido por ${validade} dias`;
+
+  if (navigator.share) {
+    navigator.share({ title: `Orçamento — ${cliente}`, text: texto }).catch(() => {});
+  } else {
+    navigator.clipboard.writeText(texto).then(() => {
+      alert('✅ Orçamento copiado! Cole no WhatsApp ou e-mail.');
+    }).catch(() => {
+      prompt('Copie o texto abaixo:', texto);
+    });
+  }
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -1720,13 +3186,21 @@ function orcCalcTotal() {
 document.addEventListener('click', e => {
   const srvSearch = document.getElementById('srv-inline-search');
   const srvResults = document.getElementById('srv-inline-results');
+  const srvNF = document.getElementById('cx-nf-srv');
+  const srvForm = document.getElementById('cx-form-srv');
   const matSearch = document.getElementById('mat-inline-search');
   const matResults = document.getElementById('mat-inline-results');
-  if (!srvSearch?.contains(e.target) && !srvResults?.contains(e.target)) {
+  const matNF = document.getElementById('cx-nf-mat');
+  const matForm = document.getElementById('cx-form-mat');
+  const inSrv = srvSearch?.contains(e.target) || srvResults?.contains(e.target) || srvNF?.contains(e.target) || srvForm?.contains(e.target);
+  const inMat = matSearch?.contains(e.target) || matResults?.contains(e.target) || matNF?.contains(e.target) || matForm?.contains(e.target);
+  if (!inSrv) {
     if (srvResults) srvResults.style.display = 'none';
+    if (srvNF) srvNF.style.display = 'none';
   }
-  if (!matSearch?.contains(e.target) && !matResults?.contains(e.target)) {
+  if (!inMat) {
     if (matResults) matResults.style.display = 'none';
+    if (matNF) matNF.style.display = 'none';
   }
 });
 
@@ -1766,10 +3240,33 @@ function renderCatalogo() {
   }).join('');
 }
 
+function abrirCatalogo(tipo) {
+  abrirModal('modal-ajustes');
+  // navegar para aba Catálogo (índice 2)
+  document.querySelectorAll('.ajtab').forEach((t,i) => {
+    t.classList.toggle('on', i===2);
+  });
+  document.querySelectorAll('.aj-panel').forEach((p,i) => {
+    if (i===2) p.style.display = i===2?'flex':'none';
+    else { p.classList.remove('on'); if(i===2) p.classList.add('on'); }
+  });
+  document.getElementById('aj-2').style.display = 'flex';
+  ['aj-0','aj-1','aj-3','aj-4'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.classList.remove('on'); el.style.display=''; }
+  });
+  renderCatalogo();
+  // selecionar sub-aba correta
+  const idx = tipo === 'srv' ? 0 : 1;
+  document.querySelectorAll('.cstab').forEach((t,i) => t.classList.toggle('on', i===idx));
+  document.getElementById('cat-servicos').style.display = idx===0?'block':'none';
+  document.getElementById('cat-materiais').style.display = idx===1?'block':'none';
+}
+
 // ══════════════════════════════════════════════════════════════
 // NAVEGAÇÃO & MODAIS
 // ══════════════════════════════════════════════════════════════
-const telas = {home:'tela-home', orcamento:'tela-orcamento', agenda:'tela-agenda'};
+const telas = {home:'tela-home', orcamento:'tela-orcamento', resultado:'tela-resultado', agenda:'tela-agenda'};
 function navTo(id) {
   Object.values(telas).forEach(t => document.getElementById(t).classList.remove('ativa'));
   document.getElementById(telas[id]).classList.add('ativa');
@@ -1849,38 +3346,113 @@ function renderNBR() {
 }
 
 // ══════════════════════════════════════════════════════════════
-// DEMANDA ELÉTRICA (simplificada)
+// DEMANDA ELÉTRICA — NBR 5410 + MUC (DIS-NOR-053 REV06)
 // ══════════════════════════════════════════════════════════════
 let demSisAtual='mono', demTensaoAtual=127, demComodos={};
+
 const DEM_COMODOS=[
-  {n:'Quarto simples',tp:'seco',ico:'🛏',area:9},{n:'Quarto casal',tp:'seco',ico:'🛏',area:12},
-  {n:'Sala de estar',tp:'seco',ico:'🛋',area:16},{n:'Sala de jantar',tp:'seco',ico:'🍽',area:12},
-  {n:'Cozinha',tp:'molhado',ico:'🍳',area:8},{n:'Banheiro',tp:'molhado',ico:'🚿',area:4},
-  {n:'Banheiro social',tp:'molhado',ico:'🚿',area:5},{n:'Lavanderia',tp:'molhado',ico:'🧺',area:6},
-  {n:'Hall/Circulação',tp:'seco',ico:'🚪',area:10},{n:'Garagem simples',tp:'seco',ico:'🚗',area:18},
-  {n:'Garagem dupla',tp:'seco',ico:'🚗',area:36},{n:'Escritório',tp:'seco',ico:'💻',area:12},
-  {n:'Área de serviço',tp:'molhado',ico:'🪣',area:6},{n:'Área externa',tp:'seco',ico:'🌿',area:20},
-  {n:'Depósito',tp:'seco',ico:'📦',area:6},{n:'Suíte',tp:'seco',ico:'🛏',area:14},
-  {n:'Copa',tp:'molhado',ico:'☕',area:6},{n:'Varanda',tp:'seco',ico:'🌅',area:8}
+  {n:'Quarto simples',tp:'seco',ico:'🛏',area:9},
+  {n:'Quarto casal',tp:'seco',ico:'🛏',area:12},
+  {n:'Sala de estar',tp:'seco',ico:'🛋',area:16},
+  {n:'Sala de jantar',tp:'seco',ico:'🍽',area:12},
+  {n:'Cozinha',tp:'molhado',ico:'🍳',area:8},
+  {n:'Banheiro',tp:'molhado',ico:'🚿',area:4},
+  {n:'Banheiro social',tp:'molhado',ico:'🚿',area:5},
+  {n:'Lavanderia',tp:'molhado',ico:'🧺',area:6},
+  {n:'Hall/Circulação',tp:'seco',ico:'🚪',area:10},
+  {n:'Garagem simples',tp:'seco',ico:'🚗',area:18},
+  {n:'Garagem dupla',tp:'seco',ico:'🚗',area:36},
+  {n:'Escritório',tp:'seco',ico:'💻',area:12},
+  {n:'Área de serviço',tp:'molhado',ico:'🪣',area:6},
+  {n:'Área externa',tp:'seco',ico:'🌿',area:20},
+  {n:'Depósito',tp:'seco',ico:'📦',area:6},
+  {n:'Suíte',tp:'seco',ico:'🛏',area:14},
+  {n:'Copa',tp:'molhado',ico:'☕',area:6},
+  {n:'Varanda',tp:'seco',ico:'🌅',area:8}
 ];
 const DEM_TIPICA=[0,1,2,3,4,5,7,8,9,11,15,17];
+
+const DEM_EQUIPAMENTOS=[
+  {n:'Chuveiro elétrico',w:5500,circ:true},
+  {n:'Ar-cond. 9000 BTU',w:1050,circ:false},
+  {n:'Ar-cond. 12000 BTU',w:1350,circ:false},
+  {n:'Ar-cond. 18000 BTU',w:1760,circ:false},
+  {n:'Forno elétrico',w:2000,circ:true},
+  {n:'Micro-ondas',w:1200,circ:false},
+  {n:'Máquina de lavar',w:1000,circ:false},
+  {n:'Secadora de roupas',w:3000,circ:true},
+  {n:'Geladeira',w:150,circ:false},
+  {n:'Freezer',w:200,circ:false},
+  {n:'Bomba d\'água',w:750,circ:false},
+  {n:'TV 55"',w:150,circ:false},
+  {n:'Computador',w:300,circ:false},
+  {n:'Aspirador',w:1000,circ:false},
+  {n:'Aquecedor elétrico',w:1500,circ:true},
+  {n:'Portão elétrico',w:750,circ:false}
+];
+
+// ── Cálculos NBR 5410 ──
 function demCalcIlum(area){return area<=6?100:100+Math.floor((area-6)/4)*60;}
-function demCalcPtsTom(tp,area){const p=Math.ceil(4*Math.sqrt(area));return tp==='molhado'?Math.max(1,Math.ceil(p/3.5)):Math.max(1,Math.ceil(p/5));}
-function demCalcVaTom(tp,pts){return tp==='molhado'?(pts<=3?pts*600:3*600+(pts-3)*100):pts*100;}
-function demCalcTom(tp,area){return demCalcVaTom(tp,demCalcPtsTom(tp,area));}
-function demSubAba(idx,el){
-  document.querySelectorAll('.dem-stab').forEach(t=>t.classList.remove('on'));el.classList.add('on');
-  document.querySelectorAll('.dem-spanel').forEach((p,i)=>p.classList.toggle('on',i===idx));
+function demCalcPtsTom(tp,area){
+  const perim=Math.ceil(4*Math.sqrt(area));
+  return tp==='molhado'?Math.max(1,Math.ceil(perim/3.5)):Math.max(1,Math.ceil(perim/5));
 }
+function demCalcVaTom(tp,pts){
+  return tp==='molhado'?(pts<=3?pts*600:3*600+(pts-3)*100):pts*100;
+}
+function demCalcTom(tp,area){return demCalcVaTom(tp,demCalcPtsTom(tp,area));}
+
+// ── Acordeão genérico ──
+function demToggleAcord(bodyId,arrowId,statusId){
+  const body=document.getElementById(bodyId);
+  const arrow=document.getElementById(arrowId);
+  const aberto=body.style.display!=='none';
+  body.style.display=aberto?'none':'block';
+  arrow.style.transform=aberto?'rotate(-90deg)':'rotate(0deg)';
+}
+
+function demAtualizaStatusSel(){
+  const keys=Object.keys(demComodos);
+  const totalArea=keys.reduce((s,i)=>s+demComodos[i].area,0);
+  const el=document.getElementById('dem-sel-status');
+  if(el) el.textContent=keys.length?`${keys.length} cômodo${keys.length>1?'s':''} • ${totalArea}m²`:'';
+}
+
+function demAtualizaStatusNBR(disj,bit){
+  const el=document.getElementById('dem-nbr-status');
+  if(el) el.textContent=`${disj} • ${bit}`;
+}
+
+function demAtualizaStatusMUC(total,cat){
+  const el=document.getElementById('muc-res-status');
+  if(el) el.textContent=`${total.toFixed(1)} kVA • Cat. ${cat}`;
+}
+
+// ── Sub-abas ──
+function demSubAba(idx,el){
+  document.querySelectorAll('.dem-stab').forEach(t=>t.classList.remove('on'));
+  el.classList.add('on');
+  document.querySelectorAll('.dem-spanel').forEach((p,i)=>p.classList.toggle('on',i===idx));
+  setTimeout(()=>document.getElementById('dem-s'+idx)?.scrollIntoView({behavior:'smooth',block:'start'}),50);
+}
+
+// ── Sistema e tensão ──
 function demSistema(el,tipo){
-  el.parentElement.querySelectorAll('.ferr-pill').forEach(b=>b.classList.remove('on'));
-  el.classList.add('on');demSisAtual=tipo;
+  el.closest('[style]').querySelectorAll('.ferr-pill').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+  demSisAtual=tipo;
   const t=document.getElementById('dem-tensoes');
   if(tipo==='mono'){t.innerHTML='<button class="ferr-pill on" onclick="demTensao(this)">127V</button><button class="ferr-pill" onclick="demTensao(this)">220V</button>';demTensaoAtual=127;}
   else if(tipo==='bi'){t.innerHTML='<button class="ferr-pill on" onclick="demTensao(this)">220V</button>';demTensaoAtual=220;}
   else{t.innerHTML='<button class="ferr-pill on" onclick="demTensao(this)">220V</button><button class="ferr-pill" onclick="demTensao(this)">380V</button>';demTensaoAtual=220;}
 }
-function demTensao(el){el.parentElement.querySelectorAll('.ferr-pill').forEach(b=>b.classList.remove('on'));el.classList.add('on');demTensaoAtual=parseInt(el.textContent);}
+function demTensao(el){
+  el.closest('#dem-tensoes').querySelectorAll('.ferr-pill').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+  demTensaoAtual=parseInt(el.textContent);
+}
+
+// ── Grid de cômodos ──
 function demRenderGrid(){
   document.getElementById('dem-grid').innerHTML=DEM_COMODOS.map((c,i)=>`
     <div class="dem-card${demComodos[i]?' sel':''}" onclick="demToggleComodo(${i})">
@@ -1890,48 +3462,350 @@ function demRenderGrid(){
       <div class="dem-card-area">${demComodos[i]?demComodos[i].area:c.area}m²</div>
     </div>`).join('');
 }
-function demToggleComodo(i){if(demComodos[i])delete demComodos[i];else demComodos[i]={...DEM_COMODOS[i],equips:[]};demRenderGrid();}
-function demTipica(){demComodos={};DEM_TIPICA.forEach(i=>demComodos[i]={...DEM_COMODOS[i],equips:[]});demRenderGrid();}
+
+function demToggleComodo(i){
+  if(demComodos[i]) delete demComodos[i];
+  else demComodos[i]={...DEM_COMODOS[i],equips:[]};
+  demRenderGrid();
+  demRenderSelecionados();
+}
+
+function demTipica(){
+  demComodos={};
+  DEM_TIPICA.forEach(i=>demComodos[i]={...DEM_COMODOS[i],equips:[]});
+  demRenderGrid();
+  demRenderSelecionados();
+}
+
+function demRenderSelecionados(){
+  const keys=Object.keys(demComodos);
+  const wrap=document.getElementById('dem-sel-wrap');
+  wrap.style.display=keys.length?'block':'none';
+  document.getElementById('dem-btn-minimo').style.display=keys.length?'block':'none';
+  document.getElementById('dem-tab-wrap').style.display='none';
+  demAtualizaStatusSel();
+  document.getElementById('dem-sel-lista').innerHTML=keys.map(i=>{
+    const c=demComodos[i];
+    const ilum=demCalcIlum(c.area);
+    const tom=demCalcTom(c.tp,c.area);
+    const equipW=c.equips.reduce((s,e)=>s+e.w,0);
+    const total=ilum+tom+equipW;
+    return `<div class="dem-comodo-item">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-size:18px">${c.ico}</span>
+          <div>
+            <div style="font-size:13px;font-weight:700;color:var(--text)">${c.n}</div>
+            <div style="font-size:10px;color:var(--text3)">${c.tp==='molhado'?'⚡ Área molhada':'Área seca'} — ${total} VA</div>
+          </div>
+        </div>
+        <button onclick="demRemComodo(${i})" style="width:26px;height:26px;border-radius:7px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#f87171;cursor:pointer;font-size:12px">✕</button>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:8px">
+        <div style="background:var(--bg-input);border-radius:8px;padding:6px;text-align:center">
+          <div style="font-size:9px;color:var(--text3);margin-bottom:3px">ÁREA (m²)</div>
+          <input type="number" value="${c.area}" min="1" onchange="demEditArea(${i},this.value)" style="width:100%;background:transparent;border:none;outline:none;text-align:center;font-size:13px;font-weight:700;color:var(--text);font-family:'IBM Plex Mono',monospace">
+        </div>
+        <div style="background:var(--bg-input);border-radius:8px;padding:6px;text-align:center">
+          <div style="font-size:9px;color:var(--text3);margin-bottom:3px">ILUM (VA)</div>
+          <div style="font-size:13px;font-weight:700;color:var(--acc);font-family:'IBM Plex Mono',monospace">${ilum}</div>
+        </div>
+        <div style="background:var(--bg-input);border-radius:8px;padding:6px;text-align:center">
+          <div style="font-size:9px;color:var(--text3);margin-bottom:3px">TOM (VA)</div>
+          <div style="font-size:13px;font-weight:700;color:#60a5fa;font-family:'IBM Plex Mono',monospace">${tom}</div>
+        </div>
+      </div>
+      ${c.equips.length?`<div style="margin-bottom:6px">${c.equips.map((e,j)=>`
+        <div class="dem-equip-item">
+          <span style="flex:1">${e.n}</span>
+          <span style="font-family:'IBM Plex Mono',monospace;color:var(--acc)">${e.w}W</span>
+          ${e.circ?'<span class="tag-circ-ind">Circ. indep.</span>':''}
+          <button onclick="demRemEquip(${i},${j})" style="width:20px;height:20px;border-radius:5px;background:rgba(239,68,68,.1);border:none;color:#f87171;cursor:pointer;font-size:10px">✕</button>
+        </div>`).join('')}</div>`:''}
+      <button onclick="demAddEquip(${i})" style="width:100%;padding:7px;background:var(--bg-input);border:1px dashed var(--border-input);border-radius:8px;font-size:11px;font-weight:700;color:var(--text3);cursor:pointer">+ Equipamento</button>
+    </div>`;
+  }).join('');
+}
+
+function demRemComodo(i){delete demComodos[i];demRenderGrid();demRenderSelecionados();}
+function demEditArea(i,v){demComodos[i].area=parseFloat(v)||demComodos[i].area;demRenderSelecionados();}
+
+function demAddEquip(idx){
+  const html=DEM_EQUIPAMENTOS.map((e,j)=>`<div class="cat-drop-item" onclick="demSelEquip(${idx},${j})">${e.n} — ${e.w}W${e.circ?' ⚡':''}</div>`).join('');
+  const popup=document.createElement('div');
+  popup.style.cssText='position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.6);display:flex;align-items:flex-end';
+  popup.innerHTML=`<div style="background:var(--bg-card);border-radius:20px 20px 0 0;width:100%;max-height:70vh;overflow-y:auto;padding:16px">
+    <div style="font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-bottom:12px">Equipamento — ${demComodos[idx].n}</div>
+    ${html}
+    <button onclick="this.closest('[style*=fixed]').remove()" style="width:100%;margin-top:12px;background:var(--bg-input);border:1px solid var(--border-input);border-radius:12px;padding:14px;font-size:14px;font-weight:700;color:var(--text);cursor:pointer">Cancelar</button>
+  </div>`;
+  document.body.appendChild(popup);
+}
+function demSelEquip(idx,j){
+  document.querySelector('[style*="fixed"][style*="inset:0"]')?.remove();
+  demComodos[idx].equips.push({...DEM_EQUIPAMENTOS[j]});
+  demRenderSelecionados();
+}
+function demRemEquip(idx,j){demComodos[idx].equips.splice(j,1);demRenderSelecionados();}
+
+function demCalcMinimo(){
+  const keys=Object.keys(demComodos);
+  if(!keys.length) return;
+  keys.forEach(i=>{
+    const c=demComodos[i];
+    if(!c.pts_ilum_editado) c.pts_ilum=Math.max(1,Math.ceil(demCalcIlum(c.area)/100));
+    if(!c.pts_tom_editado) c.pts_tom=demCalcPtsTom(c.tp,c.area);
+  });
+  demRenderTabela();
+  document.getElementById('dem-tab-wrap').style.display='block';
+  setTimeout(()=>document.getElementById('dem-tab-wrap').scrollIntoView({behavior:'smooth',block:'start'}),50);
+}
+
+function demRenderTabela(){
+  const keys=Object.keys(demComodos);
+  let totArea=0,totI=0,totT=0,totVA=0;
+  document.getElementById('dem-tab-tbody').innerHTML=keys.map((i,idx)=>{
+    const c=demComodos[i];
+    const ilumVA=demCalcIlum(c.area);
+    const tomVA=demCalcTom(c.tp,c.area);
+    const equipW=c.equips.reduce((s,e)=>s+e.w,0);
+    const va=ilumVA+tomVA+equipW;
+    totArea+=c.area; totI+=c.pts_ilum||1; totT+=c.pts_tom||1; totVA+=va;
+    return `<tr style="border-top:1px solid var(--border);background:${idx%2?'var(--bg-input)':'transparent'}">
+      <td style="padding:8px 10px;color:var(--text);font-weight:600">${c.ico} ${c.n}</td>
+      <td style="padding:8px 6px;text-align:center;color:var(--text2)">${c.area}m²</td>
+      <td style="padding:8px 6px;text-align:center;color:var(--text2)">${c.pts_ilum||1}</td>
+      <td style="padding:8px 6px;text-align:center;color:var(--text2)">${c.pts_tom||1}</td>
+      <td style="padding:8px 6px;text-align:center;color:var(--text2)">${c.equips.length?'✅':'—'}</td>
+      <td style="padding:8px 6px;text-align:center;font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--acc)">${va}</td>
+      <td style="padding:8px 6px;text-align:center"><button onclick="demEditarLinha(${i})" style="background:var(--bg-input);border:1px solid var(--border-input);border-radius:7px;width:28px;height:28px;cursor:pointer;font-size:13px;color:var(--text2)">✏️</button></td>
+    </tr>`;
+  }).join('');
+  document.getElementById('dem-tab-tot-area').textContent=totArea+'m²';
+  document.getElementById('dem-tab-tot-i').textContent=totI;
+  document.getElementById('dem-tab-tot-t').textContent=totT;
+  document.getElementById('dem-tab-tot-va').textContent=totVA+' VA';
+  document.getElementById('dem-tab-status').textContent=`${keys.length} cômodos • ${totVA} VA`;
+}
+
+function demEditarLinha(i){
+  const c=demComodos[i];
+  const popup=document.createElement('div');
+  popup.style.cssText='position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.6);display:flex;align-items:flex-end';
+  popup.innerHTML=`<div style="background:var(--bg-card);border-radius:20px 20px 0 0;width:100%;padding:16px">
+    <div style="font-size:14px;font-weight:800;color:var(--text);margin-bottom:14px">${c.ico} ${c.n}</div>
+    <div class="ilbl">Área (m²)</div>
+    <input class="inp" type="number" id="edit-area" value="${c.area}" min="1" style="margin-bottom:10px">
+    <div class="ilbl">Pontos de Iluminação</div>
+    <input class="inp" type="number" id="edit-ilum" value="${c.pts_ilum||1}" min="1" style="margin-bottom:10px">
+    <div class="ilbl">Pontos de Tomada</div>
+    <input class="inp" type="number" id="edit-tom" value="${c.pts_tom||1}" min="1" style="margin-bottom:14px">
+    <div style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin-bottom:8px">Equipamentos</div>
+    <div id="edit-equips-lista">${c.equips.map((e,j)=>`<div class="dem-equip-item"><span style="flex:1">${e.n}</span><span style="font-family:'IBM Plex Mono',monospace;color:var(--acc);font-size:12px">${e.w}W</span>${e.circ?'<span class="tag-circ-ind">Circ. indep.</span>':''}<button onclick="demRemEquipEdit(${i},${j},this)" style="width:20px;height:20px;border-radius:5px;background:rgba(239,68,68,.1);border:none;color:#f87171;cursor:pointer;font-size:10px">✕</button></div>`).join('')}</div>
+    <button onclick="demAddEquip(${i})" style="width:100%;padding:8px;background:var(--bg-input);border:1px dashed var(--border-input);border-radius:8px;font-size:11px;font-weight:700;color:var(--text3);cursor:pointer;margin-top:8px;margin-bottom:14px">+ Equipamento</button>
+    <div style="display:flex;gap:8px">
+      <button onclick="this.closest('[style*=fixed]').remove()" style="flex:1;padding:12px;background:var(--bg-input);border:1px solid var(--border-input);border-radius:12px;font-size:13px;font-weight:700;color:var(--text);cursor:pointer">Cancelar</button>
+      <button onclick="demSalvarEdicao(${i},this)" style="flex:1;padding:12px;background:var(--acc);border:none;border-radius:12px;font-size:13px;font-weight:800;color:#000;cursor:pointer">Salvar</button>
+    </div>
+  </div>`;
+  document.body.appendChild(popup);
+}
+
+function demRemEquipEdit(idx,j,btn){
+  demComodos[idx].equips.splice(j,1);
+  btn.closest('.dem-equip-item').remove();
+}
+
+function demSalvarEdicao(i,btn){
+  const popup=btn.closest('[style*="fixed"]');
+  demComodos[i].area=parseFloat(document.getElementById('edit-area').value)||demComodos[i].area;
+  demComodos[i].pts_ilum=parseInt(document.getElementById('edit-ilum').value)||1;
+  demComodos[i].pts_tom=parseInt(document.getElementById('edit-tom').value)||1;
+  demComodos[i].pts_ilum_editado=true;
+  demComodos[i].pts_tom_editado=true;
+  popup.remove();
+  demRenderTabela();
+  demRenderSelecionados();
+}
+
 function demCalcNBR(){
-  const keys=Object.keys(demComodos);if(!keys.length){alert('Selecione ao menos um cômodo!');return;}
+  const keys=Object.keys(demComodos);
+  if(!keys.length){alert('Selecione ao menos um cômodo!');return;}
   const fd=parseFloat(document.getElementById('dem-tipo').value);
-  let totalVA=0;
-  keys.forEach(i=>{const c=demComodos[i];totalVA+=demCalcIlum(c.area)+demCalcTom(c.tp,c.area)+(c.equips||[]).reduce((s,e)=>s+e.w,0);});
-  const demandada=totalVA*fd,corrente=demandada/demTensaoAtual;
+  let totalVA=0,totalIlumVA=0,totalTomVA=0,circsIndep=[];
+  keys.forEach(i=>{
+    const c=demComodos[i];
+    const ilumVA=demCalcIlum(c.area);
+    const pts_tom=c.pts_tom||demCalcPtsTom(c.tp,c.area);
+    const tomVA=demCalcVaTom(c.tp,pts_tom);
+    const equipW=c.equips.reduce((s,e)=>s+e.w,0);
+    totalIlumVA+=ilumVA; totalTomVA+=tomVA; totalVA+=ilumVA+tomVA+equipW;
+    c.equips.filter(e=>e.circ||(e.w/demTensaoAtual)>10).forEach(e=>circsIndep.push(`${c.n} — ${e.n} (${e.w}W / ${(e.w/demTensaoAtual).toFixed(1)}A)`));
+  });
+  const demandada=totalVA*fd;
+  const corrente=demandada/demTensaoAtual;
   const disj=[10,16,20,25,32,40,50,63,80,100].find(d=>d>=corrente*1.25)||100;
   const bit=[{a:15,b:'1,5mm²'},{a:21,b:'2,5mm²'},{a:28,b:'4mm²'},{a:36,b:'6mm²'},{a:50,b:'10mm²'},{a:66,b:'16mm²'},{a:84,b:'25mm²'},{a:104,b:'35mm²'}].find(b=>b.a>=corrente)?.b||'+35mm²';
+  document.getElementById('nbr-r-ci').textContent=totalVA+' VA';
   document.getElementById('nbr-r-cd').textContent=Math.round(demandada)+' VA';
-  document.getElementById('nbr-r-disj').textContent=disj+' A';
   document.getElementById('nbr-r-cor').textContent=corrente.toFixed(1)+' A';
+  document.getElementById('nbr-r-disj').textContent=disj+' A';
   document.getElementById('nbr-r-bit').textContent=bit;
+  document.getElementById('nbr-r-alertas').innerHTML=circsIndep.length?
+    circsIndep.map(c=>`<div style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);border-radius:8px;padding:7px 10px;font-size:11px;color:#f87171;margin-bottom:6px">⚡ Circ. independente (>10A): ${c}</div>`).join(''):'';
+  const nIlum=Math.max(1,Math.ceil(totalIlumVA/1000));
+  const nTom=Math.max(1,Math.ceil(totalTomVA/1500));
+  const temMolhado=Object.values(demComodos).some(c=>c.tp==='molhado');
+  document.getElementById('nbr-r-circs-lista').innerHTML=`
+    <div style="display:flex;flex-wrap:wrap;gap:6px">
+      <span style="background:rgba(59,130,246,.15);color:#60a5fa;font-size:10px;font-weight:700;border-radius:6px;padding:4px 10px">${nIlum}x Iluminação — 1,5mm²/10A</span>
+      <span style="background:rgba(59,130,246,.15);color:#60a5fa;font-size:10px;font-weight:700;border-radius:6px;padding:4px 10px">${nTom}x Tomadas TUG — 2,5mm²/16A</span>
+      ${temMolhado?`<span style="background:rgba(245,158,11,.15);color:var(--acc);font-size:10px;font-weight:700;border-radius:6px;padding:4px 10px">1x Cozinha/Serviço — 2,5mm²/20A</span>`:''}
+      ${circsIndep.length?`<span style="background:rgba(239,68,68,.12);color:#f87171;font-size:10px;font-weight:700;border-radius:6px;padding:4px 10px">${circsIndep.length}x Circ. independente</span>`:''}
+    </div>`;
   document.getElementById('dem-nbr-res').style.display='block';
+  demAtualizaStatusNBR(disj+' A',bit);
+  setTimeout(()=>document.getElementById('dem-nbr-res').scrollIntoView({behavior:'smooth',block:'start'}),50);
+  window._demResultadoNBR={totalVA,demandada,corrente,disj,bit,fd,tensao:demTensaoAtual};
 }
-// MUC (minimal)
+
+function demLevarMUC(){
+  if(!window._demResultadoNBR){alert('Calcule a demanda NBR 5410 primeiro!');return;}
+  demSubAba(1,document.querySelectorAll('.dem-stab')[1]);
+  const kva=(window._demResultadoNBR.demandada/1000).toFixed(2);
+  setTimeout(()=>{
+    if(!mucTipos.length) mucTipos.push({area:0,qt:1,dem:parseFloat(kva),custom:true});
+    renderMucTipos();
+    alert(`Demanda de ${kva} kVA carregada no MUC.\nInforme a quantidade de unidades e calcule.`);
+  },300);
+}
+
+function demLevarQuedaV(){
+  if(!window._demResultadoNBR){alert('Calcule a demanda NBR 5410 primeiro!');return;}
+  const r=window._demResultadoNBR;
+  ferrAba(2);
+  setTimeout(()=>{
+    const sel=document.getElementById('qv-tensao');
+    sel.value=r.tensao===127?'127':r.tensao===380?'380':'220';
+    document.getElementById('qv-corrente').value=r.corrente.toFixed(1);
+    const bitMap={'1,5mm²':'1.5','2,5mm²':'2.5','4mm²':'4','6mm²':'6','10mm²':'10','16mm²':'16','25mm²':'25','35mm²':'35'};
+    document.getElementById('qv-bitola').value=bitMap[r.bit]||'2.5';
+    document.getElementById('ferr-2').scrollIntoView({behavior:'smooth',block:'start'});
+  },200);
+}
+
+function demExportarPDF(){
+  if(!window._demResultadoNBR){alert('Calcule a demanda primeiro!');return;}
+  const r=window._demResultadoNBR;
+  const data=new Date().toLocaleDateString('pt-BR');
+  const keys=Object.keys(demComodos);
+  const tabelaComodos=keys.map(i=>{
+    const c=demComodos[i];
+    const ilumVA=demCalcIlum(c.area);
+    const pts_tom=c.pts_tom||demCalcPtsTom(c.tp,c.area);
+    const tomVA=demCalcVaTom(c.tp,pts_tom);
+    const equipW=c.equips.reduce((s,e)=>s+e.w,0);
+    return `<tr>
+      <td>${c.ico} ${c.n}</td>
+      <td style="text-align:center">${c.area}m²</td>
+      <td style="text-align:center">${c.pts_ilum||1}</td>
+      <td style="text-align:center">${pts_tom}</td>
+      <td style="text-align:center">${c.equips.length?c.equips.map(e=>e.n).join(', '):'—'}</td>
+      <td style="text-align:center;font-weight:700">${ilumVA+tomVA+equipW} VA</td>
+    </tr>`;
+  }).join('');
+  const alertas=keys.flatMap(i=>demComodos[i].equips.filter(e=>e.circ).map(e=>`<div class="alerta">⚡ Circ. independente: ${demComodos[i].n} — ${e.n} (${e.w}W)</div>`)).join('');
+  document.getElementById('print-area').innerHTML=`
+    <h1>⚡ Laudo de Demanda Elétrica</h1>
+    <div style="font-size:11px;color:#666;margin-bottom:16px">Calculado em ${data} — NBR 5410:2004</div>
+    <h2>Planta da Residência</h2>
+    <table>
+      <thead><tr><th>Cômodo</th><th>Área</th><th>Pts Ilum.</th><th>Pts Tom.</th><th>Equipamentos</th><th>VA Total</th></tr></thead>
+      <tbody>${tabelaComodos}</tbody>
+    </table>
+    ${alertas}
+    <h2>Resultado da Demanda</h2>
+    <div class="res-box">
+      <div class="res-item"><div class="res-lbl">Carga Instalada</div><div class="res-val">${r.totalVA} VA</div></div>
+      <div class="res-item"><div class="res-lbl">Carga Demandada</div><div class="res-val">${Math.round(r.demandada)} VA</div></div>
+      <div class="res-item"><div class="res-lbl">Corrente</div><div class="res-val">${r.corrente.toFixed(1)} A</div></div>
+      <div class="res-item"><div class="res-lbl">Disjuntor Geral</div><div class="res-val">${r.disj} A</div></div>
+    </div>
+    <div class="res-box">
+      <div class="res-item"><div class="res-lbl">Bitola Mínima</div><div class="res-val">${r.bit}</div></div>
+      <div class="res-item"><div class="res-lbl">Proteção DR</div><div class="res-val">30 mA</div></div>
+    </div>
+    <h2>Circuitos Sugeridos</h2>
+    <div>${document.getElementById('nbr-r-circs-lista').innerHTML}</div>
+    <div class="rodape">Eletricista Power PRO — Gerado automaticamente com base na NBR 5410:2004. Este laudo é uma estimativa e deve ser validado por profissional habilitado.</div>`;
+  window.print();
+}
+
+// ── MUC — DIS-NOR-053 REV06 ──
 let mucTipos=[];
-const Q35=[{max:40,d:1.00},{max:50,d:1.16},{max:60,d:1.36},{max:80,d:1.76},{max:100,d:2.16},{max:150,d:3.06},{max:200,d:4.01},{max:300,d:5.76},{max:500,d:9.10},{max:999,d:9.91}];
+const Q35=[
+  {max:40,d:1.00},{max:45,d:1.05},{max:50,d:1.16},{max:55,d:1.26},{max:60,d:1.36},
+  {max:65,d:1.47},{max:70,d:1.57},{max:75,d:1.67},{max:80,d:1.76},{max:85,d:1.86},
+  {max:90,d:1.96},{max:95,d:2.06},{max:100,d:2.16},{max:110,d:2.35},{max:120,d:2.54},
+  {max:130,d:2.73},{max:140,d:2.91},{max:150,d:3.06},{max:160,d:3.28},{max:170,d:3.47},
+  {max:180,d:3.65},{max:190,d:3.83},{max:200,d:4.01},{max:220,d:4.36},{max:240,d:4.72},
+  {max:260,d:5.07},{max:280,d:5.42},{max:300,d:5.76},{max:350,d:6.61},{max:400,d:7.45},
+  {max:450,d:8.28},{max:500,d:9.10},{max:999,d:9.91}
+];
+const Q36=[100,98,97.3,97,96.8,96.6,96.57,96.5,96.45,96.4,94.73,93.33,92.15,91.14,90.27,89.5,88.82,88.22,87.68,87.2,85.9,84.77,83.7,82.75,81.84,81,80.26,79.54,78.9,78.27,77.68,77.16,76.64,76.18,75.71,75.28,74.89,74.45,74.11,73.8,73.46,73.17,72.89,72.6,72.31,71.96,71.62,71.29,70.98,70.68,70.39,70.17,69.85,69.6,69.35,69.11,68.88,68.66,68.44,68.23];
+function getFc(n){return n>=60?68.23:Q36[n-1]||68.23;}
 function getDemApto(area){return Q35.find(r=>area<=r.max)?.d||9.91;}
+const MUC_CATS={
+  '380':[{id:'T6',min:0,max:21,disj:32,cabo:'3x6/6mm² CU XLPE'},{id:'T7',min:21.1,max:26,disj:40,cabo:'3x6/6mm² CU XLPE'},{id:'T8',min:26.1,max:33,disj:50,cabo:'3x10/10mm² CU XLPE'},{id:'T9',min:33.1,max:40,disj:63,cabo:'3x16/16mm² CU XLPE'},{id:'T10',min:40.1,max:52,disj:80,cabo:'3x16/16mm² CU XLPE'},{id:'T11',min:52.1,max:66,disj:100,cabo:'3x25/25mm² CU XLPE'},{id:'T12',min:66.1,max:75,disj:125,cabo:'3x50/50mm² CU XLPE'}],
+  '220':[{id:'M0',min:0,max:5,disj:40,cabo:'6/6mm² CU XLPE'},{id:'M1',min:5.1,max:10,disj:63,cabo:'10/10mm² CU XLPE'},{id:'B0',min:0,max:11,disj:50,cabo:'2x10/10mm² CU XLPE'},{id:'B1',min:11.1,max:18,disj:70,cabo:'2x16/16mm² CU XLPE'},{id:'T0',min:0,max:19,disj:50,cabo:'3x10/10mm² CU XLPE'},{id:'T1',min:19.1,max:24,disj:63,cabo:'3x16/16mm² CU XLPE'},{id:'T2',min:24.1,max:38,disj:100,cabo:'3x25/25mm² CU XLPE'},{id:'T3',min:38.1,max:47,disj:125,cabo:'3x35/35mm² CU XLPE'},{id:'T4',min:47.1,max:57,disj:150,cabo:'3x50/50mm² CU XLPE'},{id:'T5',min:57.1,max:75,disj:200,cabo:'3x70/70mm² CU XLPE'}]
+};
+
 function mucAddTipo(){
-  const area=parseFloat(prompt('Área útil do apto (m²):'));
-  const qt=parseInt(prompt('Quantidade:'));
+  const area=parseFloat(prompt('Área útil do apartamento (m²):')||0);
+  const qt=parseInt(prompt('Quantidade de apartamentos desse tipo:')||0);
   if(area>0&&qt>0){mucTipos.push({area,qt,dem:getDemApto(area)});renderMucTipos();}
 }
 function mucRemTipo(i){mucTipos.splice(i,1);renderMucTipos();}
 function renderMucTipos(){
-  document.getElementById('muc-tipos').innerHTML=mucTipos.map((t,i)=>
-    `<div style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--bg-card);border:1px solid var(--border-card);border-radius:10px;margin-bottom:6px">
-      <div style="flex:1;font-size:12px;color:var(--text2)">Apto ${t.area}m² × ${t.qt} = ${(t.dem*t.qt).toFixed(2)} kVA</div>
-      <button onclick="mucRemTipo(${i})" style="width:24px;height:24px;border-radius:6px;background:rgba(239,68,68,.1);border:none;color:#f87171;cursor:pointer;font-size:10px">✕</button>
-    </div>`).join('');
+  document.getElementById('muc-tipos').innerHTML=mucTipos.length?
+    `<div style="border:1px solid var(--border-card);border-radius:12px;overflow:hidden;margin-bottom:8px">`+
+    mucTipos.map((t,i)=>`<div style="display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid var(--border)">
+      <div style="flex:1">
+        <div style="font-size:13px;font-weight:700;color:var(--text)">${t.custom?'Unidade NBR':'Apto '+t.area+'m²'} × ${t.qt} unid.</div>
+        <div style="font-size:10px;color:var(--text3)">Dem. unit.: ${t.dem.toFixed(2)} kVA — Sub: ${(t.dem*t.qt).toFixed(2)} kVA</div>
+      </div>
+      <button onclick="mucRemTipo(${i})" style="width:26px;height:26px;border-radius:7px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#f87171;cursor:pointer;font-size:12px">✕</button>
+    </div>`).join('')+`</div>`:'';
 }
+
 function demCalcMUC(){
-  if(!mucTipos.length){alert('Adicione tipos de apartamento!');return;}
-  const Dtr=mucTipos.reduce((s,t)=>s+(t.dem*t.qt),0)*0.8;
+  if(!mucTipos.length){alert('Adicione ao menos um tipo de apartamento!');return;}
+  const Dr=mucTipos.reduce((s,t)=>s+(t.dem*t.qt),0);
+  const totalAptos=mucTipos.reduce((s,t)=>s+t.qt,0);
+  const fc=getFc(totalAptos)/100;
+  const Dtr=Dr*fc;
+  const fr=Dtr<=25?1.5:Dtr<=50?1.3:Dtr<=100?1.2:1.1;
+  const Drf=Dtr*fr;
   const Ds=parseFloat(document.getElementById('muc-ds').value)||0;
   const Dc=parseFloat(document.getElementById('muc-dc').value)||0;
-  const Ded=Dtr+Ds+Dc;
-  document.getElementById('muc-r-cat').textContent=`Demanda Total: ${Ded.toFixed(2)} kVA`;
-  document.getElementById('muc-r-total').textContent=Ded<=300?'✅ Tensão Secundária (BT)':'⚠️ Tensão Primária (MT) — acima de 300 kVA';
+  const Ded=Drf+Ds+Dc;
+  const tensaoKey=document.querySelector('#dem-s1 .ferr-pill.on')?.textContent.includes('380')?'380':'220';
+  const cats=MUC_CATS[tensaoKey];
+  const cat=cats.find(c=>Ded>=c.min&&Ded<=c.max)||cats[cats.length-1];
+  document.getElementById('muc-r-drf').textContent=Drf.toFixed(2)+' kVA';
+  document.getElementById('muc-r-fc').textContent=(fc*100).toFixed(2)+'%';
+  document.getElementById('muc-r-fr').textContent='×'+fr.toFixed(1);
+  document.getElementById('muc-r-total').textContent=Ded.toFixed(2)+' kVA';
+  document.getElementById('muc-r-cat').textContent='Categoria '+cat.id;
+  document.getElementById('muc-r-disj').textContent='Disjuntor: '+cat.disj+'A';
+  document.getElementById('muc-r-cabo').textContent='Cabo: '+cat.cabo;
+  const box=document.getElementById('muc-r-tensao');
+  if(Ded<=300){box.style.cssText='border-radius:10px;padding:10px;text-align:center;font-size:12px;font-weight:700;background:rgba(34,197,94,.1);color:#4ade80;border:1px solid rgba(34,197,94,.3)';box.textContent='✅ Tensão Secundária (BT) — até 300 kVA';}
+  else{box.style.cssText='border-radius:10px;padding:10px;text-align:center;font-size:12px;font-weight:700;background:rgba(245,158,11,.1);color:var(--acc);border:1px solid rgba(245,158,11,.3)';box.textContent='⚠️ Demanda >300 kVA — Tensão Primária (MT) obrigatória';}
   document.getElementById('muc-resultado').style.display='block';
+  demAtualizaStatusMUC(Ded,cat.id);
+  setTimeout(()=>document.getElementById('muc-resultado').scrollIntoView({behavior:'smooth',block:'start'}),50);
+  window._demResultadoMUC={Ded,cat,tensaoKey};
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -1984,9 +3858,150 @@ function resetCheck(){const key=document.getElementById('check-sel').value;check
 // ══════════════════════════════════════════════════════════════
 // INIT
 // ══════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════
+// CONFIG PDF
+// ══════════════════════════════════════════════════════════════
+const PDF_SECOES = [
+  { k:'cabecalho',  lbl:'Cabeçalho da empresa',   ico:'🏢', def:true  },
+  { k:'cliente',   lbl:'Dados do cliente',         ico:'👤', def:true  },
+  { k:'servicos',  lbl:'Tabela de serviços',        ico:'⚡', def:true  },
+  { k:'materiais', lbl:'Tabela de materiais',       ico:'📦', def:true  },
+  { k:'subtotais', lbl:'Subtotais discriminados',   ico:'📊', def:true  },
+  { k:'pagamento', lbl:'Forma de pagamento / sinal',ico:'💳', def:true  },
+  { k:'garantia',  lbl:'Garantia e validade',       ico:'🛡️', def:true  },
+  { k:'obs',       lbl:'Observações técnicas',      ico:'📝', def:true  },
+  { k:'rodape',    lbl:'Rodapé (gerado por...)',    ico:'📄', def:true  },
+];
+
+let pdfCfg = {
+  cor: '#f59e0b',
+  secoes: Object.fromEntries(PDF_SECOES.map(s => [s.k, s.def])),
+  assinatura: false,
+  msgCliente: '',
+  subtitulo: 'Serviços Elétricos Profissionais',
+};
+
+function abrirConfigPDF() {
+  // renderizar toggles de seções
+  document.getElementById('cfg-secoes').innerHTML = PDF_SECOES.map(s => `
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border)">
+      <span style="font-size:13px;color:var(--text2)">${s.ico} ${s.lbl}</span>
+      <div id="cfg-sw-${s.k}" class="scp-toggle-sw${pdfCfg.secoes[s.k]?' on':''}"
+        onclick="cfgToggleSecao('${s.k}',this)"></div>
+    </div>`).join('').replace(/border-bottom:1px solid var\(--border\)(?=<\/div>\s*$)/,'border:none');
+
+  // preencher campos
+  document.getElementById('cfg-msg-cliente').value = pdfCfg.msgCliente;
+  document.getElementById('cfg-subtitulo').value   = pdfCfg.subtitulo;
+
+  const sw = document.getElementById('cfg-sw-assinatura');
+  sw.classList.toggle('on', pdfCfg.assinatura);
+
+  // cor selecionada
+  document.querySelectorAll('.cfg-cor').forEach(el => {
+    const sel = el.dataset.cor === pdfCfg.cor;
+    el.style.border = sel ? `3px solid ${el.dataset.cor}` : '3px solid transparent';
+    el.style.boxShadow = sel ? `0 0 0 2px var(--bg-card),0 0 0 4px ${el.dataset.cor}` : 'none';
+  });
+
+  document.getElementById('modal-cfg-pdf').style.display = 'flex';
+}
+
+function fecharConfigPDF() {
+  // salvar campos antes de fechar
+  pdfCfg.msgCliente = document.getElementById('cfg-msg-cliente').value;
+  pdfCfg.subtitulo  = document.getElementById('cfg-subtitulo').value;
+  document.getElementById('modal-cfg-pdf').style.display = 'none';
+}
+
+function selecionarCorPDF(el) {
+  pdfCfg.cor = el.dataset.cor;
+  document.querySelectorAll('.cfg-cor').forEach(c => {
+    const sel = c.dataset.cor === pdfCfg.cor;
+    c.style.border = sel ? `3px solid ${c.dataset.cor}` : '3px solid transparent';
+    c.style.boxShadow = sel ? `0 0 0 2px var(--bg-card),0 0 0 4px ${c.dataset.cor}` : 'none';
+  });
+}
+
+function cfgToggleSecao(k, el) {
+  pdfCfg.secoes[k] = !pdfCfg.secoes[k];
+  el.classList.toggle('on', pdfCfg.secoes[k]);
+}
+
+function cfgToggle(el, k) {
+  pdfCfg[k] = !pdfCfg[k];
+  el.classList.toggle('on', pdfCfg[k]);
+}
+
 renderNBR();
 renderCheck();
 demRenderGrid();
+demRenderSelecionados();
 </script>
+<!-- ══ MODAL CONFIG PDF ══ -->
+<div id="modal-cfg-pdf" onclick="if(event.target===this)fecharConfigPDF()"
+  style="display:none;position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.6);align-items:flex-end">
+  <div style="background:var(--bg-card);border-radius:20px 20px 0 0;width:100%;max-height:90vh;display:flex;flex-direction:column;overflow:hidden">
+
+    <!-- header -->
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--border);flex-shrink:0">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="width:36px;height:36px;border-radius:10px;background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.3);display:flex;align-items:center;justify-content:center;font-size:18px">📄</div>
+        <div>
+          <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:800;color:var(--text)">Configurar PDF</div>
+          <div style="font-size:10px;color:var(--text3);margin-top:1px">Personalize o orçamento enviado ao cliente</div>
+        </div>
+      </div>
+      <button onclick="fecharConfigPDF()" style="width:32px;height:32px;background:var(--bg-input);border:1px solid var(--border-input);border-radius:9px;color:var(--text2);cursor:pointer;font-size:14px">✕</button>
+    </div>
+
+    <!-- body -->
+    <div style="overflow-y:auto;padding:16px;flex:1;-webkit-overflow-scrolling:touch">
+
+      <!-- Cor de destaque -->
+      <div style="font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-bottom:10px">🎨 Cor de Destaque</div>
+      <div style="display:flex;gap:8px;margin-bottom:20px" id="cfg-cores">
+        <div class="cfg-cor on" data-cor="#f59e0b" onclick="selecionarCorPDF(this)" style="width:32px;height:32px;border-radius:50%;background:#f59e0b;cursor:pointer;border:3px solid #f59e0b;box-shadow:0 0 0 2px #000"></div>
+        <div class="cfg-cor" data-cor="#3b82f6" onclick="selecionarCorPDF(this)" style="width:32px;height:32px;border-radius:50%;background:#3b82f6;cursor:pointer;border:3px solid transparent"></div>
+        <div class="cfg-cor" data-cor="#22c55e" onclick="selecionarCorPDF(this)" style="width:32px;height:32px;border-radius:50%;background:#22c55e;cursor:pointer;border:3px solid transparent"></div>
+        <div class="cfg-cor" data-cor="#8b5cf6" onclick="selecionarCorPDF(this)" style="width:32px;height:32px;border-radius:50%;background:#8b5cf6;cursor:pointer;border:3px solid transparent"></div>
+        <div class="cfg-cor" data-cor="#ef4444" onclick="selecionarCorPDF(this)" style="width:32px;height:32px;border-radius:50%;background:#ef4444;cursor:pointer;border:3px solid transparent"></div>
+        <div class="cfg-cor" data-cor="#0f172a" onclick="selecionarCorPDF(this)" style="width:32px;height:32px;border-radius:50%;background:#0f172a;cursor:pointer;border:3px solid transparent;border:1px solid var(--border-input)"></div>
+      </div>
+
+      <!-- Seções visíveis -->
+      <div style="font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-bottom:10px">📋 Seções do PDF</div>
+      <div style="background:var(--bg-input);border:1px solid var(--border-input);border-radius:13px;padding:0 14px;margin-bottom:20px">
+        <div id="cfg-secoes"></div>
+      </div>
+
+      <!-- Mensagem personalizada -->
+      <div style="font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-bottom:8px">✍️ Mensagem ao Cliente</div>
+      <textarea id="cfg-msg-cliente" class="inp" placeholder="Ex: Obrigado pela confiança! Qualquer dúvida estou à disposição. 😊" style="min-height:72px;margin-bottom:20px"></textarea>
+
+      <!-- Assinatura -->
+      <div style="font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-bottom:10px">✏️ Linha de Assinatura</div>
+      <div style="background:var(--bg-input);border:1px solid var(--border-input);border-radius:13px;padding:0 14px;margin-bottom:20px">
+        <div class="cfg-toggle-row" style="display:flex;align-items:center;justify-content:space-between;padding:13px 0">
+          <span style="font-size:13px;color:var(--text2)">Incluir campo de assinatura do cliente</span>
+          <div id="cfg-sw-assinatura" class="scp-toggle-sw" onclick="cfgToggle(this,'assinatura')"></div>
+        </div>
+      </div>
+
+      <!-- Subtítulo da empresa -->
+      <div style="font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-bottom:8px">🏢 Subtítulo da Empresa</div>
+      <input class="inp" id="cfg-subtitulo" type="text" placeholder="Ex: CREA-PE 123456 · (81) 99999-0000" style="margin-bottom:4px">
+      <div class="sh" style="margin-bottom:20px">Aparece abaixo do nome da empresa no cabeçalho</div>
+
+    </div>
+
+    <!-- footer -->
+    <div style="padding:12px 16px 24px;border-top:1px solid var(--border);flex-shrink:0;display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <button onclick="fecharConfigPDF()" style="padding:13px;background:var(--bg-input);border:1px solid var(--border-input);border-radius:12px;font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:var(--text2);cursor:pointer">Cancelar</button>
+      <button onclick="fecharConfigPDF();gerarPDF()" style="padding:13px;background:#3b82f6;border:none;border-radius:12px;font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:#fff;cursor:pointer">📄 Gerar PDF</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
