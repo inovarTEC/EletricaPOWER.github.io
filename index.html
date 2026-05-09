@@ -15,6 +15,29 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
+/* ══ TELA LOGIN ══ */
+#tela-login{position:fixed;inset:0;z-index:9999;background:#060810;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:24px;font-family:'Syne',sans-serif}
+.login-logo{width:80px;height:80px;background:linear-gradient(135deg,#f59e0b,#d97706);border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:40px;margin-bottom:20px;box-shadow:0 0 32px rgba(245,158,11,.4)}
+.login-title{font-size:28px;font-weight:900;color:#fff;text-align:center;line-height:1.1;margin-bottom:6px}
+.login-sub{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:32px}
+.login-box{width:100%;max-width:360px;display:flex;flex-direction:column;gap:12px}
+.login-inp-wrap{position:relative}
+.login-inp{width:100%;padding:14px 16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;color:#fff;font-size:15px;font-family:'Syne',sans-serif;outline:none;box-sizing:border-box;transition:border .2s}
+.login-inp:focus{border-color:rgba(245,158,11,.5)}
+.login-inp::placeholder{color:rgba(255,255,255,.3)}
+.login-eye{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,.35);cursor:pointer;font-size:16px;padding:4px}
+.login-btn{width:100%;padding:15px;background:linear-gradient(135deg,#f59e0b,#d97706);border:none;border-radius:14px;color:#000;font-size:15px;font-weight:900;font-family:'Syne',sans-serif;cursor:pointer;box-shadow:0 0 24px rgba(245,158,11,.35);transition:opacity .15s,transform .1s;letter-spacing:.5px}
+.login-btn:active{opacity:.85;transform:scale(.98)}
+.login-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.login-erro{display:none;align-items:center;gap:8px;color:#f87171;font-size:12px;font-weight:700;padding:10px 12px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);border-radius:10px}
+.login-erro-btns{display:none;gap:8px}
+.login-erro-btn{flex:1;padding:10px;border-radius:10px;font-size:12px;font-weight:800;font-family:'Syne',sans-serif;cursor:pointer;text-align:center;text-decoration:none;border:none;display:flex;align-items:center;justify-content:center;gap:6px}
+.login-erro-btn.ver{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.12)}
+.login-erro-btn.comprar{background:#f59e0b;color:#000}
+.login-redefinir{text-align:center;font-size:12px;color:rgba(255,255,255,.4);margin-top:4px}
+.login-redefinir a{color:#f59e0b;font-weight:700;cursor:pointer;text-decoration:none}
+/* ══ FIM TELA LOGIN ══ */
+
 :root,[data-theme="dark"]{
   --bg:#060810;--bg-home:#07090f;--bg-hdr:rgba(11,14,24,.97);--bg-card:#0b0e18;
   --bg-modal:#0d1117;--bg-input:#0d1b2a;--bg-btn:#0b0e18;--bg-bnav:rgba(8,11,20,.98);
@@ -54,6 +77,8 @@ html,body{height:100%;overflow-x:hidden;background:var(--bg);color:var(--text);f
 .hgear{width:36px;height:36px;border-radius:10px;border:1px solid var(--border-input);background:var(--bg-card);display:flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer}
 .btn-acc{background:var(--acc);color:#fff;font-family:'Syne',sans-serif;font-size:12px;font-weight:800;letter-spacing:.8px;border:none;border-radius:10px;padding:9px 18px;cursor:pointer;transition:opacity .15s,transform .1s}
 .btn-acc:active{opacity:.8;transform:scale(.96)}
+#tela-orcamento button,#tela-resultado button,#print-area button,#modal-cfg-pdf button{transition:opacity .15s,transform .1s}
+#tela-orcamento button:active,#tela-resultado button:active,#print-area button:active,#modal-cfg-pdf button:active{opacity:.8;transform:scale(.97)}
 .scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
 .scroll::-webkit-scrollbar{display:none}
 .inp{width:100%;background:var(--bg-input);border:1px solid var(--border-input);border-radius:11px;padding:12px 13px;font-size:14px;color:var(--text);outline:none;transition:border-color .2s,background .3s;margin-bottom:8px}
@@ -62,8 +87,18 @@ html,body{height:100%;overflow-x:hidden;background:var(--bg);color:var(--text);f
 textarea.inp{resize:none;min-height:72px;font-family:inherit;line-height:1.5}
 select.inp{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23475569' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:36px;cursor:pointer}
 .card{background:var(--bg-card);border:1px solid var(--border-card);border-radius:16px;padding:14px 13px;transition:background .3s,border-color .3s;margin-bottom:12px}
+.card-orc-amber{background:rgba(245,158,11,.07)!important;border-color:rgba(245,158,11,.2)!important}
+.card-orc-blue{background:rgba(59,130,246,.07)!important;border-color:rgba(59,130,246,.2)!important}
+.card-orc-green{background:rgba(34,197,94,.07)!important;border-color:rgba(34,197,94,.2)!important}
+.card-orc-purple{background:rgba(167,139,250,.07)!important;border-color:rgba(167,139,250,.2)!important}
+.card-orc-orange{background:rgba(249,115,22,.07)!important;border-color:rgba(249,115,22,.2)!important}
+[data-theme="light"] .card-orc-amber{background:rgba(245,158,11,.09)!important}
+[data-theme="light"] .card-orc-blue{background:rgba(59,130,246,.09)!important}
+[data-theme="light"] .card-orc-green{background:rgba(34,197,94,.09)!important}
+[data-theme="light"] .card-orc-purple{background:rgba(167,139,250,.09)!important}
+[data-theme="light"] .card-orc-orange{background:rgba(249,115,22,.09)!important}
 .sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-.sec-lbl{display:flex;align-items:center;gap:7px;font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--text3)}
+.sec-lbl{display:flex;align-items:center;gap:7px;font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--text)}
 .dot{width:7px;height:7px;border-radius:50%}
 .tag{font-size:9px;font-weight:700;letter-spacing:.5px;border-radius:8px;padding:4px 10px;cursor:pointer;border:none;transition:opacity .15s}
 .tag-blue{background:rgba(59,130,246,.18);color:#60a5fa}
@@ -165,7 +200,8 @@ select.inp{appearance:none;-webkit-appearance:none;background-image:url("data:im
 .total-lbl{font-family:'Syne',sans-serif;font-size:11px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--acc);margin-bottom:3px}
 .total-sub{font-size:10px;color:var(--text3)}
 .total-val{font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:600;color:var(--acc)}
-.btn-calc{width:100%;background:var(--acc-bg);border:1px solid var(--acc-border);border-radius:11px;padding:14px;font-family:'Syne',sans-serif;font-size:12px;font-weight:800;letter-spacing:1px;color:var(--acc);cursor:pointer;transition:background .2s}
+.btn-calc{width:100%;background:var(--bg-input);border:1px solid var(--border-input);border-radius:11px;padding:14px;font-family:'Syne',sans-serif;font-size:12px;font-weight:800;letter-spacing:1px;color:var(--text3);cursor:pointer;transition:all .3s;opacity:.5}
+.btn-calc.ativo{background:var(--acc);border-color:var(--acc);color:#fff;opacity:1;box-shadow:0 4px 16px var(--acc-glow)}
 .gest-body{flex:1;overflow-y:auto;padding:16px 14px 30px;-webkit-overflow-scrolling:touch}
 .gest-body::-webkit-scrollbar{display:none}
 .gest-sec{font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--text3);margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px}
@@ -383,9 +419,9 @@ textarea.inp { font-size: 15px; }
 .home-body {
   padding-bottom: calc(76px + env(safe-area-inset-bottom, 16px));
 }
-.orc-pad { padding-bottom: calc(108px + env(safe-area-inset-bottom, 0px)); }
+.orc-pad { padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px)); }
 .tela-resultado .scroll > div {
-  padding-bottom: calc(108px + env(safe-area-inset-bottom, 0px));
+  padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
 }
 
 /* ── Valor total responsivo — evita overflow em telas estreitas ── */
@@ -513,7 +549,6 @@ table { min-width: 0; }
   .hero { padding: 12px; }
   .home-body { padding-bottom: calc(70px + env(safe-area-inset-bottom, 0px)); }
 }
-
 
 /* ══════════════════════════════════════════════════════
    HOME REDESIGN — novos componentes
@@ -679,7 +714,6 @@ table { min-width: 0; }
   .home-ferr-row { grid-template-columns: repeat(2, 1fr); }
 }
 
-
 /* ── Orçamento: obs collapsível ── */
 .orc-obs-extra.open { max-height: 200px !important; }
 
@@ -786,7 +820,6 @@ table { min-width: 0; }
   }
 }
 
-
 /* ── Queda V: botões de bitola ── */
 .qv-bit-btn {
   padding: 9px 4px;
@@ -821,8 +854,11 @@ table { min-width: 0; }
 }
 
 @media print{
-  body>*{display:none!important}
-  #print-area{display:block!important;position:fixed;inset:0;background:#fff;color:#000;padding:20px;font-family:Arial,sans-serif;font-size:12px;z-index:9999;overflow:auto}
+  body>*:not(#print-area){display:none!important}
+  #print-area{display:block!important;position:static!important;overflow:visible!important;width:100%!important;height:auto!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;background:#fff!important}
+  #pdf-toolbar{display:none!important}
+  #pdf-scroll{display:block!important;overflow:visible!important;height:auto!important;max-height:none!important;flex:none!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
 }
 
 /* ── TEMAS DE ACENTO ─────────────────────────────────── */
@@ -852,111 +888,32 @@ var LS = {
 var _appReady = false;
 </script>
 
-<script>
-// Chart.js — assíncrono, não bloqueia app
-(function(){
-  var s = document.createElement('script');
-  s.src = 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js';
-  s.async = true;
-  s.onerror = function(){ console.warn('Chart.js offline'); };
-  document.head.appendChild(s);
-})();
-</script>
-
-<!-- Firebase SDK -->
-<script type="module">
-  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-  import { getAuth, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyCUoVzr9_PIGZXe1DKBZaINNCVQVj14Iqk",
-    authDomain: "eletricista-pro.firebaseapp.com",
-    projectId: "eletricista-pro",
-    storageBucket: "eletricista-pro.firebasestorage.app",
-    messagingSenderId: "184661625796",
-    appId: "1:184661625796:web:18c38153a0a2621025b291"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-
-  // Expor funções globais
-  window._fbAuth     = auth;
-  window._fbSignIn   = (e,p) => signInWithEmailAndPassword(auth,e,p);
-  window._fbSignOut  = ()    => signOut(auth);
-  window._fbReset    = (e)   => sendPasswordResetEmail(auth,e);
-
-  // Controlar acesso ao app
-  onAuthStateChanged(auth, function(user) {
-    var login  = document.getElementById('tela-login');
-    var appRoot = document.getElementById('app-root');
-    if (!login || !appRoot) return;
-    if (user) {
-      login.style.display  = 'none';
-      appRoot.style.display = 'block';
-      // Atualizar painel Acesso
-      var elEmail  = document.getElementById('acesso-email');
-      var elStatus = document.getElementById('acesso-status');
-      if (elEmail)  elEmail.textContent = user.email;
-      if (elStatus) elStatus.innerHTML  = '<div style="width:7px;height:7px;border-radius:50%;background:#4ade80;display:inline-block;margin-right:6px"></div><span style="color:#4ade80;font-weight:600">Autenticado</span>';
-    } else {
-      login.style.display  = 'flex';
-      appRoot.style.display = 'none';
-    }
-  });
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 </head>
 <body>
 
-<!-- ══ TELA LOGIN ══ -->
-<div id="tela-login" style="display:none;position:fixed;inset:0;z-index:9999;background:#0a0a12;flex-direction:column;align-items:center;justify-content:center;padding:24px">
-  <div style="width:100%;max-width:360px">
-    <!-- Logo -->
-    <div style="text-align:center;margin-bottom:28px">
-      <div style="width:72px;height:72px;border-radius:20px;background:linear-gradient(135deg,#f59e0b,#d97706);display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 16px;box-shadow:0 8px 24px rgba(245,158,11,.4)">⚡</div>
-      <div style="font-family:'Syne',sans-serif;font-size:26px;font-weight:900;color:#fff;line-height:1.2">Eletricista Power<br>PRO</div>
-      <div style="font-size:11px;font-weight:700;letter-spacing:2px;color:#475569;margin-top:6px">ÁREA RESTRITA</div>
+<!-- ══ TELA LOGIN FIREBASE ══ -->
+<div id="tela-login">
+  <div class="login-logo">⚡</div>
+  <div class="login-title">Eletricista Power<br>PRO</div>
+  <div class="login-sub">Área Restrita</div>
+  <div class="login-box">
+    <input id="login-email" class="login-inp" type="email" placeholder="Seu e-mail" autocomplete="email">
+    <div class="login-inp-wrap">
+      <input id="login-senha" class="login-inp" type="password" placeholder="Senha" autocomplete="current-password" style="padding-right:44px">
+      <button class="login-eye" onclick="loginToggleSenha()" id="login-eye-btn">👁️</button>
     </div>
-    <!-- Campo e-mail -->
-    <div style="margin-bottom:12px">
-      <input id="login-email" type="email" placeholder="Seu e-mail" autocomplete="email"
-        style="width:100%;background:#1e2235;border:1.5px solid #2d3555;border-radius:14px;padding:14px 16px;font-size:16px;color:#fff;outline:none;box-sizing:border-box;font-family:'Syne',sans-serif"
-        onfocus="this.style.borderColor='#f59e0b'" onblur="this.style.borderColor='#2d3555'">
+    <div class="login-erro" id="login-erro">
+      <span>✕</span><span id="login-erro-msg">E-mail não cadastrado na plataforma.</span>
     </div>
-    <!-- Campo senha -->
-    <div style="margin-bottom:16px;position:relative">
-      <input id="login-senha" type="password" placeholder="Senha" autocomplete="current-password"
-        style="width:100%;background:#1e2235;border:1.5px solid #2d3555;border-radius:14px;padding:14px 46px 14px 16px;font-size:16px;color:#fff;outline:none;box-sizing:border-box;font-family:'Syne',sans-serif"
-        onfocus="this.style.borderColor='#f59e0b'" onblur="this.style.borderColor='#2d3555'"
-        onkeydown="if(event.key==='Enter')loginEntrar()">
-      <span onclick="var i=document.getElementById('login-senha');i.type=i.type==='password'?'text':'password'"
-        style="position:absolute;right:14px;top:50%;transform:translateY(-50%);cursor:pointer;font-size:18px;color:#475569">👁</span>
+    <div class="login-erro-btns" id="login-erro-btns">
+      <a href="https://eletricistapro.com.br/" target="_blank" class="login-erro-btn ver">🌐 Ver App</a>
+      <a href="https://pay.cakto.com.br/94rb2jd_835329" target="_blank" class="login-erro-btn comprar">🛒 Comprar</a>
     </div>
-    <!-- Erro -->
-    <div id="login-erro" style="display:none;margin-bottom:12px;color:#f87171;font-size:13px;font-weight:600;align-items:center;gap:6px">
-      <span>✕</span><span id="login-erro-msg">Erro ao entrar.</span>
-    </div>
-    <!-- Botões Ver App + Comprar -->
-    <div id="login-btns-extra" style="display:none;margin-bottom:12px;grid-template-columns:1fr 1fr;gap:8px">
-      <a href="https://eletricistapro.com.br/" target="_blank"
-        style="background:#1e2235;border:1.5px solid #2d3555;border-radius:14px;padding:12px;text-align:center;color:#fff;font-size:13px;font-weight:700;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px">🌐 Ver App</a>
-      <a href="https://pay.cakto.com.br/94rb2jd_835329" target="_blank"
-        style="background:#f59e0b;border:none;border-radius:14px;padding:12px;text-align:center;color:#000;font-size:13px;font-weight:800;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px">🛒 Comprar</a>
-    </div>
-    <!-- Botão Entrar -->
-    <button onclick="loginEntrar()" id="login-btn"
-      style="width:100%;background:linear-gradient(135deg,#f59e0b,#d97706);border:none;border-radius:14px;padding:16px;font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:#000;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;letter-spacing:.5px;box-shadow:0 4px 16px rgba(245,158,11,.4)">
-      ⚡ ENTRAR
-    </button>
-    <!-- Esqueceu senha -->
-    <div style="text-align:center;margin-top:16px;font-size:13px;color:#475569">
-      Esqueceu a senha? <span onclick="loginRedefinir()" style="color:#f59e0b;font-weight:700;cursor:pointer">Redefinir</span>
-    </div>
+    <button class="login-btn" id="login-btn" onclick="loginEntrar()">⚡ ENTRAR</button>
+    <div class="login-redefinir">Esqueceu a senha? <a onclick="loginRedefinir()">Redefinir</a></div>
   </div>
 </div>
-
-<!-- ══ APP ROOT ══ -->
-<div id="app-root" style="display:none">
 
 <!-- ══ TELA HOME ══ -->
 <div id="tela-home" class="tela ativa">
@@ -1137,51 +1094,57 @@ var _appReady = false;
       <div id="orc-num-badge" style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;color:var(--acc);letter-spacing:.5px;margin-top:1px"></div>
     </div>
     <div style="display:flex;gap:3px;flex-shrink:0;align-items:center">
-      <button onclick="abrirConfigPDF()" style="display:flex;align-items:center;gap:2px;height:28px;padding:0 6px;border-radius:8px;border:1px solid #3b82f6;background:rgba(59,130,246,.12);color:#60a5fa;font-size:10px;font-family:'Syne',sans-serif;font-weight:800;cursor:pointer;white-space:nowrap">📄 PDF</button>
-      <button onclick="abrirHistorico()" style="display:flex;align-items:center;height:28px;padding:0 6px;border-radius:8px;border:1px solid var(--border-input);background:var(--bg-card);color:var(--text3);font-size:12px;cursor:pointer">📋</button>
-      <button class="btn-acc" onclick="salvarOrcamento()" style="height:28px;padding:0 6px;font-size:10px;white-space:nowrap;border-radius:8px">💾 SAL</button>
+      <button onclick="abrirHistorico()" style="display:flex;align-items:center;gap:5px;height:34px;padding:0 12px;border-radius:10px;border:1px solid var(--acc-border);background:var(--acc-bg);color:var(--acc);font-size:12px;font-family:'Syne',sans-serif;font-weight:800;cursor:pointer;white-space:nowrap">📋 Histórico</button>
     </div>
   </div>
   <div class="scroll">
     <div class="orc-pad">
-      <div class="card">
-        <div class="sec-head"><div class="sec-lbl"><div class="dot" style="background:#f59e0b"></div>Dados do Orçamento</div></div>
-        <input class="inp" id="orc-empresa" type="text" placeholder="Seu Nome / Sua Empresa">
-        <input class="inp" id="orc-cliente" type="text" placeholder="Nome do Cliente">
-        <input class="inp" id="orc-endereco" type="text" placeholder="Endereço (Rua, Nº, Bairro)">
-        <input class="inp" id="orc-tel" type="tel" placeholder="(DD) 9XXXX-XXXX">
-        <div class="row3" style="margin-bottom:7px">
-          <div><div class="ilbl">Data</div><input class="inp" type="date" id="orc-data" style="margin-bottom:0"></div>
-          <div><div class="ilbl">Hora</div><input class="inp" type="time" id="orc-hora" value="09:00" style="margin-bottom:0"></div>
-          <div><div class="ilbl">Garantia (d)</div><input class="inp" id="orc-garantia" type="number" placeholder="90" style="margin-bottom:0"></div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:0">
-          <div>
-            <div class="ilbl">Validade da proposta (dias)</div>
-            <input class="inp" id="orc-validade" type="number" placeholder="15" value="15" style="margin-bottom:0;margin-top:4px">
+      <div class="card card-orc-amber" style="padding:0;overflow:hidden">
+        <div onclick="orcDadosToggle(this)" style="display:flex;align-items:center;justify-content:space-between;padding:13px 14px;cursor:pointer;user-select:none">
+          <div class="sec-lbl"><div class="dot"></div>Dados do Orçamento</div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span id="orc-dados-resumo" style="font-size:11px;color:var(--text3);font-weight:600;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span>
+            <span id="orc-dados-arrow" style="font-size:12px;color:var(--text3);transition:transform .2s">▼</span>
           </div>
-          <div>
-            <div class="ilbl">Nº do Orçamento</div>
-            <input class="inp" id="orc-numero" type="text" readonly
-              style="margin-bottom:0;margin-top:4px;font-family:'IBM Plex Mono',monospace;font-weight:700;color:var(--acc);background:var(--acc-bg);border-color:var(--acc-border);cursor:default">
+        </div>
+        <div id="orc-dados-body" style="display:none;padding:0 14px 14px">
+          <input class="inp" id="orc-empresa" type="text" placeholder="Seu Nome / Sua Empresa" oninput="orcDadosResumo()">
+          <input class="inp" id="orc-cliente" type="text" placeholder="Nome do Cliente" oninput="orcDadosResumo()">
+          <input class="inp" id="orc-endereco" type="text" placeholder="Endereço (Rua, Nº, Bairro)">
+          <input class="inp" id="orc-tel" type="tel" placeholder="(DD) 9XXXX-XXXX">
+          <div class="row3" style="margin-bottom:7px">
+            <div><div class="ilbl">Data</div><input class="inp" type="date" id="orc-data" style="margin-bottom:0"></div>
+            <div><div class="ilbl">Hora</div><input class="inp" type="time" id="orc-hora" value="09:00" style="margin-bottom:0"></div>
+            <div><div class="ilbl">Garantia (d)</div><input class="inp" id="orc-garantia" type="number" placeholder="90" style="margin-bottom:0"></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:0">
+            <div>
+              <div class="ilbl">Validade da proposta (dias)</div>
+              <input class="inp" id="orc-validade" type="number" placeholder="15" value="15" style="margin-bottom:0;margin-top:4px">
+            </div>
+            <div>
+              <div class="ilbl">Nº do Orçamento</div>
+              <input class="inp" id="orc-numero" type="text" readonly
+                style="margin-bottom:0;margin-top:4px;font-family:'IBM Plex Mono',monospace;font-weight:700;color:var(--acc);background:var(--acc-bg);border-color:var(--acc-border);cursor:default">
+            </div>
           </div>
         </div>
       </div>
-      <div class="card">
+      <div class="card card-orc-blue">
         <div class="sec-head">
-          <div class="sec-lbl"><div class="dot" style="background:#3b82f6"></div>Tipo de Serviço</div>
+          <div class="sec-lbl"><div class="dot"></div>Tipo de Serviço</div>
           <button class="tag tag-blue" onclick="this.closest('.card').querySelector('.orc-obs-extra').classList.toggle('open');this.textContent=this.closest('.card').querySelector('.orc-obs-extra').classList.contains('open')?'− obs':'+ obs'">+ obs</button>
         </div>
-        <select class="inp" id="orc-tipo-serv" style="margin-bottom:0"><option value="" disabled selected>— Selecione o tipo de serviço —</option><option>Instalação Elétrica Residencial</option><option>Instalação Elétrica Comercial</option><option>Instalação Elétrica Industrial</option><option>Manutenção Elétrica</option><option>Laudo Técnico</option><option>Projeto Elétrico</option><option>Outros</option></select>
+        <select class="inp" id="orc-tipo-serv" style="margin-bottom:0"><option value="" disabled selected>— Selecione o tipo de serviço —</option><option>🏠 Instalação Elétrica Residencial</option><option>🏢 Instalação Elétrica Comercial</option><option>🏭 Instalação Elétrica Industrial</option><option>🔧 Manutenção Elétrica</option><option>📋 Laudo Técnico</option><option>📐 Projeto Elétrico</option><option>⚡ Outros</option></select>
         <div class="orc-obs-extra" style="max-height:0;overflow:hidden;transition:max-height .25s ease">
           <textarea class="inp" placeholder="Observações gerais do serviço..." style="margin-top:8px"></textarea>
         </div>
       </div>
 
       <!-- ══ SERVIÇOS ══ -->
-      <div class="card" style="border-color:rgba(34,197,94,.2)">
+      <div class="card card-orc-green">
         <div class="sec-head">
-          <div class="sec-lbl"><div class="dot" style="background:#22c55e"></div>Serviços Elétricos</div>
+          <div class="sec-lbl"><div class="dot"></div>Serviços Elétricos</div>
           <div style="display:flex;align-items:center;gap:8px">
             <button onclick="abrirCatalogo('srv')" style="display:flex;align-items:center;gap:5px;padding:5px 10px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.25);border-radius:8px;font-size:10px;font-weight:800;color:#4ade80;cursor:pointer;letter-spacing:.4px">📋 Catálogo</button>
             <span id="orc-serv-count" style="font-size:10px;color:var(--text3)">0 itens</span>
@@ -1220,9 +1183,9 @@ var _appReady = false;
       </div>
 
       <!-- ══ MATERIAIS ══ -->
-      <div class="card" style="border-color:rgba(167,139,250,.2)">
+      <div class="card card-orc-purple">
         <div class="sec-head">
-          <div class="sec-lbl"><div class="dot" style="background:#a78bfa"></div>Materiais Elétricos</div>
+          <div class="sec-lbl"><div class="dot"></div>Materiais Elétricos</div>
           <div style="display:flex;align-items:center;gap:8px">
             <button onclick="abrirCatalogo('mat')" style="display:flex;align-items:center;gap:5px;padding:5px 10px;background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.25);border-radius:8px;font-size:10px;font-weight:800;color:#c4b5fd;cursor:pointer;letter-spacing:.4px">📦 Catálogo</button>
             <span id="orc-mat-count" style="font-size:10px;color:var(--text3)">0 itens</span>
@@ -1260,51 +1223,56 @@ var _appReady = false;
         <textarea class="inp" id="orc-mat-obs" placeholder="Observações sobre materiais (marca, especificações)..." style="margin-top:8px"></textarea>
       </div>
 
-      <div class="card">
-        <div class="sec-head"><div class="sec-lbl"><div class="dot" style="background:#f97316"></div>Custos Operacionais</div></div>
-        <div class="custo-grid">
-          <div class="custo-c"><div class="custo-top">Desconto %</div><div class="custo-row"><span>%</span><input class="custo-inp" id="orc-desc" type="number" value="0" min="0" max="100" onchange="orcCalcTotal()"></div></div>
-          <div class="custo-c"><div class="custo-top">Acréscimo R$</div><div class="custo-row"><span>💰</span><input class="custo-inp" id="orc-acre" type="number" value="0" min="0" onchange="orcCalcTotal()"></div></div>
-          <div class="custo-c"><div class="custo-top">Km Total</div><div class="custo-row"><span>📍</span><input class="custo-inp" id="orc-km" type="number" value="0" min="0" onchange="orcCalcTotal()"></div></div>
-          <div class="custo-c"><div class="custo-top">R$/km</div><div class="custo-row"><span>💲</span><input class="custo-inp" id="orc-km-val" type="number" value="2" min="0" onchange="orcCalcTotal()"></div></div>
+      <div class="card card-orc-orange" style="padding:0;overflow:hidden">
+        <div onclick="orcCustosToggle()" style="display:flex;align-items:center;justify-content:space-between;padding:13px 14px;cursor:pointer;user-select:none">
+          <div class="sec-lbl"><div class="dot"></div>Custos Operacionais</div>
+          <span id="orc-custos-arrow" style="font-size:12px;color:var(--text3);transition:transform .2s">▼</span>
         </div>
-        <!-- ── FORMA DE PAGAMENTO ── -->
-        <div style="margin-bottom:12px">
-          <div class="ilbl" style="margin-bottom:8px">Forma de Pagamento</div>
-          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px">
-            <button class="pagbtn on" onclick="selPagamento(this,'pix')">💠 Pix</button>
-            <button class="pagbtn" onclick="selPagamento(this,'dinheiro')">💵 Dinheiro</button>
-            <button class="pagbtn" onclick="selPagamento(this,'credito')">💳 Crédito</button>
-            <button class="pagbtn" onclick="selPagamento(this,'debito')">💳 Débito</button>
-            <button class="pagbtn" onclick="selPagamento(this,'boleto')">📄 Boleto</button>
+        <div id="orc-custos-body" style="display:none;padding:0 14px 14px">
+          <div class="custo-grid">
+            <div class="custo-c"><div class="custo-top">Desconto %</div><div class="custo-row"><span>%</span><input class="custo-inp" id="orc-desc" type="number" value="0" min="0" max="100" onchange="orcCalcTotal()"></div></div>
+            <div class="custo-c"><div class="custo-top">Acréscimo R$</div><div class="custo-row"><span>💰</span><input class="custo-inp" id="orc-acre" type="number" value="0" min="0" onchange="orcCalcTotal()"></div></div>
+            <div class="custo-c"><div class="custo-top">Km Total</div><div class="custo-row"><span>📍</span><input class="custo-inp" id="orc-km" type="number" value="0" min="0" onchange="orcCalcTotal()"></div></div>
+            <div class="custo-c"><div class="custo-top">R$/km</div><div class="custo-row"><span>💲</span><input class="custo-inp" id="orc-km-val" type="number" value="2" min="0" onchange="orcCalcTotal()"></div></div>
           </div>
-          <div id="orc-parcelas-wrap" style="display:none;margin-bottom:10px">
-            <div class="ilbl" style="margin-bottom:6px">Parcelamento</div>
-            <select class="inp" id="orc-parcelas" style="margin-bottom:0" onchange="orcCalcTotal()">
-              <option value="1">1× sem juros</option>
-              <option value="2">2× sem juros</option>
-              <option value="3">3× sem juros</option>
-              <option value="6">6× sem juros</option>
-              <option value="12">12× sem juros</option>
-            </select>
-          </div>
-          <div style="background:var(--acc-bg);border:1px solid var(--acc-border);border-radius:11px;padding:10px 13px;">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px">
-              <div style="font-size:9px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3)">Sinal / Entrada</div>
-              <div style="display:flex;align-items:center;gap:5px">
-                <input type="number" id="orc-sinal-pct" value="30" min="0" max="100"
-                  style="width:52px;background:transparent;border:none;border-bottom:1px solid var(--acc-border);outline:none;color:var(--acc);font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:700;text-align:right;padding:2px 0"
-                  oninput="orcCalcTotal()">
-                <span style="font-size:12px;color:var(--text3);font-weight:700">%</span>
+          <!-- ── FORMA DE PAGAMENTO ── -->
+          <div style="margin-bottom:12px">
+            <div class="ilbl" style="margin-bottom:8px">Forma de Pagamento</div>
+            <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px">
+              <button class="pagbtn on" onclick="selPagamento(this,'pix')">💠 Pix</button>
+              <button class="pagbtn" onclick="selPagamento(this,'dinheiro')">💵 Dinheiro</button>
+              <button class="pagbtn" onclick="selPagamento(this,'credito')">💳 Crédito</button>
+              <button class="pagbtn" onclick="selPagamento(this,'debito')">💳 Débito</button>
+              <button class="pagbtn" onclick="selPagamento(this,'boleto')">📄 Boleto</button>
+            </div>
+            <div id="orc-parcelas-wrap" style="display:none;margin-bottom:10px">
+              <div class="ilbl" style="margin-bottom:6px">Parcelamento</div>
+              <select class="inp" id="orc-parcelas" style="margin-bottom:0" onchange="orcCalcTotal()">
+                <option value="1">1× sem juros</option>
+                <option value="2">2× sem juros</option>
+                <option value="3">3× sem juros</option>
+                <option value="6">6× sem juros</option>
+                <option value="12">12× sem juros</option>
+              </select>
+            </div>
+            <div style="background:var(--acc-bg);border:1px solid var(--acc-border);border-radius:11px;padding:10px 13px;">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px">
+                <div style="font-size:9px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3)">Sinal / Entrada</div>
+                <div style="display:flex;align-items:center;gap:5px">
+                  <input type="number" id="orc-sinal-pct" value="30" min="0" max="100"
+                    style="width:52px;background:transparent;border:none;border-bottom:1px solid var(--acc-border);outline:none;color:var(--acc);font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:700;text-align:right;padding:2px 0"
+                    oninput="orcCalcTotal()">
+                  <span style="font-size:12px;color:var(--text3);font-weight:700">%</span>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <div id="orc-parcela-info" style="font-size:10px;color:var(--text3)"></div>
+                <div id="orc-sinal-val" style="font-family:'IBM Plex Mono',monospace;font-size:18px;font-weight:700;color:var(--acc)">R$ 0,00</div>
               </div>
             </div>
-            <div style="display:flex;align-items:center;justify-content:space-between">
-              <div id="orc-parcela-info" style="font-size:10px;color:var(--text3)"></div>
-              <div id="orc-sinal-val" style="font-family:'IBM Plex Mono',monospace;font-size:18px;font-weight:700;color:var(--acc)">R$ 0,00</div>
-            </div>
           </div>
+          <button class="btn-calc" onclick="mostrarResultado()">⚡ CALCULAR TOTAL</button>
         </div>
-        <button class="btn-calc" onclick="mostrarResultado()">⚡ CALCULAR TOTAL</button>
       </div>
     </div>
   </div>
@@ -1316,13 +1284,7 @@ var _appReady = false;
     </div>
     <button onclick="mostrarResultado()" style="display:flex;align-items:center;gap:6px;padding:11px 18px;background:var(--acc);border:none;border-radius:11px;font-family:'Syne',sans-serif;font-size:12px;font-weight:800;color:#fff;cursor:pointer;box-shadow:0 4px 16px var(--acc-glow)">⚡ Ver resultado →</button>
   </div>
-  <div class="bnav">
-    <div class="ni" onclick="navTo('home')"><div class="ni-i">🏠</div>Home<div class="ni-bar"></div></div>
-    <div class="ni" onclick="abrirModal('modal-ferramentas')"><div class="ni-i">🔧</div>Ferramentas<div class="ni-bar"></div></div>
-    <div class="ni" onclick="navTo('agenda')"><div class="ni-i">📅</div>Agendar<div class="ni-bar"></div></div>
-    <div class="ni" onclick="abrirModal('modal-relatorio')"><div class="ni-i">📊</div>Relatório<div class="ni-bar"></div></div>
   </div>
-</div>
 
 <!-- ══ TELA RESULTADO ══ -->
 <div id="tela-resultado" class="tela tela-resultado">
@@ -1333,7 +1295,7 @@ var _appReady = false;
       <div id="res-num-badge" style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;color:var(--acc);margin-top:1px"></div>
     </div>
     <div style="display:flex;gap:7px">
-      <button onclick="abrirConfigPDF()" style="width:36px;height:36px;border-radius:10px;border:1px solid var(--border-input);background:var(--bg-card);color:var(--text2);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center">⚙️</button>
+      <button onclick="abrirConfigPDF()" style="display:flex;align-items:center;gap:5px;height:34px;padding:0 12px;border-radius:10px;border:1px solid var(--border-input);background:var(--bg-card);color:var(--text2);font-size:12px;font-family:'Syne',sans-serif;font-weight:800;cursor:pointer;white-space:nowrap">🎨 Ajustar PDF</button>
     </div>
   </div>
   <div class="scroll">
@@ -1383,7 +1345,7 @@ var _appReady = false;
       <!-- FORNECIMENTO -->
       <div class="card" style="margin-bottom:12px">
         <div class="sec-head" style="margin-bottom:10px">
-          <div class="sec-lbl"><div class="dot" style="background:#a78bfa"></div>Fornecimento de Material</div>
+          <div class="sec-lbl"><div class="dot"></div>Fornecimento de Material</div>
         </div>
         <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px">
           <button class="forn-pill on" id="forn-eletricista" onclick="selFornecimento(this,'eletricista')">✅<br><span style="font-size:10px">Eu forneco</span></button>
@@ -1395,8 +1357,8 @@ var _appReady = false;
       <!-- AÇÕES -->
       <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-          <button onclick="gerarPDF()" style="padding:14px 6px;background:var(--acc);border:none;border-radius:13px;font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 4px 16px var(--acc-glow)">📄 Gerar PDF</button>
-          <button onclick="compartilharOrc()" style="padding:14px 6px;background:rgba(37,211,102,.15);border:1px solid rgba(37,211,102,.35);border-radius:13px;font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:#4ade80;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px">💬 WhatsApp</button>
+          <button onclick="salvarOrcamento()" style="padding:14px 6px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.35);border-radius:13px;font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:#4ade80;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px">💾 Salvar</button>
+          <button onclick="gerarPDF()" style="padding:14px 6px;background:var(--acc);border:none;border-radius:13px;font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 4px 16px var(--acc-glow)">📄 PDF</button>
         </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
           <button onclick="navTo('orcamento')" style="padding:12px 6px;background:#3b82f6;border:none;border-radius:12px;font-family:'Syne',sans-serif;font-size:12px;font-weight:800;color:#fff;cursor:pointer">✏️ Editar</button>
@@ -1448,12 +1410,6 @@ var _appReady = false;
 
     </div>
   </div>
-  <div class="bnav">
-    <div class="ni" onclick="navTo('home')"><div class="ni-i">🏠</div>Home<div class="ni-bar"></div></div>
-    <div class="ni" onclick="abrirModal('modal-ferramentas')"><div class="ni-i">🔧</div>Ferramentas<div class="ni-bar"></div></div>
-    <div class="ni" onclick="navTo('agenda')"><div class="ni-i">📅</div>Agendar<div class="ni-bar"></div></div>
-    <div class="ni" onclick="abrirModal('modal-relatorio')"><div class="ni-i">📊</div>Relatório<div class="ni-bar"></div></div>
-  </div>
 </div>
 
 <!-- ══ TELA AGENDA ══ -->
@@ -1462,12 +1418,6 @@ var _appReady = false;
   <div class="scroll"><div class="gest-body">
     <div class="gest-sec">Agendamentos<button class="btn-nova" onclick="abrirFormNovaVisita()">+ Nova visita</button></div>
   </div></div>
-  <div class="bnav">
-    <div class="ni" onclick="navTo('home')"><div class="ni-i">🏠</div>Home<div class="ni-bar"></div></div>
-    <div class="ni" onclick="abrirModal('modal-ferramentas')"><div class="ni-i">🔧</div>Ferramentas<div class="ni-bar"></div></div>
-    <div class="ni on"><div class="ni-i">📅</div>Agendar<div class="ni-bar"></div></div>
-    <div class="ni" onclick="abrirModal('modal-relatorio')"><div class="ni-i">📊</div>Relatório<div class="ni-bar"></div></div>
-  </div>
 </div>
 
 <!-- ══ MODAIS SIMPLES ══ -->
@@ -1687,12 +1637,15 @@ var _appReady = false;
         </div>
         <!-- TIPO -->
         <div style="border:1px solid var(--border-input);border-radius:13px;margin-bottom:14px;overflow:hidden">
-          <div onclick="demToggleTipo(this)" style="display:flex;align-items:center;justify-content:space-between;padding:11px 14px;cursor:pointer;background:var(--bg-input)">
-            <div style="display:flex;align-items:center;gap:8px">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 14px;cursor:pointer;background:var(--bg-input)">
+            <div onclick="demToggleTipo(this.parentElement.parentElement)" style="display:flex;align-items:center;gap:8px;flex:1">
               <span style="font-size:10px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--text3)">TIPO</span>
               <span id="dem-tipo-lbl" style="font-size:12px;font-weight:800;color:var(--acc)">🏠 Residencial</span>
             </div>
-            <span id="dem-tipo-arr" style="font-size:10px;color:var(--text3);transition:transform .2s">▼</span>
+            <div style="display:flex;align-items:center;gap:8px">
+              <button onclick="demAbrirHistorico()" style="display:flex;align-items:center;gap:4px;height:28px;padding:0 10px;border-radius:8px;border:1px solid var(--acc-border);background:var(--acc-bg);color:var(--acc);font-size:10px;font-family:'Syne',sans-serif;font-weight:800;cursor:pointer;white-space:nowrap">📋 Histórico</button>
+              <span id="dem-tipo-arr" onclick="demToggleTipo(this.parentElement.parentElement)" style="font-size:10px;color:var(--text3);transition:transform .2s;cursor:pointer">▼</span>
+            </div>
           </div>
           <div id="dem-tipo-body" style="display:none;padding:12px">
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px">
@@ -1780,6 +1733,8 @@ var _appReady = false;
         <!-- BOTÃO CALCULAR MÍNIMO -->
         <button id="dem-btn-minimo" class="btn-salvar-full" style="display:none;margin-bottom:8px;background:var(--bg-input);border:1px solid var(--border-input);color:var(--text);font-size:12px;padding:11px" onclick="demCalcMinimo()">📋 CALCULAR MÍNIMO NBR →</button>
 
+        <button class="btn-salvar-full" style="margin-bottom:12px" onclick="demCalcNBR()">⚡ CALCULAR DEMANDA ELÉTRICA</button>
+
         <!-- RESULTADO NBR (acordeão) -->
         <div id="dem-nbr-res" style="display:none;margin-bottom:12px">
           <div onclick="demToggleAcord('dem-nbr-body','dem-nbr-arrow','dem-nbr-status')" style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;background:var(--acc-bg);border:1px solid var(--acc-border);border-radius:12px;padding:12px 14px;margin-bottom:8px">
@@ -1826,11 +1781,13 @@ var _appReady = false;
               <button class="btn-salvar-full" style="margin-top:0;background:#1d4ed8;color:#fff;font-size:11px;padding:11px" onclick="demLevarMUC()">🏢 Levar para MUC</button>
               <button class="btn-salvar-full" style="margin-top:0;background:rgba(99,102,241,.15);color:#818cf8;border:1px solid rgba(99,102,241,.25);font-size:11px;padding:11px" onclick="demLevarQuedaV()">📉 Queda de Tensão</button>
             </div>
-            <button class="btn-salvar-full" style="margin-top:0;background:rgba(34,197,94,.15);color:#4ade80;border:1px solid rgba(34,197,94,.25);font-size:12px;padding:12px" onclick="demExportarPDF()">📄 Gerar Laudo PDF / Compartilhar</button>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:0">
+              <button class="btn-salvar-full" style="margin-top:0;background:rgba(34,197,94,.15);color:#4ade80;border:1px solid rgba(34,197,94,.25);font-size:12px;padding:12px" onclick="demExportarPDF()">📄 Gerar Laudo PDF</button>
+              <button class="btn-salvar-full" style="margin-top:0;background:var(--acc-bg);color:var(--acc);border:1px solid var(--acc-border);font-size:12px;padding:12px" onclick="demSalvarHistorico()">💾 Salvar</button>
+            </div>
           </div>
         </div>
 
-        <button class="btn-salvar-full" style="margin-top:4px" onclick="demCalcNBR()">⚡ CALCULAR DEMANDA ELÉTRICA</button>
       </div>
 
       <!-- ══ SUB-ABA 1: MUC ══ -->
@@ -2258,30 +2215,24 @@ var _appReady = false;
   </div>
   <div class="aj-panel" id="aj-3"><div class="aj-body">
     <div class="acesso-card">
-      <div class="acesso-sec">🔒 CONTA</div>
-      <!-- E-mail -->
+      <div class="acesso-sec">🔒 Conta</div>
       <div style="background:var(--bg-input);border:1px solid var(--border-input);border-radius:13px;padding:14px;margin-bottom:10px">
         <div style="font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-bottom:6px">E-MAIL</div>
-        <div id="acesso-email" style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600;color:var(--acc)">—</div>
+        <div id="acesso-email" style="font-size:13px;font-weight:700;color:#60a5fa;font-family:'IBM Plex Mono',monospace">—</div>
       </div>
-      <!-- Status -->
       <div style="background:var(--bg-input);border:1px solid var(--border-input);border-radius:13px;padding:14px;margin-bottom:10px">
         <div style="font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-bottom:6px">STATUS</div>
-        <div id="acesso-status" style="font-size:13px;display:flex;align-items:center;gap:6px">
-          <div style="width:7px;height:7px;border-radius:50%;background:#4ade80"></div>
-          <span style="color:#4ade80;font-weight:600">Autenticado</span>
+        <div style="display:flex;align-items:center;gap:6px">
+          <div style="width:7px;height:7px;border-radius:50%;background:#4ade80;flex-shrink:0"></div>
+          <span style="font-size:13px;color:#4ade80;font-weight:600">Autenticado</span>
         </div>
       </div>
-      <!-- Senha -->
-      <div onclick="acessoRedefinirSenha()" style="background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:13px;padding:14px;cursor:pointer">
+      <div style="background:var(--bg-input);border:1px solid var(--border-input);border-radius:13px;padding:14px;margin-bottom:16px;cursor:pointer" onclick="loginEnviarRedefinicao()">
         <div style="font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-bottom:6px">SENHA</div>
-        <div style="font-size:13px;color:var(--acc);font-weight:700;display:flex;align-items:center;gap:6px">🔑 Enviar link de redefinição</div>
+        <div style="font-size:13px;font-weight:700;color:#f59e0b">🔑 Enviar link de redefinição</div>
       </div>
+      <button onclick="loginSair()" style="width:100%;padding:15px;background:rgba(153,27,27,.3);border:1px solid rgba(239,68,68,.3);border-radius:13px;font-family:'Syne',sans-serif;font-size:13px;font-weight:900;color:#f87171;cursor:pointer;letter-spacing:.5px">🚪 SAIR DA CONTA</button>
     </div>
-    <!-- Sair -->
-    <button onclick="acessoSair()" style="width:100%;background:rgba(239,68,68,.12);border:1.5px solid rgba(239,68,68,.3);border-radius:13px;padding:16px;font-family:'Syne',sans-serif;font-size:14px;font-weight:800;color:#f87171;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:8px">
-      🚪 SAIR DA CONTA
-    </button>
   </div></div>
   <div class="aj-panel" id="aj-4"><div class="aj-body">
     <div class="aj-sec"><span>☁️</span> Backup &amp; Restauração</div>
@@ -2437,7 +2388,7 @@ var _appReady = false;
   </div>
 </div>
 
-<div id="print-area" style="display:none;position:fixed;inset:0;z-index:9999;background:#fff;overflow-y:auto;-webkit-overflow-scrolling:touch"></div>
+<div id="print-area" style="display:none;position:fixed;inset:0;z-index:9999;background:#fff;flex-direction:column;overflow:hidden;-webkit-overflow-scrolling:touch"></div>
 
 <script>
 // ══════════════════════════════════════════════════════════════
@@ -2566,7 +2517,6 @@ const SRV = [
   {id:'s094',ico:'📦',n:'Serviço personalizado',cat:'Outros',p:100,un:'un'},
 ];
 
-
 // ══════════════════════════════════════════════════════════════
 // BLOCO 1 — DADOS: MATERIAIS
 // ══════════════════════════════════════════════════════════════
@@ -2654,7 +2604,6 @@ const MAT = [
   {id:'m098',ico:'🔩',n:'Fita zebrada sinalização (rolo 200m)',cat:'Outros',p:32.00,un:'un'},
   {id:'m099',ico:'📦',n:'Material diverso / consumível',cat:'Outros',p:50.00,un:'un'},
 ];
-
 
 // ══════════════════════════════════════════════════════════════
 // BLOCO 2 — CONFIGURADORES DE SERVIÇO (SERVICOS_CFG)
@@ -3382,9 +3331,6 @@ function _renderChipsComPlus(mod) {
   return out;
 }
 
-function scpAddChipExtra(modKey, modLabel) { scpAbrirChipModal(modKey, modLabel); }
-
-
 // ══ ETAPA 2: Editar item já adicionado ══════════════════════
 // Armazena estado do configurador para reabrir
 var _scpEditRowId   = null; // null = novo, string = editar existente
@@ -3487,7 +3433,6 @@ function orcEditarMaterial(rowId) {
     if (priceEl) { priceEl.focus(); priceEl.select(); }
   }
 }
-
 
 function renderConfigurador() {
   const cfg = SERVICOS_CFG[scpAtivo];
@@ -4151,11 +4096,6 @@ function _salvarCustomLocal(type, item) {
   } catch(e) {}
 }
 
-
-
-
-
-
 function _carregarCustomLocal() {
   try { checkCarregarCustom(); } catch(e) {}
   try { _carregarOverrides(); } catch(e) {}
@@ -4257,11 +4197,53 @@ function changeQty(btn, delta) {
 function updateServiceBadge() {
   const n = document.querySelectorAll('#srv-container .srv-row').length;
   document.getElementById('orc-serv-count').textContent = n ? `${n} serviço${n>1?'s':''}` : '0 itens';
+  _atualizarBtnCalc();
 }
 
 function updateMaterialBadge() {
   const n = document.querySelectorAll('#mat-container .mat-row').length;
   document.getElementById('orc-mat-count').textContent = n ? `${n} item${n>1?'s':''}` : '0 itens';
+  _atualizarBtnCalc();
+}
+
+function _atualizarBtnCalc() {
+  const srv = document.querySelectorAll('#srv-container .srv-row').length;
+  const mat = document.querySelectorAll('#mat-container .mat-row').length;
+  const btn  = document.querySelector('.btn-calc');
+  const body = document.getElementById('orc-custos-body');
+  const arrow = document.getElementById('orc-custos-arrow');
+  const temItens = srv > 0 || mat > 0;
+  if (btn) {
+    if (temItens) btn.classList.add('ativo');
+    else { btn.classList.remove('ativo'); btn.textContent = '⚡ CALCULAR TOTAL'; }
+  }
+  if (body) body.style.display = temItens ? 'block' : 'none';
+  if (arrow) arrow.style.transform = temItens ? 'rotate(180deg)' : '';
+}
+
+function orcCustosToggle() {
+  const body  = document.getElementById('orc-custos-body');
+  const arrow = document.getElementById('orc-custos-arrow');
+  if (!body) return;
+  const aberto = body.style.display !== 'none';
+  body.style.display    = aberto ? 'none' : 'block';
+  arrow.style.transform = aberto ? '' : 'rotate(180deg)';
+}
+
+function orcDadosToggle(hdr) {
+  const body  = document.getElementById('orc-dados-body');
+  const arrow = document.getElementById('orc-dados-arrow');
+  const aberto = body.style.display !== 'none';
+  body.style.display  = aberto ? 'none' : 'block';
+  arrow.style.transform = aberto ? '' : 'rotate(180deg)';
+}
+
+function orcDadosResumo() {
+  const emp = document.getElementById('orc-empresa')?.value.trim() || '';
+  const cli = document.getElementById('orc-cliente')?.value.trim() || '';
+  const resumo = document.getElementById('orc-dados-resumo');
+  if (!resumo) return;
+  resumo.textContent = [emp, cli].filter(Boolean).join(' · ') || '';
 }
 
 function flashButton(btn) {
@@ -4566,12 +4548,18 @@ function novoOrcamento() {
   orcFornecimento = 'eletricista';
   // novo número
   gerarNumeroOrc();
-  // badges
+  // badges + btn-calc
   updateServiceBadge(); updateMaterialBadge();
   // esconder sticky
   const sw = document.getElementById('orc-sticky-wrap'); if(sw) sw.style.display = 'none';
-  // btn-calc label
+  // btn-calc label reset
   const bc = document.querySelector('.btn-calc'); if(bc) bc.textContent = '⚡ CALCULAR TOTAL';
+  // acordeão: fechar body, atualizar resumo
+  const db = document.getElementById('orc-dados-body'); if(db) db.style.display = 'none';
+  const da = document.getElementById('orc-dados-arrow'); if(da) da.style.transform = '';
+  const cb = document.getElementById('orc-custos-body'); if(cb) cb.style.display = 'none';
+  const ca = document.getElementById('orc-custos-arrow'); if(ca) ca.style.transform = '';
+  orcDadosResumo();
   navTo('orcamento');
 }
 
@@ -4579,32 +4567,43 @@ function novoOrcamento() {
 // PDF / COMPARTILHAR
 // ══════════════════════════════════════════════════════════════
 function gerarPDF() {
-  const cor       = pdfCfg.cor || '#f59e0b';
-  const subtitulo = pdfCfg.subtitulo || 'Serviços Elétricos Profissionais';
+  const cor        = pdfCfg.cor || '#f59e0b';
+  const subtitulo  = pdfCfg.subtitulo || 'Serviços Elétricos Profissionais';
   const msgCliente = pdfCfg.msgCliente || '';
-  const S         = pdfCfg.secoes;
-  const empresa   = document.getElementById('orc-empresa')?.value || 'Eletricista Power PRO';
-  const cliente   = document.getElementById('orc-cliente')?.value || '—';
-  const endereco = document.getElementById('orc-endereco')?.value || '';
-  const tel      = document.getElementById('orc-tel')?.value || '';
-  const data     = document.getElementById('orc-data')?.value || '';
-  const garantia = document.getElementById('orc-garantia')?.value || '90';
-  const validade = document.getElementById('orc-validade')?.value || '15';
-  const numero   = document.getElementById('orc-numero')?.value || gerarNumeroOrc();
-  const obsServ  = document.getElementById('orc-serv-obs')?.value || '';
-  const obsMat   = document.getElementById('orc-mat-obs')?.value || '';
+  const S          = pdfCfg.secoes;
+  const empresa    = document.getElementById('orc-empresa')?.value || 'Eletricista Power PRO';
+  const cliente    = document.getElementById('orc-cliente')?.value || '—';
+  const endereco   = document.getElementById('orc-endereco')?.value || '';
+  const tel        = document.getElementById('orc-tel')?.value || '';
+  const data       = document.getElementById('orc-data')?.value || '';
+  const garantia   = document.getElementById('orc-garantia')?.value || '90';
+  const validade   = document.getElementById('orc-validade')?.value || '15';
+  const numero     = document.getElementById('orc-numero')?.value || gerarNumeroOrc();
+  const obsServ    = document.getElementById('orc-serv-obs')?.value || '';
+  const obsMat     = document.getElementById('orc-mat-obs')?.value || '';
+
+  // dados do perfil
+  const cfg        = _getCfg ? _getCfg() : {};
+  const docPrestador = cfg.doc || '';
+  const logoB64    = LS.getItem('logo_b64') || '';
+  const logoForma  = cfg.logoForma || 'quadrado';
+  const logoRadius = logoForma === 'redondo' ? '50%' : logoForma === 'arredondado' ? '14px' : '6px';
+  const logoSize   = Math.min(cfg.logoSize || 64, 80);
+
+  // chave PIX
+  let pixKey = '';
+  try { pixKey = JSON.parse(LS.getItem('pagamento_config') || '{}').pix || ''; } catch(e) {}
 
   // coletar serviços
-  let srvRows = '';
-  let servTotal = 0;
+  let srvRows = '', servTotal = 0;
   document.querySelectorAll('#srv-container .srv-row').forEach(row => {
-    const nome  = row.querySelector('.row-name')?.textContent || '';
-    const cat   = row.querySelector('.row-sub')?.textContent || '';
-    const qt    = parseFloat(row.querySelector('.qty-val')?.value || 1);
-    const un    = row.querySelector('.qty-un')?.textContent || '';
-    const p     = parseCurrency(row.querySelector('.row-price-inp')?.value || '0');
-    const sub   = qt * p;
-    servTotal  += sub;
+    const nome = row.querySelector('.row-name')?.textContent || '';
+    const cat  = row.querySelector('.row-sub')?.textContent || '';
+    const qt   = parseFloat(row.querySelector('.qty-val')?.value || 1);
+    const un   = row.querySelector('.qty-un')?.textContent || '';
+    const p    = parseCurrency(row.querySelector('.row-price-inp')?.value || '0');
+    const sub  = qt * p;
+    servTotal += sub;
     const specs = row.dataset?.specs || '';
     srvRows += `<tr>
       <td>${nome}<br><span style="font-size:10px;color:#888">${cat}</span>${specs ? `<br><span style="font-size:9px;color:#aaa;font-style:italic">${specs}</span>` : ''}</td>
@@ -4614,15 +4613,13 @@ function gerarPDF() {
     </tr>`;
   });
 
-  // coletar materiais — 3 variantes conforme fornecimento
-  let matRows = '';        // com preços (eletricista fornece)
-  let matRowsSemPreco = ''; // sem preços (cliente compra)
-  let matTotal = 0;
+  // coletar materiais
+  let matRows = '', matRowsSemPreco = '', matTotal = 0;
   document.querySelectorAll('#mat-container .mat-row').forEach(row => {
     const nome = row.querySelector('.row-name')?.textContent || '';
-    const cat  = row.querySelector('.row-sub')?.textContent  || '';
+    const cat  = row.querySelector('.row-sub')?.textContent || '';
     const qt   = parseFloat(row.querySelector('.qty-val')?.value || 1);
-    const un   = row.querySelector('.qty-un')?.textContent   || '';
+    const un   = row.querySelector('.qty-un')?.textContent || '';
     const p    = parseCurrency(row.querySelector('.row-price-inp')?.value || '0');
     const sub  = qt * p;
     matTotal  += sub;
@@ -4638,11 +4635,10 @@ function gerarPDF() {
     </tr>`;
   });
 
-  // total respeita fornecimento
   const matEfetivo = orcFornecimento === 'eletricista' ? matTotal : 0;
   const { desc, acre, km, kmVal, kmTotal, sub, total, sinalPct, sinal } =
     calcOrcTotais(servTotal, matEfetivo);
-  const dataBr  = data ? new Date(data + 'T12:00:00').toLocaleDateString('pt-BR') : '—';
+  const dataBr = data ? new Date(data + 'T12:00:00').toLocaleDateString('pt-BR') : '—';
 
   const pagLabels = {pix:'💠 Pix',dinheiro:'💵 Dinheiro',credito:'💳 Cartão de Crédito',debito:'💳 Cartão de Débito',boleto:'📄 Boleto'};
   const pagLabel  = pagLabels[orcPagamento] || orcPagamento;
@@ -4650,14 +4646,25 @@ function gerarPDF() {
   const parcelaInfo = orcPagamento === 'credito' && parcelas > 1
     ? ` — ${parcelas}× de R$ ${scpFmtBRL(total / parcelas)}` : '';
 
-  const html = `
+  const toolbar = `
+  <div id="pdf-toolbar" style="flex-shrink:0;background:#1e40af;color:#fff;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;gap:8px">
+    <span style="font-weight:800;font-size:13px;font-family:'Syne',sans-serif">📄 ${numero}</span>
+    <div style="display:flex;gap:8px">
+      <button onclick="_abrirConfigNoPDF()" style="background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:10px;padding:9px 13px;font-weight:800;cursor:pointer;font-size:12px;font-family:'Syne',sans-serif;white-space:nowrap">🎨 Ajustar PDF</button>
+      <button onclick="_salvarPDF()" style="background:${cor};color:#fff;border:none;border-radius:10px;padding:9px 16px;font-weight:800;cursor:pointer;font-size:13px;font-family:'Syne',sans-serif">📤 Salvar</button>
+      <button onclick="document.getElementById('print-area').style.cssText='display:none'" style="background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:10px;padding:9px 13px;font-weight:700;cursor:pointer;font-size:13px">✕</button>
+    </div>
+  </div>`;
+
+  const conteudo = `
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
-    html,body{font-family:Arial,sans-serif;font-size:13px;color:#1a1a1a;background:#fff;width:100%}
-    .pdf-wrap{width:100%;max-width:800px;margin:0 auto;padding:28px 32px}
+    body{font-family:Arial,sans-serif;font-size:13px;color:#1a1a1a;background:#fff}
+    .pdf-wrap{width:100%;max-width:800px;margin:0 auto;padding:24px 20px}
     .pdf-hdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;padding-bottom:18px;border-bottom:3px solid ${cor}}
     .pdf-empresa{font-size:20px;font-weight:900;color:#1a1a1a;margin-bottom:4px}
     .pdf-sub{font-size:11px;color:#888}
+    .pdf-doc{font-size:10px;color:#aaa;margin-top:2px}
     .pdf-badge{background:${cor};color:#fff;font-size:11px;font-weight:800;border-radius:6px;padding:5px 12px;letter-spacing:.5px;display:inline-block}
     .pdf-info{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px;background:#fafafa;border:1px solid #eee;border-radius:8px;padding:12px}
     .pdf-info-lbl{font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#999;margin-bottom:2px}
@@ -4665,20 +4672,13 @@ function gerarPDF() {
     .pdf-sec{font-size:10px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:${cor};margin-bottom:8px;margin-top:18px;display:flex;align-items:center;gap:8px}
     .pdf-sec::after{content:'';flex:1;height:1px;background:${cor}44}
     table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:8px;table-layout:fixed}
-    col.c-desc{width:52%}
-    col.c-qty{width:16%}
-    col.c-unit{width:16%}
-    col.c-total{width:16%}
-    col.c-desc2{width:70%}
-    col.c-qty2{width:30%}
+    col.c-desc{width:52%}col.c-qty{width:16%}col.c-unit{width:16%}col.c-total{width:16%}
+    col.c-desc2{width:70%}col.c-qty2{width:30%}
     thead tr{background:${cor}}
     thead th{padding:8px 10px;font-size:10px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:#fff;overflow:hidden}
-    thead th.left{text-align:left}
-    thead th.center{text-align:center}
-    thead th.right{text-align:right}
+    thead th.left{text-align:left}thead th.center{text-align:center}thead th.right{text-align:right}
     tbody td{padding:8px 10px;border-bottom:1px solid #f0f0f0;overflow:hidden;word-wrap:break-word}
-    tbody td.center{text-align:center}
-    tbody td.right{text-align:right;font-weight:700}
+    tbody td.center{text-align:center}tbody td.right{text-align:right;font-weight:700}
     tbody tr:nth-child(even){background:#fafafa}
     .pdf-totals{display:flex;flex-direction:column;align-items:flex-end;gap:5px;margin-top:12px}
     .pdf-tot-row{display:flex;gap:16px;font-size:12px}
@@ -4694,28 +4694,25 @@ function gerarPDF() {
     .pdf-foot{margin-top:18px;padding-top:12px;border-top:1px solid #eee;display:flex;justify-content:space-between;font-size:10px;color:#aaa}
     .pdf-obs{background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:9px 11px;font-size:11px;color:#555;margin-top:6px}
     @media print{
-      .no-print{display:none!important}
-      html,body{margin:0!important;padding:0!important;background:#fff!important;width:100%!important}
-      .pdf-wrap{max-width:none!important;width:100%!important;margin:0!important;padding:0!important}
-      @page{size:A4 portrait;margin:14mm 16mm 14mm 16mm}
+      body{margin:0!important;padding:0!important}
+      .pdf-wrap{max-width:none!important;width:100%!important;padding:10mm 14mm!important}
+      a[href]:after{content:none!important}
+      @page{size:A4 portrait;margin:8mm 0 14mm 0}
     }
   </style>
   <div class="pdf-wrap">
-    <div class="no-print" style="background:#1e40af;color:#fff;padding:10px 16px;border-radius:10px;display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
-      <span style="font-weight:700;font-size:13px">📄 Pré-visualização do Orçamento</span>
-      <div style="display:flex;gap:8px">
-        <button onclick="window.print()" style="background:${cor};color:#fff;border:none;border-radius:8px;padding:8px 16px;font-weight:800;cursor:pointer;font-size:12px">🖨️ Imprimir / PDF</button>
-        <button onclick="document.getElementById('print-area').style.display='none'" style="background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:8px;padding:8px 14px;font-weight:700;cursor:pointer;font-size:12px">✕ Fechar</button>
-      </div>
-    </div>
 
     ${S.cabecalho !== false ? `
     <div class="pdf-hdr">
-      <div>
-        <div class="pdf-empresa">⚡ ${empresa}</div>
-        <div class="pdf-sub">${subtitulo}</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        ${logoB64 ? `<img src="${logoB64}" style="width:${logoSize}px;height:${logoSize}px;object-fit:cover;border-radius:${logoRadius};flex-shrink:0">` : ''}
+        <div>
+          <div class="pdf-empresa">${logoB64 ? '' : '⚡ '}${empresa}</div>
+          <div class="pdf-sub">${subtitulo}</div>
+          ${docPrestador ? `<div class="pdf-doc">${docPrestador}</div>` : ''}
+        </div>
       </div>
-      <div style="text-align:right">
+      <div style="text-align:right;flex-shrink:0">
         <div class="pdf-badge">ORÇAMENTO</div>
         <div style="font-size:12px;color:#555;margin-top:6px;font-family:monospace;font-weight:700">${numero}</div>
         <div style="font-size:11px;color:#888;margin-top:2px">${dataBr}</div>
@@ -4775,6 +4772,7 @@ function gerarPDF() {
       <div>
         <div style="font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#999;margin-bottom:3px">Forma de Pagamento</div>
         <div style="font-weight:700;font-size:14px">${pagLabel}${parcelaInfo}</div>
+        ${orcPagamento === 'pix' && pixKey ? `<div style="font-size:11px;color:#666;margin-top:4px">🔑 Chave PIX: <strong>${pixKey}</strong></div>` : ''}
       </div>
       <div style="text-align:right">
         <div style="font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#999;margin-bottom:3px">Sinal / Entrada (${sinalPct}%)</div>
@@ -4800,98 +4798,132 @@ function gerarPDF() {
       <span>Gerado por Eletricista Power PRO</span>
       <span>${dataBr}</span>
     </div>` : ''}
-    ${(() => {
-      const cfg = _getCfg ? _getCfg() : {};
-      const sp  = pdfCfg.socialPdf || cfg.socialPdf || {};
-      const links = [];
-      if (sp.insta    && cfg.insta)    links.push('<a href="https://instagram.com/' + cfg.insta.replace('@','') + '" style="display:inline-flex;align-items:center;gap:5px;color:#e1306c;text-decoration:none;font-size:11px;font-weight:700;padding:5px 10px;background:#fff0f5;border-radius:8px;border:1px solid #fbc8d4">📸 ' + cfg.insta + '</a>');
-      if (sp.whatsapp && cfg.whatsapp) links.push('<a href="https://wa.me/55' + cfg.whatsapp.replace(/\D/g,'') + '" style="display:inline-flex;align-items:center;gap:5px;color:#25d366;text-decoration:none;font-size:11px;font-weight:700;padding:5px 10px;background:#f0fff4;border-radius:8px;border:1px solid #b7ebc8">💬 ' + cfg.whatsapp + '</a>');
-      if (sp.site     && cfg.site)     links.push('<a href="https://' + cfg.site.replace(/^https?:\/\//,'') + '" style="display:inline-flex;align-items:center;gap:5px;color:#3b82f6;text-decoration:none;font-size:11px;font-weight:700;padding:5px 10px;background:#eff6ff;border-radius:8px;border:1px solid #bfdbfe">🌐 ' + cfg.site + '</a>');
-      if (sp.youtube  && cfg.youtube)  links.push('<a href="https://youtube.com/' + cfg.youtube.replace('@','@') + '" style="display:inline-flex;align-items:center;gap:5px;color:#ff0000;text-decoration:none;font-size:11px;font-weight:700;padding:5px 10px;background:#fff5f5;border-radius:8px;border:1px solid #fecaca">▶️ ' + cfg.youtube + '</a>');
-      if (!links.length) return '';
-      return '<div style="margin:12px 0 0;padding:12px;background:#f8f9fa;border-radius:10px;border:1px solid #e5e7eb;text-align:center"><div style="font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#6b7280;margin-bottom:8px">SIGA-NOS / ENTRE EM CONTATO</div><div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center">' + links.join('') + '</div></div>';
-    })()}
+
+    ${_pdfSocialLinks()}
   </div>`;
 
   const area = document.getElementById('print-area');
-  area.innerHTML = html;
-  area.style.display = 'block';
-  area.scrollTop = 0;
+  area.innerHTML = toolbar +
+    '<div id="pdf-scroll" style="flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;background:#fff">' +
+    conteudo + '</div>';
+  area.style.cssText = 'display:flex;flex-direction:column;position:fixed;inset:0;z-index:9999;background:#fff;overflow:hidden;-webkit-overflow-scrolling:touch';
 }
 
-function demCompartilharLaudo(){
-  var h=window._demLaudoHTML;
-  if(!h){try{demExportarPDF();}catch(e){}}
-  setTimeout(function(){
-    var h2=window._demLaudoHTML;
-    if(!h2){alert("Calcule a demanda primeiro!");return;}
-    _abrirLaudoPDF(h2);
-  },h?0:400);
+function _salvarPDF() {
+  const scroll = document.getElementById('pdf-scroll');
+  if (!scroll) { window.print(); return; }
+
+  const html = '<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8">' +
+    '<meta name="viewport" content="width=device-width,initial-scale=1">' +
+    '<title>Orçamento</title></head><body style="margin:0;padding:0">' +
+    scroll.innerHTML + '</body></html>';
+
+  const win = window.open('', '_blank');
+  if (!win) { window.print(); return; }
+
+  win.document.write(html);
+  win.document.close();
+  win.onafterprint = function() { win.close(); };
+  setTimeout(function() {
+    win.print();
+    setTimeout(function(){ if (!win.closed) win.close(); }, 60000);
+  }, 300);
 }
+
+function _pdfSocialLinks() {
+  try {
+    const cfg = _getCfg ? _getCfg() : {};
+    const sp  = pdfCfg.socialPdf || {};
+    const links = [];
+
+    if (sp.insta && cfg.insta) {
+      // Extrai só o @usuario da URL ou campo direto
+      let insta = cfg.insta.replace(/^https?:\/\/(www\.)?instagram\.com\//,'').replace(/\?.*$/,'').replace(/\/$/,'');
+      if (!insta.startsWith('@')) insta = '@' + insta;
+      links.push('<a href="https://instagram.com/' + insta.replace('@','') + '" style="display:inline-flex;align-items:center;gap:5px;color:#e1306c;text-decoration:none;font-size:11px;font-weight:700;padding:5px 10px;background:#fff0f5;border-radius:8px;border:1px solid #fbc8d4">📸 ' + insta + '</a>');
+    }
+
+    if (sp.whatsapp && cfg.whatsapp) {
+      const nums = cfg.whatsapp.replace(/\D/g,'');
+      const fmt  = nums.length === 11
+        ? '(' + nums.slice(0,2) + ') ' + nums.slice(2,7) + '-' + nums.slice(7)
+        : cfg.whatsapp;
+      links.push('<a href="https://wa.me/55' + nums + '" style="display:inline-flex;align-items:center;gap:5px;color:#25d366;text-decoration:none;font-size:11px;font-weight:700;padding:5px 10px;background:#f0fff4;border-radius:8px;border:1px solid #b7ebc8">💬 ' + fmt + '</a>');
+    }
+
+    if (sp.site && cfg.site) {
+      const site = cfg.site.replace(/^https?:\/\//,'').replace(/\/$/,'');
+      links.push('<a href="https://' + site + '" style="display:inline-flex;align-items:center;gap:5px;color:#3b82f6;text-decoration:none;font-size:11px;font-weight:700;padding:5px 10px;background:#eff6ff;border-radius:8px;border:1px solid #bfdbfe">🌐 ' + site + '</a>');
+    }
+
+    if (sp.youtube && cfg.youtube) {
+      let yt = cfg.youtube.replace(/^https?:\/\/(www\.)?youtube\.com\//,'').replace(/\?.*$/,'').replace(/\/$/,'');
+      if (!yt.startsWith('@')) yt = '@' + yt;
+      links.push('<a href="https://youtube.com/' + yt + '" style="display:inline-flex;align-items:center;gap:5px;color:#ff0000;text-decoration:none;font-size:11px;font-weight:700;padding:5px 10px;background:#fff5f5;border-radius:8px;border:1px solid #fecaca">▶️ ' + yt + '</a>');
+    }
+
+    if (!links.length) return '';
+    return '<div style="margin:12px 0 0;padding:12px;background:#f8f9fa;border-radius:10px;border:1px solid #e5e7eb;text-align:center"><div style="font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#6b7280;margin-bottom:8px">SIGA-NOS / ENTRE EM CONTATO</div><div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center">' + links.join('') + '</div></div>';
+  } catch(e) { return ''; }
+}
+
 
 function _laudoParaPDF(h){
   return h.replace(/<div class="no-print">[\s\S]*?<\/div>\s*/,"");
 }
 function _abrirLaudoPDF(h){
-  var c=_laudoParaPDF(h);
-  var blob=new Blob([c],{type:"text/html;charset=utf-8"});
-  var url=URL.createObjectURL(blob);
-  var aba=window.open(url,"_blank");
-  if(!aba){var a=document.createElement("a");a.href=url;a.target="_blank";
-    document.body.appendChild(a);a.click();document.body.removeChild(a);}
-  setTimeout(function(){URL.revokeObjectURL(url);},30000);
+  var c = _laudoParaPDF(h);
+  var html = '<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8">' +
+    '<meta name="viewport" content="width=device-width,initial-scale=1">' +
+    '<title>Laudo de Demanda</title></head><body style="margin:0;padding:0">' +
+    c + '</body></html>';
+  var win = window.open('', '_blank');
+  if (!win) {
+    var blob = new Blob([html], {type:'text/html;charset=utf-8'});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.target = '_blank';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 30000);
+    return;
+  }
+  win.document.write(html);
+  win.document.close();
+  // Ao fechar — garante que o app volta para a tela correta
+  win.onafterprint = function() {
+    win.close();
+    try { abrirModal('modal-ferramentas'); ferrAba(1); } catch(e) {}
+  };
+  setTimeout(function() {
+    win.print();
+    setTimeout(function(){
+      if (!win.closed) {
+        win.close();
+        try { abrirModal('modal-ferramentas'); ferrAba(1); } catch(e) {}
+      }
+    }, 60000);
+  }, 300);
 }
 
 function demImprimirLaudo(){
+  // Feedback visual — busca pelo texto do botão
+  var btns = document.querySelectorAll('#print-area button');
+  var btn = null;
+  btns.forEach(function(b){ if(b.textContent.indexOf('Salvar') !== -1) btn = b; });
+  if (btn) { btn.textContent = '⏳ Gerando...'; btn.disabled = true; }
   var h=window._demLaudoHTML;
   if(!h){try{demExportarPDF();}catch(e){}}
   setTimeout(function(){
     var h2=window._demLaudoHTML;
-    if(!h2){alert("Calcule a demanda primeiro!");return;}
+    if(!h2){
+      if (btn) { btn.textContent = '📤 Salvar'; btn.disabled = false; }
+      alert("Calcule a demanda primeiro!");return;
+    }
     _abrirLaudoPDF(h2);
+    setTimeout(function(){
+      if (btn) { btn.textContent = '📤 Salvar'; btn.disabled = false; }
+    }, 1000);
   },h?0:400);
-}
-
-
-function compartilharOrc() {
-  const cliente  = document.getElementById('orc-cliente')?.value  || 'Cliente';
-  const empresa  = document.getElementById('orc-empresa')?.value  || 'Eletricista Power PRO';
-  const garantia = document.getElementById('orc-garantia')?.value || '90';
-  const validade = document.getElementById('orc-validade')?.value || '15';
-  const numero   = document.getElementById('orc-numero')?.value   || '';
-  const { total: srvTotal } = collectServices();
-  const { total: matTotal } = collectMaterials();
-  const { total: grand, sinalPct, sinal } = calcOrcTotais(srvTotal, matTotal);
-
-  let srv = '';
-  document.querySelectorAll('#srv-container .srv-row').forEach(row => {
-    const n = row.querySelector('.row-name')?.textContent || '';
-    const qt = row.querySelector('.qty-val')?.value || '1';
-    const p = parseCurrency(row.querySelector('.row-price-inp')?.value || '0');
-    srv += `  • ${n} × ${qt} — R$ ${scpFmtBRL(parseFloat(qt) * p)}\n`;
-  });
-  let matTxt = '';
-  document.querySelectorAll('#mat-container .mat-row').forEach(row => {
-    const n = row.querySelector('.row-name')?.textContent || '';
-    const qt = row.querySelector('.qty-val')?.value || '1';
-    const p = parseCurrency(row.querySelector('.row-price-inp')?.value || '0');
-    matTxt += `  • ${n} × ${qt} — R$ ${scpFmtBRL(parseFloat(qt) * p)}\n`;
-  });
-
-  const texto = `*ORÇAMENTO ${numero} — ${empresa.toUpperCase()}*\nCliente: ${cliente}\n\n` +
-    (srv ? `*Serviços:*\n${srv}\n` : '') +
-    (matTxt ? `*Materiais:*\n${matTxt}\n` : '') +
-    `*TOTAL: R$ ${scpFmtBRL(grand)}*\n\nSinal (${sinalPct}%): R$ ${scpFmtBRL(sinal)}\nGarantia: ${garantia} dias · Válido por ${validade} dias`;
-
-  if (navigator.share) {
-    navigator.share({ title: `Orçamento — ${cliente}`, text: texto }).catch(() => {});
-  } else {
-    navigator.clipboard.writeText(texto).then(() => {
-      alert('✅ Orçamento copiado! Cole no WhatsApp ou e-mail.');
-    }).catch(() => {
-      prompt('Copie o texto abaixo:', texto);
-    });
-  }
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -5152,7 +5184,6 @@ function catAbrirEditorItem(tipo, id) {
 }
 
 // alias para compatibilidade
-function catEditarCustom(tipo, id) { catAbrirEditorItem(tipo, id); }
 
 function _catEditorRender(item) {
   var tipo  = _catEditorTipo;
@@ -5332,7 +5363,6 @@ function catRemoverItem(tipo, id, origem) {
 }
 
 // alias para compatibilidade
-function catRemoverCustom(tipo, id) { catRemoverItem(tipo, id, 'custom'); }
 
 function catRestaurarTodos() {
   if (!confirm('Restaurar todos os itens removidos ao catálogo original?')) return;
@@ -5348,11 +5378,6 @@ function catFecharEditor() {
 }
 
 // alias antigo
-function catSalvarCustom() { catSalvarItem(); }
-
-
-
-
 
 function abrirCatalogo(tipo) {
   abrirModal('modal-ajustes');
@@ -5450,7 +5475,6 @@ function salvarOrcamento() {
     else hist.unshift(dados);
     if (hist.length > 50) hist = hist.slice(0, 50);
     LS.setItem('orc_historico', JSON.stringify(hist));
-
 
     // Feedback visual
     var btn = document.querySelector('.btn-acc');
@@ -5556,11 +5580,136 @@ function carregarOrcamento(dados) {
     try { orcCalcTotal(); }        catch(e) {}
     try { updateServiceBadge(); }  catch(e) {}
     try { updateMaterialBadge(); } catch(e) {}
+    try { orcDadosResumo(); }      catch(e) {}
+    // acordeão: abrir se cliente vazio, fechar se preenchido
+    try {
+      const cli = document.getElementById('orc-cliente')?.value.trim();
+      const db  = document.getElementById('orc-dados-body');
+      const da  = document.getElementById('orc-dados-arrow');
+      if (db) db.style.display = cli ? 'none' : 'block';
+      if (da) da.style.transform = cli ? '' : 'rotate(180deg)';
+    } catch(e) {}
 
     navTo('orcamento');
   } catch(err) {
     console.error('carregarOrcamento:', err);
   }
+}
+
+// ══ HISTÓRICO DEMANDA ═════════════════════════════════════════
+function demSalvarHistorico() {
+  if (!window._demResultadoNBR) { alert('Calcule a demanda primeiro!'); return; }
+  var r = window._demResultadoNBR;
+  var tipoLabels = {
+    'htc-res':'Residencial','htc-pred':'Predial',
+    'htc-com':'Comercial','htc-ind':'Industrial',
+    'htc-6ap':'+6 Unidades','htc-out':'Geral'
+  };
+  var sisLabels = {'mono':'Monofásico','bi':'Bifásico','tri':'Trifásico'};
+  var agora = new Date();
+  var item = {
+    id: 'DEM-' + String(agora.getTime()).slice(-4),
+    salvadoEm: agora.toISOString(),
+    data: agora.toLocaleDateString('pt-BR') + ' ' + agora.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}),
+    tipo: tipoLabels[r.tipoKey] || 'Residencial',
+    tipoKey: r.tipoKey || 'htc-res',
+    sistema: sisLabels[r.sistema] || 'Monofásico',
+    tensao: r.tensao || 127,
+    comodos: Object.keys(r.comodos || {}).length,
+    demandaVA: r.demandada || 0,
+    demandaKva: ((r.demandada||0)/1000).toFixed(2),
+    disjuntor: r.disj ? r.disj + 'A' : '—',
+    snapshot: {
+      demComodos: JSON.parse(JSON.stringify(r.comodos || {})),
+      sistema: r.sistema || 'mono',
+      tensao: r.tensao || 127,
+      tipoKey: r.tipoKey || 'htc-res'
+    }
+  };
+  var hist = [];
+  try { hist = JSON.parse(LS.getItem('dem_historico') || '[]'); } catch(e) {}
+  hist.unshift(item);
+  if (hist.length > 20) hist = hist.slice(0, 20);
+  try { LS.setItem('dem_historico', JSON.stringify(hist)); } catch(e) {}
+  // Feedback visual
+  var btn = event.target;
+  var orig = btn.textContent;
+  btn.textContent = '✅ Salvo!';
+  btn.style.background = 'rgba(34,197,94,.25)';
+  setTimeout(function(){ btn.textContent = orig; btn.style.background = 'var(--acc-bg)'; }, 1500);
+}
+
+function demAbrirHistorico() {
+  var overlay = document.getElementById('dem-hist-overlay');
+  if (overlay) overlay.style.display = 'flex';
+  _renderDemHistorico();
+}
+
+function demFecharHistorico() {
+  var overlay = document.getElementById('dem-hist-overlay');
+  if (overlay) overlay.style.display = 'none';
+}
+
+function _renderDemHistorico() {
+  var hist = [];
+  try { hist = JSON.parse(LS.getItem('dem_historico') || '[]'); } catch(e) {}
+  var body = document.getElementById('dem-hist-body');
+  if (!body) return;
+  if (!hist.length) {
+    body.innerHTML = '<div style="text-align:center;padding:40px 20px;color:var(--text3)"><div style="font-size:32px;margin-bottom:10px">⚡</div><div style="font-size:13px;font-weight:700">Nenhum cálculo salvo</div><div style="font-size:11px;margin-top:6px">Calcule e toque em 💾 Salvar</div></div>';
+    return;
+  }
+  body.innerHTML = hist.map(function(item, idx) {
+    return '<div style="background:var(--bg-input);border:1px solid var(--border-input);border-radius:13px;padding:13px 14px;margin-bottom:10px">' +
+      '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">' +
+        '<div>' +
+          '<div style="font-family:\'Syne\',sans-serif;font-size:12px;font-weight:800;color:var(--acc)">' + item.id + '</div>' +
+          '<div style="font-size:10px;color:var(--text3);margin-top:2px">' + item.data + '</div>' +
+        '</div>' +
+        '<div style="text-align:right">' +
+          '<div style="font-size:15px;font-weight:900;color:var(--text)">' + item.demandaKva + ' kVA</div>' +
+          '<div style="font-size:10px;color:var(--text3)">Disj: ' + item.disjuntor + '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">' +
+        '<span style="font-size:10px;font-weight:700;background:var(--acc-bg);color:var(--acc);border-radius:6px;padding:3px 8px">' + item.tipo + '</span>' +
+        '<span style="font-size:10px;font-weight:700;background:var(--bg-card);color:var(--text2);border-radius:6px;padding:3px 8px">' + item.sistema + ' ' + item.tensao + 'V</span>' +
+        '<span style="font-size:10px;font-weight:700;background:var(--bg-card);color:var(--text2);border-radius:6px;padding:3px 8px">' + item.comodos + ' cômodo' + (item.comodos !== 1 ? 's' : '') + '</span>' +
+      '</div>' +
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">' +
+        '<button onclick="_demCarregarHistorico(' + idx + ')" style="padding:8px;background:var(--acc);color:#fff;border:none;border-radius:8px;font-size:11px;font-weight:800;cursor:pointer">↺ Carregar</button>' +
+        '<button onclick="_demRemoverHistorico(' + idx + ')" style="padding:8px;background:rgba(239,68,68,.12);color:#f87171;border:1px solid rgba(239,68,68,.25);border-radius:8px;font-size:11px;font-weight:800;cursor:pointer">🗑 Remover</button>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+function _demCarregarHistorico(idx) {
+  var hist = [];
+  try { hist = JSON.parse(LS.getItem('dem_historico') || '[]'); } catch(e) {}
+  var item = hist[idx];
+  if (!item) return;
+  // Restaurar snapshot
+  demComodos = JSON.parse(JSON.stringify(item.snapshot.demComodos || {}));
+  demSisAtual = item.snapshot.sistema || 'mono';
+  demTensaoAtual = item.snapshot.tensao || 127;
+  // Selecionar tipo visualmente
+  document.querySelectorAll('.htc').forEach(function(el) {
+    el.classList.remove('sel');
+    if (el.classList.contains(item.snapshot.tipoKey)) el.classList.add('sel');
+  });
+  window._tipoSelecionado = item.snapshot.tipoKey;
+  demFecharHistorico();
+  // Recalcular
+  try { demRenderGrid(); demRenderSelecionados(); demCalcNBR(); } catch(e) {}
+}
+
+function _demRemoverHistorico(idx) {
+  var hist = [];
+  try { hist = JSON.parse(LS.getItem('dem_historico') || '[]'); } catch(e) {}
+  hist.splice(idx, 1);
+  try { LS.setItem('dem_historico', JSON.stringify(hist)); } catch(e) {}
+  _renderDemHistorico();
 }
 
 // ══ HISTÓRICO ════════════════════════════════════════════════
@@ -5662,11 +5811,9 @@ function excluirHistorico(idx) {
   _renderHistorico();
 }
 
-
 function parseCurrencySafe(v) {
   try { return parseCurrency(v); } catch(e) { return 0; }
 }
-
 
 const telas = {home:'tela-home', orcamento:'tela-orcamento', resultado:'tela-resultado', agenda:'tela-agenda'};
 function navTo(id) {
@@ -5817,14 +5964,6 @@ function demAplicarConfig(idx) {
 }
 
 // ── onchange do select #dem-tipo ──────────────────────────────
-function demTipoChanged() {
-  const sel = document.getElementById('dem-tipo');
-  if (!sel) return;
-  demComodos = {};
-  demAplicarConfig(sel.selectedIndex);
-  demRenderSelecionados();
-}
-
 
 // ══════════════════════════════════════════════════════════════
 // QUEDA DE TENSÃO — PRÉ-CONFIGURAÇÃO POR TIPO DE INSTALAÇÃO
@@ -6066,10 +6205,6 @@ function removerLogo() {
   _feedbackSalvo('Logo removida');
 }
 
-function togSocial(k, el) {
-  el.classList.toggle('on');
-}
-
 function salvarPerfil() {
   const cfg = {
     nome:      document.getElementById('aj-nome')?.value.trim()      || '',
@@ -6195,8 +6330,6 @@ function _feedbackSalvo(msg) {
   clearTimeout(el._t);
   el._t = setTimeout(() => { el.style.opacity = '0'; }, 1800);
 }
-
-function togglePw(id, btn) { const i=document.getElementById(id); i.type=i.type==='password'?'text':'password'; btn.textContent=i.type==='password'?'👁️':'🙈'; }
 
 // ══════════════════════════════════════════════════════════════
 // CLIENTES
@@ -6433,7 +6566,6 @@ function renderGraficos() {
   }
 }
 
-
 function togGraficos() {
   var wrap = document.getElementById('rel-graficos-wrap');
   var arr  = document.getElementById('tog-graf-arr');
@@ -6445,8 +6577,6 @@ function togGraficos() {
 }
 
 // Render dos 6 últimos orçamentos na home
-
-
 
 var _agendaTermo = '';
 
@@ -6553,7 +6683,6 @@ function _renderAgendaOverlay() {
   });
 }
 
-
 // Preview das 3 próximas visitas no card Esta Semana
 function homeRenderAgendaPreview(agenda) {
   var el = document.getElementById('agenda-preview');
@@ -6590,7 +6719,6 @@ function homeRenderAgendaPreview(agenda) {
     '</div>';
   }).join('');
 }
-
 
 // ══ ARMAZENAMENTO ════════════════════════════════════════════
 function backupCalcStorage() {
@@ -6729,7 +6857,6 @@ function backupCompartilhar() {
     backupExportar();
   }
 }
-
 
 function bkToggle(id, hdr) {
   var body = document.getElementById(id);
@@ -6884,7 +7011,6 @@ function backupFeedback(msg, tipo) {
   el.style.color = tipo === 'ok' ? '#4ade80' : '#f87171';
   setTimeout(function() { el.style.display = 'none'; }, 4000);
 }
-
 
 // ══ DADOS DIS-NOR-030 REV.05 ═════════════════════════════════
 
@@ -7147,7 +7273,6 @@ function norToggle(id, hdr) {
   if (arr) arr.style.transform = open ? '' : 'rotate(180deg)';
 }
 
-
 // ══ DADOS NBR 5410:2004 — OFICIAL ════════════════════════════
 
 // Tabela 36 — Capacidades de condução (A) — Cobre — PVC — 70°C
@@ -7311,7 +7436,6 @@ function nbrNorToggle(id, hdr) {
   body.style.display = open ? 'none' : 'block';
   if (arr) arr.style.transform = open ? '' : 'rotate(180deg)';
 }
-
 
 function norSubTab(idx, el) {
   document.querySelectorAll('#ferr-4 .ferr-tab').forEach(function(t){t.classList.remove('on');});
@@ -7500,7 +7624,6 @@ function nbr5Toggle(id, hdr) {
   if (arr) arr.style.transform = open ? '' : 'rotate(180deg)';
 }
 
-
 var _demTipoInstalacao = 'res';
 
 var _TIPO_INFO = {
@@ -7588,7 +7711,6 @@ function disnorFDACTipo(n, tipo) {
   }
   return disnorFDAC(n); // Coluna residencial Tab.12
 }
-
 
 // ══ MUC PDF ══════════════════════════════════════════════════
 var _mucLaudoHTML = null;
@@ -7777,7 +7899,6 @@ function mucSetOrientacao(ori) {
   if (btnP) { btnP.style.background = ori==='landscape'?'rgba(255,255,255,.3)':'transparent'; }
 }
 
-
 function relMudarMes(delta) {
   _relMes += delta;
   if (_relMes > 11) { _relMes = 0; _relAno++; }
@@ -7919,7 +8040,6 @@ function renderRelatorio() {
   // Gráficos ao clicar
 }
 
-
 // ══════════════════════════════════════════════════════════════
 // FERRAMENTAS
 // ══════════════════════════════════════════════════════════════
@@ -8055,8 +8175,6 @@ const NBR_FC_AGRUP = {
 // Capacidades nominais de disjuntores (IN comerciais)
 const NBR_DISJ_SERIE = [6,10,16,20,25,32,40,50,63,80,100,125,160,200,250,315,400];
 
-
-
 // ══════════════════════════════════════════════════════════════
 // DEMANDA ELÉTRICA — NBR 5410 + MUC (DIS-NOR-053 REV06)
 // ══════════════════════════════════════════════════════════════
@@ -8149,7 +8267,6 @@ const DEM_TIPICA_HOS=[46,40,41,42,43,44,45,22,23,25];  // Hospital
 const DEM_TIPICA_REST=[47,48,49,50,51,52,22,23,14];    // Restaurante
 const DEM_TIPICA_ESC_=[53,54,55,56,57,58,59,22,23,25]; // Escola
 const DEM_TIPICA_ESC=[18,20,19,11,16,22,23,24,14,25];  // Escritório
-
 
 // Predial — vai para MUC (sem cômodos)
 const DEM_TIPICA_PRED=null;
@@ -8359,7 +8476,6 @@ function demToggleComodo(i){
   demRenderGrid();
   demRenderSelecionados();
 }
-
 
 // ── demTipicaContexto: carrega planta típica do tipo selecionado ──
 function demTipicaContexto() {
@@ -8612,11 +8728,6 @@ function demAddEquip(idx){
 
   document.body.appendChild(popup);
   setTimeout(() => document.getElementById('equip-search-' + idx)?.focus(), 100);
-}
-function demSelEquip(idx,j){
-  document.querySelector('[style*="fixed"][style*="inset:0"]')?.remove();
-  demComodos[idx].equips.push({...DEM_EQUIPAMENTOS[j]});
-  demRenderSelecionados();
 }
 function demRemEquip(idx,j){demComodos[idx].equips.splice(j,1);demRenderSelecionados();}
 
@@ -9092,7 +9203,6 @@ function mucIrCalcularDemanda(btn) {
   }, 300);
 }
 
-
 function demLevarQuedaV(){
   if(!window._demResultadoNBR){alert('Calcule a demanda NBR 5410 primeiro!');return;}
   var r=window._demResultadoNBR;
@@ -9127,21 +9237,15 @@ function demLevarQuedaV(){
 }
 
 function demSetOrientacao(ori) {
-  // Atualizar orientação no HTML guardado
   if (window._demLaudoHTML) {
     window._demLaudoHTML = window._demLaudoHTML.replace(
       /@page\{size:A4 (portrait|landscape)/g,
       '@page{size:A4 ' + ori
     );
   }
-  // Atualizar no print-area visível também
   var area = document.getElementById('print-area');
-  var btnR = document.getElementById("btn-retrato");
-  var btnP = document.getElementById("btn-paisagem");
-  // Atualizar o @page dentro do print-area
   if (area) {
-    var styles = area.querySelectorAll("style");
-    styles.forEach(function(st) {
+    area.querySelectorAll("style").forEach(function(st) {
       if (st.textContent.indexOf("@page") !== -1) {
         st.textContent = st.textContent.replace(
           /@page\{size:A4 (portrait|landscape)/,
@@ -9150,10 +9254,6 @@ function demSetOrientacao(ori) {
       }
     });
   }
-  if (btnR) { btnR.style.background = ori === "portrait" ? "rgba(255,255,255,.3)" : "transparent";
-    btnR.style.color = ori === "portrait" ? "#fff" : "rgba(255,255,255,.7)"; }
-  if (btnP) { btnP.style.background = ori === "landscape" ? "rgba(255,255,255,.3)" : "transparent";
-    btnP.style.color = ori === "landscape" ? "#fff" : "rgba(255,255,255,.7)"; }
 }
 
 function demExportarPDF(){
@@ -9162,12 +9262,18 @@ function demExportarPDF(){
   const data = new Date().toLocaleDateString('pt-BR');
 
   // Dados da empresa (localStorage)
-  let empresa = 'Eletricista Power PRO', subtitulo = 'Serviços Elétricos Profissionais';
+  const _demCfgPerfil = _getCfg ? _getCfg() : {};
+  const cor      = demPdfCfg.cor || '#f59e0b';
+  const logoB64  = window._logoB64Cache || LS.getItem('logo_b64') || '';
+  const logoForma  = _demCfgPerfil.logoForma || 'quadrado';
+  const logoRadius = logoForma === 'redondo' ? '50%' : logoForma === 'arredondado' ? '14px' : '6px';
+  const logoSize   = Math.min(_demCfgPerfil.logoSize || 64, 80);
+  let empresa = 'Eletricista Power PRO', subtitulo = demPdfCfg.subtitulo || 'Serviços Elétricos Profissionais';
   try {
-    const cfg = JSON.parse(LS.getItem('ajustes_config')||'{}');
-    if (cfg.nome||cfg.empresa) empresa = cfg.nome||cfg.empresa;
-    if (cfg.subtitulo) subtitulo = cfg.subtitulo;
+    if (_demCfgPerfil.nome||_demCfgPerfil.empresa) empresa = _demCfgPerfil.nome||_demCfgPerfil.empresa;
   } catch(e){}
+  const docPrestador = _demCfgPerfil.doc || '';
+  const SD = demPdfCfg.secoes;
 
   // Tipo de instalação — label
   const tipoLabels = {
@@ -9223,67 +9329,83 @@ function demExportarPDF(){
   const html = `<!DOCTYPE html><html><head><meta charset="UTF-8">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Arial,sans-serif;font-size:12px;color:#1a1a1a;background:#fff}
-.wrap{max-width:800px;margin:0 auto;padding:28px 32px}
-.hdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:22px;padding-bottom:16px;border-bottom:3px solid #f59e0b}
+html,body,div{color:#1a1a1a}
+body{font-family:Arial,sans-serif;font-size:12px;background:#fff!important;color:#1a1a1a!important}
+.wrap{max-width:800px;margin:0 auto;padding:28px 32px;background:#fff;color:#1a1a1a}
+.hdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:22px;padding-bottom:16px;border-bottom:3px solid ${cor};background:#fff;color:#1a1a1a}
 .hdr-e{font-size:20px;font-weight:900;color:#1a1a1a;margin-bottom:3px}
 .hdr-s{font-size:11px;color:#888}
-.badge{background:#f59e0b;color:#000;font-size:11px;font-weight:800;border-radius:6px;padding:5px 12px;display:inline-block;margin-bottom:6px}
-.info-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:20px;background:#fafafa;border:1px solid #eee;border-radius:8px;padding:12px}
+.badge{background:${cor};color:#fff;font-size:11px;font-weight:800;border-radius:6px;padding:5px 12px;display:inline-block;margin-bottom:6px}
+.info-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:20px;background:#fafafa;border:1px solid #eee;border-radius:8px;padding:12px;color:#1a1a1a}
 .info-lbl{font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#999;margin-bottom:3px}
 .info-val{font-weight:700;font-size:13px;color:#1a1a1a}
-.sec{font-size:10px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:#f59e0b;margin-bottom:8px;margin-top:18px;display:flex;align-items:center;gap:8px}
-.sec::after{content:'';flex:1;height:1px;background:#f59e0b44}
-table{width:100%;border-collapse:collapse;font-size:11px;margin-bottom:8px}
-thead tr{background:#f59e0b}
-thead th{padding:8px 10px;font-size:9px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:#000;text-align:left}
+.sec{font-size:10px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:${cor};margin-bottom:8px;margin-top:18px;display:flex;align-items:center;gap:8px;background:#fff}
+.sec::after{content:'';flex:1;height:1px;background:${cor}44}
+table{width:100%;border-collapse:collapse;font-size:11px;margin-bottom:8px;background:#fff;color:#1a1a1a}
+thead tr{background:${cor}}
+thead th{padding:8px 10px;font-size:9px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:#fff;text-align:left}
 thead th.c{text-align:center}
-tbody td{padding:7px 10px;border-bottom:1px solid #f0f0f0}
+tbody td{padding:7px 10px;border-bottom:1px solid #f0f0f0;color:#1a1a1a;background:#fff}
 tbody td.c{text-align:center}
-tbody td.acc{font-weight:700;color:#d97706;text-align:center}
-tbody tr:nth-child(even){background:#fafafa}
+tbody td.acc{font-weight:700;color:${cor};text-align:center}
+tbody tr:nth-child(even) td{background:#fafafa}
 .res-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
-.res-card{background:#fafafa;border:1px solid #eee;border-radius:8px;padding:12px 14px}
+.res-card{background:#fafafa;border:1px solid #eee;border-radius:8px;padding:12px 14px;color:#1a1a1a}
 .res-lbl{font-size:9px;color:#999;font-weight:700;letter-spacing:.6px;text-transform:uppercase;margin-bottom:5px}
 .res-val{font-size:18px;font-weight:800;color:#1a1a1a;font-family:monospace}
-.res-val.acc{color:#d97706}
-.grand{display:flex;justify-content:space-between;align-items:center;background:#f59e0b;border-radius:8px;padding:14px 18px;margin:16px 0}
-.grand-lbl{font-size:14px;font-weight:900;color:#000}
-.grand-val{font-size:26px;font-weight:900;color:#000;font-family:monospace}
+.res-val.acc{color:${cor}}
+.grand{display:flex;justify-content:space-between;align-items:center;background:${cor};border-radius:8px;padding:14px 18px;margin:16px 0}
+.grand-lbl{font-size:14px;font-weight:900;color:#fff}
+.grand-val{font-size:26px;font-weight:900;color:#fff;font-family:monospace}
 .circ-list{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
-.circ-item{display:flex;align-items:center;gap:10px;padding:8px 12px;background:#fafafa;border:1px solid #eee;border-radius:6px;font-size:11px}
-.circ-dot{width:8px;height:8px;border-radius:50%;background:#f59e0b;flex-shrink:0}
+.circ-item{display:flex;align-items:center;gap:10px;padding:8px 12px;background:#fafafa;border:1px solid #eee;border-radius:6px;font-size:11px;color:#1a1a1a}
+.circ-dot{width:8px;height:8px;border-radius:50%;background:${cor};flex-shrink:0}
 .circ-ind .circ-dot{background:#ef4444}
-.foot{margin-top:20px;padding-top:12px;border-top:1px solid #eee;display:flex;justify-content:space-between;font-size:10px;color:#aaa}
-.no-print{background:#1e40af;color:#fff;padding:10px 16px;border-radius:10px;display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.foot{margin-top:20px;padding-top:12px;border-top:1px solid #eee;display:flex;justify-content:space-between;font-size:10px;color:#aaa;flex-wrap:wrap;gap:4px;background:#fff}
+.no-print{background:#1e40af;color:#fff;padding:10px 16px;border-radius:10px;display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:8px}
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:8px;background:#fff}
+@media screen and (max-width:520px){
+  .wrap{padding:16px 10px}
+  .hdr{flex-direction:column;gap:10px}
+  .info-grid{grid-template-columns:1fr 1fr}
+  table{font-size:10px}
+  thead th{padding:6px 4px;font-size:8px;letter-spacing:0}
+  tbody td{padding:5px 4px}
+  .res-grid{grid-template-columns:1fr 1fr}
+  .grand{padding:10px 12px}
+  .grand-lbl{font-size:12px}
+  .grand-val{font-size:20px}
+}
 @media print{.no-print{display:none!important}@page{size:A4 portrait;margin:14mm 16mm}}
 </style></head><body>
 <div class="wrap">
-  <div class="no-print">
-    <span style="font-weight:700;font-size:13px">⚡ Laudo de Demanda — Pré-visualização</span>
-    <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
-      <div style="display:flex;border:1px solid rgba(255,255,255,.3);border-radius:8px;overflow:hidden">
-        <button id="btn-retrato" onclick="demSetOrientacao('portrait')" style="background:rgba(255,255,255,.3);color:#fff;border:none;padding:6px 10px;font-size:10px;font-weight:800;cursor:pointer">📄 Retrato</button>
-        <button id="btn-paisagem" onclick="demSetOrientacao('landscape')" style="background:transparent;color:rgba(255,255,255,.7);border:none;padding:6px 10px;font-size:10px;font-weight:800;cursor:pointer">🖼️ Paisagem</button>
-      </div>
-      <button onclick="demImprimirLaudo()" style="background:#f59e0b;color:#000;border:none;border-radius:8px;padding:8px 14px;font-weight:800;cursor:pointer;font-size:11px">🖨️ Imprimir / PDF</button>
-      <button onclick="demCompartilharLaudo()" style="background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:8px;padding:8px 12px;font-weight:700;cursor:pointer;font-size:11px">💬 Compartilhar</button>
-      <button onclick="document.getElementById('print-area').style.display='none'" style="background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:8px;padding:8px 10px;font-weight:700;cursor:pointer;font-size:11px">✕ Fechar</button>
+  <div class="no-print" style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
+    <span style="font-weight:800;font-size:13px;font-family:'Syne',sans-serif">⚡ Laudo de Demanda</span>
+    <div style="display:flex;gap:8px;align-items:center">
+      <button onclick="_abrirConfigDemNoPDF()" style="background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:10px;padding:9px 13px;font-weight:800;cursor:pointer;font-size:12px;font-family:'Syne',sans-serif;white-space:nowrap">🎨 Ajustar PDF</button>
+      <button onclick="demImprimirLaudo()" style="background:#f59e0b;color:#000;border:none;border-radius:10px;padding:9px 16px;font-weight:800;cursor:pointer;font-size:13px;font-family:'Syne',sans-serif">📤 Salvar</button>
+      <button onclick="_fecharLaudoDem()" style="background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:10px;padding:9px 13px;font-weight:700;cursor:pointer;font-size:13px">✕</button>
     </div>
   </div>
 
+  ${SD.cabecalho !== false ? `
   <div class="hdr">
-    <div>
-      <div class="hdr-e">⚡ ${empresa}</div>
-      <div class="hdr-s">${subtitulo}</div>
+    <div style="display:flex;align-items:center;gap:12px">
+      ${logoB64 ? `<img src="${logoB64}" style="width:${logoSize}px;height:${logoSize}px;object-fit:cover;border-radius:${logoRadius};flex-shrink:0">` : ''}
+      <div>
+        <div class="hdr-e">${logoB64 ? '' : '⚡ '}${empresa}</div>
+        <div class="hdr-s">${subtitulo}</div>
+        ${docPrestador ? `<div style="font-size:10px;color:#aaa;margin-top:2px">${docPrestador}</div>` : ''}
+      </div>
     </div>
-    <div style="text-align:right">
+    <div style="text-align:right;flex-shrink:0">
       <div class="badge">LAUDO DE DEMANDA</div>
       <div style="font-size:11px;color:#888;margin-top:4px">${tipoLabel} · NBR 5410:2004</div>
       <div style="font-size:11px;color:#888;margin-top:2px">${data}</div>
     </div>
-  </div>
+  </div>` : ''}
 
+  ${SD.sistema !== false ? `
   <div class="info-grid">
     <div><div class="info-lbl">Sistema</div><div class="info-val">${sisLabel} · ${tensaoLabel}</div></div>
     <div><div class="info-lbl">Tipo de Instalação</div><div class="info-val">${tipoLabel}</div></div>
@@ -9291,17 +9413,19 @@ tbody tr:nth-child(even){background:#fafafa}
     <div><div class="info-lbl">Norma de Cálculo</div><div class="info-val">${normaLabel}</div></div>
     <div><div class="info-lbl">Categoria Neoenergia</div><div class="info-val">${catNeoId||"—"}</div></div>
     <div><div class="info-lbl">Referência Técnica</div><div class="info-val">NBR 5410:2004</div></div>
-  </div>
+  </div>` : ''}
 
+  ${SD.planta !== false ? `
   <div class="sec">${plantaLabel}</div>
-  <table>
+  <div class="tbl-wrap"><table>
     <thead><tr>
-      <th>Ambiente</th><th class="c">Área</th><th class="c">Pts Ilum.</th>
-      <th class="c">Pts Tom.</th><th class="c">Equipamentos</th><th class="c">VA Total</th>
+      <th>Ambiente</th><th class="c">Área</th><th class="c">Ilum.</th>
+      <th class="c">Tom.</th><th class="c">Equip.</th><th class="c">VA</th>
     </tr></thead>
     <tbody>${rowsComodos}</tbody>
-  </table>
+  </table></div>` : ''}
 
+  ${SD.resultado !== false ? `
   <div class="sec">Resultado da Demanda</div>
   <div class="res-grid">
     <div class="res-card"><div class="res-lbl">Carga Instalada</div><div class="res-val">${r.totalVA} VA</div></div>
@@ -9312,30 +9436,45 @@ tbody tr:nth-child(even){background:#fafafa}
   <div class="grand">
     <span class="grand-lbl">DISJUNTOR GERAL RECOMENDADO</span>
     <span class="grand-val">${r.disj} A</span>
-  </div>
+  </div>` : ''}
 
+  ${SD.circuitos !== false ? `
   <div class="sec">Circuitos Sugeridos</div>
   <div class="circ-list">
     ${circs.map(c=>`<div class="circ-item${c.startsWith('⚡')?' circ-ind':''}"><div class="circ-dot"></div><span>${c}</span></div>`).join('')}
     <div class="circ-item"><div class="circ-dot" style="background:#3b82f6"></div><span>1× Proteção DR 30mA — circuitos com ponto de água</span></div>
-  </div>
+  </div>` : ''}
 
-  ${catNeoObj?`<div style="margin:16px 0;padding:12px;background:#fffbeb;border:1px solid #f59e0b44;border-radius:8px"><div style="font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#f59e0b;margin-bottom:8px">🔌 PADRÃO DE ENTRADA — NEOENERGIA (DIS-NOR-030)</div><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px"><div><div style="font-size:9px;color:#999;font-weight:700">CATEGORIA</div><div style="font-size:18px;font-weight:900;color:#f59e0b">${catNeoObj.id}</div></div><div><div style="font-size:9px;color:#999;font-weight:700">DISJUNTOR</div><div style="font-size:14px;font-weight:900">${catNeoObj.disj}A</div></div><div><div style="font-size:9px;color:#999;font-weight:700">CABO ENTRADA</div><div style="font-size:11px;font-weight:700">${catNeoObj.cabo}</div></div><div><div style="font-size:9px;color:#999;font-weight:700">SISTEMA</div><div style="font-size:11px;font-weight:700">${sisLabel} · ${tensaoLabel}</div></div></div></div>`:""}
+  ${catNeoObj?`<div style="margin:16px 0;padding:12px;background:#fffbeb;border:1px solid ${cor}44;border-radius:8px"><div style="font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:${cor};margin-bottom:8px">🔌 PADRÃO DE ENTRADA — NEOENERGIA (DIS-NOR-030)</div><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px"><div><div style="font-size:9px;color:#999;font-weight:700">CATEGORIA</div><div style="font-size:18px;font-weight:900;color:${cor}">${catNeoObj.id}</div></div><div><div style="font-size:9px;color:#999;font-weight:700">DISJUNTOR</div><div style="font-size:14px;font-weight:900">${catNeoObj.disj}A</div></div><div><div style="font-size:9px;color:#999;font-weight:700">CABO ENTRADA</div><div style="font-size:11px;font-weight:700">${catNeoObj.cabo}</div></div><div><div style="font-size:9px;color:#999;font-weight:700">SISTEMA</div><div style="font-size:11px;font-weight:700">${sisLabel} · ${tensaoLabel}</div></div></div></div>`:""}
 
+  ${SD.assinatura ? `
+  <div style="display:flex;justify-content:space-between;margin-top:48px;gap:40px">
+    <div style="flex:1;text-align:center;font-size:10px;color:#aaa;border-top:1px solid #ccc;padding-top:6px">Assinatura do Cliente</div>
+    <div style="flex:1;text-align:center;font-size:10px;color:#aaa;border-top:1px solid #ccc;padding-top:6px">${empresa}<br>Assinatura do Prestador</div>
+  </div>` : ''}
+
+  ${SD.social ? `${_demPdfSocialLinks()}` : ''}
+
+  ${SD.rodape !== false ? `
   <div class="foot">
     <span>⚡ ${empresa} — ${subtitulo}</span>
     <span>Base: NBR 5410:2004 e ${normaLabel} · ${data} · Laudo estimativo — validar com profissional habilitado (CREA/CFT).</span>
-  </div>
+  </div>` : ''}
 </div>
-
-<\/script>
 <\/body><\/html>`;
 
   const area = document.getElementById('print-area');
   area.innerHTML = html;
-  area.style.display = 'block';
+  area.style.cssText = 'display:block;position:fixed;inset:0;z-index:9999;background:#fff!important;overflow-y:auto;-webkit-overflow-scrolling:touch;color:#1a1a1a';
   area.scrollTop = 0;
-  window._demLaudoHTML = html; // Guardar para impressão
+  window._demLaudoHTML = html;
+}
+
+function _fecharLaudoDem() {
+  const area = document.getElementById('print-area');
+  area.style.display = 'none';
+  area.innerHTML = '';
+  window._demLaudoHTML = null;
 }
 
 // ── MUC — DIS-NOR-053 REV06 ──
@@ -9696,7 +9835,6 @@ function qvRestaurar(idx) {
   document.getElementById('qv-bitola').value = r.S;
   calcQuedaVLive();
 }
-
 
 // ══════════════════════════════════════════════════════════════
 // CHECKLIST
@@ -10238,7 +10376,6 @@ function _checkIsCustom(key) {
   } catch(e) { return false; }
 }
 
-
 function checkToggleAc(hdr) {
   var body = document.getElementById('check-lista');
   var arr  = document.getElementById('check-ac-arr');
@@ -10271,8 +10408,6 @@ function checkLimpar(sel) {
   renderCheck();
 }
 
-
-
 // ══════════════════════════════════════════════════════════════
 // INIT
 // ══════════════════════════════════════════════════════════════
@@ -10291,6 +10426,148 @@ const PDF_SECOES = [
   { k:'rodape',    lbl:'Rodapé (gerado por...)',    ico:'📄', def:true  },
 ];
 
+const DEM_PDF_SECOES = [
+  { k:'cabecalho', lbl:'Cabeçalho da empresa',   ico:'🏢', def:true  },
+  { k:'sistema',   lbl:'Sistema elétrico',        ico:'⚡', def:true  },
+  { k:'planta',    lbl:'Planta dos cômodos',      ico:'🏠', def:true  },
+  { k:'resultado', lbl:'Resultado / Disjuntor',   ico:'🔌', def:true  },
+  { k:'circuitos', lbl:'Circuitos sugeridos',     ico:'📋', def:true  },
+  { k:'assinatura',lbl:'Linha de assinatura',     ico:'✏️', def:false },
+  { k:'rodape',    lbl:'Rodapé (gerado por...)',  ico:'📄', def:true  },
+  { k:'social',    lbl:'Redes sociais',           ico:'🌐', def:false },
+];
+
+let demPdfCfg = {
+  cor: '#f59e0b',
+  secoes: Object.fromEntries(DEM_PDF_SECOES.map(s => [s.k, s.def])),
+  subtitulo: 'Serviços Elétricos Profissionais',
+};
+
+function _sincDemPdfCfg() {
+  try {
+    var saved = JSON.parse(LS.getItem('dem_pdf_config') || '{}');
+    if (saved.secoes)   Object.assign(demPdfCfg.secoes, saved.secoes);
+    if (saved.subtitulo) demPdfCfg.subtitulo = saved.subtitulo;
+    if (saved.socialPdf) demPdfCfg.socialPdf = saved.socialPdf;
+  } catch(e) {}
+  try {
+    var cfg = _getCfg();
+    if (cfg.subtitulo) demPdfCfg.subtitulo = cfg.subtitulo;
+  } catch(e) {}
+  try {
+    var _ACC_CORES = {'ambar':'#f59e0b','eletrico':'#3b82f6','neon':'#22c55e','voltagem':'#ef4444','plasma':'#a855f7'};
+    var acc = localStorage.getItem('acc') || 'ambar';
+    if (_ACC_CORES[acc]) demPdfCfg.cor = _ACC_CORES[acc];
+  } catch(e) {}
+}
+
+function abrirConfigDemPDF() {
+  document.getElementById('dem-cfg-secoes').innerHTML = DEM_PDF_SECOES.map(function(s) {
+    return '<div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border)">' +
+      '<span style="font-size:13px;color:var(--text2)">' + s.ico + ' ' + s.lbl + '</span>' +
+      '<div id="dem-cfg-sw-' + s.k + '" class="scp-toggle-sw' + (demPdfCfg.secoes[s.k] ? ' on' : '') + '" onclick="cfgToggleDemSecao(\'' + s.k + '\',this)"></div>' +
+    '</div>';
+  }).join('');
+  document.getElementById('dem-cfg-subtitulo').value = demPdfCfg.subtitulo;
+  document.querySelectorAll('.dem-cfg-cor').forEach(function(el) {
+    var sel = el.dataset.cor === demPdfCfg.cor;
+    el.style.border = sel ? '3px solid ' + el.dataset.cor : '3px solid transparent';
+    el.style.boxShadow = sel ? '0 0 0 2px var(--bg-card),0 0 0 4px ' + el.dataset.cor : 'none';
+  });
+  var socialEl = document.getElementById('dem-cfg-social-redes');
+  if (socialEl) {
+    var html = _renderDemSocialToggles();
+    socialEl.innerHTML = html || '<div style="font-size:12px;color:var(--text3);padding:10px 0">Cadastre as redes no Perfil primeiro.</div>';
+  }
+  document.getElementById('modal-cfg-dem-pdf').style.display = 'flex';
+}
+
+function fecharConfigDemPDF() {
+  demPdfCfg.subtitulo = document.getElementById('dem-cfg-subtitulo').value;
+  try { LS.setItem('dem_pdf_config', JSON.stringify(demPdfCfg)); } catch(e) {}
+  document.getElementById('modal-cfg-dem-pdf').style.display = 'none';
+  if (window._demCfgVeioDoPreview) {
+    window._demCfgVeioDoPreview = false;
+    demExportarPDF();
+  }
+}
+
+function _abrirConfigDemNoPDF() {
+  window._demCfgVeioDoPreview = true;
+  _fecharLaudoDem();
+  abrirConfigDemPDF();
+}
+
+function cfgToggleDemSecao(k, el) {
+  el.classList.toggle('on');
+  demPdfCfg.secoes[k] = el.classList.contains('on');
+}
+
+function selecionarCorDemPDF(el) {
+  demPdfCfg.cor = el.dataset.cor;
+  document.querySelectorAll('.dem-cfg-cor').forEach(function(c) {
+    var sel = c.dataset.cor === demPdfCfg.cor;
+    c.style.border = sel ? '3px solid ' + c.dataset.cor : '3px solid transparent';
+    c.style.boxShadow = sel ? '0 0 0 2px var(--bg-card),0 0 0 4px ' + c.dataset.cor : 'none';
+  });
+}
+
+function demPdfTogSocial(el) {
+  var k = el.dataset.social;
+  el.classList.toggle('on');
+  if (!demPdfCfg.socialPdf) demPdfCfg.socialPdf = {};
+  demPdfCfg.socialPdf[k] = el.classList.contains('on');
+}
+
+function _renderDemSocialToggles() {
+  var cfg2 = _getCfg ? _getCfg() : {};
+  var sp   = demPdfCfg.socialPdf || {};
+  var redes = [
+    { k:'insta',    ico:'📸', lbl:'Instagram', val: cfg2.insta    || '' },
+    { k:'whatsapp', ico:'💬', lbl:'WhatsApp',  val: cfg2.whatsapp || '' },
+    { k:'site',     ico:'🌐', lbl:'Site',      val: cfg2.site     || '' },
+    { k:'youtube',  ico:'▶️', lbl:'YouTube',   val: cfg2.youtube  || '' }
+  ];
+  return redes.filter(function(r) { return !!r.val; }).map(function(r) {
+    var on = sp[r.k] ? ' on' : '';
+    return '<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)">' +
+      '<span style="font-size:13px;color:var(--text2)">' + r.ico + ' ' + r.lbl +
+        '<span style="font-size:10px;color:var(--text3);margin-left:6px">' + r.val + '</span>' +
+      '</span>' +
+      '<div data-social="' + r.k + '" class="scp-toggle-sw' + on + '" onclick="demPdfTogSocial(this)" style="cursor:pointer"></div>' +
+    '</div>';
+  }).join('');
+}
+
+function _demPdfSocialLinks() {
+  try {
+    var cfg = _getCfg ? _getCfg() : {};
+    var sp  = demPdfCfg.socialPdf || {};
+    var links = [];
+    if (sp.insta && cfg.insta) {
+      var insta = cfg.insta.replace(/^https?:\/\/(www\.)?instagram\.com\//,'').replace(/\?.*$/,'').replace(/\/$/,'');
+      if (!insta.startsWith('@')) insta = '@' + insta;
+      links.push('<a href="https://instagram.com/' + insta.replace('@','') + '" style="display:inline-flex;align-items:center;gap:5px;color:#e1306c;text-decoration:none;font-size:11px;font-weight:700;padding:5px 10px;background:#fff0f5;border-radius:8px;border:1px solid #fbc8d4">📸 ' + insta + '</a>');
+    }
+    if (sp.whatsapp && cfg.whatsapp) {
+      var nums = cfg.whatsapp.replace(/\D/g,'');
+      var fmt  = nums.length === 11 ? '(' + nums.slice(0,2) + ') ' + nums.slice(2,7) + '-' + nums.slice(7) : cfg.whatsapp;
+      links.push('<a href="https://wa.me/55' + nums + '" style="display:inline-flex;align-items:center;gap:5px;color:#25d366;text-decoration:none;font-size:11px;font-weight:700;padding:5px 10px;background:#f0fff4;border-radius:8px;border:1px solid #b7ebc8">💬 ' + fmt + '</a>');
+    }
+    if (sp.site && cfg.site) {
+      var site = cfg.site.replace(/^https?:\/\//,'').replace(/\/$/,'');
+      links.push('<a href="https://' + site + '" style="display:inline-flex;align-items:center;gap:5px;color:#3b82f6;text-decoration:none;font-size:11px;font-weight:700;padding:5px 10px;background:#eff6ff;border-radius:8px;border:1px solid #bfdbfe">🌐 ' + site + '</a>');
+    }
+    if (sp.youtube && cfg.youtube) {
+      var yt = cfg.youtube.replace(/^https?:\/\/(www\.)?youtube\.com\//,'').replace(/\?.*$/,'').replace(/\/$/,'');
+      if (!yt.startsWith('@')) yt = '@' + yt;
+      links.push('<a href="https://youtube.com/' + yt + '" style="display:inline-flex;align-items:center;gap:5px;color:#ff0000;text-decoration:none;font-size:11px;font-weight:700;padding:5px 10px;background:#fff5f5;border-radius:8px;border:1px solid #fecaca">▶️ ' + yt + '</a>');
+    }
+    if (!links.length) return '';
+    return '<div style="margin:12px 0 0;padding:12px;background:#f8f9fa;border-radius:10px;border:1px solid #e5e7eb;text-align:center"><div style="font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#6b7280;margin-bottom:8px">SIGA-NOS / ENTRE EM CONTATO</div><div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center">' + links.join('') + '</div></div>';
+  } catch(e) { return ''; }
+}
+
 let pdfCfg = {
   cor: '#f59e0b',
   secoes: Object.fromEntries(PDF_SECOES.map(s => [s.k, s.def])),
@@ -10301,6 +10578,14 @@ let pdfCfg = {
 
 // Sincroniza pdfCfg com ajustes_config + acc salvos
 function _sincPdfCfg() {
+  try {
+    var saved = JSON.parse(LS.getItem('pdf_config') || '{}');
+    if (saved.secoes)                    Object.assign(pdfCfg.secoes, saved.secoes);
+    if (saved.assinatura !== undefined)  pdfCfg.assinatura = saved.assinatura;
+    if (saved.msgCliente)                pdfCfg.msgCliente = saved.msgCliente;
+    if (saved.subtitulo)                 pdfCfg.subtitulo  = saved.subtitulo;
+    if (saved.socialPdf)                 pdfCfg.socialPdf  = saved.socialPdf;
+  } catch(e) {}
   try {
     var cfg = _getCfg();
     if (cfg.subtitulo) pdfCfg.subtitulo = cfg.subtitulo;
@@ -10375,10 +10660,21 @@ function pdfTogSocial(el) {
 }
 
 function fecharConfigPDF() {
-  // salvar campos antes de fechar
   pdfCfg.msgCliente = document.getElementById('cfg-msg-cliente').value;
   pdfCfg.subtitulo  = document.getElementById('cfg-subtitulo').value;
+  try { LS.setItem('pdf_config', JSON.stringify(pdfCfg)); } catch(e) {}
   document.getElementById('modal-cfg-pdf').style.display = 'none';
+  // se veio do preview do PDF, reabrir
+  if (window._pdfConfigVeioDoPreview) {
+    window._pdfConfigVeioDoPreview = false;
+    gerarPDF();
+  }
+}
+
+function _abrirConfigNoPDF() {
+  window._pdfConfigVeioDoPreview = true;
+  document.getElementById('print-area').style.display = 'none';
+  abrirConfigPDF();
 }
 
 function selecionarCorPDF(el) {
@@ -10399,7 +10695,6 @@ function cfgToggle(el, k) {
   pdfCfg[k] = !pdfCfg[k];
   el.classList.toggle('on', pdfCfg[k]);
 }
-
 
 // ══════════════════════════════════════════════════════════════
 // HOME — ATUALIZAR DADOS DINÂMICOS
@@ -10549,7 +10844,6 @@ function homeAtualizar() {
   // ── Notificações ndot ────────────────────────────────────────
   try { atualizarContadorNotif(); } catch(e) {}
 }
-
 
 // ══════════════════════════════════════════════════════════════
 // SISTEMA DE NOTIFICAÇÕES
@@ -10744,11 +11038,7 @@ function registrarGarantiaOrcamento() {
 
 // ── Adicionar visita na agenda ─────────────────────────────────
 
-
-
-
 // ── Renderizar agenda no modal ─────────────────────────────────
-
 
 function renderAgenda() {
   var body = document.getElementById('agenda-body-wrap') ||
@@ -10924,7 +11214,6 @@ function removerVisita(id, btn) {
   } catch(e) {}
 }
 
-
 // ── Renderizar garantias no modal ──────────────────────────────
 function renderGarantias() {
   const body = document.querySelector('#modal-garantias .gest-body');
@@ -10989,7 +11278,7 @@ const QV_RHO={cu:0.0172,al:0.028};
 let qvState={isolamento:'pvc',temp:30,material:'cu',metodo:'B1',grupo:0};
 
 function qvCapBase(bitola,material,isolamento,metodo){const idx=[1.5,2.5,4,6,10,16,25,35].indexOf(bitola);if(idx<0)return 0;const tbl=material==='cu'?(isolamento==='pvc'?QV_CAP_CU_PVC:QV_CAP_CU_EPR):(isolamento==='pvc'?QV_CAP_AL_PVC:QV_CAP_AL_EPR);return tbl[metodo]?.[idx]||0;}
-function qvCapCorrigida(base,isolamento,temp,fGrupo){return base*(QV_FC_TEMP[isolamento][temp]||1)*fGrupo;}
+
 function qvRenderCapacidade(){
   const base=qvCapBase(qvBitolaAtual,qvState.material,qvState.isolamento,qvState.metodo);
   const fGrupo=QV_FC_GRUPO[qvState.grupo]?.f||1;
@@ -11163,7 +11452,6 @@ function qvConvPot() {
   }
 }
 
-
 function qvSetMaterial(mat,btn){qvState.material=mat;document.querySelectorAll('#qv-mat-cu,#qv-mat-al').forEach(b=>b.classList.remove('on'));btn.classList.add('on');qvRenderCapacidade();calcQuedaVLive();}
 function qvSetIsolamento(iso,btn){qvState.isolamento=iso;document.querySelectorAll('#qv-iso-pvc,#qv-iso-epr').forEach(b=>b.classList.remove('on'));btn.classList.add('on');qvRenderCapacidade();calcQuedaVLive();}
 
@@ -11178,15 +11466,114 @@ try {
   const acc = localStorage.getItem('acc') || 'ambar';
   document.documentElement.setAttribute('data-acc', acc);
 } catch(e) {}
-// ── init direto (modo teste — sem Firebase) ──────────────────
-try { gerarNumeroOrc(); }         catch(e) {}
-try { _carregarCustomLocal(); }   catch(e) {}
-try { renderNBR(); }              catch(e) {}
-try { renderCheck(); }            catch(e) {}
-try { demRenderGrid(); }          catch(e) {}
-try { demRenderSelecionados(); }  catch(e) {}
-// init local — Firebase não ativo
-try { _sincPdfCfg(); }            catch(e) {}
+// ══ FUNÇÕES FIREBASE AUTH ══════════════════════════════════════
+function loginEntrar() {
+  var email  = (document.getElementById('login-email').value || '').trim();
+  var senha  = (document.getElementById('login-senha').value || '');
+  var btn    = document.getElementById('login-btn');
+  var erro   = document.getElementById('login-erro');
+  var erroMsg= document.getElementById('login-erro-msg');
+  var erroBtns= document.getElementById('login-erro-btns');
+
+  if (!email || !senha) {
+    erro.style.display = 'flex';
+    erroMsg.textContent = 'Preencha e-mail e senha.';
+    erroBtns.style.display = 'none';
+    return;
+  }
+  btn.textContent = '⏳ Entrando...';
+  btn.disabled = true;
+  erro.style.display = 'none';
+  erroBtns.style.display = 'none';
+
+  firebase.auth().signInWithEmailAndPassword(email, senha)
+    .then(function() {
+      btn.textContent = '⚡ ENTRAR';
+      btn.disabled = false;
+    })
+    .catch(function(e) {
+      btn.textContent = '⚡ ENTRAR';
+      btn.disabled = false;
+      erro.style.display = 'flex';
+      erroBtns.style.display = 'flex';
+      var cod = e.code || '';
+      if (cod === 'auth/user-not-found' || cod === 'auth/invalid-credential') {
+        erroMsg.textContent = 'E-mail não cadastrado na plataforma.';
+      } else if (cod === 'auth/wrong-password') {
+        erroMsg.textContent = 'Senha incorreta.';
+        erroBtns.style.display = 'none';
+      } else if (cod === 'auth/invalid-email') {
+        erroMsg.textContent = 'E-mail inválido.';
+        erroBtns.style.display = 'none';
+      } else if (cod === 'auth/too-many-requests') {
+        erroMsg.textContent = 'Muitas tentativas. Tente novamente mais tarde.';
+        erroBtns.style.display = 'none';
+      } else {
+        erroMsg.textContent = 'E-mail não cadastrado na plataforma.';
+      }
+    });
+}
+
+function loginSair() {
+  firebase.auth().signOut().catch(function(){});
+}
+
+function loginRedefinir() {
+  var email = (document.getElementById('login-email').value || '').trim();
+  var erro  = document.getElementById('login-erro');
+  var erroMsg = document.getElementById('login-erro-msg');
+  var erroBtns = document.getElementById('login-erro-btns');
+  if (!email) {
+    erro.style.display = 'flex';
+    erroMsg.textContent = 'Digite seu e-mail para redefinir a senha.';
+    erroBtns.style.display = 'none';
+    return;
+  }
+  firebase.auth().sendPasswordResetEmail(email)
+    .then(function() {
+      erro.style.display = 'flex';
+      erroMsg.textContent = '✅ Link enviado para ' + email;
+      erroBtns.style.display = 'none';
+    })
+    .catch(function() {
+      erro.style.display = 'flex';
+      erroMsg.textContent = 'E-mail não encontrado.';
+      erroBtns.style.display = 'none';
+    });
+}
+
+function loginEnviarRedefinicao() {
+  var user = firebase.auth().currentUser;
+  if (!user) return;
+  firebase.auth().sendPasswordResetEmail(user.email)
+    .then(function() { alert('✅ Link enviado para ' + user.email); })
+    .catch(function() { alert('Erro ao enviar link. Tente novamente.'); });
+}
+
+function loginToggleSenha() {
+  var inp = document.getElementById('login-senha');
+  var btn = document.getElementById('login-eye-btn');
+  if (inp.type === 'password') {
+    inp.type = 'text';
+    btn.textContent = '🙈';
+  } else {
+    inp.type = 'password';
+    btn.textContent = '👁️';
+  }
+}
+
+// Enter no campo senha dispara login
+document.addEventListener('DOMContentLoaded', function() {
+  var s = document.getElementById('login-senha');
+  if (s) s.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') loginEntrar();
+  });
+  var em = document.getElementById('login-email');
+  if (em) em.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') document.getElementById('login-senha').focus();
+  });
+});
+// ══ FIM FUNÇÕES FIREBASE AUTH ══════════════════════════════════
 
 // ══ HIDE ON SCROLL — HOME ONLY ══
 (function(){
@@ -11247,6 +11634,47 @@ try { _sincPdfCfg(); }            catch(e) {}
 })();
 
 </script>
+<!-- ══ MODAL CONFIG PDF DEMANDA ══ -->
+<div id="modal-cfg-dem-pdf" onclick="if(event.target===this)fecharConfigDemPDF()"
+  style="display:none;position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.6);align-items:flex-end">
+  <div style="background:var(--bg-card);border-radius:20px 20px 0 0;width:100%;max-height:90vh;display:flex;flex-direction:column;overflow:hidden">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--border);flex-shrink:0">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="width:36px;height:36px;border-radius:10px;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);display:flex;align-items:center;justify-content:center;font-size:18px">⚡</div>
+        <div>
+          <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:800;color:var(--text)">Configurar Laudo PDF</div>
+          <div style="font-size:10px;color:var(--text3);margin-top:1px">Personalize o laudo de demanda</div>
+        </div>
+      </div>
+      <button onclick="fecharConfigDemPDF()" style="width:32px;height:32px;background:var(--bg-input);border:1px solid var(--border-input);border-radius:9px;color:var(--text2);cursor:pointer;font-size:14px">✕</button>
+    </div>
+    <div style="overflow-y:auto;padding:16px;flex:1;-webkit-overflow-scrolling:touch">
+      <div style="font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-bottom:10px">🎨 Cor de Destaque</div>
+      <div style="display:flex;gap:8px;margin-bottom:20px">
+        <div class="dem-cfg-cor" data-cor="#f59e0b" onclick="selecionarCorDemPDF(this)" style="width:32px;height:32px;border-radius:50%;background:#f59e0b;cursor:pointer;border:3px solid #f59e0b;box-shadow:0 0 0 2px #000"></div>
+        <div class="dem-cfg-cor" data-cor="#3b82f6" onclick="selecionarCorDemPDF(this)" style="width:32px;height:32px;border-radius:50%;background:#3b82f6;cursor:pointer;border:3px solid transparent"></div>
+        <div class="dem-cfg-cor" data-cor="#22c55e" onclick="selecionarCorDemPDF(this)" style="width:32px;height:32px;border-radius:50%;background:#22c55e;cursor:pointer;border:3px solid transparent"></div>
+        <div class="dem-cfg-cor" data-cor="#8b5cf6" onclick="selecionarCorDemPDF(this)" style="width:32px;height:32px;border-radius:50%;background:#8b5cf6;cursor:pointer;border:3px solid transparent"></div>
+        <div class="dem-cfg-cor" data-cor="#ef4444" onclick="selecionarCorDemPDF(this)" style="width:32px;height:32px;border-radius:50%;background:#ef4444;cursor:pointer;border:3px solid transparent"></div>
+      </div>
+      <div style="font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-bottom:10px">📋 Seções do Laudo</div>
+      <div style="background:var(--bg-input);border:1px solid var(--border-input);border-radius:13px;padding:0 14px;margin-bottom:20px">
+        <div id="dem-cfg-secoes"></div>
+      </div>
+      <div style="font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-bottom:8px">🌐 Redes Sociais no Laudo</div>
+      <div style="background:var(--bg-input);border:1px solid var(--border-input);border-radius:13px;padding:0 14px;margin-bottom:20px">
+        <div id="dem-cfg-social-redes"></div>
+      </div>
+      <div style="font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-bottom:8px">🏢 Subtítulo da Empresa</div>
+      <input class="inp" id="dem-cfg-subtitulo" type="text" placeholder="Ex: CREA-PE 123456 · (81) 99999-0000" style="margin-bottom:4px">
+    </div>
+    <div style="padding:12px 16px 24px;border-top:1px solid var(--border);flex-shrink:0;display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <button onclick="fecharConfigDemPDF()" style="padding:13px;background:var(--bg-input);border:1px solid var(--border-input);border-radius:12px;font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:var(--text2);cursor:pointer">Cancelar</button>
+      <button onclick="fecharConfigDemPDF();demExportarPDF()" style="padding:13px;background:#3b82f6;border:none;border-radius:12px;font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:#fff;cursor:pointer">⚡ Gerar Laudo</button>
+    </div>
+  </div>
+</div>
+
 <!-- ══ MODAL CONFIG PDF ══ -->
 <div id="modal-cfg-pdf" onclick="if(event.target===this)fecharConfigPDF()"
   style="display:none;position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.6);align-items:flex-end">
@@ -11318,7 +11746,6 @@ try { _sincPdfCfg(); }            catch(e) {}
   </div>
 </div>
 
-
 <!-- ══ PAINEL DE NOTIFICAÇÕES ══ -->
 <div id="notif-overlay" onclick="if(event.target===this)fecharNotificacoes()">
   <div id="notif-panel">
@@ -11344,9 +11771,6 @@ try { _sincPdfCfg(); }            catch(e) {}
   </div>
 </div>
 
-
-
-
 <!-- ══ AGENDA OVERLAY ══ -->
 <div id="agenda-overlay" onclick="if(event.target===this)fecharAgendaOverlay()" style="position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.7);display:none;align-items:flex-end;justify-content:center">
   <div style="background:var(--bg-card);border-radius:20px 20px 0 0;width:100%;max-width:520px;max-height:88vh;display:flex;flex-direction:column;overflow:hidden">
@@ -11361,6 +11785,17 @@ try { _sincPdfCfg(); }            catch(e) {}
       <input id="agenda-overlay-busca" class="inp" type="text" placeholder="🔍 Buscar por título, cliente ou data..." style="margin:0" oninput="agendaOverlayBuscar(this.value)">
     </div>
     <div id="agenda-overlay-body" style="overflow-y:auto;flex:1;padding:14px"></div>
+  </div>
+</div>
+
+<!-- ══ HISTÓRICO DE LAUDOS DEMANDA ══ -->
+<div id="dem-hist-overlay" onclick="if(event.target===this)demFecharHistorico()" style="position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.7);display:none;align-items:flex-end;justify-content:center">
+  <div style="background:var(--bg-card);border-radius:20px 20px 0 0;width:100%;max-width:520px;max-height:88vh;display:flex;flex-direction:column;overflow:hidden">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--border);flex-shrink:0">
+      <span style="font-family:'Syne',sans-serif;font-size:15px;font-weight:800">⚡ Histórico de Cálculos</span>
+      <button onclick="demFecharHistorico()" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--text3)">✕</button>
+    </div>
+    <div id="dem-hist-body" style="overflow-y:auto;flex:1;padding:14px"></div>
   </div>
 </div>
 
@@ -11406,76 +11841,42 @@ try { _sincPdfCfg(); }            catch(e) {}
     style="background:var(--bg-card);border-radius:20px 20px 0 0;width:100%;max-width:520px;max-height:88vh;display:flex;flex-direction:column;overflow:hidden">
   </div>
 </div>
-
-</div><!-- /app-root -->
-
+<!-- ══ FIREBASE SDK ══ -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 <script>
-// ══ FUNÇÕES DE LOGIN ══
-function loginEntrar() {
-  var email = document.getElementById('login-email').value.trim();
-  var senha = document.getElementById('login-senha').value;
-  var btn   = document.getElementById('login-btn');
-  var erro  = document.getElementById('login-erro');
-  var extra = document.getElementById('login-btns-extra');
-
-  if (!email || !senha) { _loginErro('Preencha e-mail e senha.'); return; }
-
-  btn.innerHTML = 'Entrando...';
-  btn.disabled  = true;
-  erro.style.display  = 'none';
-  extra.style.display = 'none';
-
-  window._fbSignIn(email, senha)
-    .then(function() {
-      btn.innerHTML = '⚡ ENTRAR';
-      btn.disabled  = false;
-    })
-    .catch(function(e) {
-      btn.innerHTML = '⚡ ENTRAR';
-      btn.disabled  = false;
-      if (e.code === 'auth/user-not-found' || e.code === 'auth/invalid-credential') {
-        _loginErro('E-mail não cadastrado na plataforma.');
-        extra.style.display = 'grid';
-      } else if (e.code === 'auth/wrong-password') {
-        _loginErro('Senha incorreta.');
-      } else if (e.code === 'auth/invalid-email') {
-        _loginErro('E-mail inválido.');
-      } else if (e.code === 'auth/too-many-requests') {
-        _loginErro('Muitas tentativas. Tente mais tarde.');
-      } else {
-        _loginErro('Erro ao entrar. Tente novamente.');
-      }
-    });
-}
-
-function _loginErro(msg) {
-  var el  = document.getElementById('login-erro');
-  var msg_el = document.getElementById('login-erro-msg');
-  if (msg_el) msg_el.textContent = msg;
-  el.style.display = 'flex';
-}
-
-function loginRedefinir() {
-  var email = document.getElementById('login-email').value.trim();
-  if (!email) { _loginErro('Digite seu e-mail para redefinir a senha.'); return; }
-  window._fbReset(email)
-    .then(function() { _loginErro('Link enviado! Verifique seu e-mail.'); })
-    .catch(function() { _loginErro('Erro ao enviar. Verifique o e-mail.'); });
-}
-
-// ══ FUNÇÕES DO PAINEL ACESSO ══
-function acessoSair() {
-  if (!confirm('Deseja sair da conta?')) return;
-  window._fbSignOut().catch(function(){});
-}
-
-function acessoRedefinirSenha() {
-  var user = window._fbAuth ? window._fbAuth.currentUser : null;
-  if (!user) return;
-  window._fbReset(user.email)
-    .then(function() { alert('Link enviado para ' + user.email); })
-    .catch(function() { alert('Erro ao enviar link.'); });
-}
+(function() {
+  var firebaseConfig = {
+    apiKey: "AIzaSyCUoVzr9_PIGZXe1DKBZaINNCVQVj14Iqk",
+    authDomain: "eletricista-pro.firebaseapp.com",
+    projectId: "eletricista-pro",
+    storageBucket: "eletricista-pro.firebasestorage.app",
+    messagingSenderId: "184661625796",
+    appId: "1:184661625796:web:18c38153a0a2621025b291"
+  };
+  try { firebase.initializeApp(firebaseConfig); } catch(e) {}
+  firebase.auth().onAuthStateChanged(function(user) {
+    var telaLogin = document.getElementById('tela-login');
+    if (user) {
+      if (telaLogin) telaLogin.style.display = 'none';
+      var el = document.getElementById('acesso-email');
+      if (el) el.textContent = user.email || '—';
+      try { gerarNumeroOrc(); }         catch(e) {}
+      try { _carregarCustomLocal(); }   catch(e) {}
+      try { renderNBR(); }              catch(e) {}
+      try { renderCheck(); }            catch(e) {}
+      try { demRenderGrid(); }          catch(e) {}
+      try { demRenderSelecionados(); }  catch(e) {}
+      try { orcDadosResumo(); }         catch(e) {}
+      try { _atualizarBtnCalc(); }      catch(e) {}
+      try { _sincPdfCfg(); }            catch(e) {}
+      try { _sincDemPdfCfg(); }         catch(e) {}
+      try { window._logoB64Cache = LS.getItem('logo_b64') || ''; } catch(e) { window._logoB64Cache = ''; }
+    } else {
+      if (telaLogin) telaLogin.style.display = 'flex';
+    }
+  });
+})();
 </script>
 
 </body>
