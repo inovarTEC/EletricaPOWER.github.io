@@ -15,29 +15,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
-/* ══ TELA LOGIN ══ */
-#tela-login{position:fixed;inset:0;z-index:9999;background:#060810;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:24px;font-family:'Syne',sans-serif}
-.login-logo{width:80px;height:80px;background:linear-gradient(135deg,#f59e0b,#d97706);border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:40px;margin-bottom:20px;box-shadow:0 0 32px rgba(245,158,11,.4)}
-.login-title{font-size:28px;font-weight:900;color:#fff;text-align:center;line-height:1.1;margin-bottom:6px}
-.login-sub{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:32px}
-.login-box{width:100%;max-width:360px;display:flex;flex-direction:column;gap:12px}
-.login-inp-wrap{position:relative}
-.login-inp{width:100%;padding:14px 16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;color:#fff;font-size:15px;font-family:'Syne',sans-serif;outline:none;box-sizing:border-box;transition:border .2s}
-.login-inp:focus{border-color:rgba(245,158,11,.5)}
-.login-inp::placeholder{color:rgba(255,255,255,.3)}
-.login-eye{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,.35);cursor:pointer;font-size:16px;padding:4px}
-.login-btn{width:100%;padding:15px;background:linear-gradient(135deg,#f59e0b,#d97706);border:none;border-radius:14px;color:#000;font-size:15px;font-weight:900;font-family:'Syne',sans-serif;cursor:pointer;box-shadow:0 0 24px rgba(245,158,11,.35);transition:opacity .15s,transform .1s;letter-spacing:.5px}
-.login-btn:active{opacity:.85;transform:scale(.98)}
-.login-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
-.login-erro{display:none;align-items:center;gap:8px;color:#f87171;font-size:12px;font-weight:700;padding:10px 12px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);border-radius:10px}
-.login-erro-btns{display:none;gap:8px}
-.login-erro-btn{flex:1;padding:10px;border-radius:10px;font-size:12px;font-weight:800;font-family:'Syne',sans-serif;cursor:pointer;text-align:center;text-decoration:none;border:none;display:flex;align-items:center;justify-content:center;gap:6px}
-.login-erro-btn.ver{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.12)}
-.login-erro-btn.comprar{background:#f59e0b;color:#000}
-.login-redefinir{text-align:center;font-size:12px;color:rgba(255,255,255,.4);margin-top:4px}
-.login-redefinir a{color:#f59e0b;font-weight:700;cursor:pointer;text-decoration:none}
-/* ══ FIM TELA LOGIN ══ */
-
 :root,[data-theme="dark"]{
   --bg:#060810;--bg-home:#07090f;--bg-hdr:rgba(11,14,24,.97);--bg-card:#0b0e18;
   --bg-modal:#0d1117;--bg-input:#0d1b2a;--bg-btn:#0b0e18;--bg-bnav:rgba(8,11,20,.98);
@@ -878,6 +855,30 @@ table { min-width: 0; }
 .acc-pill.on{border-color:#fff;transform:scale(1.12)}
 [data-theme="light"] .acc-pill.on{border-color:#0f172a}
 </style>
+<!-- ── LOGIN FIREBASE ── -->
+<style>
+#tela-login{position:fixed;inset:0;z-index:99999;background:#060810;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:24px;font-family:'Syne',sans-serif}
+.login-logo{width:80px;height:80px;background:linear-gradient(135deg,#f59e0b,#d97706);border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:40px;margin-bottom:20px;box-shadow:0 0 32px rgba(245,158,11,.4)}
+.login-title{font-size:28px;font-weight:900;color:#fff;text-align:center;line-height:1.1;margin-bottom:6px}
+.login-sub{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:32px}
+.login-box{width:100%;max-width:360px;display:flex;flex-direction:column;gap:12px}
+.login-inp-wrap{position:relative}
+.login-inp{width:100%;padding:14px 16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;color:#fff;font-size:16px;font-family:'Syne',sans-serif;outline:none;box-sizing:border-box;transition:border .2s}
+.login-inp:focus{border-color:rgba(245,158,11,.5)}
+.login-inp::placeholder{color:rgba(255,255,255,.3)}
+.login-eye{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,.35);cursor:pointer;font-size:16px;padding:4px}
+.login-btn{width:100%;padding:15px;background:linear-gradient(135deg,#f59e0b,#d97706);border:none;border-radius:14px;color:#000;font-size:15px;font-weight:900;font-family:'Syne',sans-serif;cursor:pointer;box-shadow:0 0 24px rgba(245,158,11,.35);transition:opacity .15s,transform .1s;letter-spacing:.5px}
+.login-btn:active{opacity:.85;transform:scale(.98)}
+.login-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.login-erro{display:none;align-items:center;gap:8px;color:#f87171;font-size:12px;font-weight:700;padding:10px 12px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);border-radius:10px}
+.login-erro-btns{display:none;gap:8px}
+.login-erro-btn{flex:1;padding:10px;border-radius:10px;font-size:12px;font-weight:800;font-family:'Syne',sans-serif;cursor:pointer;text-align:center;text-decoration:none;border:none;display:flex;align-items:center;justify-content:center;gap:6px}
+.login-erro-btn.ver{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.12)}
+.login-erro-btn.comprar{background:#f59e0b;color:#000}
+.login-redefinir{text-align:center;font-size:12px;color:rgba(255,255,255,.4);margin-top:4px}
+.login-redefinir a{color:#f59e0b;font-weight:700;cursor:pointer;text-decoration:none}
+</style>
+
 <!-- ══ LS (localStorage puro) ══ -->
 <script>
 var LS = {
@@ -886,13 +887,27 @@ var LS = {
   removeItem: function(k)   { try { localStorage.removeItem(k); }        catch(e) {} }
 };
 var _appReady = false;
+
+// ─── Sanitização HTML — evita XSS nos templates do PDF ────────
+function _esc(str) {
+  var el = document.createElement('div');
+  el.textContent = String(str ?? '');
+  return el.innerHTML;
+}
+
+// ─── Globais declarados explicitamente (eram window.*) ────────
+var _demLaudoHTML        = null;
+var _scpPrice            = null;
+var _demResultadoNBR     = null;
+var _demResultadoMUC     = null;
+var _demCfgVeioDoPreview = false;
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
 
-<!-- ══ TELA LOGIN FIREBASE ══ -->
 <div id="tela-login">
   <div class="login-logo">⚡</div>
   <div class="login-title">Eletricista Power<br>PRO</div>
@@ -961,7 +976,6 @@ var _appReady = false;
     </div>
 
     <!-- ── FERRAMENTA PRINCIPAL: DEMANDA ── -->
-    <div 
     <div class="hero">
       <div class="hero-head">
         <div class="hh-l">
@@ -3238,8 +3252,6 @@ function _atualizarListaExtrasModal(k) {
   });
 }
 
-var _chipModalMod = null;
-
 function scpAbrirChipModal(modKey, modLabel) {
   _chipModalMod = { k: modKey, label: modLabel };
   var overlay = document.getElementById('chip-modal-overlay');
@@ -3375,7 +3387,7 @@ function scpAtualizarItem() {
   if (!row) { scpAdicionar(); return; }
 
   var cfg   = SERVICOS_CFG[scpAtivo];
-  var price = window._scpPrice || scpSrvData.p;
+  var price = _scpPrice || scpSrvData.p;
   var qt    = scpEstado.qt || 1;
 
   // Montar nome com specs
@@ -3619,12 +3631,12 @@ function scpAtualizarPreview() {
   document.getElementById('scp-preview-tags').innerHTML = tags
     .map(t => `<span style="background:var(--acc-bg);border:1px solid var(--acc-border);border-radius:6px;padding:3px 8px;font-size:9px;font-weight:700;color:var(--acc)">${t}</span>`)
     .join('');
-  window._scpPrice = price;
+  _scpPrice = price;
 }
 
 function scpAdicionar() {
   const cfg = SERVICOS_CFG[scpAtivo];
-  const price = window._scpPrice || scpSrvData.p;
+  const price = _scpPrice || scpSrvData.p;
   const qt = scpEstado.qt || 1;
 
   // ── montar nome do serviço ────────────────────────────────
@@ -4568,23 +4580,23 @@ function novoOrcamento() {
 // ══════════════════════════════════════════════════════════════
 function gerarPDF() {
   const cor        = pdfCfg.cor || '#f59e0b';
-  const subtitulo  = pdfCfg.subtitulo || 'Serviços Elétricos Profissionais';
-  const msgCliente = pdfCfg.msgCliente || '';
+  const subtitulo  = _esc(pdfCfg.subtitulo || 'Serviços Elétricos Profissionais');
+  const msgCliente = _esc(pdfCfg.msgCliente || '');
   const S          = pdfCfg.secoes;
-  const empresa    = document.getElementById('orc-empresa')?.value || 'Eletricista Power PRO';
-  const cliente    = document.getElementById('orc-cliente')?.value || '—';
-  const endereco   = document.getElementById('orc-endereco')?.value || '';
-  const tel        = document.getElementById('orc-tel')?.value || '';
+  const empresa    = _esc(document.getElementById('orc-empresa')?.value || 'Eletricista Power PRO');
+  const cliente    = _esc(document.getElementById('orc-cliente')?.value || '—');
+  const endereco   = _esc(document.getElementById('orc-endereco')?.value || '');
+  const tel        = _esc(document.getElementById('orc-tel')?.value || '');
   const data       = document.getElementById('orc-data')?.value || '';
   const garantia   = document.getElementById('orc-garantia')?.value || '90';
   const validade   = document.getElementById('orc-validade')?.value || '15';
   const numero     = document.getElementById('orc-numero')?.value || gerarNumeroOrc();
-  const obsServ    = document.getElementById('orc-serv-obs')?.value || '';
-  const obsMat     = document.getElementById('orc-mat-obs')?.value || '';
+  const obsServ    = _esc(document.getElementById('orc-serv-obs')?.value || '');
+  const obsMat     = _esc(document.getElementById('orc-mat-obs')?.value || '');
 
   // dados do perfil
   const cfg        = _getCfg ? _getCfg() : {};
-  const docPrestador = cfg.doc || '';
+  const docPrestador = _esc(cfg.doc || '');
   const logoB64    = LS.getItem('logo_b64') || '';
   const logoForma  = cfg.logoForma || 'quadrado';
   const logoRadius = logoForma === 'redondo' ? '50%' : logoForma === 'arredondado' ? '14px' : '6px';
@@ -4809,25 +4821,68 @@ function gerarPDF() {
   area.style.cssText = 'display:flex;flex-direction:column;position:fixed;inset:0;z-index:9999;background:#fff;overflow:hidden;-webkit-overflow-scrolling:touch';
 }
 
-function _salvarPDF() {
+async function _salvarPDF() {
   const scroll = document.getElementById('pdf-scroll');
   if (!scroll) { window.print(); return; }
 
-  const html = '<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8">' +
-    '<meta name="viewport" content="width=device-width,initial-scale=1">' +
-    '<title>Orçamento</title></head><body style="margin:0;padding:0">' +
-    scroll.innerHTML + '</body></html>';
+  // Feedback visual no botão Salvar
+  const btn = document.querySelector('#pdf-toolbar button[onclick="_salvarPDF()"]');
+  const origTxt = btn ? btn.innerHTML : '';
+  if (btn) { btn.innerHTML = '⏳'; btn.disabled = true; }
 
-  const win = window.open('', '_blank');
-  if (!win) { window.print(); return; }
+  const clienteRaw = document.getElementById('orc-cliente')?.value || 'Orcamento';
+  const filename   = 'Orcamento_' + clienteRaw.replace(/[^a-zA-Z0-9À-ú]/g, '_') + '.pdf';
 
-  win.document.write(html);
-  win.document.close();
-  win.onafterprint = function() { win.close(); };
-  setTimeout(function() {
-    win.print();
-    setTimeout(function(){ if (!win.closed) win.close(); }, 60000);
-  }, 300);
+  const opt = {
+    margin: 5,
+    filename: filename,
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2, useCORS: true },
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+  };
+
+  try {
+    // PASSO 1 — navigator.share com arquivo PDF (iOS Safari / Android Chrome modernos)
+    if (navigator.share && navigator.canShare) {
+      const blob = await html2pdf().set(opt).from(scroll).output('blob');
+      const file = new File([blob], filename, { type: 'application/pdf' });
+      if (navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          files: [file],
+          title: 'Orçamento',
+          text: 'Segue o orçamento gerado pelo Eletricista Power PRO.'
+        });
+      } else {
+        throw new Error('no share'); // canShare retornou false — cai no passo 2
+      }
+    } else {
+      // PASSO 2 — Sem Web Share API: download direto via html2pdf (desktop)
+      await html2pdf().set(opt).from(scroll).save();
+    }
+  } catch(e) {
+    // PASSO 3 — Fallback final: abre nova janela com o PDF completo + print
+    // No iOS abre o share sheet via diálogo de impressão (orientação, zoom, AirDrop etc.)
+    // No desktop abre a janela de impressão para configurar e salvar
+    const html = '<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8">' +
+      '<meta name="viewport" content="width=device-width,initial-scale=1">' +
+      '<title>Orçamento</title></head><body style="margin:0;padding:0">' +
+      scroll.innerHTML + '</body></html>';
+    const win = window.open('', '_blank');
+    if (win) {
+      win.document.write(html);
+      win.document.close();
+      win.onafterprint = function() { win.close(); };
+      setTimeout(function() {
+        win.print();
+        setTimeout(function(){ if (!win.closed) win.close(); }, 60000);
+      }, 300);
+    } else {
+      window.print(); // popup bloqueado — imprime a página atual como último recurso
+    }
+  } finally {
+    // Sempre restaura o botão, independente de sucesso ou erro
+    if (btn) { btn.innerHTML = origTxt; btn.disabled = false; }
+  }
 }
 
 function _pdfSocialLinks() {
@@ -4871,38 +4926,82 @@ function _pdfSocialLinks() {
 function _laudoParaPDF(h){
   return h.replace(/<div class="no-print">[\s\S]*?<\/div>\s*/,"");
 }
-function _abrirLaudoPDF(h){
+// ── Helper: abre nova janela com laudo completo + print (passo 3) ──
+function _laudoAbrirJanela(htmlDoc) {
+  var win = window.open('', '_blank');
+  if (win) {
+    win.document.write(htmlDoc);
+    win.document.close();
+    win.onafterprint = function() {
+      win.close();
+      try { abrirModal('modal-ferramentas'); ferrAba(1); } catch(e2) {}
+    };
+    setTimeout(function() {
+      win.print();
+      setTimeout(function(){
+        if (!win.closed) {
+          win.close();
+          try { abrirModal('modal-ferramentas'); ferrAba(1); } catch(e2) {}
+        }
+      }, 60000);
+    }, 300);
+  } else {
+    // popup bloqueado — imprime página atual
+    window.print();
+    try { abrirModal('modal-ferramentas'); ferrAba(1); } catch(e2) {}
+  }
+}
+
+async function _abrirLaudoPDF(h) {
+  // c = conteúdo limpo (sem botões .no-print)
   var c = _laudoParaPDF(h);
-  var html = '<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8">' +
+
+  // htmlDoc = documento completo para o passo 3 (window.open + print)
+  var htmlDoc = '<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8">' +
     '<meta name="viewport" content="width=device-width,initial-scale=1">' +
     '<title>Laudo de Demanda</title></head><body style="margin:0;padding:0">' +
     c + '</body></html>';
-  var win = window.open('', '_blank');
-  if (!win) {
-    var blob = new Blob([html], {type:'text/html;charset=utf-8'});
-    var url = URL.createObjectURL(blob);
-    var a = document.createElement('a');
-    a.href = url; a.target = '_blank';
-    document.body.appendChild(a); a.click(); document.body.removeChild(a);
-    setTimeout(function(){ URL.revokeObjectURL(url); }, 30000);
-    return;
-  }
-  win.document.write(html);
-  win.document.close();
-  // Ao fechar — garante que o app volta para a tela correta
-  win.onafterprint = function() {
-    win.close();
-    try { abrirModal('modal-ferramentas'); ferrAba(1); } catch(e) {}
+
+  var filename = 'Laudo_Demanda_Eletrica.pdf';
+
+  // ── CAUSA DO PDF BRANCO:
+  // O #print-area tem position:fixed;inset:0 — o html2canvas não consegue
+  // calcular o scroll interno e gera página em branco.
+  // SOLUÇÃO CORRETA: passar a string HTML direto para html2pdf().from(string).
+  // O html2pdf cria e gerencia o elemento no fluxo normal do documento
+  // internamente, sem problemas de posicionamento fixo ou scroll.
+  var opt = {
+    margin: 8,
+    filename: filename,
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2, useCORS: true },
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
   };
-  setTimeout(function() {
-    win.print();
-    setTimeout(function(){
-      if (!win.closed) {
-        win.close();
-        try { abrirModal('modal-ferramentas'); ferrAba(1); } catch(e) {}
+
+  try {
+    // PASSO 1 — navigator.share com arquivo PDF (iOS Safari / Android Chrome modernos)
+    if (navigator.share && navigator.canShare) {
+      // html2pdf.from(string) cria o elemento internamente — sem blank pages
+      var blob = await html2pdf().set(opt).from(c).output('blob');
+      var file = new File([blob], filename, { type: 'application/pdf' });
+      if (navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          files: [file],
+          title: 'Laudo de Demanda Elétrica',
+          text: 'Segue o laudo de demanda elétrica.'
+        });
+      } else {
+        throw new Error('no share'); // canShare retornou false → passo 2
       }
-    }, 60000);
-  }, 300);
+    } else {
+      // PASSO 2 — Sem Web Share API: download direto via html2pdf (desktop)
+      await html2pdf().set(opt).from(c).save();
+    }
+    try { abrirModal('modal-ferramentas'); ferrAba(1); } catch(e2) {}
+  } catch(e) {
+    // PASSO 3 — Nova janela + print (iOS antigo, share sheet, configuração de orientação)
+    _laudoAbrirJanela(htmlDoc);
+  }
 }
 
 function demImprimirLaudo(){
@@ -4911,10 +5010,10 @@ function demImprimirLaudo(){
   var btn = null;
   btns.forEach(function(b){ if(b.textContent.indexOf('Salvar') !== -1) btn = b; });
   if (btn) { btn.textContent = '⏳ Gerando...'; btn.disabled = true; }
-  var h=window._demLaudoHTML;
+  var h=_demLaudoHTML;
   if(!h){try{demExportarPDF();}catch(e){}}
   setTimeout(function(){
-    var h2=window._demLaudoHTML;
+    var h2=_demLaudoHTML;
     if(!h2){
       if (btn) { btn.textContent = '📤 Salvar'; btn.disabled = false; }
       alert("Calcule a demanda primeiro!");return;
@@ -5598,8 +5697,8 @@ function carregarOrcamento(dados) {
 
 // ══ HISTÓRICO DEMANDA ═════════════════════════════════════════
 function demSalvarHistorico() {
-  if (!window._demResultadoNBR) { alert('Calcule a demanda primeiro!'); return; }
-  var r = window._demResultadoNBR;
+  if (!_demResultadoNBR) { alert('Calcule a demanda primeiro!'); return; }
+  var r = _demResultadoNBR;
   var tipoLabels = {
     'htc-res':'Residencial','htc-pred':'Predial',
     'htc-com':'Comercial','htc-ind':'Industrial',
@@ -6041,8 +6140,8 @@ function qvAplicarConfig(tipoKey) {
     + ' <span style="margin-left:auto;font-size:9px;opacity:.7;font-weight:400">Ajuste se necessário</span>';
 
   // Se vier resultado da Demanda, popular corrente e bitola
-  if (window._demResultadoNBR) {
-    const r = window._demResultadoNBR;
+  if (_demResultadoNBR) {
+    const r = _demResultadoNBR;
     const corrEl = document.getElementById('qv-corrente');
     if (corrEl && !corrEl.value) corrEl.value = r.corrente.toFixed(1);
     const bitMap = {'1,5mm²':'1.5','2,5mm²':'2.5','4mm²':'4','6mm²':'6',
@@ -7716,7 +7815,7 @@ function disnorFDACTipo(n, tipo) {
 var _mucLaudoHTML = null;
 
 function mucExportarPDF() {
-  var m = window._demResultadoMUC;
+  var m = _demResultadoMUC;
   if (!m) { alert('Calcule a demanda MUC primeiro!'); return; }
 
   var data  = new Date().toLocaleDateString('pt-BR');
@@ -9141,7 +9240,7 @@ function demCalcNBR() {
     document.getElementById('dem-nbr-res').scrollIntoView({ behavior:'smooth', block:'start' });
   }, 50);
 
-  window._demResultadoNBR = {
+  _demResultadoNBR = {
     totalVA: ciTotal, demandada: demandakW * 1000, corrente: corrente,
     disj: disj, bit: bit, tensao: tensao, sistema: sistema,
     tipoKey: window._tipoSelecionado || 'htc-res',
@@ -9155,8 +9254,8 @@ function demCalcNBR() {
 }
 
 function demLevarMUC(){
-  if(!window._demResultadoNBR){alert('Calcule a demanda primeiro!');return;}
-  var kva = (window._demResultadoNBR.demandada/1000).toFixed(2);
+  if(!_demResultadoNBR){alert('Calcule a demanda primeiro!');return;}
+  var kva = (_demResultadoNBR.demandada/1000).toFixed(2);
   var tipo = (typeof _TIPO_INFO!=='undefined'&&typeof _demTipoInstalacao!=='undefined')
     ? (_TIPO_INFO[_demTipoInstalacao]||{label:'Unidade'}).label : 'Unidade';
   // Popup para confirmar nome e quantidade
@@ -9204,8 +9303,8 @@ function mucIrCalcularDemanda(btn) {
 }
 
 function demLevarQuedaV(){
-  if(!window._demResultadoNBR){alert('Calcule a demanda NBR 5410 primeiro!');return;}
-  var r=window._demResultadoNBR;
+  if(!_demResultadoNBR){alert('Calcule a demanda NBR 5410 primeiro!');return;}
+  var r=_demResultadoNBR;
   ferrAba(2);
   setTimeout(function(){
     // Sistema elétrico
@@ -9237,8 +9336,8 @@ function demLevarQuedaV(){
 }
 
 function demSetOrientacao(ori) {
-  if (window._demLaudoHTML) {
-    window._demLaudoHTML = window._demLaudoHTML.replace(
+  if (_demLaudoHTML) {
+    _demLaudoHTML = _demLaudoHTML.replace(
       /@page\{size:A4 (portrait|landscape)/g,
       '@page{size:A4 ' + ori
     );
@@ -9257,8 +9356,8 @@ function demSetOrientacao(ori) {
 }
 
 function demExportarPDF(){
-  if(!window._demResultadoNBR){alert('Calcule a demanda primeiro!');return;}
-  const r   = window._demResultadoNBR;
+  if(!_demResultadoNBR){alert('Calcule a demanda primeiro!');return;}
+  const r   = _demResultadoNBR;
   const data = new Date().toLocaleDateString('pt-BR');
 
   // Dados da empresa (localStorage)
@@ -9467,14 +9566,14 @@ tbody tr:nth-child(even) td{background:#fafafa}
   area.innerHTML = html;
   area.style.cssText = 'display:block;position:fixed;inset:0;z-index:9999;background:#fff!important;overflow-y:auto;-webkit-overflow-scrolling:touch;color:#1a1a1a';
   area.scrollTop = 0;
-  window._demLaudoHTML = html;
+  _demLaudoHTML = html;
 }
 
 function _fecharLaudoDem() {
   const area = document.getElementById('print-area');
   area.style.display = 'none';
   area.innerHTML = '';
-  window._demLaudoHTML = null;
+  _demLaudoHTML = null;
 }
 
 // ── MUC — DIS-NOR-053 REV06 ──
@@ -9644,7 +9743,7 @@ function demCalcMUC(){
   document.getElementById('muc-resultado').style.display='block';
   demAtualizaStatusMUC(Ded,cat.id);
   setTimeout(()=>document.getElementById('muc-resultado').scrollIntoView({behavior:'smooth',block:'start'}),50);
-  window._demResultadoMUC={Ded,cat,tensaoKey,Dr,Dtr,Drf,Ds,Dc,fc,fr,totalAptos,tipos:mucTipos.slice()};
+  _demResultadoMUC={Ded,cat,tensaoKey,Dr,Dtr,Drf,Ds,Dc,fc,fr,totalAptos,tipos:mucTipos.slice()};
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -10486,14 +10585,14 @@ function fecharConfigDemPDF() {
   demPdfCfg.subtitulo = document.getElementById('dem-cfg-subtitulo').value;
   try { LS.setItem('dem_pdf_config', JSON.stringify(demPdfCfg)); } catch(e) {}
   document.getElementById('modal-cfg-dem-pdf').style.display = 'none';
-  if (window._demCfgVeioDoPreview) {
-    window._demCfgVeioDoPreview = false;
+  if (_demCfgVeioDoPreview) {
+    _demCfgVeioDoPreview = false;
     demExportarPDF();
   }
 }
 
 function _abrirConfigDemNoPDF() {
-  window._demCfgVeioDoPreview = true;
+  _demCfgVeioDoPreview = true;
   _fecharLaudoDem();
   abrirConfigDemPDF();
 }
@@ -11466,114 +11565,19 @@ try {
   const acc = localStorage.getItem('acc') || 'ambar';
   document.documentElement.setAttribute('data-acc', acc);
 } catch(e) {}
-// ══ FUNÇÕES FIREBASE AUTH ══════════════════════════════════════
-function loginEntrar() {
-  var email  = (document.getElementById('login-email').value || '').trim();
-  var senha  = (document.getElementById('login-senha').value || '');
-  var btn    = document.getElementById('login-btn');
-  var erro   = document.getElementById('login-erro');
-  var erroMsg= document.getElementById('login-erro-msg');
-  var erroBtns= document.getElementById('login-erro-btns');
-
-  if (!email || !senha) {
-    erro.style.display = 'flex';
-    erroMsg.textContent = 'Preencha e-mail e senha.';
-    erroBtns.style.display = 'none';
-    return;
-  }
-  btn.textContent = '⏳ Entrando...';
-  btn.disabled = true;
-  erro.style.display = 'none';
-  erroBtns.style.display = 'none';
-
-  firebase.auth().signInWithEmailAndPassword(email, senha)
-    .then(function() {
-      btn.textContent = '⚡ ENTRAR';
-      btn.disabled = false;
-    })
-    .catch(function(e) {
-      btn.textContent = '⚡ ENTRAR';
-      btn.disabled = false;
-      erro.style.display = 'flex';
-      erroBtns.style.display = 'flex';
-      var cod = e.code || '';
-      if (cod === 'auth/user-not-found' || cod === 'auth/invalid-credential') {
-        erroMsg.textContent = 'E-mail não cadastrado na plataforma.';
-      } else if (cod === 'auth/wrong-password') {
-        erroMsg.textContent = 'Senha incorreta.';
-        erroBtns.style.display = 'none';
-      } else if (cod === 'auth/invalid-email') {
-        erroMsg.textContent = 'E-mail inválido.';
-        erroBtns.style.display = 'none';
-      } else if (cod === 'auth/too-many-requests') {
-        erroMsg.textContent = 'Muitas tentativas. Tente novamente mais tarde.';
-        erroBtns.style.display = 'none';
-      } else {
-        erroMsg.textContent = 'E-mail não cadastrado na plataforma.';
-      }
-    });
-}
-
-function loginSair() {
-  firebase.auth().signOut().catch(function(){});
-}
-
-function loginRedefinir() {
-  var email = (document.getElementById('login-email').value || '').trim();
-  var erro  = document.getElementById('login-erro');
-  var erroMsg = document.getElementById('login-erro-msg');
-  var erroBtns = document.getElementById('login-erro-btns');
-  if (!email) {
-    erro.style.display = 'flex';
-    erroMsg.textContent = 'Digite seu e-mail para redefinir a senha.';
-    erroBtns.style.display = 'none';
-    return;
-  }
-  firebase.auth().sendPasswordResetEmail(email)
-    .then(function() {
-      erro.style.display = 'flex';
-      erroMsg.textContent = '✅ Link enviado para ' + email;
-      erroBtns.style.display = 'none';
-    })
-    .catch(function() {
-      erro.style.display = 'flex';
-      erroMsg.textContent = 'E-mail não encontrado.';
-      erroBtns.style.display = 'none';
-    });
-}
-
-function loginEnviarRedefinicao() {
-  var user = firebase.auth().currentUser;
-  if (!user) return;
-  firebase.auth().sendPasswordResetEmail(user.email)
-    .then(function() { alert('✅ Link enviado para ' + user.email); })
-    .catch(function() { alert('Erro ao enviar link. Tente novamente.'); });
-}
-
-function loginToggleSenha() {
-  var inp = document.getElementById('login-senha');
-  var btn = document.getElementById('login-eye-btn');
-  if (inp.type === 'password') {
-    inp.type = 'text';
-    btn.textContent = '🙈';
-  } else {
-    inp.type = 'password';
-    btn.textContent = '👁️';
-  }
-}
-
-// Enter no campo senha dispara login
-document.addEventListener('DOMContentLoaded', function() {
-  var s = document.getElementById('login-senha');
-  if (s) s.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') loginEntrar();
-  });
-  var em = document.getElementById('login-email');
-  if (em) em.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') document.getElementById('login-senha').focus();
-  });
-});
-// ══ FIM FUNÇÕES FIREBASE AUTH ══════════════════════════════════
+// ── init direto (modo teste — sem Firebase) ──────────────────
+try { gerarNumeroOrc(); }         catch(e) {}
+try { _carregarCustomLocal(); }   catch(e) {}
+try { renderNBR(); }              catch(e) {}
+try { renderCheck(); }            catch(e) {}
+try { demRenderGrid(); }          catch(e) {}
+try { demRenderSelecionados(); }  catch(e) {}
+try { orcDadosResumo(); }         catch(e) {}
+try { _atualizarBtnCalc(); }      catch(e) {}
+// init local — Firebase não ativo
+try { _sincPdfCfg(); }            catch(e) {}
+try { _sincDemPdfCfg(); }         catch(e) {}
+try { window._logoB64Cache = LS.getItem('logo_b64') || ''; } catch(e) { window._logoB64Cache = ''; }
 
 // ══ HIDE ON SCROLL — HOME ONLY ══
 (function(){
@@ -11632,6 +11636,76 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!ticking) { ticking = true; requestAnimationFrame(update); }
   }, { passive: true });
 })();
+
+// ══ FIREBASE AUTH — FUNÇÕES ════════════════════════════════
+function loginEntrar() {
+  var email   = (document.getElementById('login-email').value || '').trim();
+  var senha   = (document.getElementById('login-senha').value || '');
+  var btn     = document.getElementById('login-btn');
+  var erro    = document.getElementById('login-erro');
+  var erroMsg = document.getElementById('login-erro-msg');
+  var erroBtns= document.getElementById('login-erro-btns');
+  if (!email || !senha) {
+    erro.style.display = 'flex'; erroMsg.textContent = 'Preencha e-mail e senha.';
+    erroBtns.style.display = 'none'; return;
+  }
+  btn.textContent = '⏳ Entrando...'; btn.disabled = true;
+  erro.style.display = 'none'; erroBtns.style.display = 'none';
+  firebase.auth().signInWithEmailAndPassword(email, senha)
+    .then(function() { btn.textContent = '⚡ ENTRAR'; btn.disabled = false; })
+    .catch(function(e) {
+      btn.textContent = '⚡ ENTRAR'; btn.disabled = false;
+      erro.style.display = 'flex'; erroBtns.style.display = 'flex';
+      var cod = e.code || '';
+      if (cod === 'auth/user-not-found' || cod === 'auth/invalid-credential') {
+        erroMsg.textContent = 'E-mail não cadastrado na plataforma.';
+      } else if (cod === 'auth/wrong-password') {
+        erroMsg.textContent = 'Senha incorreta.'; erroBtns.style.display = 'none';
+      } else if (cod === 'auth/invalid-email') {
+        erroMsg.textContent = 'E-mail inválido.'; erroBtns.style.display = 'none';
+      } else if (cod === 'auth/too-many-requests') {
+        erroMsg.textContent = 'Muitas tentativas. Tente novamente mais tarde.'; erroBtns.style.display = 'none';
+      } else {
+        erroMsg.textContent = 'E-mail não cadastrado na plataforma.';
+      }
+    });
+}
+function loginSair() { firebase.auth().signOut().catch(function(){}); }
+function loginRedefinir() {
+  var email   = (document.getElementById('login-email').value || '').trim();
+  var erro    = document.getElementById('login-erro');
+  var erroMsg = document.getElementById('login-erro-msg');
+  var erroBtns= document.getElementById('login-erro-btns');
+  if (!email) {
+    erro.style.display = 'flex';
+    erroMsg.textContent = 'Digite seu e-mail para redefinir a senha.';
+    erroBtns.style.display = 'none'; return;
+  }
+  firebase.auth().sendPasswordResetEmail(email)
+    .then(function() { erro.style.display='flex'; erroMsg.textContent='✅ Link enviado para '+email; erroBtns.style.display='none'; })
+    .catch(function() { erro.style.display='flex'; erroMsg.textContent='E-mail não encontrado.'; erroBtns.style.display='none'; });
+}
+function loginEnviarRedefinicao() {
+  var user = firebase.auth().currentUser; if (!user) return;
+  firebase.auth().sendPasswordResetEmail(user.email)
+    .then(function() { alert('✅ Link enviado para ' + user.email); })
+    .catch(function() { alert('Erro ao enviar link. Tente novamente.'); });
+}
+function loginToggleSenha() {
+  var inp = document.getElementById('login-senha');
+  var btn = document.getElementById('login-eye-btn');
+  if (inp.type === 'password') { inp.type = 'text'; btn.textContent = '🙈'; }
+  else { inp.type = 'password'; btn.textContent = '👁️'; }
+}
+document.addEventListener('DOMContentLoaded', function() {
+  var s = document.getElementById('login-senha');
+  if (s) s.addEventListener('keydown', function(e) { if (e.key==='Enter') loginEntrar(); });
+  var em = document.getElementById('login-email');
+  if (em) em.addEventListener('keydown', function(e) {
+    if (e.key==='Enter') { var s2=document.getElementById('login-senha'); if(s2) s2.focus(); }
+  });
+});
+// ══ FIM FIREBASE AUTH ══════════════════════════════════════
 
 </script>
 <!-- ══ MODAL CONFIG PDF DEMANDA ══ -->
@@ -11841,6 +11915,7 @@ document.addEventListener('DOMContentLoaded', function() {
     style="background:var(--bg-card);border-radius:20px 20px 0 0;width:100%;max-width:520px;max-height:88vh;display:flex;flex-direction:column;overflow:hidden">
   </div>
 </div>
+
 <!-- ══ FIREBASE SDK ══ -->
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
